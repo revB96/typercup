@@ -1,0 +1,105 @@
+function printQuiz(){
+    $("#quiz-cards").html("")
+    getQuestions().then(async (questions) => {
+        await getUserAnswers(getUserId()).then(async (userQuestions) => {
+            
+                for await(const [index, question] of Object.entries(questions)) {
+                    var closed ="", questionType="", answer = ""
+                    var counter = new Number(index) +1
+                    var select = `<option >Wybierz odpowiedź</option>
+                                  <option value="yes">TAK</option>
+                                  <option value="no">NIE</option>`
+
+                    if(question.closed == true)
+                        closed = "disabled"
+                    $("#save-user-quiz-button").addClass(closed)
+                    if(userQuestions != null){
+                        for (var i=1; i <= Object.keys(questions).length; i++){
+                            if(userQuestions.answers[i] != undefined)
+                                if(userQuestions.answers[i].questionId == question._id){
+                                    answer = userQuestions.answers[i].answer
+                                }
+                        }
+                    }
+
+                if((answer == "yes") & (question.type == "yes-no"))
+                    select= `<option value="yes" selected>TAK</option>
+                            <option value="no">NIE</option>`
+                else if((answer == "no") & (question.type == "yes-no"))
+                    select = `<option value="yes">TAK</option>
+                            <option value="no" selected>NIE</option>`
+
+                    if(question.type == "yes-no")
+                        questionType=`
+                                <select class="form-select" style="text-align-last: center;" name="${question._id}" ${closed}>
+                                    ${select}
+                                </select>`
+                    else
+                        questionType=`<input value="${answer}" type="text" class="form-control" style="text-align-last: center;" name="${question._id}">`
+
+                     $("#quiz-cards").append(`
+                        <div class="card text-center mt-3">
+                        <div class="card-header">
+                            Pytanie #${counter}
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">${question.question}</h5>
+                            ${questionType}
+                        </div>
+                        </div>
+                    `)
+                }
+       })
+    })
+}
+
+$(document).ready(function () {
+    printQuiz()
+
+    $("#save-user-quiz-form").submit(function (e) {
+        e.preventDefault();
+        const formData = $("#save-user-quiz-form").serializeArray();
+    
+        var lenght = formData.length;
+        var quizAnswers = `[`;
+        for (var i = 0; i < lenght; i ++) {
+            if(i==0){
+                quizAnswers += JSON.stringify({
+                    userId: getUserId(),
+                });
+                quizAnswers +=","
+            }
+                quizAnswers += JSON.stringify({
+                    questionId: formData[i].name,
+                    answer: formData[i].value,
+                });
+
+        if (i != lenght - 1) quizAnswers += ",";
+        }
+        quizAnswers += `]`;
+        console.log(quizAnswers)
+        $.ajax({
+        url: "/api/quiz/add",
+        type: "POST",
+        data: quizAnswers,
+        contentType: "application/json",
+        complete: () => {
+            //window.location.href= "/"
+            $(".toast").html(`
+                        <div class="toast-header">
+                        <strong class="mr-auto">Typer Cup</strong>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="toast-body">
+                            Zapisano twój Quiz
+                        </div>
+                    `);
+            $(".toast").toast("show");
+        },
+        });
+    
+     })
+
+})

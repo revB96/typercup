@@ -1,0 +1,81 @@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="groupStage-tab" data-bs-toggle="tab" data-bs-target="#groupStage" type="button" role="tab" aria-controls="groupStage" aria-selected="true">Faza grupowa</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="knockoutStage-tab" data-bs-toggle="tab" data-bs-target="#knockoutStage" type="button" role="tab" aria-controls="knockoutStage" aria-selected="false">Faza pucharowa</button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+   <!--GROUP STAGE !-->
+  <div class="tab-pane fade show active" id="groupStage" role="tabpanel" aria-labelledby="groupStage-tab">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="selectGroup">Grupa</label>
+        </div>
+        <select class="custom-select" id="selectGroup" onchange="selectGroup()">
+            <option value="1" selected>A</option>
+            <option value="2">B</option>
+            <option value="3">C</option>
+        </select>
+    </div>
+    <div id="group-table">
+        <h2 style="text-align: center;">Tabela</h3>
+        <div class="table-responsive">
+            <table class="table table-sm table-striped" style="text-align: center;">
+            <thead>
+                <tr>
+                <th scope="col"></th>
+                <th scope="col">Reprezentacja</th>
+                <th scope="col">RM</th>
+                <th scope="col">W</th>
+                <th scope="col">R</th>
+                <th scope="col">P</th>
+                <th scope="col">BZ</th>
+                <th scope="col">BS</th>
+                <th scope="col">RB</th>
+                <th scope="col">PKT</th>
+                </tr>
+            </thead>
+            <tbody id="group-table-body"></tbody>
+        </table>
+        </div>
+    </div>
+    <h2 style="text-align: center;">Terminarz</h3>
+    <div id="euro2021-schedule"></div>
+  </div>
+  <!--KNOCKOUT STAGE !-->
+  <div class="tab-pane fade" id="knockoutStage" role="tabpanel" aria-labelledby="knockoutStage-tab">
+    <div class="input-group mb-3">
+        <select class="custom-select" id="inputGroupSelect01">
+            <option value="1">1/8 FINAŁU</option>
+            <option value="2">ĆWIERĆFINAŁY</option>
+            <option value="3">PÓŁFINAŁY</option>
+            <option value="3">FINAŁ</option>
+        </select>
+         <div class="table-responsive">
+            <table class="table table-sm" style="text-align: center;">
+            <thead class="table-success">
+                <tr>
+                <th scope="col"></th>
+                <th scope="col">20.06.2021</th>
+                <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row">Włochy</th>
+                    <td scope="row">15:00</th>
+                    <td scope="row">Szwajcaria</th>
+                </tr>
+                <tr>
+                    <td scope="row">Turcja</th>
+                    <td scope="row">18:00</th>
+                    <td scope="row">Walia</th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+</div>

@@ -98,8 +98,18 @@ function checkIfRoundIsOpen(){
             getFirstRoundMatch(runningRound.roundDate).then(firstMatch => {
                 var matchDate = new Date(firstMatch[0].matchDate)
                 var timestamp = new Date(Date.now());
-                    //19                    //21-1 = 20
-                if((timestamp.getHours() > matchDate.getHours() - 1) & (timestamp.getDay() == matchDate.getDay())){
+                // console.log(timestamp.getHours())
+                // console.log(matchDate.getHours() - 1)
+                // console.log(timestamp.getDay())
+                // console.log(matchDate.getDay())
+                if(timestamp.getHours() >= matchDate.getHours() - 1)
+                    console.log("1")
+                if(timestamp.getMinutes() <= matchDate.getMinutes())
+                    console.log("2")
+                if(timestamp.getDay() >= matchDate.getDay())
+                    console.log("3")
+
+                if((timestamp.getHours() >= matchDate.getHours() - 1) & (timestamp.getMinutes() <= matchDate.getMinutes()) & (timestamp.getDay() >= matchDate.getDay())){
                     def.resolve(false);
                 }else{ 
                     def.resolve(true);

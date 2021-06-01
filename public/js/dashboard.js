@@ -93,21 +93,20 @@ function printRoundWithMatches(round) {
 }
 
 $(document).ready(function () {
-  printRoundWithMatches(1);
-  // checkIfRoundIsOpen().then((roundState) => {
-  //   console.log(roundState)
-  //   if (roundState == true)
-  //     printRoundWithMatches(1);
-  //   else{
-  //     printRoundWithMatches(0);
-  //   }
-  // })
+  checkIfRoundIsOpen().then((roundState) => {
+     if (roundState == true)
+       printRoundWithMatches(1);
+     else{
+       printRoundWithMatches(0);
+     }
+   })
   $("#add-ticket-form").submit(function (e) {
     e.preventDefault();
     var inputs = document.getElementsByTagName("input");
     var lenght = inputs.length;
+    //console.log(inputs)
     var tickets = `[`;
-    for (var i = 1; i < lenght; i += 4) {
+    for (var i = 0; i < lenght; i += 4) {
       tickets += JSON.stringify({
         scheduleId: inputs[i].value,
         round: inputs[i + 1].value,
@@ -115,11 +114,9 @@ $(document).ready(function () {
         t2g: inputs[i + 3].value,
         userId: getUserId(),
       });
-
       if (i != lenght - 4) tickets += ",";
     }
     tickets += `]`;
-
     $.ajax({
       url: "/api/ticket/add",
       type: "POST",

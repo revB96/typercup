@@ -73,8 +73,28 @@ function updateUserStats(userId, points) {
     return def.promise;
 }
 
+function addQuizToStats(userId, point){
+  var def = Q.defer();
+  UserStats.findOneAndUpdate(
+    {user: userId},
+    {
+      $inc: {
+        points: point,
+        quizPoints: point
+      },
+    },
+    {
+      new: true,
+    }
+  ).exec(function (err, quizPoints) {
+    err ? console.log(err) : console.log(quizPoints)
+  });
+
+}
+
 module.exports = {
     add,
     getAll,
-    updateUserStats
+    updateUserStats,
+    addQuizToStats
 }

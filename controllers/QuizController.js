@@ -3,7 +3,8 @@ const Q = require("q");
 const express = require("express");
 const Quiz = require("../models/quiz.js");
 const Question = require("../models/quizQuestions.js");
-const {updateUserQuizStatus} = require("./UserController.js");
+const UserStats = require("./UserStatsController");
+const User = require("./UserController.js");
 
 function addQuestion(formData){
     var def = Q.defer();
@@ -112,7 +113,7 @@ function addUserQuiz(formData){
     })
     getUserQuiz(formData[0].userId).then(quiz => {
         if(quiz == null){
-            updateUserQuizStatus(formData[0].userId, true)
+            User.updateUserQuizStatus(formData[0].userId, true)
             userQuiz.save(function (err, userQuiz) {
             if(err){
                 def.reject(err)
@@ -143,6 +144,24 @@ function addUserQuiz(formData){
 
 
     return def.promise;
+}
+
+function addQuizPoints(){
+    User.getAll().then(users =>{
+        users.forEach(user =>{
+            getUserAnswers(user._id).then(userAnswers => {
+                getAllQuestions().then(questions => {
+                    questions.forEach(question =>{
+                        userAnswers.answers.forEach(userAnswer => {
+                             if((question._id == userAnswer.questionId) & (question.correctAnswer == userAnswer.answer)) {
+                                UserStats.addQuizToStats(user._id, 1)
+                             }
+                        })
+                    })
+                })
+        })
+    })
+})
 }
 
 function closeQuiz() {

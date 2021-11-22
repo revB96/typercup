@@ -1,4 +1,3 @@
-# typer-cup.pl
 # TYPER-CUP.PL
 Typer-cup is website project to placing bets on football matches. The project was created for Euro 2020, but I want to adapt it to other tournaments.
 

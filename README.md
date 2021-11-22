@@ -32,33 +32,33 @@ Typer-cup is website project to placing bets on football matches. The project wa
 - [x] Dashboard: saving bets for the current queue, summary users bets after lock queues
 ![Dashboard](https://i.ibb.co/S5VKXHY/dashboard.png)
 ![Dashboard2](https://i.ibb.co/rFbqdjt/dashboard2.png)
-- [x] Queues history
-- [x] Table
+- [x] Queues history                                                                    
+- [x] Table                                                                             
 ![Table](https://i.ibb.co/y5gqMjJ/Zrzut-ekranu-2021-11-21-o-22-52-38.png)
-- [x] Tournament table and stats
+- [x] Tournament table and stats                                                         
 ![Tournament table and stats](https://i.ibb.co/hgG5Lw8/euro.png)
-- [x] Quiz
+- [x] Quiz                                                                                  
 ![Quiz](https://i.ibb.co/ByYX9DG/quiz.png)
-- [x] Profile: reset password, notifications manager (TODO), user bets history
+- [x] Profile: reset password, notifications manager (TODO), user bets history                          
 ![Profile](https://i.ibb.co/5LLfpJX/Zrzut-ekranu-2021-11-21-o-22-56-48.png)
 
 ## Admin menu and facilities
 
-- [x] Teams: Add new teams to database
-![Teams](https://i.ibb.co/zVPCfjX/teams.png)
-- [x] Schedule: Add new matchs in tournament
+- [x] Teams: Add new teams to database                                                   
+![Teams](https://i.ibb.co/zVPCfjX/teams.png) 
+- [x] Schedule: Add new matchs in tournament                                               
 ![Schedule](https://i.ibb.co/JttRfPR/schedule.png)
-- [x] Scores: Add result of the matchs
+- [x] Scores: Add result of the matchs                                                   
 ![Scores](https://i.ibb.co/JRcRVZk/results.png)
-- [x] Queues: Add new queues, control queues (start,lock,end)
+- [x] Queues: Add new queues, control queues (start,lock,end)                              
 ![Queues](https://i.ibb.co/WfgRn7b/queues.png)
-- [x] Users: Creating new user account. The logon details are sending by email.
+- [x] Users: Creating new user account. The logon details are sending by email.                                  
 ![Users](https://i.ibb.co/x5h8xkh/users.png)
 - [x] Quiz: Add questions and answers to the quiz, locking quiz (prohibit making changes in answers), add point for the quiz to the end results
 ![Quiz](https://i.ibb.co/tKbPRsL/quiz.png)
 ![Quiz2](https://i.ibb.co/n70Q1LJ/quiz2.png)
-- [ ] Backup: creating database backups before and after each of the queue
-![Backup](https://i.ibb.co/JR1yXRs/backup.png)
+- [ ] Backup: creating database backups before and after each of the queue                                   
+![Backup](https://i.ibb.co/JR1yXRs/backup.png) 
 
 ## TODO
 - [ ] Project adaptation to play others tournament

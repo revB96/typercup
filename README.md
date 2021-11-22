@@ -65,4 +65,5 @@ Typer-cup is website project to placing bets on football matches. The project wa
 - [ ] Add reset password by user
 - [ ] Notifications system: new queue, queue summary, reminder about not sent bets
 - [ ] Introduce new modes of playing tournaments
-
+- [ ] Introduce English language 
+- [ ] Adapt project for users from other timezones

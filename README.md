@@ -1,4 +1,4 @@
-# TYPER-CUP.PL
+# TYPER-CUP.PL  ![nodejs](https://i.ibb.co/Zh6JVzH/112724-development-512x512.png) ![js](https://i.ibb.co/ZcJ0q5m/download.jpg) ![mongo](https://i.ibb.co/w6DMQKd/download.png) ![handlebars](https://i.ibb.co/t3tgBT5/download.png)
 Typer-cup is website project to placing bets on football matches. The project was created for Euro 2020, but I want to adapt it to other tournaments.
 
 * [Project assumption](#project-assumption)

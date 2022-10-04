@@ -2,8 +2,10 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
+const User = require("../models/users");
+const UserController= require("../controllers/UserController")
+const Round = require("../controllers/RoundController")
 
-//Przenieść
 
 function authenticate(req, res, next) {
   const token = req.cookies.access_token;
@@ -18,29 +20,77 @@ function authenticate(req, res, next) {
   });
 }
 
-router.get("/", authenticate, function (req, res, next) {
+function authenticateAdmin(req, res, next) {
+  const token = req.cookies.access_token;
+
+  if (token === null) return res.redirect("/login");
+
+  jwt.verify(token, process.env.SECRET_TOKEN, (err, user) => {
+    if(err)res.redirect("/login")
+  
+    if(user.user.role == "admin"){
+      req.user = user;
+    }else{
+      res.status(401).render("401", {
+        title: "Brak dostępu",
+      });
+    }
+
+    next();
+  });
+}
+
+router.get("/", authenticate, async function (req, res, next) {
   res.render("dashboard", {
     title: "Dashboard",
     user: req.user,
     token: req.query.secret_token,
+    lastRound: 1
   });
-});
+})
 
-router.get("/table", authenticate, function (req, res) {
+router.get("/roundSummary", authenticate, async function (req, res, next) {
+  
+  res.render("roundSummary", {
+    title: "Podsumowanie rundy",
+    user: req.user,
+    token: req.query.secret_token,
+    lastRound: 1
+  });
+})
+
+router.get("/table", authenticate, async function (req, res) {
   res.render("table", {
     title: "Tabela",
+    lastRound: 1
   });
 });
 
-router.get("/euro", authenticate, function (req, res) {
+router.get("/euro", authenticate, async function (req, res) {
   res.render("euro", {
     title: "Euro 2021",
+    lastRound: 1
+});
+})
+
+router.get("/rules", authenticate, async function (req, res) {
+  res.render("rules", {
+    title: "Regulamin i zasady",
+    lastRound: 1
   });
 });
 
-router.get("/admin", authenticate, function (req, res) {
+router.get("/previousRound", authenticate, async function (req, res) {
+  res.render("previousRounds", {
+    title: "Poprzednie kolejki",
+    lastRound: 1
+  });
+});
+
+router.get("/admin", authenticateAdmin, async function (req, res) {
   res.render("admin", {
     title: "Admin",
+    lastRound: 1
   });
 });
 
@@ -82,6 +132,12 @@ router.post("/login", async (req, res, next) => {
         maxAge: 86400000,
         //httpOnly: true
       });
+
+      UserController.lastLogonUpdate(user.id)
+
+      if(user.firstLogon == false)
+        UserController.loginStateUpdate(user._id)
+
       if(user.filledQuiz == true)
         return res.redirect("/");
       else
@@ -110,16 +166,19 @@ router.get("/progress", authenticate, function (req, res, next) {
   });
 });
 
-router.get("/profile", authenticate, function (req, res, next) {
+router.get("/profile", authenticate, async function (req, res, next) {
   res.render("profile", {
     title: "Profil",
+    lastRound: 1
   });
 });
 
-router.get("/quiz", authenticate, function (req, res, next) {
+router.get("/quiz", authenticate, async function (req, res, next) {
   res.render("quiz", {
     title: "Quiz",
+    lastRound: 1
   });
 });
+
 
 module.exports = router;

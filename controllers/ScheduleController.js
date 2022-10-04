@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Q = require("q");
 const express = require("express");
 const Schedule = require("../models/schedule.js");
+const moment = require('moment-timezone');
 
 function add(formData){
     const timestamp = Date.now();
@@ -13,10 +14,10 @@ function add(formData){
     var data = new Schedule({
         t1 : formData.team1,
         t2 : formData.team2,
-        matchDate : matchDateConverted,
+        matchDate : moment.tz(matchDateConverted, "Europe/Warsaw"),
         group : formData.group,
-        createdAt : timestamp,
-        updatedAt : timestamp
+        createdAt : moment.tz(timestamp, "Europe/Warsaw"),
+        updatedAt : moment.tz(timestamp, "Europe/Warsaw")
     })
 
     data.save((function(err, result){
@@ -57,7 +58,6 @@ function getGroupSchedule(group){
         .sort({matchDate: "asc"})
         .populate("t1", "teamName shortcut").populate("t2", "teamName shortcut")
         .exec(function (err, schedule) {
-            //console.log(schedule)
             err ? def.reject(err) : def.resolve(schedule);
     });
     return def.promise;
@@ -83,12 +83,12 @@ function getRoundSchedule(roundDate){
 }
 
 function getFirstRoundMatch(roundDate){
+
     var def = Q.defer();
     var startDate = new Date(roundDate)
     var endDate = new Date(roundDate)
     startDate.setHours(0, 0, 0, 0);
     endDate.setHours(23, 59, 59, 999);
-
     Schedule
         .find({matchDate: {$gte: startDate, $lte: endDate}})
         .sort({matchDate: "asc"})
@@ -108,14 +108,27 @@ function updateScheduleStatus(scheduleId){
         scheduleId,
         {
         played: true,
-        updatedAt: timestamp,
+        updatedAt: moment.tz(timestamp, "Europe/Warsaw"),
         },
         {
         new: true,
         }
     ).exec(function (err, round) {
-        err ? console.log(err) : def.resolve(round);
+        err ? def.reject(err) : def.resolve(round);
     });
+    return def.promise;
+}
+
+function getMatchesBetweenDates(startDate, endDate){
+    var def = Q.defer();
+    Schedule
+            .find({matchDate: {$gte: startDate, $lte: endDate}})
+            .sort({matchDate: "asc"})
+            .populate("t1", "teamName shortcut").populate("t2", "teamName shortcut")
+            .exec(function (err, schedule) {
+                //console.log(schedule)
+                err ? def.reject(err) : def.resolve(schedule);
+        });
     return def.promise;
 }
 
@@ -126,6 +139,7 @@ module.exports = {
     getRoundSchedule,
     getScheduleById,
     getFirstRoundMatch,
-    updateScheduleStatus
+    updateScheduleStatus,
+    getMatchesBetweenDates
 }
 

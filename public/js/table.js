@@ -9,6 +9,9 @@ function listUserTable(){
             if(userStat.quizPoints != 0)
                 quizPoints = userStat.quizPoints
 
+            var effectiveness = ( (userStat.correctScore + userStat.correctTeam) / result[0].tickets) * 100
+            var effectiveness2 = (userStat.points / (result[0].tickets * 3)) * 100
+
             $("#users-stat-table").append(`
             <tr ${yellowClass}>
                 <th scope="row">${counter}</th>
@@ -18,8 +21,12 @@ function listUserTable(){
                 <td>${userStat.correctScore}</td>
                 <td>${userStat.correctTeam}</td>
                 <td>${userStat.defeat}</td>
-                <td>${userStat.correctQuestions}</td>
                 <td>${quizPoints}</td>
+                <td>
+                    <span class="badge rounded-pill bg-primary">${Math.round(effectiveness)}%</span><br />
+                    <span class="badge rounded-pill bg-success">${Math.round(effectiveness2)}%</span>
+                </td>
+                
              </tr>
             `)
         }
@@ -27,5 +34,7 @@ function listUserTable(){
 }
 
 $(document).ready(function () {
-    listUserTable()
+    if(document.title == "Typer Cup | Tabela"){
+        listUserTable()
+    }
 })

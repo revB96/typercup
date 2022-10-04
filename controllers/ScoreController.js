@@ -7,9 +7,10 @@ const { getScheduleById } = require("./ScheduleController.js");
 const { updateScheduleStatus } = require("./ScheduleController.js");
 const { updateUserStats } = require("./UserStatsController.js");
 const { payForTicketsAfterMatch } = require("./TicketController.js");
+const moment = require('moment-timezone');
 
 async function add(formData){
-    const timestamp = Date.now();
+    const timestamp = moment.tz(Date.now(), "Europe/Warsaw")
     var def = Q.defer();
 
     var data = new Score({
@@ -37,20 +38,21 @@ async function add(formData){
             console.log("***")
             console.log(formData.schedule)
             getScheduleById(formData.schedule).then(schedule=>{
-                console.log(schedule._id + " "+ score.t1g+ " "+score.t2g+ " "+schedule.t1._id+ " "+schedule.t2._id)
                 if(score.t1g > score.t2g){
                     updateTeamStats(schedule.t1, 3, score.t1g, score.t2g)
-                    updateScheduleStatus(schedule.id)
                     updateTeamStats(schedule.t2, 0, score.t2g, score.t1g)
                     payForTicketsAfterMatch(schedule._id,score.t1g, score.t2g, schedule.t1._id)
+                    updateScheduleStatus(schedule.id)
                 }else if(score.t2g > score.t1g){
                     updateTeamStats(schedule.t1, 0, score.t1g, score.t2g)
                     updateTeamStats(schedule.t2, 3, score.t2g, score.t1g)
                     payForTicketsAfterMatch(schedule._id, score.t1g, score.t2g, schedule.t2._id)
+                    updateScheduleStatus(schedule.id)
                 }else if(score.t2g == score.t1g){
                     updateTeamStats(schedule.t1, 1, score.t1g, score.t2g)
                     updateTeamStats(schedule.t2, 1, score.t2g, score.t1g)
                     payForTicketsAfterMatch(schedule._id, score.t1g, score.t2g, "drawn")
+                    updateScheduleStatus(schedule.id)
                 }
             })
             
@@ -79,6 +81,23 @@ function getAll() {
     return def.promise;
 }
 
+function getScoresByDate(roundDate) {
+    var def = Q.defer();
+
+    var startDate = new Date(roundDate)
+    var endDate = new Date(roundDate)
+
+    startDate.setHours(0, 0, 0, 0);
+    endDate.setHours(23, 59, 59, 999);
+
+    Score
+        .find({matchDate: {$gte: startDate, $lte: endDate}})
+        .exec(function (err, scores) {
+            err ? def.reject(err) : def.resolve(scores);
+    });
+    return def.promise;
+}
+
 function getScheduleScore(scheduleId){
     var def = Q.defer();
     Score.findOne({ schedule: scheduleId})
@@ -93,5 +112,6 @@ function getScheduleScore(scheduleId){
 module.exports = {
     add,
     getAll,
-    getScheduleScore
+    getScheduleScore,
+    getScoresByDate
 }

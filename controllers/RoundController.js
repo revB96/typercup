@@ -2,7 +2,9 @@ const mongoose = require("mongoose");
 const Q = require("q");
 const express = require("express");
 const Round = require("../models/rounds.js");
-const {getFirstRoundMatch} = require("./ScheduleController.js");
+const moment = require('moment-timezone');
+const Schedule = require("./ScheduleController");
+//const User = require("./UserController")
 
 function add(formData){
     var def = Q.defer();
@@ -30,12 +32,30 @@ function add(formData){
     return def.promise;
 }
 
+function getKnockoutSchedule(stage){
+    var def = Q.defer();
+
+    getRoundByStage(stage).then(round =>{
+        var startDate = new Date(round.roundDate)
+        var endDate = new Date(round.roundDate)
+    
+        startDate.setHours(0, 0, 0, 0);
+        endDate.setHours(23, 59, 59, 999);
+        Schedule.getMatchesBetweenDates(startDate,endDate).then(result =>{
+            def.resolve(result);
+        })
+        
+
+    })
+    return def.promise;
+}
+
 function getRound(state) {
     var def = Q.defer();
     if (state == "all"){
         Round
             .find()
-            .sort({round: "asc"})
+            .sort({roundDate: "asc"})
             .exec(function (err, round) {
                 err ? def.reject(err) : def.resolve(round);
             });
@@ -49,6 +69,18 @@ function getRound(state) {
     
     return def.promise;
 }
+
+function getRoundByStage(stage){
+    var def = Q.defer();
+    Round
+        .findOne({round:stage})
+        .exec(function (err, round) {
+            err ? def.reject(err) : def.resolve(round);
+        });
+    return def.promise;
+}
+
+
 function update(data)
 {
     var def = Q.defer();
@@ -61,7 +93,7 @@ function update(data)
         gpio: data.gpio,
         scene: data.scene,
         lastStatus: "Updated",
-        updatedAt: timestamp,
+        updatedAt: moment.tz(timestamp, "Europe/Warsaw"),
     },{
         new:true
     }).exec(function (err, action){
@@ -81,45 +113,6 @@ function countRunningRound(){
     return def.promise;
 }
 
-function getRunningRound(){
-    var def = Q.defer();
-    Round
-        .findOne({state:"running"})
-        .exec(function (err, round) {
-            err ? def.reject(err) : def.resolve(round);
-        });
-    return def.promise;
-}
-
-function checkIfRoundIsOpen(){
-    var def = Q.defer();
-    getRunningRound().then(runningRound => {
-        if(!!runningRound){
-            getFirstRoundMatch(runningRound.roundDate).then(firstMatch => {
-                var matchDate = new Date(firstMatch[0].matchDate)
-                var timestamp = new Date(Date.now());
-                // console.log(timestamp.getHours())
-                // console.log(matchDate.getHours() - 1)
-                // console.log(timestamp.getDay())
-                // console.log(matchDate.getDay())
-                if(timestamp.getHours() >= matchDate.getHours() - 1)
-                    console.log("1")
-                if(timestamp.getMinutes() <= matchDate.getMinutes())
-                    console.log("2")
-                if(timestamp.getDay() >= matchDate.getDay())
-                    console.log("3")
-
-                if((timestamp.getHours() >= matchDate.getHours() - 1) & (timestamp.getMinutes() <= matchDate.getMinutes()) & (timestamp.getDay() >= matchDate.getDay())){
-                    def.resolve(false);
-                }else{ 
-                    def.resolve(true);
-                }
-            })
-        }
-    })
-    return def.promise;
-}
-
 function changeStatus(roundId, newState){
     var def = Q.defer();
 
@@ -134,6 +127,10 @@ function changeStatus(roundId, newState){
                 }).exec(function (err, round){
                     console.log(`Zmieniono status ${round.displayName} na ${round.state}`)
                     err ? def.reject(err) : def.resolve(round);
+                    Schedule.getFirstRoundMatch(round.roundDate).then(firstMatch =>{
+                        User.roundEmailNotification(firstMatch[0].matchDate)
+                    })
+                      
                 }) 
             }else{
                 console.log("Istnieje już aktywna runda. Zakończ wszystkie rozpoczęte kolejki.")
@@ -147,18 +144,59 @@ function changeStatus(roundId, newState){
         },{
             new:true
         }).exec(function (err, round){
-            console.log(`Zmieniono status ${round.displayName} na ${round.state}`)
             err ? def.reject(err) : def.resolve(round);
+            console.log(`Zmieniono status ${round.displayName} na ${round.state}`)
         }) 
     }
-    
     return def.promise;
 }
+
+function getRunningRound(){
+    var def = Q.defer();
+    Round
+        .findOne({state:"running"})
+        .exec(function (err, round) {
+            err ? def.reject(err) : def.resolve(round);
+        });
+    return def.promise;
+  }
+
+async function getPreviousRound(){
+    var round = await Round
+                    .find()
+                    .sort({roundDate: "asc"})
+                    .limit(1)
+                    .select("round")
+                    .exec();
+ 
+    if(!!round)
+        return 0
+    else
+        return round[0].round
+}
+
+async function getPreviousRoundDetails(){
+    var def = Q.defer();
+    Round
+        .find()
+        .sort({roundDate: "asc"})
+        .limit(1)
+        .exec(function (err, round){
+            err ? def.reject(err) : def.resolve(round);
+        })
+
+    return def.promise;
+
+}
+
 
 module.exports = {
     add,
     getRound,
     changeStatus,
     countRunningRound,
-    checkIfRoundIsOpen
+    getRoundByStage,
+    getKnockoutSchedule,
+    getPreviousRound,
+    getPreviousRoundDetails
 }

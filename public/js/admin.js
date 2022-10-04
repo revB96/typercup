@@ -1,8 +1,8 @@
 function adminSelectTeams() {
   $("#add-match-select-team1").html("");
   $("#add-match-select-team2").html("");
-  getGroup($("#add-match-select-group option:selected").text()).then(
-    (result) => {
+  if($("#add-match-select-group option:selected").text() == '[ALL]'){
+    getTeams().then((result) => {
       for (const [index, team] of Object.entries(result)) {
         $("#add-match-select-team1").append(`
                     <option value="${team._id}">${team.teamName}</option>
@@ -11,9 +11,22 @@ function adminSelectTeams() {
                     <option value="${team._id}">${team.teamName}</option>
                 `);
       }
-      //printSchedule(result)
-    }
-  );
+    })
+  }else{
+    getGroup($("#add-match-select-group option:selected").text()).then(
+      (result) => {
+        for (const [index, team] of Object.entries(result)) {
+          $("#add-match-select-team1").append(`
+                      <option value="${team._id}">${team.teamName}</option>
+                  `);
+          $("#add-match-select-team2").append(`
+                      <option value="${team._id}">${team.teamName}</option>
+                  `);
+        }
+        //printSchedule(result)
+      }
+    );
+  }
 }
 
 function adminListTeams() {
@@ -36,7 +49,7 @@ function adminListTeams() {
 
 function adminGetSchedule() {
   var counter,
-    played = "";
+  played = "";
   $("#admin-schedule-list").html("");
   getSchedule().then((result) => {
     var matchDate;
@@ -71,8 +84,8 @@ function adminGetSchedule() {
 function adminListRound() {
   $("#list-round-table").html("");
   const options = { year: "numeric", month: "numeric", day: "numeric" };
-  getRound("all").then((result) => {
-    for (const [index, round] of Object.entries(result)) {
+  getRound("all").then(async (result) => {
+    for await(const [index, round] of Object.entries(result)) {
       var roundControl = "";
       var roundDate = new Date(round.roundDate);
       switch (round.state) {
@@ -86,7 +99,7 @@ function adminListRound() {
           roundControl = `<button type="button" class="btn btn-dark">X</button>`;
           break;
       }
-      $("#list-round-table").append(`
+      await $("#list-round-table").append(`
                     <tr>
                         <th scope="row">${round.displayName}</th>
                         <td>${roundDate.toLocaleDateString(
@@ -112,7 +125,7 @@ function adminListUsers() {
   };
   adminGetUsers().then((result) => {
     for (const [index, user] of Object.entries(result)) {
-      var updatedAt = new Date(user.updatedAt);
+      var lastLogon = new Date(user.lastLogon);
       $("#list-user-table").append(`
                 <tr>
                     <th scope="row">${user._id.substr(user._id.length - 4)}</th>
@@ -121,7 +134,7 @@ function adminListUsers() {
                     <td>${user.role}</td>
                     <td>${user.firstLogon}</td>
                     <td>${user.filledQuiz}</td>
-                    <td>${updatedAt.toLocaleDateString("pl-PL", options)}</td>
+                    <td>${lastLogon.toLocaleDateString("pl-PL", options)}</td>
                 </tr>
                 `);
     }
@@ -162,9 +175,9 @@ function adminChangeStatus(status, roundId) {
 }
 
 function adminGetRound() {
-  getRound("all").then((result) => {
-    for (const [index, round] of Object.entries(result)) {
-      $(`#admin-score-round-select`).append(
+  getRound("all").then(async (result) => {
+    for await(const [index, round] of Object.entries(result)) {
+      await $(`#admin-score-round-select`).append(
         `<option value="${round.roundDate}">${round.round}. ${round.displayName}</option>`
       );
     }
@@ -174,11 +187,12 @@ function adminGetRound() {
 function adminGetMatches() {
   $(`#admin-score-match-select`).html("");
   getRoundSchedule($("#admin-score-round-select option:selected").val()).then(
-    (result) => {
-      for (const [index, match] of Object.entries(result)) {
-        $(`#admin-score-match-select`).append(
-          `<option value="${match._id}">${index}. | ${match.t1.teamName} vs ${match.t2.teamName}</option>`
-        );
+    async (result) => {
+      for await(const [index, match] of Object.entries(result)) {
+        if(match.played == false)
+          await $(`#admin-score-match-select`).append(
+            `<option value="${match._id}">${index}. | ${match.t1.teamName} vs ${match.t2.teamName}</option>`
+          );
       }
     }
   );
@@ -266,6 +280,40 @@ function adminGetQuestions() {
   });
 }
 
+function restoreDatabase(fileName){
+  $.post(`/api/admin/backups/restore?fileName=${fileName}`).done(() => {
+    $(".toast").html(`
+                <div class="toast-header">
+                <strong class="mr-auto">Panel administratora</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="toast-body">
+                    Przywrócono bazę: ${fileName}
+                </div>
+            `);
+  $(".toast").toast("show");
+  })
+}
+
+function adminPrintBackups(){
+  $(`#admin-backups-table`).html("")
+  getBackups().then(async (result) =>{
+    var counter = 1
+    result.forEach(async backup =>{
+      await $(`#admin-backups-table`).append(`
+      <tr>
+        <th scope="row">${counter}</th>
+        <td>${backup}</td>
+        <td><button type="button" class="btn btn-primary" onClick="restoreDatabase('${backup}')">Przywróć</button></td>
+      </tr>
+      `)
+      counter ++
+    })
+  })
+}
+
 function addQuestionAnswer(id){
     var data = {
         id: id,
@@ -307,20 +355,59 @@ function closeQuiz(){
     });
 }
 
+function adminAddPointsFromQuiz(){
+  $.get("/api/admin/quiz/addpoints").done(() => {
+    $(".toast").html(`
+                    <div class="toast-header">
+                    <strong class="mr-auto">Panel administratora</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="toast-body">
+                        Dodano punkty z Quizu
+                    </div>
+                `);
+      $(".toast").toast("show");
+    });
+}
+
 $(document).ready(function () {
-  adminSelectTeams();
-  adminListTeams();
-  adminGetSchedule();
-  adminListRound();
-  adminListUsers();
-  adminGetRound();
-  adminGetAllScores();
-  adminGetQuestions();
-  adminGetMatches()
+  if(document.title == "Typer Cup | Admin"){
+    adminSelectTeams();
+    adminListTeams();
+    adminGetSchedule();
+    adminListRound();
+    adminListUsers();
+    adminGetRound();
+    adminGetAllScores();
+    adminGetQuestions();
+    adminGetMatches()
+    adminPrintBackups()
 
   $("#add-quiz-answer-form").submit(function (e) {
     e.preventDefault();
   })
+
+  $("#create-backup-form").submit(function (e) {
+    e.preventDefault();
+    const formData = $("#create-backup-form").serializeArray();
+    $.post("/api/admin/backups/create", formData).always(() => {
+      $(".toast").html(`
+                    <div class="toast-header">
+                    <strong class="mr-auto">Panel administratora</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="toast-body">
+                        Stworzono nowy backup
+                    </div>
+                `);
+      $(".toast").toast("show");
+      adminPrintBackups();
+    });
+  });
 
   $("#add-schedule-form").submit(function (e) {
     e.preventDefault();
@@ -473,4 +560,5 @@ $(document).ready(function () {
       $(".toast").toast("show");
     });
   });
+}
 });

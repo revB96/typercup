@@ -26,6 +26,20 @@ function getGroupSchedule(group) {
     })
 }
 
+function getKnockoutSchedule(stage) {
+    return $.ajax({
+        url: `/api/schedule/knockout?stage=${stage}`,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (result) {
+            return result;
+        },
+        fail: function (){
+            console.log("Nie udało się pobrać");
+        }
+    })
+}
+
 function getTeams() {
     return $.ajax({
         url: `/api/teams/list`,
@@ -85,6 +99,20 @@ function getRoundSchedule(roundDate){
 function getAllScores(){
     return $.ajax({
         url: `/api/scores`,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (result) {
+            return result;
+        },
+        fail: function (){
+            console.log("Nie udało się pobrać");
+        }
+    })
+}
+
+function getScoresByDate(roundDate){
+    return $.ajax({
+        url: `/api/scores?roundDate=${roundDate}`,
         contentType: "application/json",
         dataType: 'json',
         success: function (result) {
@@ -184,9 +212,38 @@ function getUserTable(){
     })
 }
 
+
+function getRoundTickets(round){
+    return $.ajax({
+        url: `/api/tickets?round=${round}`,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (result) {
+            return result;
+        },
+        fail: function (){
+            console.log("Nie udało się pobrać");
+        }
+    })
+}
+
 function getQuestions(){
     return $.ajax({
         url: `/api/quiz/questions`,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (result) {
+            return result;
+        },
+        fail: function (){
+            console.log("Nie udało się pobrać");
+        }
+    })
+}
+
+function getUserCorrectAnswers(id){
+    return $.ajax({
+        url: `/api/quiz/correctAnswers?user=${id}`,
         contentType: "application/json",
         dataType: 'json',
         success: function (result) {
@@ -239,6 +296,50 @@ function getScheduleScore(id){
         }
     })
 }
+
+function getBackups(id){
+    return $.ajax({
+        url: `/api/admin/backups`,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (result) {
+            return result;
+        },
+        fail: function (){
+            console.log("Nie udało się pobrać");
+        }
+    })
+}
+
+
+function getLastRound(){
+    return $.ajax({
+        url: `/api/round/last`,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (result) {
+            return result;
+        },
+        fail: function (){
+            console.log("Nie udało się pobrać");
+        }
+    })
+}
+
+function getRoundByStage(round){
+    return $.ajax({
+        url: `/api/round/get?round=${round}`,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (result) {
+            return result;
+        },
+        fail: function (){
+            console.log("Nie udało się pobrać");
+        }
+    })
+}
+
 function checkIfRoundIsOpen(){
     return $.ajax({
         url: `/api/round/checkifopen`,

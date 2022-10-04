@@ -2,9 +2,10 @@ const mongoose = require("mongoose");
 const Q = require("q");
 const express = require("express");
 const Team = require("../models/nationalTeams");
+const moment = require('moment-timezone');
 
 function add(formData) {
-  const timestamp = Date.now();
+  const timestamp = moment.tz(Date.now(), "Europe/Warsaw")
   var def = Q.defer();
 
   var data = new Team({
@@ -37,7 +38,23 @@ function getGroup(group) {
   Team.find({ group: group })
     .sort({ points: "desc" })
     .exec(function (err, data) {
-      err ? def.reject(err) : def.resolve(data);
+      if(err)
+        def.reject(err)
+      else {
+        var sortGorup = data
+        sortGorup.sort(function (a, b) {
+          if(a.points>b.points)
+            return -1
+          else if (a.points<b.points)
+            return 1
+          else
+            if(a.difference > b.difference)
+              return -1
+            else if(a.difference < b.difference)
+              return 1
+        })
+        def.resolve(sortGorup);
+      }
     });
   return def.promise;
 }
@@ -67,7 +84,6 @@ function resetTeamsStats() {
 }
 
 function updateTeamStats(teamId, point, forGoal, against) {
-  const timestamp = Date.now();
   var def = Q.defer();
   var wonPoint = 0,
     drawnPoint = 0,
@@ -87,6 +103,7 @@ function updateTeamStats(teamId, point, forGoal, against) {
         lost: lostPoint,
         for: forGoal,
         against: against,
+        difference: forGoal-against
       },
     },
     {

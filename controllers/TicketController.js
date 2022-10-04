@@ -2,8 +2,10 @@ const mongoose = require("mongoose");
 const Q = require("q");
 const express = require("express");
 const Ticket = require("../models/tickets.js");
+const Round = require("../models/rounds.js");
 const { updateUserStats } = require("./UserStatsController.js");
-const { checkIfRoundIsOpen } = require("./RoundController.js");
+const Schedule = require("./ScheduleController.js");
+const moment = require('moment-timezone');
 
 function getUserTicketById(scheduleId, userId) {
   var def = Q.defer();
@@ -28,6 +30,7 @@ function getAllUserTickets(userId) {
       populate: { path: "t2", select: "teamName" },
     })
     .sort({ round: "asc" })
+    .collation({locale: "en_US", numericOrdering: true})
     .exec(function (err, tickets) {
       err ? def.reject(err) : def.resolve(tickets);
     });
@@ -36,7 +39,7 @@ function getAllUserTickets(userId) {
 
 function ticketUpdate(ticketId, t1g, t2g) {
   var def = Q.defer();
-  const timestamp = Date.now();
+  const timestamp = moment.tz(Date.now(), "Europe/Warsaw")
   Ticket.findByIdAndUpdate(
     ticketId,
     {
@@ -53,9 +56,40 @@ function ticketUpdate(ticketId, t1g, t2g) {
   return def.promise;
 }
 
+function getRunningRound(){
+  var def = Q.defer();
+  Round
+      .findOne({state:"running"})
+      .exec(function (err, round) {
+          err ? def.reject(err) : def.resolve(round);
+      });
+  return def.promise;
+}
+
+function checkIfRoundIsOpen(){
+  var def = Q.defer();
+  getRunningRound().then(runningRound => {
+      if(!!runningRound){
+          Schedule.getFirstRoundMatch(runningRound.roundDate).then(firstMatch => {
+              
+              var matchDate = new Date(firstMatch[0].matchDate)
+       
+              var timestamp = new Date(Date.now());
+
+              if(moment.tz(timestamp, "Europe/Warsaw").format() > moment.tz(matchDate.setHours(matchDate.getHours()-1), "Europe/Warsaw").format()){
+                  def.resolve(false);
+              }else{ 
+                  def.resolve(true);
+              }
+          })
+      }
+  })
+  return def.promise;
+}
+
 function add(formData) {
   var def = Q.defer();
-  const timestamp = Date.now();
+  const timestamp = moment.tz(Date.now(), "Europe/Warsaw")
   formData.forEach((match) => {
     var ticket = new Ticket({
       t1g: match.t1g,
@@ -132,6 +166,26 @@ function getUserTicketsByRound(userId, round) {
   return def.promise;
 }
 
+function getTicketsByRound(round){
+  var def = Q.defer();
+  Ticket.find({round: round })
+    .sort({ round: "asc" })
+    .populate({
+      path: "schedule",
+      populate: { path: "t1" },
+    })
+    .populate({
+      path: "schedule",
+      populate: { path: "t2" },
+    })
+    .populate("user", "username")
+    .exec(function (err, tickets) {
+      err ? def.reject(err) : def.resolve(tickets);
+    });
+
+  return def.promise;
+}
+
 function getTicketsBySchedule(scheduleId) {
   var def = Q.defer();
   Ticket.find({ schedule: scheduleId })
@@ -155,20 +209,17 @@ async function payForTicketsAfterMatch(scheduleId, t1g, t2g, winTeam) {
     tickets.forEach((ticket) => {
       var userWinTeam = "";
       if (ticket.t1g > ticket.t2g) {
-        console.log(ticket.schedule.t1._id);
         userWinTeam = ticket.schedule.t1._id.toString();
       } else if (ticket.t1g < ticket.t2g) {
-        console.log("2.2");
-        console.log(ticket.schedule.t2._id);
         userWinTeam = ticket.schedule.t2._id.toString();
       }
       
       if ((ticket.t1g == t1g) & (ticket.t2g == t2g)) {
         updateUserStats(ticket.user._id, 3.0);
-      } else if (userWinTeam.toString() == winTeam.toString()) {
+      } else if ((userWinTeam.toString() == winTeam.toString()) || ((t1g == t2g) & (ticket.t1g == ticket.t2g))) {
         updateUserStats(ticket.user._id, 1.5);
       } else {
-        updateUserStats(ticket.user._id, 0);
+        updateUserStats(ticket.user._id, 0.0);
       }
     });
   });
@@ -178,5 +229,7 @@ module.exports = {
   add,
   getUserTicketsByRound,
   payForTicketsAfterMatch,
-  getAllUserTickets
+  getAllUserTickets,
+  getTicketsByRound,
+  checkIfRoundIsOpen
 };

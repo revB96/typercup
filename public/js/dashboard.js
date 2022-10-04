@@ -1,6 +1,5 @@
 function printRoundWithMatches(round) {
   const dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
-  
   if(round == 0){
     var roundState = "Disabled";
   }else{
@@ -18,9 +17,17 @@ function printRoundWithMatches(round) {
           var minutes = closeTime.getMinutes()
           if (minutes < 10)
             minutes = "00"
-          $(`#dashboard-round-date`).html(
-            `${roundDate.toLocaleDateString("pl-PL", dateOptions)}<br /> Godzina zamknięcia kolejki: ${closeTime.getHours() -1}:${minutes}`
-          );
+          if(roundState != "Disabled")
+            $(`#dashboard-round-date`).html(
+              `${roundDate.toLocaleDateString("pl-PL", dateOptions)}<br /> Godzina zamknięcia kolejki: ${closeTime.getHours() -1}:${minutes}`
+            );
+          else{
+            $(`#dashboard-round-date`).html(
+              `${roundDate.toLocaleDateString("pl-PL", dateOptions)}<br /> Kolejka została zamknięta o: ${closeTime.getHours() -1}:${minutes}`
+            );
+            $(`#dashboard-message`).html(`<a href="/roundSummary"><button type="button" class="btn btn-primary">Sprawdź jak postawili inni</button></a>`);
+          }
+
 
           for (const [index, match] of Object.entries(schedule)) {
             var t1g = "",
@@ -88,11 +95,13 @@ function printRoundWithMatches(round) {
       $("#dashboard-submit-button")
         .html(`<div class="d-grid gap-2" style="padding: 1.5em;">
                 <button type="submit" class="btn btn-primary">Dodaj</button>
-               </div>`);    
-  
+               </div>`);
+        
 }
 
 $(document).ready(function () {
+  $(`#dashboard-round-matches`).html("Brak aktywnych kolejek");
+  if(document.title == "Typer Cup | Dashboard"){
   checkIfRoundIsOpen().then((roundState) => {
      if (roundState == true)
        printRoundWithMatches(1);
@@ -153,4 +162,5 @@ $(document).ready(function () {
       }
     });
   });
+  }
 });

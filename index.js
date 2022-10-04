@@ -14,17 +14,19 @@ const passport = require('passport');
 const session = require('express-session');
 const flash = require('express-flash');
 const methodOverride = require('method-override')
-
+const moment = require('moment-timezone');
 const api = require("./api/api");
 const User = require("./controllers/UserController");
+const Cron = require("./controllers/CronController");
+//const Backup = require("./controllers/BackupController");
 const routes = require('./routes/routes');
 const DB = config.database;
 
-//database connect
-mongoose.connect(`mongodb+srv://${DB.USER}:${DB.PASSWORD}@cluster0.tr3d2.mongodb.net/${DB.DBNAME}?retryWrites=true&w=majority`,
+mongoose.connect(`mongodb://localhost/${process.env.DB_NAME}?retryWrites=true&w=majority`,
     function (error) {
         error ? console.log(error) : console.log("Successfully connected to database...");
     });
+
 
 require('./config/passport-config');
 
@@ -70,9 +72,8 @@ app.use("/", routes);
 
 app.use(express.static('public'))
 
-
-
 /*Run Server*/
-app.listen(1996, function () {
-    console.log("Server is running at 20482 port...");
+app.listen(8081, function () {
+     
+    console.log("Server is running at 1996 port...");
 })

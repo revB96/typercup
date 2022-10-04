@@ -147,21 +147,27 @@ function addUserQuiz(formData){
 }
 
 function addQuizPoints(){
+    var def = Q.defer();
     User.getAll().then(users =>{
         users.forEach(user =>{
             getUserAnswers(user._id).then(userAnswers => {
                 getAllQuestions().then(questions => {
                     questions.forEach(question =>{
-                        userAnswers.answers.forEach(userAnswer => {
-                             if((question._id == userAnswer.questionId) & (question.correctAnswer == userAnswer.answer)) {
-                                UserStats.addQuizToStats(user._id, 1)
-                             }
+                        userAnswers.answers.forEach((userAnswer, index) => {
+                            if(index > 0){  
+                                if((question._id == userAnswer.questionId) & (question.correctAnswer.toLowerCase().trim() == userAnswer.answer.toLowerCase().trim()) & (question.closed == true)) {
+                                    UserStats.addQuizToStats(user._id, 0.5)
+                                    UserStats.addToCorrectAnswers(user._id, question._id)
+                                }
+                            }
                         })
                     })
                 })
         })
     })
 })
+def.resolve(1);
+return def.promise;
 }
 
 function closeQuiz() {
@@ -202,4 +208,5 @@ module.exports = {
     addUserQuiz,
     getUserAnswers,
     closeQuiz,
+    addQuizPoints
 }

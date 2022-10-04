@@ -8,7 +8,8 @@ var userSchema = new mongoose.Schema({
     filledQuiz: {type: Boolean, default: false},
     role: String,
     createdAt: Date,
-    updatedAt: Date
+    updatedAt: Date,
+    lastLogon: Date
 });
 var User = mongoose.model('User', userSchema);
 

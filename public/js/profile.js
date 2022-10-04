@@ -47,36 +47,35 @@ function printUserTicketsTable(userId) {
             var t1 = score.schedule.t1;
             var t2 = score.schedule.t2;
 
-            if(
-              (t1g > t2g) &
-              (userTicket.t1g > t2g) &
-              (userTicket.schedule.t1._id == t1)
-            )
-              console.log("1");
-            var trClass = ""
+            if((t1g > t2g) & (userTicket.t1g > t2g) & (userTicket.schedule.t1._id == t1))
+              var trClass = ""
+
             if ((t1g == userTicket.t1g) & (t2g == userTicket.t2g)){
               var result = "3 pkt";
               trClass = "table-success"
             }else if (
-              (t1g > t2g) &
-                (userTicket.t1g > t2g) &
-                (userTicket.schedule.t1._id == t1) ||
-              (t2g > t1g) &
-                (userTicket.t1g < t2g) &
-                (userTicket.schedule.t2._id == t2)
-            ){
+              ((t1g != userTicket.t1g) || (t2g != userTicket.t2g)) &
+              ((((t1g == t2g) & (userTicket.t1g == userTicket.t2g))) || ((t1g > t2g) & (userTicket.t1g > userTicket.t2g)) || ((t1g < t2g) & (userTicket.t1g < userTicket.t2g)))
+              )
+            {
               var result = "1.5 pkt";
               trClass = "table-info"
             }else{
              var result = "0 pkt";
              trClass = "table-danger"
             }
+            var round;
+            if(userTicket.round == "quarterfinal") round = "Ćwierćfinał"
+            else if(userTicket.round == "final") round = "Finał"
+            else if(userTicket.round == "semifinal") round = "Półfinał"
+            else if(userTicket.round == "roundof16") round = "1/16 finału"
+            else round = userTicket.round 
 
             if ((userTicket.schedule) != null) {
               var updatedAt = new Date(userTicket.updatedAt);
               await $(`#profile-user-ticket-table`).append(`
                                     <tr class="${trClass}">
-                                        <td>${userTicket.round}</td>
+                                        <td>${round}</td>
                                         <td>${
                                           userTicket.schedule.t1.teamName} vs ${userTicket.schedule.t2.teamName}</td>
                                         <td>${userTicket.t1g}:${userTicket.t2g}</td>
@@ -92,11 +91,19 @@ function printUserTicketsTable(userId) {
           });
         } else {
           if ((userTicket.schedule) != null) {
+            var round;
             var updatedAt = await new Date(userTicket.updatedAt);
+
+            if(userTicket.round == "quarterfinal") round = "Ćwierćfinał"
+            else if(userTicket.round == "final") round = "Finał"
+            else if(userTicket.round == "semifinal") round = "Półfinał"
+            else if(userTicket.round == "roundof16") round = "1/16 finału"
+            else round = userTicket.round 
+            
             await $(`#profile-user-ticket-table`).append(`
                         <tr>
                 
-                            <td>${userTicket.round}</td>
+                            <td>${round}</td>
                             <td>${userTicket.schedule.t1.teamName} vs ${userTicket.schedule.t2.teamName}</td>
                             <td>${userTicket.t1g}:${userTicket.t2g}</td>
                             <td>?:?</td>
@@ -114,86 +121,68 @@ function printUserTicketsTable(userId) {
   });
 }
 
-$(document).ready(function () {
-  $("#change-password-form-userId").val(getUserId());
-  printUserTicketsTable(getUserId());
+function changeNotificationSettings(notification){
+  $.post(`/api/user/notification/toggle?name=${notification}&userId=${getUserId()}`).done(() => {
+    $(".toast").html(`
+      <div class="toast-header">
+      <strong class="mr-auto">Panel administratora</strong>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="toast-body">
+          Zaktualizowano ustawienia powiadomień
+      </div>
+  `);
+  $(".toast").toast("show");
+  printUserNotifications()
+  })
+}
 
+function printUserNotifications(){
+  $("#user-notifications-settings").html("")
   getUserNotifications(getUserId()).then((notifications) => {
     if (!!notifications) {
       if (notifications.newRound == true)
         $("#user-notifications-settings").append(`
-            <div class="mb-3">
-                <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" name="newRound" checked>
-                <label class="form-check-label">Nowa kolejka</label>
-                </div>
-            </div>`);
+            <button class="btn btn-success" type="button" onClick="changeNotificationSettings('newRound')" >Nowa kolejka</button>`);
       else
         $("#user-notifications-settings").append(`
-            <div class="mb-3">
-                <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" name="newRound">
-                <label class="form-check-label">Nowa kolejka</label>
-                </div>
-            </div>`);
+            <button class="btn btn-secondary" type="button" onClick="changeNotificationSettings('newRound')" >Nowa kolejka</button>`);
 
       if (notifications.daySummary == true)
         $("#user-notifications-settings").append(`
-            <div class="mb-3">
-                <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" name="daySummary" checked>
-                <label class="form-check-label">Podsumowanie dnia</label>
-                </div>
-            </div>`);
+          <button class="btn btn-success" type="button" onClick="changeNotificationSettings('daySummary')" >Podsumowanie dnia</button>`);
       else
         $("#user-notifications-settings").append(`
-            <div class="mb-3">
-                <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" name="daySummary">
-                <label class="form-check-label">Podsumowanie dnia</label>
-                </div>
-            </div>`);
+        <button class="btn btn-secondary" type="button" onClick="changeNotificationSettings('daySummary')">Podsumowanie dnia</button>`);
 
       if (notifications.closeRound == true)
         $("#user-notifications-settings").append(`
-            <div class="mb-3">
-                <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" name="closeRound" checked>
-                <label class="form-check-label">Zamknięcie kolejki</label>
-                </div>
-            </div>`);
+            <button class="btn btn-success" type="button" onClick="changeNotificationSettings('closeRound')" >Zamknięcie kolejki</button>`);
       else
         $("#user-notifications-settings").append(`
-            <div class="mb-3">
-                <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" name="closeRound">
-                <label class="form-check-label">Zamknięcie kolejki</label>
-                </div>
-            </div>`);
+            <button class="btn btn-secondary" type="button" onClick="changeNotificationSettings('closeRound')" >Zamknięcie kolejki</button>`);
 
       if (notifications.reminder == true)
         $("#user-notifications-settings").append(`
-            <div class="mb-3">
-                <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" name="reminder" checked>
-                <label class="form-check-label">Przypomnienie o nie wysłaniu typów na aktualną kolejkę</label>
-                </div>
-            </div>`);
+            <button class="btn btn-success" type="button" onClick="changeNotificationSettings('reminder')">Przypomnienie o nie wysłaniu typów na aktualną kolejkę</button>`);
       else
         $("#user-notifications-settings").append(`
-            <div class="mb-3">
-                <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" name="reminder">
-                <label class="form-check-label">Przypomnienie o nie wysłaniu typów na aktualną kolejkę</label>
-                </div>
-            </div>`);
+            <button class="btn btn-secondary" type="button" onClick="changeNotificationSettings('reminder')">Przypomnienie o nie wysłaniu typów na aktualną kolejkę</button>`);
     }
   });
+}
+
+$(document).ready(function () {
+  if(document.title == "Typer Cup | Profil"){
+  $("#change-password-form-userId").val(getUserId());
+  printUserTicketsTable(getUserId());
+  printUserNotifications()
 
   $("#change-password-form").submit(function (e) {
     e.preventDefault();
     const formData = $("#change-password-form").serializeArray();
-    console.log(formData);
     $.post("/api/user/changepassword", formData).done(() => {
       $(".toast").html(`
                     <div class="toast-header">
@@ -209,4 +198,5 @@ $(document).ready(function () {
       $(".toast").toast("show");
     });
   });
+  }
 });

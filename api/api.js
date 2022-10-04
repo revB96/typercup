@@ -8,8 +8,8 @@ const User = require("../controllers/UserController")
 const Ticket = require("../controllers/TicketController")
 const Score = require("../controllers/ScoreController")
 const UserStats = require("../controllers/UserStatsController")
-const UserNotification = require("../controllers/UserNotificationController")
 const Quiz = require("../controllers/QuizController")
+const Backup = require("../controllers/BackupController")
 
 router.post('/admin/schedule/add', function (req, res) {
     //console.log(req.body)
@@ -54,8 +54,19 @@ router.get('/schedule/round', function (req, res) {
             }); 
 })
 
+router.get('/schedule/knockout', function (req, res) {
+    Round.getKnockoutSchedule(req.query.stage)
+            .then(data => {
+                console.log(data)
+                res.json(data)
+            })
+            .catch(err => {
+                res.json(err)
+            }); 
+})
+
 router.get('/round/checkifopen', function (req, res) {
-    Round.checkIfRoundIsOpen()
+    Ticket.checkIfRoundIsOpen()
         .then(data => {
             res.json(data)
         })
@@ -112,14 +123,22 @@ router.post('/admin/round/add', function (req, res) {
 })
 
 router.get('/round/get', function (req, res) {
-
-    Round.getRound(req.query.state)
-        .then(data => {
-            res.json(data)
-        })
-        .catch(err => {
-            res.json(err)
-        });
+    if(!!req.query.state)
+        Round.getRound(req.query.state)
+            .then(data => {
+                res.json(data)
+            })
+            .catch(err => {
+                res.json(err)
+            });
+    if(!!req.query.round)
+        Round.getRoundByStage(req.query.round)
+            .then(data => {
+                res.json(data)
+            })
+            .catch(err => {
+                res.json(err)
+            });
     
 })
 
@@ -215,7 +234,7 @@ router.get('/score/schedule', function (req, res) {
 })
 
 router.get('/user-notifications', function (req, res) {
-    UserNotification.getUserNotifications(req.query.id)
+    User.getUserNotifications(req.query.id)
         .then(data => {
             res.json(data)
         })
@@ -238,7 +257,16 @@ router.post('/ticket/add', function (req, res) {
 })
 
 router.get('/tickets', function (req, res) {
-    Ticket.getUserTicketsByRound(req.query.userId, req.query.round)
+    if((!!req.query.userId)&(!!req.query.round))
+        Ticket.getUserTicketsByRound(req.query.userId, req.query.round)
+            .then(data => {
+                res.json(data)
+            })
+            .catch(err => {
+                res.json(err)
+            });
+    if(!!req.query.round)
+        Ticket.getTicketsByRound(req.query.round)
         .then(data => {
             res.json(data)
         })
@@ -260,7 +288,19 @@ router.post('/admin/score/add', function (req, res) {
 })
 
 router.get('/scores', function (req, res) {
-    Score.getAll(req.body)
+
+  Score.getAll(req.body)
+    .then(data => {
+        res.json(data)
+     })
+    .catch(err => {
+        res.json(err)
+     });
+    
+})
+
+router.get('/admin/backups', function (req, res) {
+    Backup.getBackupsList(req.body)
         .then(data => {
             res.json(data)
         })
@@ -270,8 +310,56 @@ router.get('/scores', function (req, res) {
     
 })
 
+router.post('/admin/backups/create', function (req, res) {
+    Backup.dumpMongo2Localfile(req.body)
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        });
+    
+})
+
+router.post('/admin/backups/restore', function (req, res) {
+    console.log(req.query.fileName)
+    Backup.restoreLocalfile2Mongo(req.query.fileName)
+        .then(data => {
+	    console.log(data);
+            res.json(data)
+        })
+        .catch(err => {
+	    console.log(err);
+            res.json(err)
+        });
+    
+})
+
 router.get('/user/table', function (req, res) {
     UserStats.getAll(req.body)
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        });
+    
+})
+
+router.get('/round/last', function (req, res) {
+    Round.getPreviousRound()
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        });
+    
+})
+
+
+router.post('/user/notification/toggle', function (req, res) {
+    User.toogleNotification(req.query.name,req.query.userId)
         .then(data => {
             res.json(data)
         })
@@ -340,8 +428,30 @@ router.get('/quiz/answers', function (req, res) {
     
 })
 
+router.get('/quiz/correctAnswers', function (req, res) {
+    UserStats.getUserCorrectAnswers(req.query.user)
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        });
+    
+})
+
 router.post('/admin/quiz/answer/add', function (req, res) {
     Quiz.addAnswer(req.body)
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        });
+    
+})
+
+router.get('/admin/quiz/addpoints', function (req, res) {
+    Quiz.addQuizPoints()
         .then(data => {
             res.json(data)
         })

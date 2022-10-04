@@ -17,6 +17,9 @@
             <option value="1" selected>A</option>
             <option value="2">B</option>
             <option value="3">C</option>
+            <option value="4">D</option>
+            <option value="5">E</option>
+            <option value="6">F</option>
         </select>
     </div>
     <div id="group-table">
@@ -47,35 +50,18 @@
   <!--KNOCKOUT STAGE !-->
   <div class="tab-pane fade" id="knockoutStage" role="tabpanel" aria-labelledby="knockoutStage-tab">
     <div class="input-group mb-3">
-        <select class="custom-select" id="inputGroupSelect01">
-            <option value="1">1/8 FINAŁU</option>
-            <option value="2">ĆWIERĆFINAŁY</option>
-            <option value="3">PÓŁFINAŁY</option>
-            <option value="3">FINAŁ</option>
+        <select class="custom-select" id="selectKnockout" onchange="selectKnockout()">
+            <option value="14">1/8 FINAŁU [26.06]</option>
+            <option value="15">1/8 FINAŁU [27.06]</option>
+            <option value="16">1/8 FINAŁU [28.06]</option>
+            <option value="17">1/8 FINAŁU [29.06]</option>
+            <option value="18">ĆWIERĆFINAŁY[02.07]</option>
+            <option value="19">ĆWIERĆFINAŁY[03.07]</option>
+            <option value="20">PÓŁFINAŁY[06.07]</option>
+            <option value="21">PÓŁFINAŁY[07.07]</option>
+            <option value="22">FINAŁ</option>
         </select>
-         <div class="table-responsive">
-            <table class="table table-sm" style="text-align: center;">
-            <thead class="table-success">
-                <tr>
-                <th scope="col"></th>
-                <th scope="col">20.06.2021</th>
-                <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td scope="row">Włochy</th>
-                    <td scope="row">15:00</th>
-                    <td scope="row">Szwajcaria</th>
-                </tr>
-                <tr>
-                    <td scope="row">Turcja</th>
-                    <td scope="row">18:00</th>
-                    <td scope="row">Walia</th>
-                </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
+    <div id="euro2021-knockout"></div>
   </div>
 </div>

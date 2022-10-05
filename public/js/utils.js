@@ -204,7 +204,7 @@ function getUserTimezone(userId){
         contentType: "application/json",
         dataType: 'json',
         success: function (result) {
-            return result;
+            return result.timezone;
         },
         fail: function (){
             console.log("Nie udało się pobrać");

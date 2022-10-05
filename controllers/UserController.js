@@ -19,6 +19,9 @@ let transporter = nodemailer.createTransport({
     user: 'admin@typer-cup.pl',
     pass: 'pass',
   },
+  tls: {
+    rejectUnauthorized: false
+  }
 });
 
 async function add(formData) {

@@ -21,6 +21,8 @@ function printRoundWithMatches(round) {
           else
             closeTime.setHours(closeTime.getHours() - 1);
 
+          console.log(closeTime.getHours());
+
           if(roundState != "disabled")  $(`#dashboard-round-display-name`).html(`${round[0].displayName}`);
           else $(`#dashboard-round-display-name`).html(`<div class="row" style="text-align: center;"><h3>Kolejka zamknięta</h3></div>`);
           var minutes = closeTime.getMinutes()

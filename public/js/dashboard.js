@@ -16,7 +16,7 @@ function printRoundWithMatches(round) {
           var closeTime = new Date(schedule[0].matchDate)
           var timeoffset;
 
-          if (userTimezone == "UK")
+          if (userTimezone.timezone == "UK")
             timeoffset = 2
           else
             timeoffset = 1;

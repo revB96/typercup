@@ -15,6 +15,7 @@ const Round = require("../models/rounds.js");
 let transporter = nodemailer.createTransport({
   host: "mail.typer-cup.pl",
   port: 587,
+  secure: false,
   auth: {
     user: 'admin@typer-cup.pl',
     pass: 'pass',
@@ -778,7 +779,7 @@ function newAccountEmailNotification(reciver, username, password) {
 
   transporter.sendMail(mailOptions, function (err, data) {
     if (err) {
-      console.log("Error " + err);
+      console.log("Mail: " + err);
     } else {
       console.log("Email sent successfully");
     }

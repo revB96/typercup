@@ -30,11 +30,11 @@ function printRoundWithMatches(round) {
             minutes = "00"
           if(roundState != "Disabled")
             $(`#dashboard-round-date`).html(
-              `${roundDate.toLocaleDateString("pl-PL", dateOptions)}<br /> Godzina zamknięcia kolejki: ${closeTime.getHours()}:${minutes}`
+              `${roundDate.toLocaleDateString("pl-PL", dateOptions)}<br /> Godzina zamknięcia kolejki: ${closeTime.getHours()-1}:${minutes}`
             );
           else{
             $(`#dashboard-round-date`).html(
-              `${roundDate.toLocaleDateString("pl-PL", dateOptions)}<br /> Kolejka została zamknięta o: ${closeTime.getHours()}:${minutes}`
+              `${roundDate.toLocaleDateString("pl-PL", dateOptions)}<br /> Kolejka została zamknięta o: ${closeTime.getHours()-1}:${minutes}`
             );
             $(`#dashboard-message`).html(`<a href="/roundSummary"><button type="button" class="btn btn-primary">Sprawdź jak postawili inni</button></a>`);
           }

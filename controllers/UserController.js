@@ -8,7 +8,7 @@ const UserStats = require("./UserStatsController");
 const {getFirstRoundMatch} = require("./ScheduleController")
 const moment = require("moment-timezone");
 const nodemailer = require("nodemailer");
-import "dateFormat";
+import dateFormat from "dateformat";
 const Ticket = require("../models/tickets.js");
 const Round = require("../models/rounds.js");
 

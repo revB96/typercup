@@ -6,6 +6,7 @@ var userSchema = new mongoose.Schema({
     password: String,
     firstLogon: {type: Boolean, default: false},
     filledQuiz: {type: Boolean, default: false},
+    timezone: {type: String},
     role: String,
     createdAt: Date,
     updatedAt: Date,

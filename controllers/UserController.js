@@ -13,14 +13,11 @@ const Ticket = require("../models/tickets.js");
 const Round = require("../models/rounds.js");
 
 let transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.x999.mikr.dev",
+  port: 587,
   auth: {
-    type: "OAuth2",
-    user: process.env.MAIL_USERNAME,
-    pass: process.env.MAIL_PASSWORD,
-    clientId: process.env.OAUTH_CLIENTID,
-    clientSecret: process.env.OAUTH_CLIENT_SECRET,
-    refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+    user: 'admin@typer-cup.pl',
+    pass: 'pass',
   },
 });
 
@@ -35,6 +32,7 @@ async function add(formData) {
     password: hashedPassword,
     email: formData.email,
     role: formData.role,
+    timezone: formData.timezone,
     createdAt: timestamp,
     updatedAt: timestamp,
   });
@@ -100,7 +98,7 @@ function getUserDetails(id) {
   var def = Q.defer();
   User.findOne({ _id: id })
     .populate("userNotifications")
-    .select("username email firstLogon filledQuiz userNotifications")
+    .select("username email firstLogon filledQuiz userNotifications timezone")
     .exec(function (err, user) {
       err ? def.reject(err) : def.resolve(user);
     });
@@ -136,7 +134,7 @@ function getAll() {
   var def = Q.defer();
   User.find(
     {},
-    "username email role firstLogon filledQuiz createdAt updatedAt lastLogon"
+    "username email role firstLogon filledQuiz createdAt updatedAt lastLogon timezone"
   )
     .sort({ createdAt: "desc" })
     .exec(function (err, users) {
@@ -765,10 +763,10 @@ function newAccountEmailNotification(reciver, username, password) {
       Zmień hasło na jakieś lepsze, po zalogowaniu się 👽
       Podczas pierwszego logowania, zostaniesz poproszony o wypełnienie Quizu początkowego. Składa się on z 20 pytań, które dotycza nadchodzącego Euro 2020
       
-      © 2021 [typer-cup.pl]. All rights reserved.
+      © 2022 [typer-cup.pl]. All rights reserved.
       `;
   let mailOptions = {
-    from: '"Typer-Cup.pl ⚽ " <powiadomienia@typer-cup.pl>', // sender address
+    from: '"Typer-Cup.pl ⚽ " <admin@typer-cup.pl>', // sender address
     to: reciver, // list of receivers
     subject: "Witaj w typer-cup.pl ✔", // Subject line
     html: html, // html body
@@ -1306,7 +1304,7 @@ function roundEmailNotification(firstMatch) {
                               </html>
                               `;
           let mailOptions = {
-            from: '"Typer-Cup.pl ⚽ " <powiadomienia@typer-cup.pl>', // sender address
+            from: '"Typer-Cup.pl ⚽ " <admin@typer-cup.pl>', // sender address
             to: user.email, // list of receivers
             subject: "Wystartowała nowa kolejka 🔜", // Subject line
             html: html, // html body
@@ -1894,7 +1892,7 @@ function sendReminder(roundDate){
                                     </html>
                                     `;
                 let mailOptions = {
-                  from: '"Typer-Cup.pl ⚽ " <powiadomienia@typer-cup.pl>', // sender address
+                  from: '"Typer-Cup.pl ⚽ " <admin@typer-cup.pl>', // sender address
                   to: user.email, // list of receivers
                   subject: "Za godzinę zamykamy kolejkę, a ty nadal nie zapisałeś swoich typów 🛑", // Subject line
                   html: html, // html body
@@ -2430,7 +2428,7 @@ function sendCloseRoundNotification() {
                                 </html>
                                 `;
             let mailOptions = {
-              from: '"Typer-Cup.pl ⚽ " <powiadomienia@typer-cup.pl>', // sender address
+              from: '"Typer-Cup.pl ⚽ " <admin@typer-cup.pl>', // sender address
               to: user.email, // list of receivers
               subject: "Kolejka została zamknięta 🛑 Sprawdź jak typowali inni", // Subject line
               html: html, // html body

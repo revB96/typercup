@@ -131,6 +131,7 @@ function adminListUsers() {
                     <th scope="row">${user._id.substr(user._id.length - 4)}</th>
                     <td>${user.username}</td>
                     <td>${user.email}</td>
+                    <td>${user.timezone}</td>
                     <td>${user.role}</td>
                     <td>${user.firstLogon}</td>
                     <td>${user.filledQuiz}</td>

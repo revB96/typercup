@@ -13,7 +13,7 @@ const Ticket = require("../models/tickets.js");
 const Round = require("../models/rounds.js");
 
 let transporter = nodemailer.createTransport({
-  host: "smtp.typer-cup.pl",
+  host: "smtp.x999.mikr.dev",
   port: 587,
   secure: false,
   auth: {

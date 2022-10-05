@@ -212,7 +212,7 @@ router.get('/user', function (req, res) {
 })
 
 router.get('/user/timezone', function (req, res) {
-    Ticket.getAllUserTickets(req.query.userId)
+    User.getUserTimezone(req.query.userId)
         .then(data => {
             res.json(data)
         })

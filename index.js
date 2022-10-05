@@ -1,8 +1,8 @@
-import * as dotenv from 'dotenv'
-dotenv.config()
+if(process.env.NODE_ENV !=='production'){
+    require('dotenv').config()
+}
 
-
-import * as express from 'express';
+const express = require("express");
 const app = express();
 const hbs = require("express-handlebars");
 const bodyParser = require("body-parser");

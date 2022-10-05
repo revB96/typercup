@@ -116,7 +116,6 @@ function getUserTimezone(userID) {
     .select("timezone")
     .exec(function (err, user) {
       err ? def.reject(err) : def.resolve(user);
-      console.log(user.timezone)
     });
 
   return def.promise;

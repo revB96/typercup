@@ -1,3 +1,4 @@
+import dateFormat, { masks } from "dateformat";
 const mongoose = require("mongoose");
 const Q = require("q");
 const express = require("express");
@@ -8,7 +9,6 @@ const UserStats = require("./UserStatsController");
 const {getFirstRoundMatch} = require("./ScheduleController")
 const moment = require("moment-timezone");
 const nodemailer = require("nodemailer");
-import dateFormat from "dateformat";
 const Ticket = require("../models/tickets.js");
 const Round = require("../models/rounds.js");
 

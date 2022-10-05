@@ -17,9 +17,9 @@ function printRoundWithMatches(round) {
           var timeoffset;
 
           if (userTimezone == "UK")
-            timeoffset = 2;
+            closeTime.setHours(closeTime.getHours() - 2);
           else
-            timeoffset = 1;
+            closeTime.setHours(closeTime.getHours() - 1);
 
           if(roundState != "disabled")  $(`#dashboard-round-display-name`).html(`${round[0].displayName}`);
           else $(`#dashboard-round-display-name`).html(`<div class="row" style="text-align: center;"><h3>Kolejka zamknięta</h3></div>`);
@@ -28,11 +28,11 @@ function printRoundWithMatches(round) {
             minutes = "00"
           if(roundState != "Disabled")
             $(`#dashboard-round-date`).html(
-              `${roundDate.toLocaleDateString("pl-PL", dateOptions)}<br /> Godzina zamknięcia kolejki: ${closeTime.getHours() -timeoffset}:${minutes}`
+              `${roundDate.toLocaleDateString("pl-PL", dateOptions)}<br /> Godzina zamknięcia kolejki: ${closeTime.getHours()}:${minutes}`
             );
           else{
             $(`#dashboard-round-date`).html(
-              `${roundDate.toLocaleDateString("pl-PL", dateOptions)}<br /> Kolejka została zamknięta o: ${closeTime.getHours() -timeoffset}:${minutes}`
+              `${roundDate.toLocaleDateString("pl-PL", dateOptions)}<br /> Kolejka została zamknięta o: ${closeTime.getHours()}:${minutes}`
             );
             $(`#dashboard-message`).html(`<a href="/roundSummary"><button type="button" class="btn btn-primary">Sprawdź jak postawili inni</button></a>`);
           }

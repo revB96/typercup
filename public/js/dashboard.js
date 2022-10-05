@@ -10,8 +10,17 @@ function printRoundWithMatches(round) {
       $(`#dashboard-round-matches`).html("");
       getRoundSchedule(round[0].roundDate).then((schedule) => {
         getUserTickets(getUserId(), round[0].round).then((userTickets) => {
+          getUserTimezone(getUserId()).then((userTimezone) => {
+          
           var roundDate = new Date(round[0].roundDate);
           var closeTime = new Date(schedule[0].matchDate)
+          var timeoffset;
+
+          if (userTimezone == "UK")
+            timeoffset = 2;
+          else
+            timeoffset = 1;
+
           if(roundState != "disabled")  $(`#dashboard-round-display-name`).html(`${round[0].displayName}`);
           else $(`#dashboard-round-display-name`).html(`<div class="row" style="text-align: center;"><h3>Kolejka zamknięta</h3></div>`);
           var minutes = closeTime.getMinutes()
@@ -19,20 +28,19 @@ function printRoundWithMatches(round) {
             minutes = "00"
           if(roundState != "Disabled")
             $(`#dashboard-round-date`).html(
-              `${roundDate.toLocaleDateString("pl-PL", dateOptions)}<br /> Godzina zamknięcia kolejki: ${closeTime.getHours() -1}:${minutes}`
+              `${roundDate.toLocaleDateString("pl-PL", dateOptions)}<br /> Godzina zamknięcia kolejki: ${closeTime.getHours() -timeoffset}:${minutes}`
             );
           else{
             $(`#dashboard-round-date`).html(
-              `${roundDate.toLocaleDateString("pl-PL", dateOptions)}<br /> Kolejka została zamknięta o: ${closeTime.getHours() -1}:${minutes}`
+              `${roundDate.toLocaleDateString("pl-PL", dateOptions)}<br /> Kolejka została zamknięta o: ${closeTime.getHours() -timeoffset}:${minutes}`
             );
             $(`#dashboard-message`).html(`<a href="/roundSummary"><button type="button" class="btn btn-primary">Sprawdź jak postawili inni</button></a>`);
           }
 
-
           for (const [index, match] of Object.entries(schedule)) {
             var t1g = "",
-              t2g = "",
-              ticketColor = "text-white bg-danger";
+                t2g = "",
+                ticketColor = "text-white bg-danger";
 
             for (const [index, userTicket] of Object.entries(userTickets)) {
               if (match._id == userTicket.schedule) {
@@ -89,6 +97,7 @@ function printRoundWithMatches(round) {
           }
         });
       });
+    });
     });
 
     if (roundState == "")

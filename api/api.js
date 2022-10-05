@@ -211,6 +211,17 @@ router.get('/user', function (req, res) {
     
 })
 
+router.get('/user/timezone', function (req, res) {
+    Ticket.getAllUserTickets(req.query.userId)
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        });
+    
+})
+
 router.get('/user/tickets', function (req, res) {
     Ticket.getAllUserTickets(req.query.userId)
         .then(data => {

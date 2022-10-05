@@ -110,6 +110,17 @@ function getUserDetails(id) {
   return def.promise;
 }
 
+function getUserTimezone(userID) {
+  var def = Q.defer();
+  User.findOne({ _id: userID })
+    .select("timezone")
+    .exec(function (err, user) {
+      err ? def.reject(err) : def.resolve(user);
+    });
+
+  return def.promise;
+}
+
 function updateUserQuizStatus(userId, status) {
   const timestamp = moment.tz(Date.now(), "Europe/Warsaw");
   User.findByIdAndUpdate(
@@ -2516,4 +2527,5 @@ module.exports = {
   checkCloseRoundNotification,
   checkReminder,
   addAdmin,
+  getUserTimezone,
 };

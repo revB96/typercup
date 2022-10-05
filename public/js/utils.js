@@ -198,6 +198,20 @@ function getUserTickets(userId, round){
     })
 }
 
+function getUserTimezone(userId){
+    return $.ajax({
+        url: `/api/user/timezone?userId=${userId}`,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (result) {
+            return result;
+        },
+        fail: function (){
+            console.log("Nie udało się pobrać");
+        }
+    })
+}
+
 function getUserTable(){
     return $.ajax({
         url: `/api/user/table`,

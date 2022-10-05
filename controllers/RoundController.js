@@ -4,7 +4,7 @@ const express = require("express");
 const Round = require("../models/rounds.js");
 const moment = require('moment-timezone');
 const Schedule = require("./ScheduleController");
-//const User = require("./UserController")
+const User = require("./UserController")
 
 function add(formData){
     var def = Q.defer();

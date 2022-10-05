@@ -1,4 +1,4 @@
-import { dateformat } from "dateformat";
+import dateformat from "dateformat";
 const mongoose = require("mongoose");
 const Q = require("q");
 const express = require("express");

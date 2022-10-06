@@ -843,6 +843,7 @@ function roundEmailNotification(firstMatch) {
         userNotifications.forEach((userNotification, index) => {
           getUserById(userNotification.user).then((user) => {
             getUserRandomCode(user._id).then((randomCode) => {
+            console.log(randomCode);
               var nameCapitalized =
                 user.username.charAt(0).toUpperCase() + user.username.slice(1);
 

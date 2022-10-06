@@ -248,7 +248,6 @@ function lastLogonUpdate(userId) {
 function getRunningRound() {
   var def = Q.defer();
   Round.findOne({ state: "running" }).exec(function (err, round) {
-    console.log(round);
     err ? def.reject(err) : def.resolve(round);
   });
   return def.promise;
@@ -262,7 +261,7 @@ function getUserRandomCode(userId) {
       err,
       randomCode
     ) {
-      console.log(randomCode)
+      console.log("Random code" + randomCode);
       err ? def.reject(err) : def.resolve(randomCode);
     });
     return def.promise;

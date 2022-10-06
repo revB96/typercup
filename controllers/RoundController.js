@@ -2,9 +2,47 @@ const mongoose = require("mongoose");
 const Q = require("q");
 const express = require("express");
 const Round = require("../models/rounds.js");
+const RandomCode = require("../models/randomCodes.js");
 const moment = require('moment-timezone');
 const Schedule = require("./ScheduleController");
 const User = require("./UserController")
+const cryptoRandomString = require("crypto-random-string")
+
+
+function generateUserCodes(roundNumber){
+
+    let timestamp = Date.now();
+
+    User.getAll().then(Users =>{
+        
+        Users.forEach(user =>{
+            var cryptoRandomCode = cryptoRandomString({length: 64, type: 'ascii-printable'});
+
+            var randomCode = new RandomCode({
+                user: user._id,
+                code:cryptoRandomCode,
+                active: true,
+                round:roundNumber,
+                createdAt:timestamp,
+                updatedAt:timestamp
+            })
+
+            randomCode.save((function(err, result){
+                if(err){
+                    console.log("Błąd przy generowaniu kodu losowego! Treść błędu: ")
+                    console.log(err)
+                }
+                else{
+                    def.resolve(result);
+                    console.log("Dodano nowy kod losowy: ")
+                    console.log(`User: ${user.username}, Data: ${timezone}`)
+                }
+            }));
+
+        })
+    })
+
+}
 
 function add(formData){
     var def = Q.defer();
@@ -25,6 +63,7 @@ function add(formData){
             def.resolve(result);
             console.log("Dodano nową kolejkę: ")
             console.log(`Nazwa wyświetlania: ${formData.displayName}, Data: ${formData.roundDate}`)
+            generateUserCodes(formData.round);
         }
     }));
 

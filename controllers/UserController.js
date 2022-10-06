@@ -261,7 +261,7 @@ function getUserRandomCode(userId) {
   var def = Q.defer();
   console.log(userId)
   getRunningRound().then(round => {
-    console.log(round)
+    //console.log(round)
     RandomCode.findOne({ user: userId}).exec(function (
       err,
       randomCode
@@ -843,7 +843,7 @@ function roundEmailNotification(firstMatch) {
         userNotifications.forEach((userNotification, index) => {
           getUserById(userNotification.user).then((user) => {
             getUserRandomCode(user._id).then((randomCode) => {
-            console.log(randomCode);
+            console.log("Random code: "+ randomCode);
               var nameCapitalized =
                 user.username.charAt(0).toUpperCase() + user.username.slice(1);
 

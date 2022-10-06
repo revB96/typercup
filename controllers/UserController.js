@@ -2,10 +2,11 @@ const mongoose = require("mongoose");
 const Q = require("q");
 const express = require("express");
 const User = require("../models/users");
+const RandomCode = require("../models/randomCodes");
 const UserNotification = require("../models/userNotifications");
 const bcrypt = require("bcrypt");
 const UserStats = require("./UserStatsController");
-const {getFirstRoundMatch} = require("./ScheduleController")
+const { getFirstRoundMatch } = require("./ScheduleController");
 const moment = require("moment-timezone");
 const nodemailer = require("nodemailer");
 const dateFormat = require("dateformat");
@@ -17,12 +18,12 @@ let transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: 'admin@typer-cup.pl',
-    pass: 'pass',
+    user: "admin@typer-cup.pl",
+    pass: "pass",
   },
   tls: {
-    rejectUnauthorized: false
-  }
+    rejectUnauthorized: false,
+  },
 });
 
 async function add(formData) {
@@ -62,7 +63,7 @@ async function add(formData) {
   return def.promise;
 }
 
-async function addAdmin(){
+async function addAdmin() {
   const timestamp = Date.now();
   var hashedPassword = await bcrypt.hash("0000", 10);
   var user = new User({
@@ -75,9 +76,8 @@ async function addAdmin(){
   });
 
   user.save(function (err, result) {
-	console.log(`Dodano!`);
-  })
-
+    console.log(`Dodano!`);
+  });
 }
 
 function getUserByName(username) {
@@ -242,6 +242,26 @@ function lastLogonUpdate(userId) {
       console.log("***");
       def.reject(err);
     }
+  });
+}
+
+function getRunningRound() {
+  var def = Q.defer();
+  Round.findOne({ state: "running" }).exec(function (err, round) {
+    err ? def.reject(err) : def.resolve(round);
+  });
+  return def.promise;
+}
+
+function getUserRandomCode(userId) {
+  getRunningRound().then((round) => {
+    RandomCode.findOne({ _id: userId, round: round.round }).exec(function (
+      err,
+      randomCode
+    ) {
+      err ? def.reject(err) : def.resolve(randomCode);
+    });
+    return def.promise;
   });
 }
 
@@ -797,13 +817,17 @@ function newAccountEmailNotification(reciver, username, password) {
   });
 }
 
+function testRoundEmailNotification(){
+  var timestamp = new Date(Date.now());
+  roundEmailNotification(timestamp);
+}
+
 function roundEmailNotification(firstMatch) {
   var endDate = new Date(firstMatch);
 
   endDate.setHours(endDate.getHours() - 1);
   endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
 
-  console.log(endDate);
   UserNotification.find({ newRound: true }).exec(function (
     err,
     userNotifications
@@ -812,18 +836,20 @@ function roundEmailNotification(firstMatch) {
     else {
       //console.log(userNotifications);
       setTimeout(() => {
-      userNotifications.forEach((userNotification, index) => {
-        getUserById(userNotification.user).then((user) => {
-          var nameCapitalized =
-            user.username.charAt(0).toUpperCase() + user.username.slice(1);
-          const dateOptions = {
-            year: "numeric",
-            month: "numeric",
-            day: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-          };
-          var html = `
+        userNotifications.forEach((userNotification, index) => {
+          getUserById(userNotification.user).then((user) => {
+            getUserRandomCode(user._id).then((randomCode) => {
+              var nameCapitalized =
+                user.username.charAt(0).toUpperCase() + user.username.slice(1);
+
+              const dateOptions = {
+                year: "numeric",
+                month: "numeric",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+              };
+              var html = `
                               <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
                               <html xmlns="http://www.w3.org/1999/xhtml">
                               <head>
@@ -1301,6 +1327,7 @@ function roundEmailNotification(firstMatch) {
                                                           </td>
                                                           </tr>
                                                       </table>
+                                                      <p>Jeżeli nie możesz wysłać swoich typów, kliknij w ten link aby dodać losowe typy: <a href="https://typer-cup.pl/randomCode/${randomCode.code}" class="f-fallback button" target="_blank">KLIK</a></p>
                                                       
                                               <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
                                               <tr>
@@ -1318,17 +1345,18 @@ function roundEmailNotification(firstMatch) {
                               </body>
                               </html>
                               `;
-          let mailOptions = {
-            from: '"Typer-Cup.pl ⚽ " <admin@typer-cup.pl>', // sender address
-            to: user.email, // list of receivers
-            subject: "Wystartowała nowa kolejka 🔜", // Subject line
-            html: html, // html body
-          };
+              let mailOptions = {
+                from: '"Typer-Cup.pl ⚽ " <admin@typer-cup.pl>', // sender address
+                to: user.email, // list of receivers
+                subject: "Wystartowała nowa kolejka 🔜", // Subject line
+                html: html, // html body
+              };
 
-          transporter.sendMail(mailOptions, function (err, data) {
-            if (err) console.log("Error " + err);
+              transporter.sendMail(mailOptions, function (err, data) {
+                if (err) console.log("Error " + err);
+              });
+            }, 1000 * index);
           });
-        }, 1000 * index);
         });
       });
     }
@@ -1360,58 +1388,75 @@ function getUserNotifications(userId) {
   return def.promise;
 }
 
-function toogleNotification(notificationName, userId){
-    var def = Q.defer();
-    if(notificationName == "newRound")
-        UserNotification.findOne({user:userId}, function (err, userNotification) {
-            userNotification.newRound = !userNotification.newRound;
-            userNotification.save(function (err, updatedNotification) {
-                err ? def.reject(err) : def.resolve(updatedNotification);
-            })
-        })
-    if(notificationName == "daySummary")
-        UserNotification.findOne({user:userId}, function (err, userNotification) {
-            userNotification.daySummary = !userNotification.daySummary;
-            userNotification.save(function (err, updatedNotification) {
-                err ? def.reject(err) : def.resolve(updatedNotification);
-            })
-        })    
+function toogleNotification(notificationName, userId) {
+  var def = Q.defer();
+  if (notificationName == "newRound")
+    UserNotification.findOne(
+      { user: userId },
+      function (err, userNotification) {
+        userNotification.newRound = !userNotification.newRound;
+        userNotification.save(function (err, updatedNotification) {
+          err ? def.reject(err) : def.resolve(updatedNotification);
+        });
+      }
+    );
+  if (notificationName == "daySummary")
+    UserNotification.findOne(
+      { user: userId },
+      function (err, userNotification) {
+        userNotification.daySummary = !userNotification.daySummary;
+        userNotification.save(function (err, updatedNotification) {
+          err ? def.reject(err) : def.resolve(updatedNotification);
+        });
+      }
+    );
 
-    if(notificationName == "closeRound")
-        UserNotification.findOne({user:userId}, function (err, userNotification) {
-            userNotification.closeRound = !userNotification.closeRound;
-            userNotification.save(function (err, updatedNotification) {
-                err ? def.reject(err) : def.resolve(updatedNotification);
-            })
-        }) 
+  if (notificationName == "closeRound")
+    UserNotification.findOne(
+      { user: userId },
+      function (err, userNotification) {
+        userNotification.closeRound = !userNotification.closeRound;
+        userNotification.save(function (err, updatedNotification) {
+          err ? def.reject(err) : def.resolve(updatedNotification);
+        });
+      }
+    );
 
-    if(notificationName == "reminder")
-        UserNotification.findOne({user:userId}, function (err, userNotification) {
-            userNotification.reminder = !userNotification.reminder;
-            userNotification.save(function (err, updatedNotification) {
-                err ? def.reject(err) : def.resolve(updatedNotification);
-            })
-        }) 
+  if (notificationName == "reminder")
+    UserNotification.findOne(
+      { user: userId },
+      function (err, userNotification) {
+        userNotification.reminder = !userNotification.reminder;
+        userNotification.save(function (err, updatedNotification) {
+          err ? def.reject(err) : def.resolve(updatedNotification);
+        });
+      }
+    );
 
-    return def.promise;
+  return def.promise;
 }
-function sendReminder(roundDate){
-  var startDate = new Date(moment.tz(roundDate, "Europe/Warsaw"))
-  var endDate = new Date(moment.tz(roundDate, "Europe/Warsaw"))
+function sendReminder(roundDate) {
+  var startDate = new Date(moment.tz(roundDate, "Europe/Warsaw"));
+  var endDate = new Date(moment.tz(roundDate, "Europe/Warsaw"));
   startDate.setHours(2, 0, 0, 0);
   endDate.setHours(25, 59, 59, 99);
-  UserNotification.find().exec(function (err,userNotifications) {
+  UserNotification.find().exec(function (err, userNotifications) {
     if (err) console.log(err);
     else {
       userNotifications.forEach((userNotification, index) => {
         setTimeout(() => {
           getUserById(userNotification.user).then((user) => {
-            Ticket.find({ user: user._id, matchDate: {$gte: startDate, $lte: endDate}})
-            .count()
-            .exec(function (err, tickets) {
-              if(tickets == 0){
-                var nameCapitalized =user.username.charAt(0).toUpperCase() + user.username.slice(1);
-                var html = `
+            Ticket.find({
+              user: user._id,
+              matchDate: { $gte: startDate, $lte: endDate },
+            })
+              .count()
+              .exec(function (err, tickets) {
+                if (tickets == 0) {
+                  var nameCapitalized =
+                    user.username.charAt(0).toUpperCase() +
+                    user.username.slice(1);
+                  var html = `
                                     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
                                     <html xmlns="http://www.w3.org/1999/xhtml">
                                     <head>
@@ -1906,29 +1951,28 @@ function sendReminder(roundDate){
                                     </body>
                                     </html>
                                     `;
-                let mailOptions = {
-                  from: '"Typer-Cup.pl ⚽ " <admin@typer-cup.pl>', // sender address
-                  to: user.email, // list of receivers
-                  subject: "Za godzinę zamykamy kolejkę, a ty nadal nie zapisałeś swoich typów 🛑", // Subject line
-                  html: html, // html body
-                };
-  
-                transporter.sendMail(mailOptions, function (err, data) {
-                  if (err) console.log("Error " + err);
-                  else console.log("Wysłano Reminder")
-                });
-              }
-            });
-          });            
+                  let mailOptions = {
+                    from: '"Typer-Cup.pl ⚽ " <admin@typer-cup.pl>', // sender address
+                    to: user.email, // list of receivers
+                    subject:
+                      "Za godzinę zamykamy kolejkę, a ty nadal nie zapisałeś swoich typów 🛑", // Subject line
+                    html: html, // html body
+                  };
+
+                  transporter.sendMail(mailOptions, function (err, data) {
+                    if (err) console.log("Error " + err);
+                    else console.log("Wysłano Reminder");
+                  });
+                }
+              });
+          });
         }, 1000 * index);
       });
     }
-  })
+  });
 }
 
-
 function sendCloseRoundNotification() {
- 
   UserNotification.find({ closeRound: true }).exec(function (
     err,
     userNotifications
@@ -2448,63 +2492,69 @@ function sendCloseRoundNotification() {
               subject: "Kolejka została zamknięta 🛑 Sprawdź jak typowali inni", // Subject line
               html: html, // html body
             };
-  
+
             transporter.sendMail(mailOptions, function (err, data) {
-              console.log("wysłano")
+              console.log("wysłano");
               if (err) console.log("Error " + err);
             });
-          });            
-      }, 1000 * index);
-        
+          });
+        }, 1000 * index);
       });
     }
   });
 }
 
-function getRunningRound(){
+function getRunningRound() {
   var def = Q.defer();
-  Round
-      .findOne({state:"running"})
-      .exec(function (err, round) {
-          err ? def.reject(err) : def.resolve(round);
-      });
+  Round.findOne({ state: "running" }).exec(function (err, round) {
+    err ? def.reject(err) : def.resolve(round);
+  });
   return def.promise;
 }
 
-function checkCloseRoundNotification(){
+function checkCloseRoundNotification() {
   var def = Q.defer();
-  getRunningRound().then(runningRound => {
-      if(!!runningRound){
-          getFirstRoundMatch(runningRound.roundDate).then(firstMatch => {
-              
-              var matchDate = new Date(firstMatch[0].matchDate)
-       
-              var timestamp = new Date(Date.now());
+  getRunningRound().then((runningRound) => {
+    if (!!runningRound) {
+      getFirstRoundMatch(runningRound.roundDate).then((firstMatch) => {
+        var matchDate = new Date(firstMatch[0].matchDate);
 
-              if(moment.tz(timestamp, "Europe/Warsaw").format() > moment.tz(matchDate.setHours(matchDate.getHours()-1), "Europe/Warsaw").format()){
-                  def.resolve(true)
-                  sendCloseRoundNotification()
-              }else{ 
-                  def.resolve(false);
-              }
-          })
-      }
-  })
-  
+        var timestamp = new Date(Date.now());
+
+        if (
+          moment.tz(timestamp, "Europe/Warsaw").format() >
+          moment
+            .tz(matchDate.setHours(matchDate.getHours() - 1), "Europe/Warsaw")
+            .format()
+        ) {
+          def.resolve(true);
+          sendCloseRoundNotification();
+        } else {
+          def.resolve(false);
+        }
+      });
+    }
+  });
 }
 
-function checkReminder(){
-  getRunningRound().then(runningRound =>{
-      getFirstRoundMatch(runningRound.roundDate).then(firstMatch =>{
-          var matchDate = new Date(moment.tz(firstMatch[0].matchDate, "Europe/Warsaw"))
-          var timestamp = new Date(moment.tz(Date.now(), "Europe/Warsaw"));
-          console.log(matchDate)
-          console.log(timestamp)
-          if((matchDate.getHours() - 1 == timestamp.getHours()) & (matchDate.getDay() == timestamp.getDay()) & (matchDate.getMonth() == timestamp.getMonth())){
-              sendReminder(moment.tz(firstMatch[0].matchDate, "Europe/Warsaw"))
-          }
-      })
-  })
+function checkReminder() {
+  getRunningRound().then((runningRound) => {
+    getFirstRoundMatch(runningRound.roundDate).then((firstMatch) => {
+      var matchDate = new Date(
+        moment.tz(firstMatch[0].matchDate, "Europe/Warsaw")
+      );
+      var timestamp = new Date(moment.tz(Date.now(), "Europe/Warsaw"));
+      console.log(matchDate);
+      console.log(timestamp);
+      if (
+        (matchDate.getHours() - 1 == timestamp.getHours()) &
+        (matchDate.getDay() == timestamp.getDay()) &
+        (matchDate.getMonth() == timestamp.getMonth())
+      ) {
+        sendReminder(moment.tz(firstMatch[0].matchDate, "Europe/Warsaw"));
+      }
+    });
+  });
 }
 
 module.exports = {
@@ -2528,4 +2578,5 @@ module.exports = {
   checkReminder,
   addAdmin,
   getUserTimezone,
+  testRoundEmailNotification
 };

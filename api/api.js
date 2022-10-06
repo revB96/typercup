@@ -189,6 +189,11 @@ router.post('/admin/user/add', function (req, res) {
     
 })
 
+router.post('/admin/test/sendRoundNotification', function (req, res) {
+    //console.log(req.body)
+    User.testRoundEmailNotification();
+})
+
 router.post('/user/changepassword', function (req, res) {
     User.changePassword(req.body)
         .then(data => {

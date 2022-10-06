@@ -246,6 +246,7 @@ function lastLogonUpdate(userId) {
 }
 function testRoundEmailNotification(){
   var timestamp = new Date(Date.now());
+  console.log(timestamp)
   roundEmailNotification(timestamp);
 }
 
@@ -838,7 +839,7 @@ function roundEmailNotification(firstMatch) {
   ) {
     if (err) console.log(err);
     else {
-      //console.log(userNotifications);
+      console.log(userNotifications);
       setTimeout(() => {
         userNotifications.forEach((userNotification, index) => {
           getUserById(userNotification.user).then((user) => {

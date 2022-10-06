@@ -244,6 +244,10 @@ function lastLogonUpdate(userId) {
     }
   });
 }
+function testRoundEmailNotification(){
+  var timestamp = new Date(Date.now());
+  roundEmailNotification(timestamp);
+}
 
 function getRunningRound() {
   var def = Q.defer();
@@ -254,6 +258,7 @@ function getRunningRound() {
 }
 
 function getUserRandomCode(userId) {
+  var def = Q.defer();
   console.log(userId)
   getRunningRound().then(round => {
     console.log(round)
@@ -820,10 +825,6 @@ function newAccountEmailNotification(reciver, username, password) {
   });
 }
 
-function testRoundEmailNotification(){
-  var timestamp = new Date(Date.now());
-  roundEmailNotification(timestamp);
-}
 
 function roundEmailNotification(firstMatch) {
   var endDate = new Date(firstMatch);

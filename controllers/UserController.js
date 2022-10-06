@@ -260,6 +260,7 @@ function getUserRandomCode(userId) {
       err,
       randomCode
     ) {
+      console.log(randomCode)
       err ? def.reject(err) : def.resolve(randomCode);
     });
     return def.promise;

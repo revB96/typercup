@@ -66,7 +66,7 @@ router.get('/schedule/knockout', function (req, res) {
 })
 
 router.get('/round/checkifopen', function (req, res) {
-    Ticket.checkIfRoundIsOpen()
+    Ticket.checkIfRoundIsOpen(req.query.userId)
         .then(data => {
             res.json(data)
         })

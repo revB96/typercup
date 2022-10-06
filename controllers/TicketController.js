@@ -4,6 +4,7 @@ const express = require("express");
 const Ticket = require("../models/tickets.js");
 const Round = require("../models/rounds.js");
 const { updateUserStats } = require("./UserStatsController.js");
+const { getUserTimezone } = require("./UserController.js");
 const Schedule = require("./ScheduleController.js");
 const moment = require('moment-timezone');
 
@@ -66,24 +67,32 @@ function getRunningRound(){
   return def.promise;
 }
 
-function checkIfRoundIsOpen(){
+function checkIfRoundIsOpen(userID){
   var def = Q.defer();
-  getRunningRound().then(runningRound => {
-      if(!!runningRound){
-          Schedule.getFirstRoundMatch(runningRound.roundDate).then(firstMatch => {
-              
-              var matchDate = new Date(firstMatch[0].matchDate)
-       
-              var timestamp = new Date(Date.now());
+  getUserTimezone(userID).then(timezone =>{
+    
+    var userTZ;
+    if(timezone = "UK") userTZ = "Europe/London"
+    else userTZ = "Europe/Warsaw"
+    
+    getRunningRound().then(runningRound => {
+        if(!!runningRound){
+            Schedule.getFirstRoundMatch(runningRound.roundDate).then(firstMatch => {
+                
+                var matchDate = new Date(firstMatch[0].matchDate)
+        
+                var timestamp = new Date(Date.now());
 
-              if(moment.tz(timestamp, "Europe/Warsaw").format() > moment.tz(matchDate.setHours(matchDate.getHours()-1), "Europe/Warsaw").format()){
-                  def.resolve(false);
-              }else{ 
-                  def.resolve(true);
-              }
-          })
-      }
+                if(moment.tz(timestamp, userTZ).format() > moment.tz(matchDate.setHours(matchDate.getHours()-1), userTZ).format()){
+                    def.resolve(false);
+                }else{ 
+                    def.resolve(true);
+                }
+            })
+        }
+    })
   })
+
   return def.promise;
 }
 
@@ -100,7 +109,7 @@ function add(formData) {
       createdAt: timestamp,
       updatedAt: timestamp,
     });
-    checkIfRoundIsOpen().then((roundState) => {
+    checkIfRoundIsOpen(match.userId).then((roundState) => {
       if (roundState == false) {
   
          def.reject(new Error("Kolejka jest już zamknięta"));

@@ -24,9 +24,12 @@ function printRoundWithMatches(round) {
           console.log(closeTime.getHours());  
           console.log(userTimezone);
 
-          if(roundState != "disabled")  $(`#dashboard-round-display-name`).html(`${round[0].displayName}`);
+          if(roundState != "disabled")  
+            $(`#dashboard-round-display-name`).html(`${round[0].displayName}`);
           else $(`#dashboard-round-display-name`).html(`<div class="row" style="text-align: center;"><h3>Kolejka zamknięta</h3></div>`);
+          
           var minutes = closeTime.getMinutes()
+      
           if (minutes < 10)
             minutes = "00"
           if(roundState != "Disabled")
@@ -57,6 +60,9 @@ function printRoundWithMatches(round) {
 
             var timeMatch = new Date(match.matchDate);
             var hrs = timeMatch.getHours();
+            if (userTimezone.timezone == "UK")
+              hrs = hrs - 1;
+
             var mins = timeMatch.getMinutes();
             if (hrs <= 9) hrs = "0" + hrs;
             if (mins < 10) mins = "0" + mins;
@@ -114,7 +120,7 @@ function printRoundWithMatches(round) {
 $(document).ready(function () {
   $(`#dashboard-round-matches`).html("Brak aktywnych kolejek");
   if(document.title == "Typer Cup | Dashboard"){
-  checkIfRoundIsOpen().then((roundState) => {
+  checkIfRoundIsOpen(getUserId()).then((roundState) => {
      if (roundState == true)
        printRoundWithMatches(1);
      else{

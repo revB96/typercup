@@ -354,9 +354,9 @@ function getRoundByStage(round){
     })
 }
 
-function checkIfRoundIsOpen(){
+function checkIfRoundIsOpen(userId){
     return $.ajax({
-        url: `/api/round/checkifopen`,
+        url: `/api/round/checkifopen?userId=${userId}`,
         contentType: "application/json",
         dataType: 'json',
         success: function (result) {

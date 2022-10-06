@@ -258,7 +258,7 @@ function getUserRandomCode(userId) {
   console.log(userId)
   getRunningRound().then(round => {
     console.log(round)
-    RandomCode.findOne({ _id: userId, round: round.round }).exec(function (
+    RandomCode.findOne({ user: userId, round: round.round }).exec(function (
       err,
       randomCode
     ) {

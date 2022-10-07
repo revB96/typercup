@@ -267,7 +267,7 @@ function getUserRandomCode(userId) {
       randomCode
     ) {
       //console.log("Random code" + randomCode.code);
-      err ? def.reject(err) : def.resolve(randomCode.code);
+      err ? def.reject(err) : def.resolve(randomCode);
     });
   });
   return def.promise;
@@ -842,13 +842,11 @@ function roundEmailNotification(firstMatch) {
         userNotifications.forEach((userNotification) => {
           getUserById(userNotification.user).then((user) => {
             if(!!user){
-            console.log("user: " + user._id)
+            //console.log("user: " + user._id)
             getUserRandomCode(user._id).then((randomCode) => {
-            console.log("Random code: "+ randomCode);
+            //console.log("Random code: "+ randomCode);
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);
-              //var userRandomCode = randomCode.code;
-              //console.log(randomCode.code)
-              //console.log(userRandomCode);
+      
               
               const dateOptions = {
                 year: "numeric",
@@ -1335,7 +1333,7 @@ function roundEmailNotification(firstMatch) {
                                                           </td>
                                                           </tr>
                                                       </table>
-                                                      <p>Jeżeli nie możesz wysłać swoich typów, kliknij w ten link aby dodać losowe typy: <a href="https://typer-cup.pl/randomCode/" class="f-fallback button" target="_blank">KLIK</a></p>
+                                                      <p>Jeżeli nie możesz wysłać swoich typów, kliknij w ten link aby dodać losowe typy: <a href="https://typer-cup.pl/randomCode/${randomCode.code}" class="f-fallback button" target="_blank">KLIK</a></p>
                                                       
                                               <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
                                               <tr>

@@ -842,7 +842,7 @@ function roundEmailNotification(firstMatch) {
       setTimeout(() => {
         userNotifications.forEach((userNotification, index) => {
           getUserById(userNotification.user).then((user) => {
-            getUserRandomCode(user._id).then((randomCode) => {
+            getUserRandomCode(user._id).then(randomCode => {
             console.log("Random code: "+ randomCode);
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);
               //var userRandomCode = randomCode.code;
@@ -1360,12 +1360,11 @@ function roundEmailNotification(firstMatch) {
               transporter.sendMail(mailOptions, function (err, data) {
                 if (err) console.log("Error " + err);
               });
-            }, 1000 * index);
-          });
-        });
-      });
-    }
-  });
+            })
+            })
+          })  
+      }, 1000 * index);
+    
 }
 
 function addNotification(userId) {

@@ -827,7 +827,7 @@ function newAccountEmailNotification(reciver, username, password) {
 
 function roundEmailNotification(firstMatch) {
   var endDate = new Date(firstMatch);
-
+  var index = 5;
   endDate.setHours(endDate.getHours() - 1);
   endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
 

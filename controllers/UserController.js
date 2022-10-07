@@ -844,8 +844,10 @@ function roundEmailNotification(firstMatch) {
             getUserRandomCode(user._id).then(randomCode => {
             console.log("Random code: "+ randomCode);
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);
-              //var userRandomCode = randomCode.code;
-
+              var userRandomCode = randomCode.code;
+              console.log(randomCode.code)
+              console.log(userRandomCode);
+              
               const dateOptions = {
                 year: "numeric",
                 month: "numeric",

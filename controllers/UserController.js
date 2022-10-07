@@ -1365,8 +1365,8 @@ function roundEmailNotification(firstMatch) {
 
             })
           })  
+        })
       }, 1000 * index);
-    })
     }
   })
   

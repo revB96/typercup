@@ -22,7 +22,7 @@ let transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: "no-reply@typer-cup.pl",
+    user: "powiadomienia@typer-cup.pl",
     pass: process.env.MAIL_PASSWORD,
   },
   tls: {

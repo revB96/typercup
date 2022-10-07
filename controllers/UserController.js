@@ -839,10 +839,10 @@ function roundEmailNotification(firstMatch) {
     else {
       //console.log(userNotifications);
       setTimeout(() => {
-        userNotifications.forEach((userNotification, index) => {
+        userNotifications.forEach((userNotification) => {
           getUserById(userNotification.user).then((user) => {
             getUserRandomCode(user._id).then(randomCode => {
-            //console.log("Random code: "+ randomCode);
+            console.log("Random code: "+ randomCode);
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);
               //var userRandomCode = randomCode.code;
               //console.log(randomCode.code)

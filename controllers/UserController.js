@@ -848,7 +848,7 @@ function roundEmailNotification(firstMatch) {
             //console.log("Random code: "+ randomCode);
               var nameCapitalized =
                 user.username.charAt(0).toUpperCase() + user.username.slice(1);
-              //var userRandomCode = randomCode.code;
+              var userRandomCode = randomCode.code;
 
               const dateOptions = {
                 year: "numeric",
@@ -1335,7 +1335,7 @@ function roundEmailNotification(firstMatch) {
                                                           </td>
                                                           </tr>
                                                       </table>
-                                                      <p>Jeżeli nie możesz wysłać swoich typów, kliknij w ten link aby dodać losowe typy: <a href="https://typer-cup.pl/randomCode/" class="f-fallback button" target="_blank">KLIK</a></p>
+                                                      <p>Jeżeli nie możesz wysłać swoich typów, kliknij w ten link aby dodać losowe typy: <a href="https://typer-cup.pl/randomCode/${userRandomCode}" class="f-fallback button" target="_blank">KLIK</a></p>
                                                       
                                               <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
                                               <tr>

@@ -10,13 +10,14 @@ const cryptoRandomString = require("crypto-random-string")
 
 
 function generateUserCodes(roundNumber){
-
+    
+    var def = Q.defer();
     let timestamp = Date.now();
 
     User.getAll().then(Users =>{
         
         Users.forEach(user =>{
-            var cryptoRandomCode = cryptoRandomString({length: 64, type: 'ascii-printable'});
+            var cryptoRandomCode = cryptoRandomString({length: 64, type: 'url-safe'});
 
             var randomCode = new RandomCode({
                 user: user._id,
@@ -42,6 +43,7 @@ function generateUserCodes(roundNumber){
         })
     })
 
+    return def.promise;
 }
 
 function add(formData){

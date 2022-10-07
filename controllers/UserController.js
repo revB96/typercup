@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV !=='production'){
+  require('dotenv').config();
+}
+
 const mongoose = require("mongoose");
 const Q = require("q");
 const express = require("express");
@@ -19,7 +23,7 @@ let transporter = nodemailer.createTransport({
   secure: false,
   auth: {
     user: "no-reply@typer-cup.pl",
-    pass: "Tv87%4uH82mjXs$2XN&Mg",
+    pass: process.env.MAIL_PASSWORD,
   },
   tls: {
     rejectUnauthorized: false,

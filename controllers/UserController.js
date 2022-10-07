@@ -266,7 +266,7 @@ function getUserRandomCode(userId) {
       err,
       randomCode
     ) {
-      //console.log("Random code" + randomCode);
+      console.log("Random code" + randomCode.code);
       err ? def.reject(err) : def.resolve(randomCode);
     });
     return def.promise;
@@ -842,7 +842,7 @@ function roundEmailNotification(firstMatch) {
         userNotifications.forEach((userNotification) => {
           getUserById(userNotification.user).then((user) => {
             if(!!user){
-            console.log("user: " + user)
+            console.log("user: " + user._id)
             getUserRandomCode(user._id).then((randomCode) => {
             console.log("Random code: "+ randomCode);
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);

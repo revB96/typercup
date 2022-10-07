@@ -841,6 +841,7 @@ function roundEmailNotification(firstMatch) {
       setTimeout(() => {
         userNotifications.forEach((userNotification) => {
           getUserById(userNotification.user).then((user) => {
+            if(!!user){
             console.log("user: " + user)
             getUserRandomCode(user._id).then((randomCode) => {
             console.log("Random code: "+ randomCode);
@@ -1364,6 +1365,7 @@ function roundEmailNotification(firstMatch) {
               });
 
             })
+          }
           })  
         })
       }, 1000 * index);

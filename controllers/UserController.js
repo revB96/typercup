@@ -825,7 +825,6 @@ function newAccountEmailNotification(reciver, username, password) {
   });
 }
 
-
 function roundEmailNotification(firstMatch) {
   var endDate = new Date(firstMatch);
 
@@ -1364,7 +1363,9 @@ function roundEmailNotification(firstMatch) {
             })
           })  
       }, 1000 * index);
-    
+    }
+  })
+  
 }
 
 function addNotification(userId) {

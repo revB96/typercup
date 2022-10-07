@@ -269,8 +269,8 @@ function getUserRandomCode(userId) {
       //console.log("Random code" + randomCode.code);
       err ? def.reject(err) : def.resolve(randomCode.code);
     });
-    return def.promise;
   });
+  return def.promise;
 }
 
 //USER NOTIFICATIONS

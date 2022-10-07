@@ -844,7 +844,7 @@ function roundEmailNotification(firstMatch) {
           console.log("1")
           getUserById(userNotification.user).then((user) => {
             //console.log(user._id)
-            //getUserRandomCode(user._id).then((randomCode) => {
+            getUserRandomCode(user._id).then((randomCode) => {
             //console.log("Random code: "+ randomCode);
               var nameCapitalized =
                 user.username.charAt(0).toUpperCase() + user.username.slice(1);
@@ -1366,7 +1366,7 @@ function roundEmailNotification(firstMatch) {
             }, 1000 * index);
           });
         });
-      //});
+      });
     }
   });
 }

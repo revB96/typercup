@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/users");
 const UserController= require("../controllers/UserController")
 const Round = require("../controllers/RoundController")
+const Ticket = require("../controllers/TicketController")
 
 
 function authenticate(req, res, next) {
@@ -179,6 +180,17 @@ router.get("/quiz", authenticate, async function (req, res, next) {
     lastRound: 1
   });
 });
+
+router.post('/', function (req, res) {
+  Ticket.addRandomTickets(req.query.randomCode)
+      .then(data => {
+          res.json(data)
+      })
+      .catch(err => {
+          res.json(err)
+      });
+  
+})
 
 
 module.exports = router;

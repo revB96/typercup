@@ -3,6 +3,7 @@ const Q = require("q");
 const express = require("express");
 const Ticket = require("../models/tickets.js");
 const Round = require("../models/rounds.js");
+const RandomCode = require("../models/randomCodes.js");
 const { updateUserStats } = require("./UserStatsController.js");
 const { getUserTimezone } = require("./UserController.js");
 const Schedule = require("./ScheduleController.js");
@@ -93,6 +94,68 @@ function checkIfRoundIsOpen(userID){
     })
   })
 
+  return def.promise;
+}
+
+function getUserRandomCode(randomCode){
+  var def = Q.defer();
+  RandomCode
+      .findOne({code:randomCode})
+      .exec(function (err, code) {
+          err ? def.reject(err) : def.resolve(code);
+      });
+  return def.promise;
+}
+
+function addRandomTickets(randomCode){
+  var def = Q.defer();
+  const timestamp = moment.tz(Date.now(), "Europe/Warsaw")
+
+  getUserRandomCode(randomCode).then(userRandomCode => {
+    if(!!userRandomCode){
+      getRunningRound().then(runningRound => {
+        if(runningRound.round == userRandomCode.round){
+          checkIfRoundIsOpen(userRandomCode.user).then(roundState =>{
+            if(roundState == true){
+              Schedule.getRoundSchedule(runningRound.roundDate).then(schedule =>{
+                forEach.schedule(match =>{
+                  var ticket = new Ticket({
+                    t1g: Math.random()*(6-0)+0,
+                    t2g: Math.random()*(6-0)+0,
+                    round: userRandomCode.round,
+                    schedule: match._id,
+                    user: userRandomCode.user,
+                    createdAt: timestamp,
+                    updatedAt: timestamp,
+                  });
+
+                  ticket.save(function (err, result) {
+                    if (err) {
+                      def.reject(err);
+                      console.log("***");
+                      console.log("Błąd przy zapisywaniu typów!");
+                      console.log("Treść błędu: ");
+                      console.log(err);
+                      console.log("***");
+                    } else {
+                      def.resolve(result);
+                      console.log("***");
+                      console.log("Dodano nowy typ ");
+    
+                      console.log("***");
+                    }
+                  });
+
+                })
+              })
+            }
+          })
+        }
+      })
+    }else{
+      def.resolve("Podany kod nie istnieje");
+    }
+  })
   return def.promise;
 }
 
@@ -240,5 +303,6 @@ module.exports = {
   payForTicketsAfterMatch,
   getAllUserTickets,
   getTicketsByRound,
-  checkIfRoundIsOpen
+  checkIfRoundIsOpen,
+  addRandomTickets
 };

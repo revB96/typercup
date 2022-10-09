@@ -17,7 +17,7 @@ function generateUserCodes(roundNumber){
     User.getAll().then(Users =>{
         
         Users.forEach(user =>{
-            var cryptoRandomCode = cryptoRandomString({length: 64, type: 'url-safe'});
+            var cryptoRandomCode = cryptoRandomString({length: 64, type: 'base64'});
 
             var randomCode = new RandomCode({
                 user: user._id,
@@ -119,28 +119,6 @@ function getRoundByStage(stage){
         .exec(function (err, round) {
             err ? def.reject(err) : def.resolve(round);
         });
-    return def.promise;
-}
-
-
-function update(data)
-{
-    var def = Q.defer();
-    var id = data.id;
-    delete data.id;
-    let timestamp = Date.now();
-
-    Action.findByIdAndUpdate(id,{
-        component: data.component,
-        gpio: data.gpio,
-        scene: data.scene,
-        lastStatus: "Updated",
-        updatedAt: moment.tz(timestamp, "Europe/Warsaw"),
-    },{
-        new:true
-    }).exec(function (err, action){
-        err ? def.reject(err) : def.resolve(action);
-    })
     return def.promise;
 }
 

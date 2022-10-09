@@ -17,7 +17,7 @@ let transporter = nodemailer.createTransport({
     },
   });
 
-function sendNotificationToUser(reciver, subject, html_content, username){
+function sendNotificationToUser(receiver, subject, html_content, username){
     const nameCapitalized = username.charAt(0).toUpperCase() + username.slice(1)
 
     let html=`
@@ -514,7 +514,7 @@ function sendNotificationToUser(reciver, subject, html_content, username){
     `
     let mailOptions = {
         from: '"Typer-Cup.pl ⚽ " <powiadomienia@typer-cup.pl>', // sender address
-        to: reciver, // list of receivers
+        to: receiver, // list of receivers
         subject: subject, // Subject line
         html: html, // html body
       };
@@ -523,7 +523,7 @@ function sendNotificationToUser(reciver, subject, html_content, username){
         if (err) {
           console.log("Error " + err);
         } else {
-          console.log("Email sent successfully");
+          console.log("Wysłano maila o dodaniu losowych typów. Odbiorca: " + receiver);
         }
       });
 }

@@ -9,6 +9,19 @@ const { getUserTimezone } = require("./UserController.js");
 const Schedule = require("./ScheduleController.js");
 const moment = require('moment-timezone');
 
+let transporter = nodemailer.createTransport({
+  host: "smtp.x999.mikr.dev",
+  port: 587,
+  secure: false,
+  auth: {
+    user: "powiadomienia@typer-cup.pl",
+    pass: process.env.MAIL_PASSWORD,
+  },
+  tls: {
+    rejectUnauthorized: false,
+  },
+});
+
 function getUserTicketById(scheduleId, userId) {
   var def = Q.defer();
   Ticket.findOne({ schedule: scheduleId, user: userId }).exec(function (
@@ -107,24 +120,47 @@ function getUserRandomCode(randomCode){
   return def.promise;
 }
 
+function deactivateRandomCode(randomCode) {
+  var def = Q.defer();
+  const timestamp = moment.tz(Date.now(), "Europe/Warsaw");
+
+  RandomCode.findOneAndUpdate(
+    { code: randomCode },
+    {
+      $set: {
+        active: false,
+        updatedAt: timestamp,
+      },
+    },
+    {
+      new: false,
+    }
+  ).exec(function (err, code) {
+    err ? def.reject(err) : def.resolve(code);
+  });
+
+  return def.promise;
+}
+
 function addRandomTickets(randomCode){
   var def = Q.defer();
   const timestamp = moment.tz(Date.now(), "Europe/Warsaw")
-  console.log("Random Code: "+ randomCode)
+  //console.log("Random Code: "+ randomCode)
   getUserRandomCode(randomCode).then(userRandomCode => {
-    console.log("User Random Code: " + userRandomCode)
+    //console.log("User Random Code: " + userRandomCode)
     if(!!userRandomCode){
+      if(userRandomCode.active == true){
       getRunningRound().then(runningRound => {
-        console.log("Running round: " + runningRound)
+       // console.log("Running round: " + runningRound)
         if(runningRound.round == userRandomCode.round){
           checkIfRoundIsOpen(userRandomCode.user).then(roundState =>{
-            console.log("Round State: " + roundState)
+            //console.log("Round State: " + roundState)
             if(roundState === true){
-              console.log("IF OK")
+              //console.log("IF OK")
               Schedule.getRoundSchedule(runningRound.roundDate).then(schedule =>{
-                console.log("Schedule: " + schedule)
+                //console.log("Schedule: " + schedule)
                 schedule.forEach(match =>{
-                  console.log("Match: " + match)
+                  //console.log("Match: " + match)
                   var ticket = new Ticket({
                     t1g: Math.floor(Math.random() * 6),
                     t2g: Math.floor(Math.random() * 6),
@@ -145,21 +181,32 @@ function addRandomTickets(randomCode){
                       console.log("***");
                     } else {
                       def.resolve(result);
-                      console.log("***");
-                      console.log("Dodano nowy typ ");
-    
+                      console.log("Dodano losowy typ ");
+                      deactivateRandomCode(randomCode).then(err, result =>{
+                        if(err) { 
+                          console.log("Bład przy dezaktywacji kodu jednorazowego: ")
+                          console.log(err)
+                        }else{
+                          console.log("Dezaktywowano kod");
+                        }
+                      })
                       console.log("***");
                     }
                   });
 
                 })
               })
+            }else{
+              def.reject("Kolejka jest już zamknięta")
             }
           })
         }
       })
     }else{
-      def.resolve("Podany kod nie istnieje");
+      def.reject("Podany kod został już wykorzystany");
+    }
+    }else{
+      def.reject("Podany kod nie istnieje");
     }
   })
   return def.promise;

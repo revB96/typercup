@@ -841,17 +841,16 @@ function roundEmailNotification(firstMatch) {
   ) {
     if (err) console.log(err);
     else {
-      //console.log(userNotifications);
+      console.log(userNotifications);
       setTimeout(() => {
         userNotifications.forEach((userNotification) => {
           getUserById(userNotification.user).then((user) => {
             if(!!user){
-            //console.log("user: " + user._id)
+            console.log("user: " + user._id)
             getUserRandomCode(user._id).then((randomCode) => {
-            //console.log("Random code: "+ randomCode);
+            console.log("Random code: "+ randomCode);
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);
-      
-              
+        
               const dateOptions = {
                 year: "numeric",
                 month: "numeric",

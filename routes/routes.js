@@ -189,7 +189,6 @@ router.get('/randomCode', function (req, res) {
       .catch(err => {
           res.json(err)
       });
-  r
 })
 
 

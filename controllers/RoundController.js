@@ -37,7 +37,7 @@ function generateUserCodes(roundNumber){
                 else{
                     def.resolve(result);
                     console.log("Dodano nowy kod losowy: ")
-                    console.log(`User: ${user.username}, Data: ${timezone}`)
+                    console.log(`User: ${user.username}, Data: ${timestamp}`)
                 }
             }));
 

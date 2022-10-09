@@ -9,6 +9,7 @@ const { getUserTimezone } = require("./UserController.js");
 const Schedule = require("./ScheduleController.js");
 const moment = require('moment-timezone');
 const nodemailer = require("nodemailer");
+const {sendNotificationToUser} = require("./UserNotificationController")
 
 let transporter = nodemailer.createTransport({
   host: "smtp.x999.mikr.dev",
@@ -183,7 +184,16 @@ function addRandomTickets(randomCode){
                     } else {
                       def.resolve(result);
                       console.log("Dodano losowy typ ");
-                      deactivateRandomCode(randomCode).then(err, result =>{
+                      sendNotificationToUser(
+                        userRandomCode.email, 
+                        "Wysłano losowe typy ✔", 
+                        "<p>Wysłałeś losowe typy na kolejkę</p><p>Jeżeli to nie ty, to daj znać na grupie messenger</p>",
+                        ""
+                        ).then((err, emailStatus)=>{
+                          if(err) console.log("Błąd podczas wysyłania maila: " + err)
+                          else console.log("Wysłano powiadomienie")
+                        })
+                      deactivateRandomCode(randomCode).then((err, deactivatedCode) =>{
                         if(err) { 
                           console.log("Bład przy dezaktywacji kodu jednorazowego: ")
                           console.log(err)

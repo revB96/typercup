@@ -21,6 +21,7 @@ function generateUserCodes(roundNumber){
 
             var randomCode = new RandomCode({
                 user: user._id,
+                mailToNotifications: user.email,
                 code:cryptoRandomCode,
                 active: true,
                 round:roundNumber,

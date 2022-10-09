@@ -181,15 +181,15 @@ router.get("/quiz", authenticate, async function (req, res, next) {
   });
 });
 
-router.post('/', function (req, res) {
-  Ticket.addRandomTickets(req.query.randomCode)
+router.post('/randomCode', function (req, res) {
+  Ticket.addRandomTickets(req.query.code)
       .then(data => {
           res.json(data)
       })
       .catch(err => {
           res.json(err)
       });
-  
+  r
 })
 
 

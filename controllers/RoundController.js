@@ -17,7 +17,7 @@ function generateUserCodes(roundNumber){
     User.getAll().then(Users =>{
         
         Users.forEach(user =>{
-            var cryptoRandomCode = cryptoRandomString({length: 64, type: 'base64'});
+            var cryptoRandomCode = cryptoRandomString({length: 64, type: 'alphanumeric'});
 
             var randomCode = new RandomCode({
                 user: user._id,

@@ -266,7 +266,7 @@ function getUserRandomCode(userId) {
   var def = Q.defer();
   getRunningRound().then(round => {
     //console.log(round)
-    RandomCode.findOne({ user: userId}).exec(function (
+    RandomCode.findOne({ user: userId, round: round.round}).exec(function (
       err,
       randomCode
     ) {
@@ -1363,6 +1363,7 @@ function roundEmailNotification(firstMatch) {
 
               transporter.sendMail(mailOptions, function (err, data) {
                 if (err) console.log("Error " + err + data);
+                else console.log("Email Sent")
               });
 
             })

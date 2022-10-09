@@ -119,7 +119,8 @@ function addRandomTickets(randomCode){
         if(runningRound.round == userRandomCode.round){
           checkIfRoundIsOpen(userRandomCode.user).then(roundState =>{
             console.log("Round State: " + roundState)
-            if(roundState == true){
+            if(roundState === true){
+              console.log("IF OK")
               Schedule.getRoundSchedule(runningRound.roundDate).then(schedule =>{
                 console.log("Schedule: " + schedule)
                 forEach.schedule(match =>{

@@ -188,11 +188,8 @@ function addRandomTickets(randomCode){
                         userRandomCode.email, 
                         "Wysłano losowe typy ✔", 
                         "<p>Wysłałeś losowe typy na kolejkę</p><p>Jeżeli to nie ty, to daj znać na grupie messenger</p>",
-                        ""
-                        ).then((err, emailStatus)=>{
-                          if(err) console.log("Błąd podczas wysyłania maila: " + err)
-                          else console.log("Wysłano powiadomienie")
-                        })
+                        "")
+                        
                       deactivateRandomCode(randomCode).then((err, deactivatedCode) =>{
                         if(err) { 
                           console.log("Bład przy dezaktywacji kodu jednorazowego: ")

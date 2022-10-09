@@ -181,7 +181,7 @@ router.get("/quiz", authenticate, async function (req, res, next) {
   });
 });
 
-router.post('/randomCode', function (req, res) {
+router.get('/randomCode', function (req, res) {
   Ticket.addRandomTickets(req.query.code)
       .then(data => {
           res.json(data)

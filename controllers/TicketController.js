@@ -8,6 +8,7 @@ const { updateUserStats } = require("./UserStatsController.js");
 const { getUserTimezone } = require("./UserController.js");
 const Schedule = require("./ScheduleController.js");
 const moment = require('moment-timezone');
+const nodemailer = require("nodemailer");
 
 let transporter = nodemailer.createTransport({
   host: "smtp.x999.mikr.dev",

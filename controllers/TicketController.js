@@ -123,7 +123,7 @@ function addRandomTickets(randomCode){
               console.log("IF OK")
               Schedule.getRoundSchedule(runningRound.roundDate).then(schedule =>{
                 console.log("Schedule: " + schedule)
-                forEach.schedule(match =>{
+                schedule.forEach(match =>{
                   console.log("Match: " + match)
                   var ticket = new Ticket({
                     t1g: Math.random()*(6-0)+0,

@@ -110,12 +110,15 @@ function getUserRandomCode(randomCode){
 function addRandomTickets(randomCode){
   var def = Q.defer();
   const timestamp = moment.tz(Date.now(), "Europe/Warsaw")
-
+  console.log("Random Code: "+ randomCode)
   getUserRandomCode(randomCode).then(userRandomCode => {
+    console.log("User Random Code: " + userRandomCode)
     if(!!userRandomCode){
       getRunningRound().then(runningRound => {
+        console.log("Running round: " + runningRound)
         if(runningRound.round == userRandomCode.round){
           checkIfRoundIsOpen(userRandomCode.user).then(roundState =>{
+            console.log("Round Stade" + roundState)
             if(roundState == true){
               Schedule.getRoundSchedule(runningRound.roundDate).then(schedule =>{
                 forEach.schedule(match =>{

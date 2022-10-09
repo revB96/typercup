@@ -126,8 +126,8 @@ function addRandomTickets(randomCode){
                 schedule.forEach(match =>{
                   console.log("Match: " + match)
                   var ticket = new Ticket({
-                    t1g: int(Math.floor(Math.random() * 6)),
-                    t2g: int(Math.floor(Math.random() * 6)),
+                    t1g: Math.floor(Math.random() * 6),
+                    t2g: Math.floor(Math.random() * 6),
                     round: userRandomCode.round,
                     schedule: match._id,
                     user: userRandomCode.user,

@@ -185,7 +185,7 @@ function addRandomTickets(randomCode){
                       def.resolve(result);
                       console.log("Dodano losowy typ ");
                       sendNotificationToUser(
-                        userRandomCode.email, 
+                        userRandomCode.mailToNotifications, 
                         "Wysłano losowe typy ✔", 
                         "<p>Wysłałeś losowe typy na kolejkę</p><p>Jeżeli to nie ty, to daj znać na grupie messenger</p>",
                         "")

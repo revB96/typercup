@@ -182,7 +182,7 @@ function addRandomTickets(randomCode){
                       console.log(err);
                       console.log("***");
                     } else {
-                      def.resolve(result);
+                      def.resolve("Dodano losowe typy. Za chwilę otrzymasz potwierdzenie email");
                       console.log("Dodano losowy typ ");
                       sendNotificationToUser(
                         userRandomCode.mailToNotifications, 

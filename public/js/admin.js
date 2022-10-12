@@ -388,8 +388,8 @@ async function adminGetAllRandomCodes() {
               </tr>
             </thead>
             <tbody>`);
-      for await(const [index, code] of Object.entries(randomCode.codes)) {
-        await $("#pills-randomCodes").append(`
+      for (const [index, code] of Object.entries(randomCode.codes)) {
+         $("#pills-randomCodes").append(`
           <tr class="table-danger">
             <th scope="row">${code.round}</th>
             <td>${code.code}</td>

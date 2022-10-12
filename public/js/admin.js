@@ -386,7 +386,7 @@ async function adminGetAllRandomCodes() {
           <tr>
             <th scope="col">Kolejka</th>
             <th scope="col">Kod</th>
-            <th scope="col">Aktywny</th>
+            <th scope="col" style="min-width: 30px;">Aktywny</th>
           </tr>
         </thead>
         <tbody>`;
@@ -398,7 +398,7 @@ async function adminGetAllRandomCodes() {
         var formatDate = date.toLocaleDateString('pl-PL', dateOptions)
         if(code.active == false){
           tableColor = "danger";
-          active = `${code.active} | ${formatDate}`;
+          active = `${code.active} | <span class="badge rounded-pill bg-danger">${formatDate}</span>`;
         }else{
           tableColor = "success";
           active = `${code.active}`;

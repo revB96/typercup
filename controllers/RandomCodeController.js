@@ -19,7 +19,7 @@ function getAll(){
                 _id:"$mailToNotifications",
                 codes:{
                     $push : {
-                        round:"$_id.round",
+                        round:"$round",
                         code:"$code"
                     }
                 }

@@ -375,8 +375,8 @@ function adminAddPointsFromQuiz(){
 
 function adminGetAllRandomCodes() {
   $("#pills-randomCodes").html(``)
-  getRandomCodes().then((randomCodes) => {
-    for (const [index, randomCode] of Object.entries(randomCodes)) {
+  getRandomCodes().then(async (randomCodes) => {
+    for await(const [index, randomCode] of Object.entries(randomCodes)) {
       $("#pills-randomCodes").append(`
         <div>
           <span class="badge badge-dark">${randomCode._id}</span>
@@ -389,7 +389,7 @@ function adminGetAllRandomCodes() {
               </tr>
             </thead>
             <tbody>`);
-      for (const [index, code] of Object.entries(randomCode.codes)) {
+      for await(const [index, code] of Object.entries(randomCode.codes)) {
         $("#pills-randomCodes").append(`
           <tr class="table-danger">
             <th scope="row">${code.round}</th>

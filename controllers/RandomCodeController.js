@@ -11,11 +11,7 @@ function getAll(){
             $group: {
                 _id: {mailToNotifications : "$mailToNotifications"},
                //round: {round:"$round"},
-                codes: {
-                    round: {round : "$round"},
-                    code : {
-                        $push: "$code"}
-                }
+                code: {$push: "$code", $push: "$active"}
             }
         }
     ])

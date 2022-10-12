@@ -393,9 +393,12 @@ async function adminGetAllRandomCodes() {
 
       for (const [index, code] of Object.entries(randomCode.codes)) {
         var tableColor, active;
+        var date = new Date(code.updatedAt)
+        const dateOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
+        var formatDate = date.toLocaleDateString('en-GB', dateOptions)
         if(code.active == false){
           tableColor = "danger";
-          active = `${code.active} | ${code.updatedAt}`;
+          active = `${code.active} | ${formatDate}`;
         }else{
           tableColor = "success";
           active = `${code.active}`;

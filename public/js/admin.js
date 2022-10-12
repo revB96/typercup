@@ -374,10 +374,10 @@ function adminAddPointsFromQuiz(){
 }
 
 function adminGetAllRandomCodes() {
-  $("pills-randomCodes").html(``)
+  $("#pills-randomCodes").html(``)
   getRandomCodes().then((randomCodes) => {
     for (const [index, randomCode] of Object.entries(randomCodes)) {
-      $("pills-randomCodes").append(`
+      $("#pills-randomCodes").append(`
         <div>
           <span class="badge badge-dark">${randomCode._id}</span>
           <table class="table table-sm table-hover caption-top">
@@ -390,14 +390,14 @@ function adminGetAllRandomCodes() {
             </thead>
             <tbody>`);
       for (const [index, code] of Object.entries(randomCode.codes)) {
-        $("pills-randomCodes").append(`
+        $("#pills-randomCodes").append(`
           <tr class="table-danger">
             <th scope="row">${code.round}</th>
             <td>${code.code}</td>
             <td>${code.active}</td>
           </tr>`);
       }
-      $("pills-randomCodes").append(`
+      $("#pills-randomCodes").append(`
         </tbody>
         </table>
       </div>`)

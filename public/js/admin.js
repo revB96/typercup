@@ -396,7 +396,7 @@ function adminGetAllRandomCodes() {
             <td>${code.active}</td>
           </tr>`);
       }
-      $("#pills-randomCodes").append(`
+      await $("#pills-randomCodes").append(`
       </tbody>
       </table>
       <span>test</span>

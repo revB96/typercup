@@ -377,47 +377,37 @@ async function adminGetAllRandomCodes() {
   $("#pills-randomCodes").html(``)
   getRandomCodes().then(async (randomCodes) => {
     for await(const [index, randomCode] of Object.entries(randomCodes)) {
-      function loadTable(){
-        $("#pills-randomCodes").append(`
-          <span class="badge badge-dark">${randomCode._id}</span>
-          <table class="table table-sm table-hover caption-top">
-            <thead class="table-light">
-              <tr>
-                <th scope="col">Kolejka</th>
-                <th scope="col">Kod</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody>`);
-            return Promise.resolve(1);
-      }
-      function loadTableContent(){
-        for (const [index, code] of Object.entries(randomCode.codes)) {
-        $("#pills-randomCodes").append(`
-          <tr class="table-danger">
-            <th scope="row">${code.round}</th>
-            <td>${code.code}</td>
-            <td>${code.active}</td>
-          </tr>`);
-        }
-        return Promise.resolve(1);
-      }
-      function loadTableEnd(){
-        $("#pills-randomCodes").append(`
-          </tbody>
-          </table>
-          <span>test</span>
-          `)
-          return Promise.resolve(1);
+
+      var content = `
+      <span class="badge badge-dark">${randomCode._id}</span>
+      <table class="table table-sm table-hover caption-top">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Kolejka</th>
+            <th scope="col">Kod</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+      for (const [index, code] of Object.entries(randomCode.codes)) {
+        content += `
+        <tr class="table-danger">
+          <th scope="row">${code.round}</th>
+          <td>${code.code}</td>
+          <td>${code.active}</td>
+        </tr>`
       }
 
-      loadTable().then(res => {
-        loadTableContent().then(res2 =>{
-          loadTableEnd()
-        })
-      });
-
+      content += `
+      </tbody>
+      </table>
+      <span>test</span>
+      `
+      $("#pills-randomCodes").append(content)
+      
     }
+    
   });
 }
 

@@ -10,7 +10,7 @@ const Score = require("../controllers/ScoreController")
 const UserStats = require("../controllers/UserStatsController")
 const Quiz = require("../controllers/QuizController")
 const Backup = require("../controllers/BackupController")
-const RandomCode = require("../controllers/RandomCodeControllers")
+const RandomCode = require("../controllers/RandomCodeController")
 
 router.post('/admin/schedule/add', function (req, res) {
     //console.log(req.body)

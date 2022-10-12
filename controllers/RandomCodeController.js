@@ -7,28 +7,23 @@ const RandomCode = require("../models/randomCodes.js");
 function getAll(){
     var def = Q.defer();
 
-    RandomCode
-        .find()
-        .sort({createdAt: "asc"})
-        .exec(function (err, randomCodes){
-            if(err){
-                def.reject(err)
-            }else{
-                randomCodes.aggregate([
-                    {$group: {
-                        mail:"$mailToNotifications",
-                        round: "$round",
-                        code: {$push: "$code"}
-                    }}
-                ])
-                console.log(randomCodes);
-                def.resolve(randomCodes);
+    RandomCode.aggregate([
+        {
+            $group: {
+                mail:"$mailToNotifications",
+                round: "$round",
+                code: {$push: "$code"}
             }
-        })
-
+        }
+    ])
+    .then(randomCodes =>{
+        console.log(randomCodes);
+        def.resolve(randomCodes);
+    })
     return def.promise;
-
+        
 }
+
 
 module.exports = {
     getAll,

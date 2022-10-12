@@ -3,7 +3,6 @@ const Q = require("q");
 const express = require("express");
 const RandomCode = require("../models/randomCodes.js");
 
-
 function getAll(){
     var def = Q.defer();
 

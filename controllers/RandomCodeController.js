@@ -9,11 +9,11 @@ function getAll(){
     RandomCode.aggregate([
         {
             $group: {
-                _id: {mailToNotifications : "$mailToNotifications"},
-                round: {
-                    round:"$round",
-                    code: {$push: "$code"}
-                }
+                _id: {
+                    mailToNotifications : "$mailToNotifications",
+                    round:"$round"
+                },
+                code: {$push: "$code",}
             }
         }
     ])

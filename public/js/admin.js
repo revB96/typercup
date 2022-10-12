@@ -379,20 +379,27 @@ async function adminGetAllRandomCodes() {
     for await(const [index, randomCode] of Object.entries(randomCodes)) {
 
       var content = `
+      <div>
       <span class="badge badge-dark">${randomCode._id}</span>
       <table class="table table-sm table-hover caption-top">
         <thead class="table-light">
           <tr>
             <th scope="col">Kolejka</th>
             <th scope="col">Kod</th>
-            <th scope="col">Status</th>
+            <th scope="col">Aktywny</th>
           </tr>
         </thead>
         <tbody>`;
 
       for (const [index, code] of Object.entries(randomCode.codes)) {
+        var tableColor;
+        if(code.active == true)
+          tableColor = "danger"
+        else
+          tableColor = "success"
+
         content += `
-        <tr class="table-danger">
+        <tr class="table-${tableColor}">
           <th scope="row">${code.round}</th>
           <td>${code.code}</td>
           <td>${code.active}</td>
@@ -402,7 +409,7 @@ async function adminGetAllRandomCodes() {
       content += `
       </tbody>
       </table>
-      <span>test</span>
+      </div>
       `
       $("#pills-randomCodes").append(content)
       

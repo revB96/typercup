@@ -392,7 +392,7 @@ async function adminGetAllRandomCodes() {
             return Promise.resolve(1);
       }
       function loadTableContent(){
-        for await (const [index, code] of Object.entries(randomCode.codes)) {
+        for (const [index, code] of Object.entries(randomCode.codes)) {
         $("#pills-randomCodes").append(`
           <tr class="table-danger">
             <th scope="row">${code.round}</th>

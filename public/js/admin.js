@@ -378,7 +378,6 @@ function adminGetAllRandomCodes() {
   getRandomCodes().then(async (randomCodes) => {
     for await(const [index, randomCode] of Object.entries(randomCodes)) {
       $("#pills-randomCodes").append(`
-        <div>
           <span class="badge badge-dark">${randomCode._id}</span>
           <table class="table table-sm table-hover caption-top">
             <thead class="table-light">
@@ -401,7 +400,7 @@ function adminGetAllRandomCodes() {
       </tbody>
       </table>
       <span>test</span>
-      </div>`)
+      `)
     }
   });
 }

@@ -28,7 +28,7 @@ function getAll(){
         }
     ])
     .then(randomCodes =>{
-        console.log(randomCodes);
+        //console.log(randomCodes);
         def.resolve(randomCodes);
     })
     return def.promise;

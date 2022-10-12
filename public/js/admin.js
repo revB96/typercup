@@ -373,9 +373,41 @@ function adminAddPointsFromQuiz(){
     });
 }
 
+function adminGetAllRandomCodes() {
+  getRandomCodes().then((randomCodes) => {
+    for (const [index, randomCode] of Object.entries(randomCodes)) {
+      $("pills-randomCodes").append(`
+        <div>
+          <span class="badge badge-dark">${randomCode._id}</span>
+          <table class="table table-sm table-hover caption-top">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">Kolejka</th>
+                <th scope="col">Kod</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>`);
+      for (const [index, code] of Object.entries(randomCode.codes)) {
+        $("pills-randomCodes").append(`
+          <tr class="table-danger">
+            <th scope="row">${code.round}</th>
+            <td>${code.code}</td>
+            <td>${code.active}</td>
+          </tr>`);
+      }
+      $("pills-randomCodes").append(`
+        </tbody>
+        </table>
+      </div>`)
+
+    }
+  });
+}
+
 $(document).ready(function () {
   if(document.title == "Typer Cup | Admin"){
-
+    adminGetAllRandomCodes()
     adminSelectTeams();
     adminListTeams();
     adminGetSchedule();

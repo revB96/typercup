@@ -393,7 +393,7 @@ async function adminGetAllRandomCodes() {
 
       for (const [index, code] of Object.entries(randomCode.codes)) {
         var tableColor;
-        if(code.active == true)
+        if(code.active == false)
           tableColor = "danger"
         else
           tableColor = "success"

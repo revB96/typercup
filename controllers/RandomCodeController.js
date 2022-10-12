@@ -20,6 +20,7 @@ function getAll(){
                 codes:{
                     $push : {
                         round:"$round",
+                        active:"$active",
                         code:"$code"
                     }
                 }

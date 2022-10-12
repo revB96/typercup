@@ -373,7 +373,7 @@ function adminAddPointsFromQuiz(){
     });
 }
 
-function adminGetAllRandomCodes() {
+async function adminGetAllRandomCodes() {
   $("#pills-randomCodes").html(``)
   getRandomCodes().then(async (randomCodes) => {
     for await(const [index, randomCode] of Object.entries(randomCodes)) {

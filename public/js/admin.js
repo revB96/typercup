@@ -377,8 +377,8 @@ async function adminGetAllRandomCodes() {
   $("#pills-randomCodes").html(``)
   getRandomCodes().then(async (randomCodes) => {
     for await(const [index, randomCode] of Object.entries(randomCodes)) {
-      async function loadTable(){
-        await $("#pills-randomCodes").append(`
+      function loadTable(){
+        $("#pills-randomCodes").append(`
           <span class="badge badge-dark">${randomCode._id}</span>
           <table class="table table-sm table-hover caption-top">
             <thead class="table-light">
@@ -391,9 +391,9 @@ async function adminGetAllRandomCodes() {
             <tbody>`);
             return Promise.resolve(1);
       }
-      async function loadTableContent(){
+      function loadTableContent(){
         for await (const [index, code] of Object.entries(randomCode.codes)) {
-         await $("#pills-randomCodes").append(`
+        $("#pills-randomCodes").append(`
           <tr class="table-danger">
             <th scope="row">${code.round}</th>
             <td>${code.code}</td>
@@ -402,8 +402,8 @@ async function adminGetAllRandomCodes() {
         }
         return Promise.resolve(1);
       }
-      async function loadTableEnd(){
-        await $("#pills-randomCodes").append(`
+      function loadTableEnd(){
+        $("#pills-randomCodes").append(`
           </tbody>
           </table>
           <span>test</span>

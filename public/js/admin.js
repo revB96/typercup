@@ -375,6 +375,9 @@ function adminAddPointsFromQuiz(){
 
 $(document).ready(function () {
   if(document.title == "Typer Cup | Admin"){
+
+    getRandomCodes().then(async (result) => {console.log(result)});
+
     adminSelectTeams();
     adminListTeams();
     adminGetSchedule();
@@ -383,8 +386,8 @@ $(document).ready(function () {
     adminGetRound();
     adminGetAllScores();
     adminGetQuestions();
-    adminGetMatches();
-    adminPrintBackups();
+    adminGetMatches()
+    adminPrintBackups()
 
   $("#add-quiz-answer-form").submit(function (e) {
     e.preventDefault();

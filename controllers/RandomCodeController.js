@@ -21,6 +21,7 @@ function getAll(){
                     $push : {
                         round:"$round",
                         active:"$active",
+                        updatedAt:"$updatedAt",
                         code:"$code"
                     }
                 }

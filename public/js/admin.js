@@ -392,11 +392,14 @@ async function adminGetAllRandomCodes() {
         <tbody>`;
 
       for (const [index, code] of Object.entries(randomCode.codes)) {
-        var tableColor;
-        if(code.active == false)
-          tableColor = "danger"
-        else
-          tableColor = "success"
+        var tableColor, active;
+        if(code.active == false){
+          tableColor = "danger";
+          active = `${code.active} | ${code.updatedAt}`;
+        }else{
+          tableColor = "success";
+          active = `${code.active}`;
+        }
 
         content += `
         <tr class="table-${tableColor}">

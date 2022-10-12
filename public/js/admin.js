@@ -374,6 +374,7 @@ function adminAddPointsFromQuiz(){
 }
 
 function adminGetAllRandomCodes() {
+  $("pills-randomCodes").html(``)
   getRandomCodes().then((randomCodes) => {
     for (const [index, randomCode] of Object.entries(randomCodes)) {
       $("pills-randomCodes").append(`

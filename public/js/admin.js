@@ -397,10 +397,7 @@ function adminGetAllRandomCodes() {
             <td>${code.active}</td>
           </tr>`);
       }
-      $("#pills-randomCodes").append(`
-        </tbody>
-        </table>
-      </div>`)
+  
 
     }
   });

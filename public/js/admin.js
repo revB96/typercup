@@ -386,7 +386,7 @@ async function adminGetAllRandomCodes() {
           <tr>
             <th scope="col">Kolejka</th>
             <th scope="col">Kod</th>
-            <th scope="col" style="min-width: 30px;">Aktywny</th>
+            <th scope="col" style="min-width: 170px;">Aktywny</th>
           </tr>
         </thead>
         <tbody>`;

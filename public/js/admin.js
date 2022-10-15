@@ -64,13 +64,35 @@ function adminGetSchedule() {
       matchDate = new Date(schedule.matchDate);
       counter = parseInt(index, 10);
       schedule.played == true
-        ? (played = `class="table-danger"`)
-        : (played = "");
+        ? (played = `class="table-danger"`) : (played = "");
+      var stage ="";
+      switch(schedule.stage){
+        case 'group':
+          stage = "Grupa"
+          break;
+        case '14':
+          stage = "1/4"
+          break;
+        case '18':
+          stage = "1/8"
+          break;
+        case '12':
+          stage = "1/2"
+          break;
+         case 'final':
+          stage = "Finał"
+          break;
+        default:
+          stage = "Nieokreślony"
+          break;
+      }
+
       $("#admin-schedule-list").append(`
                     <tr ${played}>
                         <th scope="row">${counter + 1}</th>
                         <td>${schedule.t1.teamName}</td>
                         <td>${schedule.t2.teamName}</td> 
+                        <td>${stage}</td>
                         <td>${matchDate.toLocaleDateString(
                           "pl-PL",
                           options

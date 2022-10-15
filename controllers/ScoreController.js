@@ -39,18 +39,24 @@ async function add(formData){
             console.log(formData.schedule)
             getScheduleById(formData.schedule).then(schedule=>{
                 if(score.t1g > score.t2g){
-                    updateTeamStats(schedule.t1, 3, score.t1g, score.t2g)
-                    updateTeamStats(schedule.t2, 0, score.t2g, score.t1g)
+                    if(schedule.stage == "group"){
+                        updateTeamStats(schedule.t1, 3, score.t1g, score.t2g)
+                        updateTeamStats(schedule.t2, 0, score.t2g, score.t1g)
+                    }
                     payForTicketsAfterMatch(schedule._id,score.t1g, score.t2g, schedule.t1._id)
                     updateScheduleStatus(schedule.id)
                 }else if(score.t2g > score.t1g){
-                    updateTeamStats(schedule.t1, 0, score.t1g, score.t2g)
-                    updateTeamStats(schedule.t2, 3, score.t2g, score.t1g)
+                    if(schedule.stage == "group"){
+                        updateTeamStats(schedule.t1, 0, score.t1g, score.t2g)
+                        updateTeamStats(schedule.t2, 3, score.t2g, score.t1g)
+                    }
                     payForTicketsAfterMatch(schedule._id, score.t1g, score.t2g, schedule.t2._id)
                     updateScheduleStatus(schedule.id)
                 }else if(score.t2g == score.t1g){
-                    updateTeamStats(schedule.t1, 1, score.t1g, score.t2g)
-                    updateTeamStats(schedule.t2, 1, score.t2g, score.t1g)
+                    if(schedule.stage == "group"){
+                        updateTeamStats(schedule.t1, 1, score.t1g, score.t2g)
+                        updateTeamStats(schedule.t2, 1, score.t2g, score.t1g)
+                    }
                     payForTicketsAfterMatch(schedule._id, score.t1g, score.t2g, "drawn")
                     updateScheduleStatus(schedule.id)
                 }

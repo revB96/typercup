@@ -16,6 +16,7 @@ function add(formData){
         t2 : formData.team2,
         matchDate : moment.tz(matchDateConverted, "Europe/Warsaw"),
         group : formData.group,
+        stage : formData.stage,
         createdAt : moment.tz(timestamp, "Europe/Warsaw"),
         updatedAt : moment.tz(timestamp, "Europe/Warsaw")
     })

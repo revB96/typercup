@@ -4,6 +4,7 @@ var scheduleSchema = new mongoose.Schema({
     t1: {type: mongoose.Schema.Types.ObjectId, ref: "NationalTeam"},
     t2: {type: mongoose.Schema.Types.ObjectId, ref: "NationalTeam"},
     group: String,
+    stage: String,
     played: {type: Boolean, default: false},
     matchDate: Date,
     createdAt: Date,

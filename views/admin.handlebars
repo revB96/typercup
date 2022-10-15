@@ -93,7 +93,7 @@
           <option value="F">F</option>
           <option value="G">G</option>
           <option value="H">H</option>
-          <option value="H">[ALL]</option>
+          <option value="ALL">[ALL]</option>
         </select>
       </div>
       <div class="mb-3">
@@ -107,6 +107,16 @@
         </select>
       </div>
       <div class="mb-3">
+        <label for="stage">Etap</label>
+          <select id="add-match-select-stage" class="form-select" name="stage" required>
+            <option value="group">Grupa</option>
+            <option value="18">1/8</option>
+            <option value="14">1/4</option>
+            <option value="12">1/2</option>
+            <option value="final">Finał</option>
+        </select>
+      </div>
+      <div class="mb-3">
         <div class="row">
           <div class="col">
             <label for="group">Data</label>
@@ -115,9 +125,11 @@
           <div class="col">
             <label for="matchTime">Godzina</label>
             <select id="add-match-machTime" class="form-select" name="matchTime" required>
-              <option value="15:00:00">15:00</option>
-              <option value="18:00:00" selected>18:00</option>
-              <option value="21:00:00">21:00</option>
+              <option value="11:00:00">11:00</option>
+              <option value="14:00:00">14:00</option>
+              <option value="16:00:00">16:00</option>
+              <option value="17:00:00" selected>17:00</option>
+              <option value="20:00:00">20:00</option>
             </select>
           </div>
         </div>

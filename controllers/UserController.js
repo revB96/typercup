@@ -42,6 +42,7 @@ async function add(formData) {
     email: formData.email,
     role: formData.role,
     timezone: formData.timezone,
+    friendlyName: formData.friendlyName,
     createdAt: timestamp,
     updatedAt: timestamp,
   });
@@ -106,7 +107,7 @@ function getUserDetails(id) {
   var def = Q.defer();
   User.findOne({ _id: id })
     .populate("userNotifications")
-    .select("username email firstLogon filledQuiz userNotifications timezone")
+    .select("username email firstLogon filledQuiz userNotifications timezone friendlyName")
     .exec(function (err, user) {
       err ? def.reject(err) : def.resolve(user);
     });
@@ -153,7 +154,7 @@ function getAll() {
   var def = Q.defer();
   User.find(
     {},
-    "username email role firstLogon filledQuiz createdAt updatedAt lastLogon timezone"
+    "username email role firstLogon filledQuiz createdAt updatedAt lastLogon timezone friendlyName"
   )
     .sort({ createdAt: "desc" })
     .exec(function (err, users) {

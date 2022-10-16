@@ -15,7 +15,12 @@ function listUserTable(){
             $("#users-stat-table").append(`
             <tr ${yellowClass}>
                 <th scope="row">${counter}</th>
-                <td>${userStat.user.username}</td>
+                <td>${userStat.user.username}
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    ${userStats.user.friendlyName}
+                    <span class="visually-hidden">unread messages</span>
+                </span>
+                </td>
                 <td><b>${userStat.points}</b></td>
                 <td>${userStat.tickets}</td>
                 <td>${userStat.correctScore}</td>

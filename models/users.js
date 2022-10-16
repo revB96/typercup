@@ -7,6 +7,7 @@ var userSchema = new mongoose.Schema({
     firstLogon: {type: Boolean, default: false},
     filledQuiz: {type: Boolean, default: false},
     timezone: {type: String},
+    friendlyName: {type: String},
     role: String,
     createdAt: Date,
     updatedAt: Date,

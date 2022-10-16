@@ -17,13 +17,7 @@ function listUserTable(){
             <tr ${yellowClass}>
                 <th scope="row">${counter}</th>
                 <td>
-                    <button type="button" class="btn btn-primary position-relative">
-                    ${userStat.user.username}
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    ${userStat.user.friendlyName}
-                    <span class="visually-hidden">unread messages</span>
-                    </span>
-                    </button>
+                    <a href="#" title="${userStat.user.friendlyName}">${userStat.user.username}</a>
                 </td>
                 <td><b>${userStat.points}</b></td>
                 <td>${userStat.tickets}</td>

@@ -277,6 +277,7 @@ router.get('/tickets/stats', function (req, res) {
     Ticket.getTicketStats(req.query.scheduleId)
         .then(data => {
             res.json(data)
+            console.log(data)
         })
         .catch(err => {
             res.json(err)

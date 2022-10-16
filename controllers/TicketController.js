@@ -370,7 +370,7 @@ function getTicketStats(scheduleID){
         if(ticket.t1g < ticket.t2g) t2w++;
         counter++;
       })
-
+      
       def.resolve({
         t1: (t1w/counter)*100,
         t2: (t2w/counter)*100,

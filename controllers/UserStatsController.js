@@ -31,9 +31,6 @@ function getAll() {
     .populate({
       path: "user",
       populate: { path: "username" },
-    })
-    .populate({
-      path: "user",
       populate: { path: "friendlyName" },
     })
     .sort({ points: "desc" })

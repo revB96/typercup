@@ -2,14 +2,14 @@ function listUserTable(){
     getUserTable().then(result=>{
         for (const [index,userStat] of Object.entries(result)) {
             var counter = parseInt(index, 10) + 1;
-            var yellowClass="", firiendlyName=""
+            var yellowClass="", friendlyName=""
             var quizPoints = "?"
             if(counter === 1)
                 yellowClass = `class="bg-warning"`
             if(userStat.quizPoints != 0)
                 quizPoints = userStat.quizPoints
-            if(userStat.user.firiendlyName != undefined)
-                firiendlyName=`<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            if(userStat.user.friendlyName != undefined)
+                friendlyName=`<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                 ${userStats.user.friendlyName}
                                 <span class="visually-hidden">unread messages</span>
                                </span>`
@@ -21,7 +21,7 @@ function listUserTable(){
             <tr ${yellowClass}>
                 <th scope="row">${counter}</th>
                 <td>${userStat.user.username}
-                    ${firiendlyName}
+                    ${friendlyName}
                 </td>
                 <td><b>${userStat.points}</b></td>
                 <td>${userStat.tickets}</td>

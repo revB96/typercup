@@ -28,7 +28,8 @@ function add(userId){
 function getAll() {
   var def = Q.defer();
   UserStats.find()
-    .populate("user", "username", "friendlyName")
+    .populate("user", "username")
+    .populate("user", "friendlyName")
     .sort({ points: "desc" })
     .exec(function (err, stats) {
       if (err) def.reject(err);

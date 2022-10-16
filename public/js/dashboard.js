@@ -57,7 +57,6 @@ function printRoundWithMatches(round) {
               t2w = stats.t2;
               drawn = stats.drawn;
             
-              console.log(t2w)
             for (const [index, userTicket] of Object.entries(userTickets)) {
               if (match._id == userTicket.schedule) {
                 if ((userTicket.t1g != null) & (userTicket.t2g != null)) {
@@ -76,6 +75,10 @@ function printRoundWithMatches(round) {
             var mins = timeMatch.getMinutes();
             if (hrs <= 9) hrs = "0" + hrs;
             if (mins < 10) mins = "0" + mins;
+
+            console.log(t2w)
+            console.log(stats.t1)
+            console.log(stats.drawn)
 
             $(`#dashboard-round-matches`).append(`
                         <div class="col" style="margin-right: 0;">

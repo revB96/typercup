@@ -52,12 +52,12 @@ function printRoundWithMatches(round) {
                 t2w = 0,
                 drawn = 0,
                 ticketColor = "text-white bg-danger";
-                
-              t1w = stats.t1w;
-              t2w = stats.t2w;
+
+              t1w = stats.t1;
+              t2w = stats.t2;
               drawn = stats.drawn;
             
-
+              console.log(t1w)
             for (const [index, userTicket] of Object.entries(userTickets)) {
               if (match._id == userTicket.schedule) {
                 if ((userTicket.t1g != null) & (userTicket.t2g != null)) {

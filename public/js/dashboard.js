@@ -51,7 +51,7 @@ function printRoundWithMatches(round) {
                 drawn = 0,
                 ticketColor = "text-white bg-danger";
 
-            getTicketsStats(schedule._id).then(stats => {
+            getTicketsStats(match._id).then(stats => {
               t1w = stats.t1w;
               t2w = stats.t2w;
               drawn = stats.drawn;

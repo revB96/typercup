@@ -29,8 +29,9 @@ function getAll() {
   var def = Q.defer();
   UserStats.find()
     .populate({
-      populate: { path: "username" },
-      populate: { path: "friendlyName" },
+      populate: { path: "username",
+                  path: "friendlyName"
+                },
     })
     .sort({ points: "desc" })
     .exec(function (err, stats) {

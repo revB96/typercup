@@ -44,18 +44,19 @@ function printRoundWithMatches(round) {
           }
 
           for (const [index, match] of Object.entries(schedule)) {
-            var t1g = "",
+            
+            getTicketsStats(match._id).then(stats => {
+              var t1g = "",
                 t2g = "",
                 t1w = 0,
                 t2w = 0,
                 drawn = 0,
                 ticketColor = "text-white bg-danger";
-
-            getTicketsStats(match._id).then(stats => {
+                
               t1w = stats.t1w;
               t2w = stats.t2w;
               drawn = stats.drawn;
-            })
+            
 
             for (const [index, userTicket] of Object.entries(userTickets)) {
               if (match._id == userTicket.schedule) {
@@ -119,6 +120,7 @@ function printRoundWithMatches(round) {
                             </div>  
                         </div>
                         `);
+           })
           }
         });
       });

@@ -76,7 +76,7 @@ function printRoundWithMatches(round) {
             if (hrs <= 9) hrs = "0" + hrs;
             if (mins < 10) mins = "0" + mins;
 
-            console.log(t2w)
+            console.log(stats.t2)
             console.log(stats.t1)
             console.log(stats.drawn)
 

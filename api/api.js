@@ -274,6 +274,7 @@ router.post('/ticket/add', function (req, res) {
 })
 
 router.get('/tickets/stats', function (req, res) {
+    console.log(req.query.scheduleId)
     Ticket.getTicketStats(req.query.scheduleId)
         .then(data => {
             res.json(data)

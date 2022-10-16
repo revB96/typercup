@@ -29,7 +29,6 @@ function getAll() {
   var def = Q.defer();
   UserStats.find()
     .populate({
-      path: "user",
       populate: { path: "username" },
       populate: { path: "friendlyName" },
     })

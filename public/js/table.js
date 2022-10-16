@@ -9,10 +9,10 @@ function listUserTable(){
             if(userStat.quizPoints != 0)
                 quizPoints = userStat.quizPoints
             if(userStat.user.friendlyName != undefined)
-                friendlyName=`<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                ${userStat.user.friendlyName}
-                                <span class="visually-hidden">unread messages</span>
-                               </span>`
+                friendlyName=`
+                <p class="text-muted">
+                    ${userStat.user.friendlyName}
+                </p>`
 
             var effectiveness = ( (userStat.correctScore + userStat.correctTeam) / result[0].tickets) * 100
             var effectiveness2 = (userStat.points / (result[0].tickets * 3)) * 100

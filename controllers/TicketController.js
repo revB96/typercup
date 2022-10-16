@@ -359,7 +359,7 @@ async function payForTicketsAfterMatch(scheduleId, t1g, t2g, winTeam) {
 }
 
 function getTicketStats(scheduleID){
-
+  var def = Q.defer();
   Ticket.find({schedule: scheduleID}, function (err, tickets) {
     if(err) def.reject(err);
     if(!!tickets){

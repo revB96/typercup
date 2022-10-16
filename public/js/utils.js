@@ -82,6 +82,20 @@ function getRound(state){
     })
 }
 
+function getTicketsStats(scheduleId){
+    return $.ajax({
+        url: `/api/tickets/stats?scheduleId=${scheduleId}`,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (result) {
+            return result;
+        },
+        fail: function (){
+            console.log("Nie udało się pobrać");
+        }
+    })
+}
+
 function getRoundSchedule(roundDate){
     return $.ajax({
         url: `/api/schedule/round?roundDate=${roundDate}`,

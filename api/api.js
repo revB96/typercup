@@ -273,6 +273,16 @@ router.post('/ticket/add', function (req, res) {
     
 })
 
+router.get('/tickets/stats', function (req, res) {
+    Ticket.getTicketStats(req.query.scheduleId)
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        });
+})
+
 router.get('/tickets', function (req, res) {
     if((!!req.query.userId)&(!!req.query.round))
         Ticket.getUserTicketsByRound(req.query.userId, req.query.round)

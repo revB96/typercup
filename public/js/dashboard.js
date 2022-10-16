@@ -46,7 +46,16 @@ function printRoundWithMatches(round) {
           for (const [index, match] of Object.entries(schedule)) {
             var t1g = "",
                 t2g = "",
+                t1w = 0,
+                t2w = 0,
+                drawn = 0,
                 ticketColor = "text-white bg-danger";
+
+            getTicketsStats(schedule._id).then(stats => {
+              t1w = stats.t1w;
+              t2w = stats.t2w;
+              drawn = stats.drawn;
+            })
 
             for (const [index, userTicket] of Object.entries(userTickets)) {
               if (match._id == userTicket.schedule) {
@@ -97,6 +106,13 @@ function printRoundWithMatches(round) {
                                     <input type="text" value="${t2g}" class="form-control" style="text-align: center;" name="${match.t2._id}" ${roundState}>
                                     </div>
                                 </div>
+                                <div class="row>
+                                <div class="progress">
+                                  <div class="progress-bar" role="progressbar" style="width: ${t1w}%" aria-valuenow="${t1w}" aria-valuemin="0" aria-valuemax="100"></div>
+                                  <div class="progress-bar bg-success" role="progressbar" style="width: ${drawn}%" aria-valuenow="${drawn}" aria-valuemin="0" aria-valuemax="100"></div>
+                                  <div class="progress-bar bg-info" role="progressbar" style="width: ${t2w}%" aria-valuenow="${t2w}" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                </div>
                                 </p>
                                 <p class="card-text"><small>Grupa ${match.group}</small></p>
                             </div>
@@ -106,9 +122,8 @@ function printRoundWithMatches(round) {
           }
         });
       });
+      });
     });
-    });
-
     if (roundState == "")
       $("#dashboard-submit-button")
         .html(`<div class="d-grid gap-2" style="padding: 1.5em;">

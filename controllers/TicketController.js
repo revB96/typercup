@@ -358,6 +358,30 @@ async function payForTicketsAfterMatch(scheduleId, t1g, t2g, winTeam) {
   });
 }
 
+function getTicketStats(scheduleID){
+
+  Ticket.find({schedule: scheduleID}, function (err, tickets) {
+    if(err) def.reject(err);
+    if(!!tickets){
+      var t1w = 0, t2w = 0, counter = 0, drawn = 0;
+      tickets.forEach(ticket =>{
+        if(ticket.t1g == ticket.t2g) drawn++;
+        if(ticket.t1g > ticket.t2g) t1w++;
+        if(ticket.t1g < ticket.t2g) t2w++;
+        counter++;
+      })
+
+      def.resolve({
+        t1: (t1w/counter)*100,
+        t2: (t2w/counter)*100,
+        drawn: (drawn/counter)*100,
+        counter: counter
+      })
+    }
+  });
+  return def.promise;
+}
+
 module.exports = {
   add,
   getUserTicketsByRound,
@@ -365,5 +389,6 @@ module.exports = {
   getAllUserTickets,
   getTicketsByRound,
   checkIfRoundIsOpen,
-  addRandomTickets
+  addRandomTickets,
+  getTicketStats
 };

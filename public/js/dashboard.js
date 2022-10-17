@@ -61,7 +61,7 @@ function printRoundWithMatches(round) {
               if(stats.drawn)  statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: ${stats.drawn}%" aria-valuenow="${stats.drawn}" aria-valuemin="0" aria-valuemax="100">REMIS</div>`
               statsDiv += `</div>`
             }else{
-              stats=`<p class="fw-lighter" style="color: white">(Zbyt mało głosów)</div>`
+              statsDiv=`<p class="fw-lighter" style="color: white">(Zbyt mało głosów)</div>`
             }
             for (const [index, userTicket] of Object.entries(userTickets)) {
               if (match._id == userTicket.schedule) {

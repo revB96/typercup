@@ -81,44 +81,45 @@ function printRoundWithMatches(round) {
             console.log("drawn: " +stats.drawn)
 
             $(`#dashboard-round-matches`).append(`
-                        <div class="col" style="margin-right: 0;">
-                            <div class="card ${ticketColor}">
-                            <div class="card-body">
-                                <p class="card-text"><small>${hrs}:${mins}</small></p>
-                                <h5 class="card-title" style="text-align: center;">
-                                <div class="row">
-                                    <div class="col">
-                                    <b>${match.t1.teamName}</b>
-                                    </div>
-                                    <div class="col-2">
-                                    </div>
-                                    <div class="col">
-                                    <b>${match.t2.teamName}</b>
-                                    </div>
-                                </div>
-                                </h5>
-                                <p class="card-text">
-                                  <div class="row">
-                                      <input type="text" class="form-control d-none" value="${match._id}" disabled/>
-                                      <input type="text" class="form-control d-none" value="${round[0].round}" disabled/>
-                                      <div class="col">
-                                        <input type="text" value="${t1g}" class="form-control" style="text-align: center;" name="${match.t1._id}" ${roundState}>
-                                      </div>
-                                      <div class="col-1">:
-                                      </div>
-                                      <div class="col">
-                                        <input type="text" value="${t2g}" class="form-control" style="text-align: center;" name="${match.t2._id}" ${roundState}>
-                                      </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="progress">
-                                      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                  </div>
-                                </p>
-                                <p class="card-text"><small>Grupa ${match.group}</small></p>
-                            </div> 
-                        </div>
+              <div class="col" style="margin-right: 0;">
+              <div class="card ${ticketColor}">
+                  <div class="card-body">
+                      <p class="card-text"><small>${hrs}:${mins}</small></p>
+                      <h5 class="card-title" style="text-align: center;">
+                          <div class="row">
+                          <div class="col">
+                          <b>${match.t1.teamName}</b>
+                          </div>
+                          <div class="col-2">
+                          </div>
+                          <div class="col">
+                          <b>${match.t2.teamName}</b>
+                          </div>
+                          </div>
+                      </h5>
+                      <p class="card-text">
+                      <div class="row">
+                          <input type="text" class="form-control d-none" value="${match._id}" disabled/>
+                          <input type="text" class="form-control d-none" value="${round[0].round}" disabled/>
+                          <div class="col">
+                              <input type="text" value="${t1g}" class="form-control" style="text-align: center;" name="${match.t1._id}" ${roundState}>
+                          </div>
+                          <div class="col-1">:
+                          </div>
+                          <div class="col">
+                              <input type="text" value="${t2g}" class="form-control" style="text-align: center;" name="${match.t2._id}" ${roundState}>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="progress">
+                          <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                      </div>
+                      </p>
+                      <p class="card-text"><small>Grupa ${match.group}</small></p>
+                  </div>
+              </div> 
+          </div>
                         `);
            })
           }

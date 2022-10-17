@@ -112,9 +112,9 @@ function printRoundWithMatches(round) {
                       </div>
                       <div class="row">
                         <div class="progress">
-                          <div class="progress-bar-striped" role="progressbar" style="width: ${stats.t1}%" aria-valuenow="${stats.t1}" aria-valuemin="0" aria-valuemax="100"></div>
-                          <div class="progress-bar-striped bg-info" role="progressbar" style="width: ${stats.drawn}%" aria-valuenow="${stats.drawn}" aria-valuemin="0" aria-valuemax="100"></div>
-                          <div class="progress-bar-striped bg-warning" role="progressbar" style="width: ${stats.t2}%" aria-valuenow="${stats.t2}" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div class="progress-bar-striped progress-bar-animated" role="progressbar" style="width: ${stats.t1}%" aria-valuenow="${stats.t1}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></div>
+                          <div class="progress-bar-striped bg-info progress-bar-animated" role="progressbar" style="width: ${stats.drawn}%" aria-valuenow="${stats.drawn}" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div class="progress-bar-striped bg-warning progress-bar-animated" role="progressbar" style="width: ${stats.t2}%" aria-valuenow="${stats.t2}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></div>
                         </div>
                       </div>
                       </p>

@@ -116,11 +116,11 @@ function printRoundWithMatches(round) {
                           </div>
                       </div>
                       <div class="row">
-                        <div class="progress">
+                        
                           ${t1stat}
                           ${drawnStat}
                           ${t2stat}
-                        </div>
+                        
                       </div>
                       </p>
                       <p class="card-text"><small>Grupa ${match.group}</small></p>

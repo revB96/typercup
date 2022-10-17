@@ -115,12 +115,10 @@ function printRoundWithMatches(round) {
                               <input type="text" value="${t2g}" class="form-control" style="text-align: center;" name="${match.t2._id}" ${roundState}>
                           </div>
                       </div>
-                      <div class="row" style=""padding: 10px">
-                        
+                      <div class="row" style="padding: 20px">                      
                           ${t1stat}
                           ${drawnStat}
                           ${t2stat}
-                        
                       </div>
                       </p>
                       <p class="card-text"><small>Grupa ${match.group}</small></p>

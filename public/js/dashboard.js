@@ -47,15 +47,20 @@ function printRoundWithMatches(round) {
             
             getTicketsStats(match._id).then(stats => {
               var t1g = "",
-                t2g = "",
-                t1w = 0,
-                t2w = 0,
-                drawn = 0,
-                ticketColor = "text-white bg-danger";
+                  t2g = "",
+                  t1stat="",
+                  t2stat="",
+                  drawnStat="",
+                  ticketColor = "text-white bg-danger";
 
-              t1w = stats.t1;
-              t2w = stats.t2;
-              drawn = stats.drawn;
+            if(stats.t1)  t1stat = `<div class="progress-bar-striped progress-bar-animated" role="progressbar" style="width: ${stats.t1}%" aria-valuenow="${stats.t1}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></div>`
+            if(stats.t2)  t2stat = `<div class="progress-bar-striped progress-bar-animated" role="progressbar" style="width: ${stats.t2}%" aria-valuenow="${stats.t2}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></div>`
+            if(stats.drawn)  drawnStat = `<div class="progress-bar-striped progress-bar-animated" role="progressbar" style="width: ${stats.drawn}%" aria-valuenow="${stats.drawn}" aria-valuemin="0" aria-valuemax="100"></div>`
+
+
+            t1w = stats.t1;
+            t2w = stats.t2;
+            drawn = stats.drawn;
             
             for (const [index, userTicket] of Object.entries(userTickets)) {
               if (match._id == userTicket.schedule) {
@@ -112,9 +117,9 @@ function printRoundWithMatches(round) {
                       </div>
                       <div class="row">
                         <div class="progress">
-                          <div class="progress-bar-striped progress-bar-animated" role="progressbar" style="width: ${stats.t1}%" aria-valuenow="${stats.t1}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></div>
-                          <div class="progress-bar-striped bg-info progress-bar-animated" role="progressbar" style="width: ${stats.drawn}%" aria-valuenow="${stats.drawn}" aria-valuemin="0" aria-valuemax="100"></div>
-                          <div class="progress-bar-striped bg-warning progress-bar-animated" role="progressbar" style="width: ${stats.t2}%" aria-valuenow="${stats.t2}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></div>
+                          ${t1stat}
+                          ${drawnStat}
+                          ${t2stat}
                         </div>
                       </div>
                       </p>

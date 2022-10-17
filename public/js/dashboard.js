@@ -115,7 +115,7 @@ function printRoundWithMatches(round) {
                               <input type="text" value="${t2g}" class="form-control" style="text-align: center;" name="${match.t2._id}" ${roundState}>
                           </div>
                       </div>
-                      <div class="row" style="padding: 20px">                      
+                      <div class="row" style="padding: 10px">                      
                           ${t1stat}
                           ${drawnStat}
                           ${t2stat}

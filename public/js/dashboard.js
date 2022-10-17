@@ -110,7 +110,7 @@ function printRoundWithMatches(round) {
                                         <input type="text" value="${t2g}" class="form-control" style="text-align: center;" name="${match.t2._id}" ${roundState}>
                                       </div>
                                   </div>
-                                  <div class="row>
+                                  <div class="row">
                                     <div class="progress">
                                       <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>

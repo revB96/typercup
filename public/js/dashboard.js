@@ -52,16 +52,14 @@ function printRoundWithMatches(round) {
                   t2stat="",
                   drawnStat="",
                   ticketColor = "text-white bg-danger";
-
-            if(stats.t1)  t1stat = `<div class="progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: ${stats.t1}%" aria-valuenow="${stats.t1}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></div>`
-            if(stats.t2)  t2stat = `<div class="progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: ${stats.t2}%" aria-valuenow="${stats.t2}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></div>`
-            if(stats.drawn)  drawnStat = `<div class="progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: ${stats.drawn}%" aria-valuenow="${stats.drawn}" aria-valuemin="0" aria-valuemax="100">REMIS</div>`
-
-
-            t1w = stats.t1;
-            t2w = stats.t2;
-            drawn = stats.drawn;
             
+            if(stats.counter > 3){
+              if(stats.t1)  t1stat = `<div class="progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: ${stats.t1}%" aria-valuenow="${stats.t1}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></div>`
+              if(stats.t2)  t2stat = `<div class="progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: ${stats.t2}%" aria-valuenow="${stats.t2}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></div>`
+              if(stats.drawn)  drawnStat = `<div class="progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: ${stats.drawn}%" aria-valuenow="${stats.drawn}" aria-valuemin="0" aria-valuemax="100">REMIS</div>`
+            }else{
+              drawnStat=`<p class="text-muted fw-lighter">(Zbyt mało głosów)</div>`
+            }
             for (const [index, userTicket] of Object.entries(userTickets)) {
               if (match._id == userTicket.schedule) {
                 if ((userTicket.t1g != null) & (userTicket.t2g != null)) {
@@ -80,10 +78,6 @@ function printRoundWithMatches(round) {
             var mins = timeMatch.getMinutes();
             if (hrs <= 9) hrs = "0" + hrs;
             if (mins < 10) mins = "0" + mins;
-
-            console.log("t2: " + stats.t2)
-            console.log("t1: " +stats.t1)
-            console.log("drawn: " +stats.drawn)
 
             $(`#dashboard-round-matches`).append(`
               <div class="col" style="margin-right: 0;">

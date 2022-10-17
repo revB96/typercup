@@ -88,8 +88,8 @@ function checkIfRoundIsOpen(userID){
   getUserTimezone(userID).then(timezone =>{
     
     var userTZ, offsetTZ;
-    if(timezone = "UK") {userTZ = "Europe/London"; offsetTZ = 1}
-    else {userTZ = "Europe/Warsaw"; offsetTZ = 2}
+    if(timezone = "UK") {userTZ = "Europe/London"; offsetTZ = 2}
+    else {userTZ = "Europe/Warsaw"; offsetTZ = 1}
     
     getRunningRound().then(runningRound => {
         if(!!runningRound){

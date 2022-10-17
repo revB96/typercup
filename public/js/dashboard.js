@@ -21,8 +21,8 @@ function printRoundWithMatches(round) {
           else
             timeoffset = 1;
 
-          console.log(closeTime.getHours());  
-          console.log(userTimezone);
+          //console.log(closeTime.getHours());  
+          //console.log(userTimezone);
 
           if(roundState != "disabled")  
             $(`#dashboard-round-display-name`).html(`${round[0].displayName}`);
@@ -76,9 +76,9 @@ function printRoundWithMatches(round) {
             if (hrs <= 9) hrs = "0" + hrs;
             if (mins < 10) mins = "0" + mins;
 
-            console.log(stats.t2)
-            console.log(stats.t1)
-            console.log(stats.drawn)
+            console.log("t2: " + stats.t2)
+            console.log("t1: " +stats.t1)
+            console.log("drawn: " +stats.drawn)
 
             $(`#dashboard-round-matches`).append(`
                         <div class="col" style="margin-right: 0;">

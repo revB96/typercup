@@ -87,9 +87,9 @@ function checkIfRoundIsOpen(userID){
   var def = Q.defer();
   getUserTimezone(userID).then(timezone =>{
     
-    var userTZ;
-    if(timezone = "UK") userTZ = "Europe/London"
-    else userTZ = "Europe/Warsaw"
+    var userTZ, offsetTZ;
+    if(timezone = "UK") {userTZ = "Europe/London"; offsetTZ = 1}
+    else {userTZ = "Europe/Warsaw"; offsetTZ = 2}
     
     getRunningRound().then(runningRound => {
         if(!!runningRound){
@@ -99,7 +99,7 @@ function checkIfRoundIsOpen(userID){
         
                 var timestamp = new Date(Date.now());
 
-                if(moment.tz(timestamp, userTZ).format() > moment.tz(matchDate.setHours(matchDate.getHours()-1), userTZ).format()){
+                if(moment.tz(timestamp, userTZ).format() > moment.tz(matchDate.setHours(matchDate.getHours()-offsetTZ), userTZ).format()){
                     def.resolve(false);
                 }else{ 
                     def.resolve(true);

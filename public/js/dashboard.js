@@ -59,7 +59,7 @@ function printRoundWithMatches(round) {
               if(stats.t1)  statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: ${stats.t1}%" aria-valuenow="${stats.t1}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></div>`
               if(stats.t2)  statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: ${stats.t2}%" aria-valuenow="${stats.t2}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></div>`
               if(stats.drawn)  statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: ${stats.drawn}%" aria-valuenow="${stats.drawn}" aria-valuemin="0" aria-valuemax="100">REMIS</div>`
-              statsDiv = `</div>`
+              statsDiv += `</div>`
             }else{
               stats=`<p class="fw-lighter" style="color: white">(Zbyt mało głosów)</div>`
             }

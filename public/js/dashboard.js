@@ -143,9 +143,8 @@ $(document).ready(function () {
   if (document.title == "Typer Cup | Dashboard") {
     checkIfRoundIsOpen(getUserId()).then((roundState) => {
       if (roundState == true) printRoundWithMatches(1);
-      else {
-        printRoundWithMatches(0);
-      }
+      else printRoundWithMatches(0);
+      
     });
     $("#add-ticket-form").submit(function (e) {
       e.preventDefault();

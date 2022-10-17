@@ -111,9 +111,11 @@ function printRoundWithMatches(round) {
                           </div>
                       </div>
                       <div class="row">
-                          <div class="progress">
-                          <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" style="width: ${stats.t1}%" aria-valuenow="${stats.t1}" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div class="progress-bar bg-success" role="progressbar" style="width: ${stats.drawn}%" aria-valuenow="${stats.drawn}" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div class="progress-bar bg-info" role="progressbar" style="width: ${stats.t2}%" aria-valuenow="${stats.t2}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
                       </div>
                       </p>
                       <p class="card-text"><small>Grupa ${match.group}</small></p>

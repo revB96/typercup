@@ -51,14 +51,17 @@ function printRoundWithMatches(round) {
                   t1stat="",
                   t2stat="",
                   drawnStat="",
+                  stats="",
                   ticketColor = "text-white bg-danger";
             
             if(stats.counter > 3){
-              if(stats.t1)  t1stat = `<div class="progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: ${stats.t1}%" aria-valuenow="${stats.t1}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></div>`
-              if(stats.t2)  t2stat = `<div class="progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: ${stats.t2}%" aria-valuenow="${stats.t2}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></div>`
-              if(stats.drawn)  drawnStat = `<div class="progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: ${stats.drawn}%" aria-valuenow="${stats.drawn}" aria-valuemin="0" aria-valuemax="100">REMIS</div>`
+              stats = `<div class="row" style="padding: 10px; margin-top: 10px;">`
+              if(stats.t1)  stats += `<div class="progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: ${stats.t1}%" aria-valuenow="${stats.t1}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></div>`
+              if(stats.t2)  stats += `<div class="progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: ${stats.t2}%" aria-valuenow="${stats.t2}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></div>`
+              if(stats.drawn)  stats += `<div class="progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: ${stats.drawn}%" aria-valuenow="${stats.drawn}" aria-valuemin="0" aria-valuemax="100">REMIS</div>`
+              stats = `</div>`
             }else{
-              drawnStat=`<p class="fw-lighter" style="color: white">(Zbyt mało głosów)</div>`
+              stats=`<p class="fw-lighter" style="color: white">(Zbyt mało głosów)</div>`
             }
             for (const [index, userTicket] of Object.entries(userTickets)) {
               if (match._id == userTicket.schedule) {
@@ -109,11 +112,7 @@ function printRoundWithMatches(round) {
                               <input type="text" value="${t2g}" class="form-control" style="text-align: center;" name="${match.t2._id}" ${roundState}>
                           </div>
                       </div>
-                      <div class="row" style="padding: 10px; margin-top: 10px;">                      
-                          ${t1stat}
-                          ${drawnStat}
-                          ${t2stat}
-                      </div>
+                      ${stats}
                       </p>
                       <p class="card-text"><small>Grupa ${match.group}</small></p>
                   </div>

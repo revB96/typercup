@@ -58,7 +58,7 @@ function printRoundWithMatches(round) {
               if(stats.t2)  t2stat = `<div class="progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: ${stats.t2}%" aria-valuenow="${stats.t2}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></div>`
               if(stats.drawn)  drawnStat = `<div class="progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: ${stats.drawn}%" aria-valuenow="${stats.drawn}" aria-valuemin="0" aria-valuemax="100">REMIS</div>`
             }else{
-              drawnStat=`<p class="text-muted fw-lighter">(Zbyt mało głosów)</div>`
+              drawnStat=`<p class="text-muted fw-lighter" style="color: white">(Zbyt mało głosów)</div>`
             }
             for (const [index, userTicket] of Object.entries(userTickets)) {
               if (match._id == userTicket.schedule) {

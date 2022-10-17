@@ -51,15 +51,15 @@ function printRoundWithMatches(round) {
                   t1stat="",
                   t2stat="",
                   drawnStat="",
-                  stats="",
+                  statsDiv="",
                   ticketColor = "text-white bg-danger";
             
-            if(stats.counter < 1){
-              stats = `<div class="row" style="padding: 10px; margin-top: 10px;">`
-              if(stats.t1)  stats += `<div class="progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: ${stats.t1}%" aria-valuenow="${stats.t1}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></div>`
-              if(stats.t2)  stats += `<div class="progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: ${stats.t2}%" aria-valuenow="${stats.t2}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></div>`
-              if(stats.drawn)  stats += `<div class="progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: ${stats.drawn}%" aria-valuenow="${stats.drawn}" aria-valuemin="0" aria-valuemax="100">REMIS</div>`
-              stats = `</div>`
+            if(stats.counter > 1){
+              statsDiv = `<div class="row" style="padding: 10px; margin-top: 10px;">`
+              if(stats.t1)  statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: ${stats.t1}%" aria-valuenow="${stats.t1}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></div>`
+              if(stats.t2)  statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: ${stats.t2}%" aria-valuenow="${stats.t2}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></div>`
+              if(stats.drawn)  statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: ${stats.drawn}%" aria-valuenow="${stats.drawn}" aria-valuemin="0" aria-valuemax="100">REMIS</div>`
+              statsDiv = `</div>`
             }else{
               stats=`<p class="fw-lighter" style="color: white">(Zbyt mało głosów)</div>`
             }
@@ -112,7 +112,7 @@ function printRoundWithMatches(round) {
                               <input type="text" value="${t2g}" class="form-control" style="text-align: center;" name="${match.t2._id}" ${roundState}>
                           </div>
                       </div>
-                      ${stats}
+                      ${statsDiv}
                       </p>
                       <p class="card-text"><small>Grupa ${match.group}</small></p>
                   </div>

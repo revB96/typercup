@@ -1,88 +1,106 @@
 function printRoundWithMatches(round) {
   const dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
-  if(round == 0){
+  if (round == 0) {
     var roundState = "Disabled";
-  }else{
+  } else {
     var roundState = "";
   }
 
   getRound("running").then((round) => {
-      $(`#dashboard-round-matches`).html("");
-      getRoundSchedule(round[0].roundDate).then((schedule) => {
-        getUserTickets(getUserId(), round[0].round).then((userTickets) => {
-          getUserTimezone(getUserId()).then((userTimezone) => {
-          
+    $(`#dashboard-round-matches`).html("");
+    getRoundSchedule(round[0].roundDate).then((schedule) => {
+      getUserTickets(getUserId(), round[0].round).then((userTickets) => {
+        getUserTimezone(getUserId()).then((userTimezone) => {
           var roundDate = new Date(round[0].roundDate);
-          var closeTime = new Date(schedule[0].matchDate)
+          var closeTime = new Date(schedule[0].matchDate);
           var timeoffset;
 
-          if (userTimezone.timezone == "UK")
-            timeoffset = 2
-          else
-            timeoffset = 1;
+          if (userTimezone.timezone == "UK") timeoffset = 2;
+          else timeoffset = 1;
 
-          //console.log(closeTime.getHours());  
+          //console.log(closeTime.getHours());
           //console.log(userTimezone);
 
-          if(roundState != "disabled")  
+          if (roundState != "disabled")
             $(`#dashboard-round-display-name`).html(`${round[0].displayName}`);
-          else $(`#dashboard-round-display-name`).html(`<div class="row" style="text-align: center;"><h3>Kolejka zamknięta</h3></div>`);
-          
-          var minutes = closeTime.getMinutes()
-      
-          if (minutes < 10)
-            minutes = "00"
-          if(roundState != "Disabled")
-            $(`#dashboard-round-date`).html(
-              `${roundDate.toLocaleDateString("pl-PL", dateOptions)}<br /> Godzina zamknięcia kolejki: ${closeTime.getHours()-timeoffset}:${minutes}`
+          else
+            $(`#dashboard-round-display-name`).html(
+              `<div class="row" style="text-align: center;"><h3>Kolejka zamknięta</h3></div>`
             );
-          else{
+
+          var minutes = closeTime.getMinutes();
+
+          if (minutes < 10) minutes = "00";
+          if (roundState != "Disabled")
             $(`#dashboard-round-date`).html(
-              `${roundDate.toLocaleDateString("pl-PL", dateOptions)}<br /> Kolejka została zamknięta o: ${closeTime.getHours()-timeoffset}:${minutes}`
+              `${roundDate.toLocaleDateString(
+                "pl-PL",
+                dateOptions
+              )}<br /> Godzina zamknięcia kolejki: ${
+                closeTime.getHours() - timeoffset
+              }:${minutes}`
             );
-            $(`#dashboard-message`).html(`<a href="/roundSummary"><button type="button" class="btn btn-primary">Sprawdź jak postawili inni</button></a>`);
+          else {
+            $(`#dashboard-round-date`).html(
+              `${roundDate.toLocaleDateString(
+                "pl-PL",
+                dateOptions
+              )}<br /> Kolejka została zamknięta o: ${
+                closeTime.getHours() - timeoffset
+              }:${minutes}`
+            );
+            $(`#dashboard-message`).html(
+              `<a href="/roundSummary"><button type="button" class="btn btn-primary">Sprawdź jak postawili inni</button></a>`
+            );
           }
 
           for (const [index, match] of Object.entries(schedule)) {
-            
-            getTicketsStats(match._id).then(stats => {
+            getTicketsStats(match._id).then((stats) => {
               var t1g = "",
-                  t2g = "",
-                  t1stat="",
-                  t2stat="",
-                  drawnStat="",
-                  statsDiv="",
-                  ticketColor = "text-white bg-danger";
-            
-            if(stats.counter > 3){
-              statsDiv = `<div class="row" style="padding: 10px; margin-top: 10px;">`
-              if(stats.t1)  statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: ${stats.t1}%" aria-valuenow="${stats.t1}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></div>`
-              if(stats.t2)  statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: ${stats.t2}%" aria-valuenow="${stats.t2}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></div>`
-              if(stats.drawn)  statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: ${stats.drawn}%" aria-valuenow="${stats.drawn}" aria-valuemin="0" aria-valuemax="100">REMIS</div>`
-              statsDiv += `</div>`
-            }else{
-              statsDiv=`<p class="fw-lighter" style="color: white">(Zbyt mało głosów)</div>`
-            }
-            for (const [index, userTicket] of Object.entries(userTickets)) {
-              if (match._id == userTicket.schedule) {
-                if ((userTicket.t1g != null) & (userTicket.t2g != null)) {
-                  t1g = userTicket.t1g;
-                  t2g = userTicket.t2g;
-                  ticketColor = "text-white bg-success";
+                t2g = "",
+                statsDiv = "",
+                ticketColor = "text-white bg-danger";
+
+              if (stats.counter > 3) {
+                statsDiv = `<div class="row" style="padding: 10px; margin-top: 10px;">`;
+                if (stats.t1)
+                  statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: ${
+                    stats.t1
+                  }%" aria-valuenow="${
+                    stats.t1
+                  }" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></div>`;
+                if (stats.t2)
+                  statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: ${
+                    stats.t2
+                  }%" aria-valuenow="${
+                    stats.t2
+                  }" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></div>`;
+                if (stats.drawn)
+                  statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: ${stats.drawn}%" aria-valuenow="${stats.drawn}" aria-valuemin="0" aria-valuemax="100">REMIS</div>`;
+                statsDiv += `</div>`;
+              } else {
+                statsDiv = `<p class="fw-lighter" style="color: white">(Zbyt mało głosów)</div>`;
+              }
+
+              for (const [index, userTicket] of Object.entries(userTickets)) {
+                if (match._id == userTicket.schedule) {
+                  if ((userTicket.t1g != null) & (userTicket.t2g != null)) {
+                    t1g = userTicket.t1g;
+                    t2g = userTicket.t2g;
+                    ticketColor = "text-white bg-success";
+                  }
                 }
               }
-            }
 
-            var timeMatch = new Date(match.matchDate);
-            var hrs = timeMatch.getHours();
-            if (userTimezone.timezone == "UK")
-              hrs = hrs - 1;
+              var timeMatch = new Date(match.matchDate);
+              var hrs = timeMatch.getHours();
+              if (userTimezone.timezone == "UK") hrs = hrs - 1;
 
-            var mins = timeMatch.getMinutes();
-            if (hrs <= 9) hrs = "0" + hrs;
-            if (mins < 10) mins = "0" + mins;
+              var mins = timeMatch.getMinutes();
+              if (hrs <= 9) hrs = "0" + hrs;
+              if (mins < 10) mins = "0" + mins;
 
-            $(`#dashboard-round-matches`).append(`
+              $(`#dashboard-round-matches`).append(`
               <div class="col" style="margin-right: 0;">
               <div class="card ${ticketColor}">
                   <div class="card-body">
@@ -113,60 +131,57 @@ function printRoundWithMatches(round) {
                           </div>
                       </div>
                       ${statsDiv}
-                      </p>
                       <p class="card-text"><small>Grupa ${match.group}</small></p>
                   </div>
               </div> 
           </div>
                         `);
-           })
+            });
           }
         });
       });
-      });
     });
-    if (roundState == "")
-      $("#dashboard-submit-button")
-        .html(`<div class="d-grid gap-2" style="padding: 1.5em;">
+  });
+  if (roundState == "")
+    $("#dashboard-submit-button")
+      .html(`<div class="d-grid gap-2" style="padding: 1.5em;">
                 <button type="submit" class="btn btn-primary">Dodaj</button>
                </div>`);
-        
 }
 
 $(document).ready(function () {
   $(`#dashboard-round-matches`).html("Brak aktywnych kolejek");
-  if(document.title == "Typer Cup | Dashboard"){
-  checkIfRoundIsOpen(getUserId()).then((roundState) => {
-     if (roundState == true)
-       printRoundWithMatches(1);
-     else{
-       printRoundWithMatches(0);
-     }
-   })
-  $("#add-ticket-form").submit(function (e) {
-    e.preventDefault();
-    var inputs = document.getElementsByTagName("input");
-    var lenght = inputs.length;
-    //console.log(inputs)
-    var tickets = `[`;
-    for (var i = 0; i < lenght; i += 4) {
-      tickets += JSON.stringify({
-        scheduleId: inputs[i].value,
-        round: inputs[i + 1].value,
-        t1g: inputs[i + 2].value,
-        t2g: inputs[i + 3].value,
-        userId: getUserId(),
-      });
-      if (i != lenght - 4) tickets += ",";
-    }
-    tickets += `]`;
-    $.ajax({
-      url: "/api/ticket/add",
-      type: "POST",
-      data: tickets,
-      contentType: "application/json",
-      success: () => {
-        $(".toast").html(`
+  if (document.title == "Typer Cup | Dashboard") {
+    checkIfRoundIsOpen(getUserId()).then((roundState) => {
+      if (roundState == true) printRoundWithMatches(1);
+      else {
+        printRoundWithMatches(0);
+      }
+    });
+    $("#add-ticket-form").submit(function (e) {
+      e.preventDefault();
+      var inputs = document.getElementsByTagName("input");
+      var lenght = inputs.length;
+      //console.log(inputs)
+      var tickets = `[`;
+      for (var i = 0; i < lenght; i += 4) {
+        tickets += JSON.stringify({
+          scheduleId: inputs[i].value,
+          round: inputs[i + 1].value,
+          t1g: inputs[i + 2].value,
+          t2g: inputs[i + 3].value,
+          userId: getUserId(),
+        });
+        if (i != lenght - 4) tickets += ",";
+      }
+      tickets += `]`;
+      $.ajax({
+        url: "/api/ticket/add",
+        type: "POST",
+        data: tickets,
+        contentType: "application/json",
+        success: () => {
+          $(".toast").html(`
                     <div class="toast-header">
                     <strong class="mr-auto">Typer Cup</strong>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -177,11 +192,11 @@ $(document).ready(function () {
                         Zapisano twoje typy
                     </div>
                 `);
-        $(".toast").toast("show");
-        printRoundWithMatches();
-      },
-      error: (xhr, status, error)=>{
-        $(".toast").html(`
+          $(".toast").toast("show");
+          printRoundWithMatches();
+        },
+        error: (xhr, status, error) => {
+          $(".toast").html(`
             <div class="toast-header">
             <strong class="mr-auto">Typer Cup</strong>
             <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -192,9 +207,9 @@ $(document).ready(function () {
               ${xhr.responseJSON}
             </div>
             `);
-      $(".toast").toast("show");
-      }
+          $(".toast").toast("show");
+        },
+      });
     });
-  });
   }
 });

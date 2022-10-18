@@ -7,7 +7,7 @@ async function restoreLocalfile2Mongo(fileName) {
     var def = Q.defer();
     const mongo_connector = new MongoDBDuplexConnector({
         connection: {
-            uri: `mongodb://localhost:2717`,
+            uri: `mongodb://localhost`,
             dbname: `${process.env.DB_NAME}`,
         },
     });
@@ -62,7 +62,6 @@ async function dumpMongo2Localfile(formData) {
     });
 
     for await (const { total, write } of transferer) {
-        console.log(transferer);
         console.log(`remaining bytes to write: ${total - write}`);
     }
     def.resolve(1)

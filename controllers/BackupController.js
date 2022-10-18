@@ -38,9 +38,9 @@ async function dumpMongo2Localfile(formData) {
     timestamp = dateFormat(timestamp, "yyyy-mm-dd_HH:MM");
     var path;
     if(formData.backupName == "")
-        path = `./backups/backup_${timestamp}.tar`
+        path = `/www/typer-cup.pl/backups/backup_${timestamp}.tar`
     else
-        path = `./backups/${formData.backupName}.tar`
+        path = `/www/typer-cup.pl/backups/${formData.backupName}.tar`
 
     console.log(path)
     const mongo_connector = new MongoDBDuplexConnector({
@@ -60,7 +60,7 @@ async function dumpMongo2Localfile(formData) {
         source: mongo_connector,
         targets: [localfile_connector],
     });
-
+    console.log(transferer);
     for await (const { total, write } of transferer) {
         console.log(`remaining bytes to write: ${total - write}`);
     }

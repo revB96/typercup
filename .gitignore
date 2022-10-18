@@ -43,6 +43,7 @@ node_modules/
 jspm_packages/
 backups/
 config/
+img/photos
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 

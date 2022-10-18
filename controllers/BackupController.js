@@ -8,10 +8,10 @@ async function restoreLocalfile2Mongo(fileName) {
     const mongo_connector = new MongoDBDuplexConnector({
         connection: {
             uri: `mongodb://localhost:2717`,
-            dbname: `${process.env.LOCALDB_NAME}`,
+            dbname: `${process.env.DB_NAME}`,
         },
     });
-
+    
     var path = `./backups/${fileName}`
 
     const localfile_connector = new LocalFileSystemDuplexConnector({
@@ -36,7 +36,8 @@ async function dumpMongo2Localfile(formData) {
     var def = Q.defer();
     var timestamp = Date.now();
     timestamp = dateFormat(timestamp, "yyyy-mm-dd_HH:MM");
-    var path
+    var path;
+    console.log(path)
     if(formData.backupName == "")
         path = `./backups/backup_${timestamp}.tar`
     else
@@ -45,7 +46,7 @@ async function dumpMongo2Localfile(formData) {
     const mongo_connector = new MongoDBDuplexConnector({
         connection: {
             uri: `mongodb://localhost:2717`,
-            dbname: `${process.env.LOCALDB_NAME}`,
+            dbname: `${process.env.DB_NAME}`,
         },
     });
 

@@ -2,6 +2,7 @@ const { MongoTransferer, MongoDBDuplexConnector, LocalFileSystemDuplexConnector 
 const dateFormat = require("dateformat");
 const fs = require('fs');
 const Q = require("q");
+const mongoose = require("mongoose");
 
 async function restoreLocalfile2Mongo(fileName) {
     var def = Q.defer();
@@ -13,7 +14,8 @@ async function restoreLocalfile2Mongo(fileName) {
         },
     });
 
-    const collections = await mongo_connector.listCollections().toArray();
+    const db = mongoose.connection.db;
+    const collections = await db.listCollections().toArray();
     console.log(collections);
     // collections
     //   .map((collection) => collection.name)

@@ -8,7 +8,7 @@ async function restoreLocalfile2Mongo(fileName) {
     const mongo_connector = new MongoDBDuplexConnector({
         connection: {
             uri: `mongodb://localhost`,
-            dbname: `${process.env.DB_NAME}`,
+            dbname: `Backup`,
         },
     });
 

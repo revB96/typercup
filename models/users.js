@@ -6,6 +6,7 @@ var userSchema = new mongoose.Schema({
     password: String,
     firstLogon: {type: Boolean, default: false},
     filledQuiz: {type: Boolean, default: false},
+    champion: {type: Boolean, default: false},
     timezone: {type: String},
     friendlyName: {type: String},
     role: String,

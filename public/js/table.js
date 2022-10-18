@@ -4,11 +4,13 @@ function listUserTable(){
             var counter = parseInt(index, 10) + 1;
             var yellowClass=""
             var quizPoints = "?"
+            var crown;
             if(counter === 1)
                 yellowClass = `class="bg-warning"`
             if(userStat.quizPoints != 0)
                 quizPoints = userStat.quizPoints
-           
+            
+            if(userStat.user.champion == true)  crown = `<img src="img/crown.svg" style="width: 12px; height: 12px"/>`
 
             var effectiveness = ( (userStat.correctScore + userStat.correctTeam) / result[0].tickets) * 100
             var effectiveness2 = (userStat.points / (result[0].tickets * 3)) * 100

@@ -5,12 +5,21 @@ const Q = require("q");
 
 async function restoreLocalfile2Mongo(fileName) {
     var def = Q.defer();
+
     const mongo_connector = new MongoDBDuplexConnector({
         connection: {
             uri: `mongodb://localhost`,
-            dbname: `Backup`,
+            dbname: `${process.env.DB_NAME}`,
         },
     });
+
+    const collections = await mongo_connector.listCollections().toArray();
+    console.log(collections);
+    // collections
+    //   .map((collection) => collection.name)
+    //   .forEach(async (collectionName) => {
+    //     mongo_connector.dropCollection(collectionName);
+    //   });
 
     var path = `./backups/${fileName}`
 

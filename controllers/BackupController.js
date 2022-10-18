@@ -20,10 +20,10 @@ async function restoreLocalfile2Mongo(fileName) {
             db.dropCollection(collectionName);
           });
     
-        res.sendStatus(200);
+        def.reject(200);
     } catch (e) {
         console.log(e);
-        res.sendStatus(500);
+        def.reject(500);
     }
 
     const mongo_connector = new MongoDBDuplexConnector({

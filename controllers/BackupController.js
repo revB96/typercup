@@ -60,8 +60,9 @@ async function dumpMongo2Localfile(formData) {
         source: mongo_connector,
         targets: [localfile_connector],
     });
-    console.log(transferer);
+
     for await (const { total, write } of transferer) {
+        console.log(transferer);
         console.log(`remaining bytes to write: ${total - write}`);
     }
     def.resolve(1)

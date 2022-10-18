@@ -45,7 +45,7 @@ async function dumpMongo2Localfile(formData) {
     console.log(path)
     const mongo_connector = new MongoDBDuplexConnector({
         connection: {
-            uri: `mongodb://localhost:2717`,
+            uri: `mongodb://localhost`,
             dbname: `${process.env.DB_NAME}`,
         },
     });

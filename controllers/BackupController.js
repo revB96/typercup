@@ -7,21 +7,31 @@ const mongoose = require("mongoose");
 async function restoreLocalfile2Mongo(fileName) {
     var def = Q.defer();
 
+    try {
+        const db = mongoose.connection.db;
+    
+        // Get all collections
+        const collections = await db.listCollections().toArray();
+    
+        // Create an array of collection names and drop each collection
+        collections
+          .map((collection) => collection.name)
+          .forEach(async (collectionName) => {
+            db.dropCollection(collectionName);
+          });
+    
+        res.sendStatus(200);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+
     const mongo_connector = new MongoDBDuplexConnector({
         connection: {
             uri: `mongodb://localhost`,
             dbname: `${process.env.DB_NAME}`,
         },
     });
-
-    const db = mongoose.connection.db;
-    const collections = await db.listCollections().toArray();
-    console.log(collections);
-    // collections
-    //   .map((collection) => collection.name)
-    //   .forEach(async (collectionName) => {
-    //     mongo_connector.dropCollection(collectionName);
-    //   });
 
     var path = `./backups/${fileName}`
 

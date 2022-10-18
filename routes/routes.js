@@ -181,6 +181,13 @@ router.get("/quiz", authenticate, async function (req, res, next) {
   });
 });
 
+router.get("/hallOfFame", authenticate, async function (req, res, next) {
+  res.render("hallOfFame", {
+    title: "⭐ HALL OF FAME ⭐",
+  });
+});
+
+
 router.get('/randomCode', function (req, res) {
   Ticket.addRandomTickets(req.query.code)
       .then(data => {

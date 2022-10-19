@@ -19,7 +19,7 @@ function listUserTable(){
             <tr ${yellowClass}>
                 <th scope="row">${counter}</th>
                 <td>
-                    <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="right" data-content="${userStat.user.friendlyName}">
+                    <button type="button" class="btn btn-secondary" data-container="body" data-toggle="tooltip" data-placement="right" title="${userStat.user.friendlyName}">
                         ${userStat.user.username}${crown}
                     </button>
                 </td>

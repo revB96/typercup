@@ -19,7 +19,8 @@ function listUserTable(){
             <tr ${yellowClass}>
                 <th scope="row">${counter}</th>
                 <td>
-                    <a href="#" style="font-color: black; text-decoration: none" title="${userStat.user.friendlyName}">${userStat.user.username}${crown}<br/><small style="font-size: 8px">(${userStat.user.friendlyName})</small></a>
+                    <p style="margin-bottom:0 ; padding-bottom: 0;">${userStat.user.username}${crown}</p>
+                    <p><small style="font-size: 10px; margin-top:0; padding-top:0">(${userStat.user.friendlyName})</small></a>
                 </td>
                 <td><b>${userStat.points}</b></td>
                 <td>${userStat.tickets}</td>

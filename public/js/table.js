@@ -19,9 +19,12 @@ function listUserTable(){
             <tr ${yellowClass}>
                 <th scope="row">${counter}</th>
                 <td>
-                    <button type="button" class="btn btn-secondary" data-container="body" data-toggle="tooltip" data-placement="right" title="${userStat.user.friendlyName}">
-                        ${userStat.user.username}${crown}
-                    </button>
+                    <a href="#" id="${userStat._id}" style="font-color: black; text-decoration: none" title="${userStat.user.friendlyName}">${userStat.user.username}${crown}</a>
+                    <script>
+                        tippy('#${userStat._id}', {
+                            content: 'My tooltip!',
+                        });
+                    </script>
                 </td>
                 <td><b>${userStat.points}</b></td>
                 <td>${userStat.tickets}</td>

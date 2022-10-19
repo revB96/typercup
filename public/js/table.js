@@ -20,7 +20,7 @@ function listUserTable(){
                 <th scope="row">${counter}</th>
                 <td>
                     <p style="margin-bottom:0 ; padding-bottom: 0;">${userStat.user.username}${crown}</p>
-                    <p><small style="font-size: 10px; margin-top:0; padding-top:0">(${userStat.user.friendlyName})</small></a>
+                    <p><small style="font-size: 10px; margin:0; padding:0">(${userStat.user.friendlyName})</small></a>
                 </td>
                 <td><b>${userStat.points}</b></td>
                 <td>${userStat.tickets}</td>

@@ -19,7 +19,9 @@ function listUserTable(){
             <tr ${yellowClass}>
                 <th scope="row">${counter}</th>
                 <td>
-                    <a href="#" style="font-color: black; text-decoration: none" title="${userStat.user.friendlyName}">${userStat.user.username}${crown}</a>
+                    <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="right" data-content="${userStat.user.friendlyName}">
+                        ${userStat.user.username}${crown}
+                    </button>
                 </td>
                 <td><b>${userStat.points}</b></td>
                 <td>${userStat.tickets}</td>
@@ -39,6 +41,7 @@ function listUserTable(){
 }
 
 $(document).ready(function () {
+    $('[data-toggle="popover"]').popover()
     if(document.title == "Typer Cup | Tabela"){
         listUserTable()
     }

@@ -163,10 +163,11 @@ function addRandomTickets(randomCode){
               Schedule.getRoundSchedule(runningRound.roundDate).then(schedule =>{
                 //console.log("Schedule: " + schedule)
                 schedule.forEach(match =>{
-                  var chance = new Chance();
+                  var chance1 = new Chance();
+                  var chance2 = new Chance();
                   var ticket = new Ticket({
-                    t1g: chance.weighted([0, 1, 2, 3, 4, 5, 6], [10, 10, 8, 4, 2, 1, 0.5]),
-                    t2g: chance.weighted([0, 1, 2, 3, 4, 5, 6], [10, 10, 8, 4, 2, 1, 0.5]),
+                    t1g: chance1.weighted([0, 1, 2, 3, 4, 5, 6], [10, 10, 8, 4, 2, 1, 0.5]),
+                    t2g: chance2.weighted([0, 1, 2, 3, 4, 5, 6], [10, 10, 8, 4, 2, 1, 0.5]),
                     round: userRandomCode.round,
                     schedule: match._id,
                     user: userRandomCode.user,

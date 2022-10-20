@@ -55,7 +55,7 @@ function printRoundWithMatches(round) {
           }
 
           for await (const [index, match] of Object.entries(schedule)) {
-            getTicketsStats(match._id).then((stats) => {
+            await getTicketsStats(match._id).then(async (stats) => {
               var t1g = "",
                   t2g = "",
                   statsDiv = "",
@@ -71,7 +71,7 @@ function printRoundWithMatches(round) {
                 statsDiv = `<p class="fw-lighter" style="color: white; margin: 0; padding: 0;">(Zbyt mało głosów)</div>`;
               }
 
-              for (const [index, userTicket] of Object.entries(userTickets)) {
+              for await (const [index, userTicket] of Object.entries(userTickets)) {
                 if (match._id == userTicket.schedule) {
                   if ((userTicket.t1g != null) & (userTicket.t2g != null)) {
                     t1g = userTicket.t1g;
@@ -89,7 +89,7 @@ function printRoundWithMatches(round) {
               if (hrs <= 9) hrs = "0" + hrs;
               if (mins < 10) mins = "0" + mins;
 
-              $(`#dashboard-round-matches`).append(`
+              await $(`#dashboard-round-matches`).append(`
               <div class="col" style="margin-right: 0;">
               <div class="card ${ticketColor}">
                   <div class="card-body">

@@ -39,7 +39,7 @@ function adminListTeams() {
                     <tr>
                         <th scope="row">${counter + 1}</th>
                         <td>${team.teamName}</td>
-                        <td>${team.shortcut}</td> 
+                        <td>${team.shortcut} | <span class="flag-icon flag-icon-${team.shortcut}"></span> </td> 
                         <td>${team.group}</td> 
                     </tr>
                 `);

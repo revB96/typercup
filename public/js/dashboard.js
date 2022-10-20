@@ -54,7 +54,7 @@ function printRoundWithMatches(round) {
             );
           }
 
-          for (const [index, match] of Object.entries(schedule)) {
+          for await (const [index, match] of Object.entries(schedule)) {
             getTicketsStats(match._id).then((stats) => {
               var t1g = "",
                   t2g = "",

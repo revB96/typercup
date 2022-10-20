@@ -9,7 +9,8 @@ const { getUserTimezone } = require("./UserController.js");
 const Schedule = require("./ScheduleController.js");
 const moment = require('moment-timezone');
 const nodemailer = require("nodemailer");
-const {sendNotificationToUser} = require("./UserNotificationController")
+const {sendNotificationToUser} = require("./UserNotificationController");
+const Chance = require('chance');
 
 let transporter = nodemailer.createTransport({
   host: "smtp.x999.mikr.dev",
@@ -162,10 +163,10 @@ function addRandomTickets(randomCode){
               Schedule.getRoundSchedule(runningRound.roundDate).then(schedule =>{
                 //console.log("Schedule: " + schedule)
                 schedule.forEach(match =>{
-                  //console.log("Match: " + match)
+                  var chance = new Chance();
                   var ticket = new Ticket({
-                    t1g: Math.floor(6/(Math.random() * 0 + 6)),
-                    t2g: Math.floor(6/(Math.random() * 0 + 6)),
+                    t1g: chance.weighted([0, 1, 2, 3, 4, 5, 6], [10, 10, 8, 4, 2, 1, 0.5]),
+                    t2g: chance.weighted([0, 1, 2, 3, 4, 5, 6], [10, 10, 8, 4, 2, 1, 0.5]),
                     round: userRandomCode.round,
                     schedule: match._id,
                     user: userRandomCode.user,

@@ -58,7 +58,7 @@ router.get('/schedule/round', function (req, res) {
 router.get('/schedule/knockout', function (req, res) {
     Round.getKnockoutSchedule(req.query.stage)
             .then(data => {
-                console.log(data)
+                //console.log(data)
                 res.json(data)
             })
             .catch(err => {
@@ -267,18 +267,18 @@ router.post('/ticket/add', function (req, res) {
             res.json(data)
         })
         .catch(err => {
-            console.log("error")
+            //console.log("error")
             res.status(409).json(err.message)
         });
     
 })
 
 router.get('/tickets/stats', function (req, res) {
-    console.log(req.query.scheduleId)
+    //console.log(req.query.scheduleId)
     Ticket.getTicketStats(req.query.scheduleId)
         .then(data => {
             res.json(data)
-            console.log(data)
+            //console.log(data)
         })
         .catch(err => {
             res.json(err)
@@ -351,10 +351,10 @@ router.post('/admin/backups/create', function (req, res) {
 })
 
 router.post('/admin/backups/restore', function (req, res) {
-    console.log(req.query.fileName)
+    //console.log(req.query.fileName)
     Backup.restoreLocalfile2Mongo(req.query.fileName)
         .then(data => {
-	    console.log(data);
+	    //console.log(data);
             res.json(data)
         })
         .catch(err => {

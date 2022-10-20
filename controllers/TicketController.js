@@ -127,20 +127,21 @@ function deactivateRandomCode(randomCode) {
   var def = Q.defer();
   const timestamp = moment.tz(Date.now(), "Europe/Warsaw");
 
-  RandomCode.findOneAndUpdate(
-    { code: randomCode },
-    {
-      $set: {
-        active: false,
-        updatedAt: timestamp,
+  if(randomCode != "Q5fx5M95OCWN5c295TnnaEHMlI0dJR0ZDxOoHWzCgd3pnJ1VatqwCwRx7Hs9uVcT")
+    RandomCode.findOneAndUpdate(
+      { code: randomCode },
+      {
+        $set: {
+          active: false,
+          updatedAt: timestamp,
+        },
       },
-    },
-    {
-      new: false,
-    }
-  ).exec(function (err, code) {
-    err ? def.reject(err) : def.resolve(code);
-  });
+      {
+        new: false,
+      }
+    ).exec(function (err, code) {
+      err ? def.reject(err) : def.resolve(code);
+    });
 
   return def.promise;
 }

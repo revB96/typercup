@@ -96,7 +96,7 @@ function getBackupsList(){
     const directoryPath = '/www/typer-cup.pl/backups';
     //passsing directoryPath and callback function
     fs.readdir(directoryPath, function (err, files) {
-        console.log(files)
+        //console.log(files)
         files.sort();
         if (err) {
             def.reject(err)

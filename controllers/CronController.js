@@ -10,7 +10,7 @@ cronManager.add('backupDatabase8','0 8 * * *', ()=>{Backup.dumpMongo2Localfile()
 cronManager.add('backupDatabase18','0 18 * * *', ()=>{Backup.dumpMongo2Localfile()}, {start: true, timeZone: "Europe/Warsaw"}) //Database backup every day at 18:00
 cronManager.add('backupDatabase23','59 23 * * *', ()=>{Backup.dumpMongo2Localfile()}, {start: true, timeZone: "Europe/Warsaw"}) //Database backup every day at 23:59
 
-cronManager.add('reminder','* * * * *', ()=>{
+cronManager.add('reminder','0 * * * *', ()=>{
     console.log("Trig reminder")
     User.checkReminder()
 }, {start: true, timeZone: "Europe/Warsaw"})

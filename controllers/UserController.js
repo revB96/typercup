@@ -2545,9 +2545,11 @@ function checkCloseRoundNotification() {
             .tz(matchDate.setHours(matchDate.getHours() - 1), "Europe/Warsaw")
             .format()
         ) {
+          console.log("1")
           def.resolve(true);
           sendCloseRoundNotification();
         } else {
+          console.log("2")
           def.resolve(false);
         }
       });

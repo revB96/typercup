@@ -18,7 +18,8 @@ cronManager.add('reminder','0 * * * *', ()=>{
 }, {start: true, timeZone: "Europe/Warsaw"})
 
 cronManager.add('closeRound14','* * * * *', function(){
-    User.checkCloseRoundNotification()
+    User.checkCloseRoundNotification();
+    console.log("Close Round")
 }, {start: true, timeZone: "Europe/Warsaw"})
 
 

@@ -2538,7 +2538,10 @@ function checkCloseRoundNotification() {
         var matchDate = new Date(firstMatch[0].matchDate);
 
         var timestamp = new Date(Date.now());
-
+        console.log("1.1: "+ moment.tz(timestamp, "Europe/Warsaw").format())
+        console.log("1.2" + moment
+          .tz(matchDate.setHours(matchDate.getHours() - 1), "Europe/Warsaw")
+          .format())
         if (
           moment.tz(timestamp, "Europe/Warsaw").format() >
           moment

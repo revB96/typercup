@@ -2565,7 +2565,7 @@ function checkReminder() {
       console.log(matchDate);
       console.log(timestamp);
       if (
-        (matchDate.getHours() - 1 == timestamp.getHours()) &
+        (matchDate.getHours() - 2 == timestamp.getHours()) &
         (matchDate.getDay() == timestamp.getDay()) &
         (matchDate.getMonth() == timestamp.getMonth())
       ) {

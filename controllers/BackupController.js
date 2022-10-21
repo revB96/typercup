@@ -58,7 +58,7 @@ async function dumpMongo2Localfile(formData) {
     var timestamp = Date.now();
     timestamp = dateFormat(timestamp, "yyyy-mm-dd_HH:MM");
     var path;
-    if(formData.backupName == "")
+    if(formData.backupName == "" || formData == "")
         path = `/www/typer-cup.pl/backups/backup_${timestamp}.tar`
     else
         path = `/www/typer-cup.pl/backups/${formData.backupName}.tar`

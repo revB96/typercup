@@ -187,24 +187,25 @@ function addRandomTickets(randomCode){
                     } else {
                       def.resolve("Dodano losowe typy. Za chwilę otrzymasz potwierdzenie email");
                       console.log("Dodano losowy typ ");
-                      sendNotificationToUser(
-                        userRandomCode.mailToNotifications, 
-                        "Wysłano losowe typy ✔", 
-                        "<p>Wysłałeś losowe typy na kolejkę</p><p>Jeżeli to nie ty, to daj znać na grupie messenger</p>",
-                        "")
-                        
-                      deactivateRandomCode(randomCode).then((err, deactivatedCode) =>{
-                        if(err) { 
-                          console.log("Bład przy dezaktywacji kodu jednorazowego: ")
-                          console.log(err)
-                        }else{
-                          console.log("Dezaktywowano kod");
-                        }
-                      })
+  
                       console.log("***");
                     }
                   });
 
+                })
+                sendNotificationToUser(
+                  userRandomCode.mailToNotifications, 
+                  "Wysłano losowe typy ✔", 
+                  "<p>Wysłałeś losowe typy na kolejkę</p><p>Jeżeli to nie ty, to daj znać na grupie messenger</p>",
+                  "")
+                  
+                deactivateRandomCode(randomCode).then((err, deactivatedCode) =>{
+                  if(err) { 
+                    console.log("Bład przy dezaktywacji kodu jednorazowego: ")
+                    console.log(err)
+                  }else{
+                    console.log("Dezaktywowano kod");
+                  }
                 })
               })
             }else{

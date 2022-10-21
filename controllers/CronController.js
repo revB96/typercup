@@ -13,13 +13,13 @@ cronManager.add('backupDatabase8','30 * * * *', ()=>{
 }, {start: true, timeZone: "Europe/Warsaw"}) //Database backup every day at 8:00
 
 cronManager.add('reminder','0 * * * *', ()=>{
-    console.log("Trig reminder")
+    //console.log("Trig reminder")
     User.checkReminder()
 }, {start: true, timeZone: "Europe/Warsaw"})
 
-cronManager.add('closeRound14','* * * * *', function(){
+cronManager.add('closeRound','0 * * * *', function(){
     User.checkCloseRoundNotification();
-    console.log("Close Round")
+    //console.log("Close Round")
 }, {start: true, timeZone: "Europe/Warsaw"})
 
 

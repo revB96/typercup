@@ -2542,7 +2542,7 @@ function checkCloseRoundNotification() {
         if (
           moment.tz(timestamp, "Europe/Warsaw").format() >
           moment
-            .tz(matchDate.setHours(matchDate.getHours() - 1), "Europe/Warsaw")
+            .tz(matchDate.setHours(matchDate.getHours() - 2), "Europe/Warsaw")
             .format()
         ) {
           def.resolve(true);

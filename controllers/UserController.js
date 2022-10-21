@@ -2535,19 +2535,11 @@ function checkCloseRoundNotification() {
   getRunningRound().then((runningRound) => {
     if (!!runningRound) {
       getFirstRoundMatch(runningRound.roundDate).then((firstMatch) => {
-        var matchDate = new Date(firstMatch[0].matchDate);
+        var timezoneTemplate = Date.now();
+        var timestamp = new Date(timezoneTemplate, "Europe/Warsaw".format());
+        var matchDate = new Date(moment.tz(firstMatch[0].matchDate, "Europe/Warsaw").format());
 
-        var timestamp = new Date(Date.now());
-        console.log("1.1: "+ moment.tz(timestamp, "Europe/Warsaw").format())
-        console.log("1.2" + moment
-          .tz(matchDate.setHours(matchDate.getHours() - 1), "Europe/Warsaw")
-          .format())
-        if (
-          moment.tz(timestamp, "Europe/Warsaw").format() >
-          moment
-            .tz(matchDate.setHours(matchDate.getHours() - 1), "Europe/Warsaw")
-            .format()
-        ) {
+        if ((timestamp.getHours() == matchDate.getHours()) && (timestamp.getMinutes()== matchDate.getMinutes()) ) {
           console.log("1")
           def.resolve(true);
           sendCloseRoundNotification();

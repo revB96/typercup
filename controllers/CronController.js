@@ -17,15 +17,10 @@ cronManager.add('reminder','0 * * * *', ()=>{
     User.checkReminder()
 }, {start: true, timeZone: "Europe/Warsaw"})
 
-cronManager.add('closeRound14','1 14 * * *', function(){
-    User.checkCloseRoundNotification().then(result =>{
-        if (result == false)
-            cronManager.add('closeRound17','1 17 * * *', function(){
-                if(result == false)
-                    cronManager.add('closeRound20','1 20 * * *', User.checkCloseRoundNotification(), {start: true, timeZone: "Europe/Warsaw"})
-            }, {start: true, timeZone: "Europe/Warsaw"})
-    })
+cronManager.add('closeRound14','* * * * *', function(){
+    User.checkCloseRoundNotification()
 }, {start: true, timeZone: "Europe/Warsaw"})
+
 
 var jobs = cronManager.listCrons();
 console.log(jobs)

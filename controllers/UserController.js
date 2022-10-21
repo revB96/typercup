@@ -2559,8 +2559,8 @@ function checkReminder() {
         moment.tz(firstMatch[0].matchDate, "Europe/Warsaw")
       );
       var timestamp = new Date(moment.tz(Date.now(), "Europe/Warsaw"));
-      console.log(matchDate);
-      console.log(timestamp);
+      //console.log(matchDate);
+      //console.log(timestamp);
       if (
         (matchDate.getHours() - 2 == timestamp.getHours()) &
         (matchDate.getMinutes() == timestamp.getMinutes()) &

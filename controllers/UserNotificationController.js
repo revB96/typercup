@@ -17,7 +17,7 @@ let transporter = nodemailer.createTransport({
     },
   });
 
-function sendNotificationToUser(receiver, subject, html_content, username){
+function sendNotificationToUser(receiver, subject, html_content, username, prehearder = ""){
     const nameCapitalized = username.charAt(0).toUpperCase() + username.slice(1)
 
     let html=`
@@ -461,7 +461,7 @@ function sendNotificationToUser(receiver, subject, html_content, username){
     <![endif]-->
     </head>
     <body>
-        <span class="preheader">Twoje konto jest już gotowe</span>
+        <span class="preheader">"${prehearder}"</span>
         <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
         <tr>
             <td align="center">

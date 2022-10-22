@@ -221,7 +221,7 @@ async function countFinishedRounds(){
     return def.promise;
 }
 
-
+countFinishedRounds()
 
 module.exports = {
     add,

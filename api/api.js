@@ -387,7 +387,7 @@ router.get('/round/last', function (req, res) {
 })
 
 router.get('/round/finished/count', function (req, res) {
-    Round.getPreviousRound()
+    Round.countFinishedRounds()
         .then(data => {
             res.json(data)
         })

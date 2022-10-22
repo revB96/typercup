@@ -1,6 +1,6 @@
 function printRoundSummaryAccordion(){
     $(`#round-summary-accordion`).html("")
-    checkIfRoundIsOpen().then((roundState) => {
+    checkIfRoundIsOpen(getUserId()).then((roundState) => {
         console.log(roundState)
         if(roundState == false)
         {
@@ -73,7 +73,6 @@ function printRoundSummaryAccordion(){
 
 $(document).ready(function () {
     if(document.title == "Typer Cup | Podsumowanie rundy"){
-        console.log("1")
         printRoundSummaryAccordion()
     }
 })

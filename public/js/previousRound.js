@@ -6,10 +6,11 @@ function printLastRoundNav(round) {
         lastRoundNumber = parseInt(lastRound),
         lastRound = "",
         nextRound = "";
-      var lastRound = `<li class="page-item"><a class="page-link" href="/previousRound?round=${
-        roundNumber - 1
-      }"><i class="bi bi-caret-left"></i></a></li>`;
-      var nextRound = `<li class="page-item"><a class="page-link" href="/previousRound?round=${
+      
+      if(roundNumber - 1 > 0)
+        var lastRound = `<li class="page-item"><a class="page-link" href="/previousRound?round=${roundNumber - 1}"><i class="bi bi-caret-left"></i></a></li>`;
+      if(roundNumber >= count)
+       var nextRound = `<li class="page-item"><a class="page-link" href="/previousRound?round=${
         roundNumber + 1
       }"><i class="bi bi-caret-right"></i></a></li>`;
       var dropdownItems = "";

@@ -73,6 +73,7 @@ function printRoundSummaryAccordion(){
 
 $(document).ready(function () {
     if(document.title == "Typer Cup | Podsumowanie rundy"){
+        console.log("1")
         printRoundSummaryAccordion()
     }
 })

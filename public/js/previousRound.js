@@ -13,7 +13,7 @@ function printLastRoundNav(round) {
         roundNumber + 1
       }"><i class="bi bi-caret-right"></i></a></li>`;
       var dropdownItems = "";
-
+      console.log(count)
       for (let i = 1; i <= count; i++) {
         dropdownItems =
           +`<a class="dropdown-item" href="/previousRound?round=${i}">Kolejka #${i}</a>`;

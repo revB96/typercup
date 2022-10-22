@@ -376,6 +376,17 @@ router.get('/user/table', function (req, res) {
 })
 
 router.get('/round/last', function (req, res) {
+    Round.countFinishedRounds()
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        });
+    
+})
+
+router.get('/round/finished/count', function (req, res) {
     Round.getPreviousRound()
         .then(data => {
             res.json(data)

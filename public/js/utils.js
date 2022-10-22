@@ -427,6 +427,21 @@ function getRandomCodes(){
     })
 }
 
+function getCountFinishedRound(){
+    return $.ajax({
+        url: `/api/round/finished/count`,
+        method: 'get',
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (result) {
+            return result;
+        },
+        fail: function (){
+            console.log("Nie udało się pobrać");
+        }
+    })
+}
+
 
 $(document).ready(function () {
     if(checkIfTokenExists() == 1){

@@ -1,5 +1,7 @@
   function printLastRoundNav(round){
        getRoundByStage(round).then(roundDetails =>{
+        getCountFinishedRound().then(count =>{
+            console.log(count)
            var lastRound = $("#last-round").val()
             
                 var roundNumber = parseInt(round), lastRoundNumber = parseInt(lastRound), lastRound ="", nextRound =""
@@ -11,7 +13,7 @@
                 $("#last-round-nav").html(`
                 ${lastRound}
                 <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-primary dropdown-toggle btn-lg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Kolejka ${round}
                     </button>
                     <ul class="dropdown-menu">
@@ -40,6 +42,8 @@
                 $(`#last-round-accordion`).append("Kolejka jeszcze się nie zakończyła")
             else
                 printLastRoundTickers(round)
+
+            })
         })
         
 }

@@ -206,8 +206,16 @@ function getPreviousRoundDetails(){
         })
 
     return def.promise;
-
 }
+
+async function countFinishedRounds(){
+    
+    const count = await Round.count({ state: 'finished' });
+    def.resolve(count)
+
+    return def.promise;
+}
+
 
 
 module.exports = {
@@ -218,5 +226,6 @@ module.exports = {
     getRoundByStage,
     getKnockoutSchedule,
     getPreviousRound,
-    getPreviousRoundDetails
+    getPreviousRoundDetails,
+    countFinishedRounds
 }

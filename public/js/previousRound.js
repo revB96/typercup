@@ -15,10 +15,10 @@ function printLastRoundNav(round){
                 $("#last-round-nav").html(`
                 ${lastRound}
                 <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle btn-lg" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-primary dropdown-toggle btn-lg previousRoundButton" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Kolejka ${round}
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div class="dropdown-menu previousRoundDropdown" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="/previousRound?round=1">Kolejka #1</a>
                         <a class="dropdown-item" href="/previousRound?round=2">Kolejka #2</a>
                         <a class="dropdown-item" href="/previousRound?round=3">Kolejka #3</a>

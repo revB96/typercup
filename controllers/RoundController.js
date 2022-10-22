@@ -210,9 +210,12 @@ function getPreviousRoundDetails(){
 
 async function countFinishedRounds(){
     
-    const count = await Round.count();
-    console. log(count)
-    def.resolve(count)
+    Round
+        .find()
+        .count()
+        .exec(function (err, round){
+            err ? def.reject(err) : def.resolve(round);
+        })
 
     return def.promise;
 }

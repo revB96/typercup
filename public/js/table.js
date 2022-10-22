@@ -5,6 +5,9 @@ function listUserTable(){
             var yellowClass=""
             var quizPoints = "?"
             var crown="";
+            var effectiveness=0;
+            var effectiveness2 = 0;
+
             if(counter === 1)
                 yellowClass = `class="bg-warning"`
             if(userStat.quizPoints != 0)
@@ -12,8 +15,10 @@ function listUserTable(){
             
             if(userStat.user.champion == true)  crown = `<img src="img/crown.svg" style="width: 24px; height: 24px"/>`
 
-            var effectiveness = ( (userStat.correctScore + userStat.correctTeam) / result[0].tickets) * 100
-            var effectiveness2 = (userStat.points / (result[0].tickets * 3)) * 100
+            if(!isNaN(effectiveness))
+                effectiveness = ( (userStat.correctScore + userStat.correctTeam) / result[0].tickets) * 100
+            if(!isNaN(effectiveness2))
+                effectiveness2 = (userStat.points / (result[0].tickets * 3)) * 100
 
             $("#users-stat-table").append(`
             <tr ${yellowClass}>

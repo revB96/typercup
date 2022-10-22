@@ -1,3 +1,13 @@
+ <script>
+  const button = document.querySelector('#button');
+  const tooltip = document.querySelector('#tooltip');
+
+  // Pass the button, the tooltip, and some options, and Popper will do the
+  // magic positioning for you:
+  Popper.createPopper(button, tooltip, {
+    placement: 'right',
+  });
+</script>
  <input id="last-round" type="text" class="form-control d-none" value="{{lastRound}}">
 <div class="row mt-4">
     <div class="col d-flex flex-row justify-content-center my-flex-container">

@@ -209,7 +209,7 @@ function getPreviousRoundDetails(){
 }
 
 async function countFinishedRounds(){
-    
+    var def = Q.defer();
     Round
         .find()
         .count()

@@ -214,7 +214,6 @@ async function countFinishedRounds(){
         .find({state:"finished"})
         .count()
         .exec(function (err, round){
-            console.log(round)
             err ? def.reject(err) : def.resolve(round);
         })
 

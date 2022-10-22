@@ -11,10 +11,10 @@
                 $("#last-round-nav").html(`
                 ${lastRound}
                 <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle btn-lg previousRoundButton" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Kolejka ${round}
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Kolejka ${round}
                     </button>
-                    <div class="dropdown-menu previousRoundDropdown" aria-labelledby="dropdownMenuButton">
+                    <ul class="dropdown-menu">
                         <a class="dropdown-item" href="/previousRound?round=1">Kolejka #1</a>
                         <a class="dropdown-item" href="/previousRound?round=2">Kolejka #2</a>
                         <a class="dropdown-item" href="/previousRound?round=3">Kolejka #3</a>
@@ -30,7 +30,7 @@
                         <a class="dropdown-item" href="/previousRound?round=13">Kolejka #13</a>
                         <a class="dropdown-item" href="/previousRound?round=14">Kolejka #14</a>
                         <a class="dropdown-item" href="/previousRound?round=15">Kolejka #15</a>
-                    </div>
+                    </ul>
                 </div>
                 ${nextRound}
                 `)

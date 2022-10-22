@@ -23,6 +23,7 @@ function listUserTable(){
                     <script>tippy('#tableButton-${userStat._id}', {
                         content: "${userStat.user.friendlyName}",
                         placement: 'right-start',
+                        theme: 'material',
                       });
                     </script>
                 </td>

@@ -17,6 +17,7 @@ function printLastRoundNav(round) {
       for (let i = 1; i <= count; i++) {
         dropdownItems =
           +`<a class="dropdown-item" href="/previousRound?round=${i}">Kolejka #${i}</a>`;
+          console.log(dropdownItems)
       }
       $("#last-round-nav").html(`
                 ${lastRound}

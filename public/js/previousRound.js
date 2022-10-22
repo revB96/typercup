@@ -11,26 +11,26 @@ function printLastRoundNav(round){
                 $("#last-round-nav").html(`
                 ${lastRound}
                 <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Kolejka ${round}
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/previousRound?round=1">Kolejka #1</a>
-                    <a class="dropdown-item" href="/previousRound?round=2">Kolejka #2</a>
-                    <a class="dropdown-item" href="/previousRound?round=3">Kolejka #3</a>
-                    <a class="dropdown-item" href="/previousRound?round=4">Kolejka #4</a>
-                    <a class="dropdown-item" href="/previousRound?round=5">Kolejka #5</a>
-                    <a class="dropdown-item" href="/previousRound?round=6">Kolejka #6</a>
-                    <a class="dropdown-item" href="/previousRound?round=7">Kolejka #7</a>
-                    <a class="dropdown-item" href="/previousRound?round=8">Kolejka #8</a>
-                    <a class="dropdown-item" href="/previousRound?round=9">Kolejka #9</a>
-                    <a class="dropdown-item" href="/previousRound?round=10">Kolejka #10</a>
-                    <a class="dropdown-item" href="/previousRound?round=11">Kolejka #11</a>
-                    <a class="dropdown-item" href="/previousRound?round=12">Kolejka #12</a>
-                    <a class="dropdown-item" href="/previousRound?round=13">Kolejka #13</a>
-                    <a class="dropdown-item" href="/previousRound?round=14">Kolejka #14</a>
-                    <a class="dropdown-item" href="/previousRound?round=15">Kolejka #15</a>
-                </div>
+                    <button class="btn btn-primary dropdown-toggle btn-lg" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Kolejka ${round}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/previousRound?round=1">Kolejka #1</a>
+                        <a class="dropdown-item" href="/previousRound?round=2">Kolejka #2</a>
+                        <a class="dropdown-item" href="/previousRound?round=3">Kolejka #3</a>
+                        <a class="dropdown-item" href="/previousRound?round=4">Kolejka #4</a>
+                        <a class="dropdown-item" href="/previousRound?round=5">Kolejka #5</a>
+                        <a class="dropdown-item" href="/previousRound?round=6">Kolejka #6</a>
+                        <a class="dropdown-item" href="/previousRound?round=7">Kolejka #7</a>
+                        <a class="dropdown-item" href="/previousRound?round=8">Kolejka #8</a>
+                        <a class="dropdown-item" href="/previousRound?round=9">Kolejka #9</a>
+                        <a class="dropdown-item" href="/previousRound?round=10">Kolejka #10</a>
+                        <a class="dropdown-item" href="/previousRound?round=11">Kolejka #11</a>
+                        <a class="dropdown-item" href="/previousRound?round=12">Kolejka #12</a>
+                        <a class="dropdown-item" href="/previousRound?round=13">Kolejka #13</a>
+                        <a class="dropdown-item" href="/previousRound?round=14">Kolejka #14</a>
+                        <a class="dropdown-item" href="/previousRound?round=15">Kolejka #15</a>
+                    </div>
                 </div>
                 ${nextRound}
                 `)

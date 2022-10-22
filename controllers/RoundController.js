@@ -195,7 +195,7 @@ async function getPreviousRound(){
         return round[0].round
 }
 
-async function getPreviousRoundDetails(){
+function getPreviousRoundDetails(){
     var def = Q.defer();
     Round
         .find()

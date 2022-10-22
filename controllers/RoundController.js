@@ -211,7 +211,7 @@ function getPreviousRoundDetails(){
 async function countFinishedRounds(){
     var def = Q.defer();
     Round
-        .find()
+        .find({state:"finished"})
         .count()
         .exec(function (err, round){
             console.log(round)

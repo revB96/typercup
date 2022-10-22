@@ -210,7 +210,7 @@ function getPreviousRoundDetails(){
 
 async function countFinishedRounds(){
     
-    const count = await Round.count({ state: 'finished' });
+    const count = await Round.count();
     def.resolve(count)
 
     return def.promise;

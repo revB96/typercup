@@ -1,3 +1,7 @@
+$(function () {
+    $('[data-toggle="popover"]').popover()
+  })
+  
 function printLastRoundNav(round){
        getRoundByStage(round).then(roundDetails =>{
            var lastRound = $("#last-round").val()

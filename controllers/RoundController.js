@@ -211,6 +211,7 @@ function getPreviousRoundDetails(){
 async function countFinishedRounds(){
     
     const count = await Round.count();
+    console. log(count)
     def.resolve(count)
 
     return def.promise;

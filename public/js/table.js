@@ -15,9 +15,9 @@ function listUserTable(){
             
             if(userStat.user.champion == true)  crown = `<img src="img/crown.svg" style="width: 24px; height: 24px"/>`
 
-            if((isNaN(userStat.correctScore) && isNaN(userStat.correctTeam) && isNaN(result[0].tickets)) == false)
+            if(isNaN(((userStat.correctScore + userStat.correctTeam) / result[0].tickets) * 100) == false)
                 effectiveness = ( (userStat.correctScore + userStat.correctTeam) / result[0].tickets) * 100
-            if((isNaN(userStat.points) && isNaN(result[0].tickets)) == false)
+            if(isNaN((userStat.points / (result[0].tickets * 3)) * 100) == false)
                 effectiveness2 = (userStat.points / (result[0].tickets * 3)) * 100
 
             $("#users-stat-table").append(`

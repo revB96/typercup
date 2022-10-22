@@ -19,8 +19,12 @@ function listUserTable(){
             <tr ${yellowClass}>
                 <th scope="row">${counter}</th>
                 <td>
-                    <p style="margin-bottom:0 ; padding-bottom: 0;">${userStat.user.username}${crown}</p>
-                    <p style="margin:0; padding:0; font-size: 9px;">(${userStat.user.friendlyName})</p>
+                    <button id="tableButton-${userStat._id}">${userStat.user.username}${crown}</button>
+                    <script>tippy('#tableButton-${userStat._id}', {
+                        content: "${userStat.user.friendlyName}",
+                        placement: 'right-start',
+                      });
+                    </script>
                 </td>
                 <td><b>${userStat.points}</b></td>
                 <td>${userStat.tickets}</td>

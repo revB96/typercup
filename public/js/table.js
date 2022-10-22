@@ -19,7 +19,7 @@ function listUserTable(){
             <tr ${yellowClass}>
                 <th scope="row">${counter}</th>
                 <td>
-                    <button style="border-style: none; opacity: 0.3" id="tableButton-${userStat._id}">${userStat.user.username}${crown}</button>
+                    <button style="border-style: none; background-color: transparent;" id="tableButton-${userStat._id}">${userStat.user.username}${crown}</button>
                     <script>tippy('#tableButton-${userStat._id}', {
                         content: "${userStat.user.friendlyName}",
                         placement: 'right-start',

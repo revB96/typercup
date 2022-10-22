@@ -1,8 +1,4 @@
-$(function () {
-    $('[data-toggle="popover"]').popover()
-  })
-  
-function printLastRoundNav(round){
+  function printLastRoundNav(round){
        getRoundByStage(round).then(roundDetails =>{
            var lastRound = $("#last-round").val()
             
@@ -153,6 +149,9 @@ function getQueryParams(qs) {
 
 $(document).ready(function () {
     if(document.title == "Typer Cup | Poprzednie kolejki"){
+        tippy('#myButton', {
+            content: "I'm a Tippy tooltip!",
+          });
         var query = getQueryParams(document.location.search);
         console.log(query)
         printLastRoundNav(query.round)

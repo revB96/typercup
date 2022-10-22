@@ -58,17 +58,12 @@ async function dumpMongo2Localfile(formData) {
     var timestamp = Date.now();
     timestamp = dateFormat(timestamp, "yyyy-mm-dd_HH:MM");
     var path;
-    console.log(formData.backupName)
-    if(formData.backupName == ""){
-        path = `/www/typer-cup.pl/backups/backup_${timestamp}.tar`
-        console.log("1")
-    }
-    else{
-        console.log("1")
-        path = `/www/typer-cup.pl/backups/${formData.backupName}.tar`
-    }
 
-    console.log(path)
+    if(!!formData.backupName)
+        path = `/www/typer-cup.pl/backups/${formData.backupName}.tar`
+    else
+        path = `/www/typer-cup.pl/backups/backup_${timestamp}.tar`
+
     const mongo_connector = new MongoDBDuplexConnector({
         connection: {
             uri: `mongodb://localhost`,

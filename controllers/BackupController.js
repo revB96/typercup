@@ -56,25 +56,6 @@ async function restoreLocalfile2Mongo(fileName) {
 async function restoreToBackupDatabase(fileName) {
     var def = Q.defer();
 
-    try {
-        const db = mongoose.connection.db;
-    
-        // Get all collections
-        const collections = await db.listCollections().toArray();
-    
-        // Create an array of collection names and drop each collection
-        collections
-          .map((collection) => collection.name)
-          .forEach(async (collectionName) => {
-            db.dropCollection(collectionName);
-          });
-    
-        def.reject(200);
-    } catch (e) {
-        console.log(e);
-        def.reject(500);
-    }
-
     const mongo_connector = new MongoDBDuplexConnector({
         connection: {
             uri: `mongodb://localhost`,

@@ -56,12 +56,12 @@ async function restoreLocalfile2Mongo(fileName) {
 async function restoreToBackupDatabase(fileName) {
     var def = Q.defer();
 
-    console.log(fileName)
+    fileName.replace(" ","");
 
     const mongo_connector = new MongoDBDuplexConnector({
         connection: {
             uri: `mongodb://localhost`,
-            dbname: "Backup2",
+            dbname: fileName.slice(0,-4),
         },
     });
 

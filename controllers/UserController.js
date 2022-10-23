@@ -1471,7 +1471,7 @@ function sendReminder(roundDate) {
                   var nameCapitalized =
                     user.username.charAt(0).toUpperCase() +
                     user.username.slice(1);
-                  if(randomCode.code == undefined)
+                  if(randomCode.code == null)
                     randomCode.code="brak";
 
                   var html = `

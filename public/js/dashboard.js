@@ -83,7 +83,7 @@ function printRoundWithMatches(round) {
 
               var timeMatch = new Date(match.matchDate);
               var hrs = timeMatch.getHours();
-              if (userTimezone.timezone == "UK") hrs = hrs - 1;
+              //if (userTimezone.timezone == "UK") hrs = hrs - 1;
 
               var mins = timeMatch.getMinutes();
               if (hrs <= 9) hrs = "0" + hrs;

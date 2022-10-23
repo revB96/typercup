@@ -94,7 +94,7 @@ function printRoundWithMatches(round) {
               <div class="card ${ticketColor}">
                   <div class="card-body">
                       <p class="card-text">
-                        <p>Grupa ${match.group}</p><br />
+                        <b>Grupa ${match.group}</b><br />
                         <small>${hrs}:${mins}</small>
                       </p>
                       <h5 class="card-title" style="text-align: center;">

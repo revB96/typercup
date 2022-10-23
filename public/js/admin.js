@@ -348,7 +348,7 @@ function adminPrintBackups(){
         <td>${backup}</td>
         <td>
           <button type="button" class="btn btn-primary" onClick="restoreDatabase('${backup}')">Przywróć</button>
-          <button type="button" class="btn btn-primary" onClick="restoreDatabaseToBackup('${backup}')">Przywróć</button>
+          <button type="button" class="btn btn-primary" onClick="restoreDatabaseToBackup('${backup}')">Nowa baza</button>
         </td>
       </tr>
       `)

@@ -15,7 +15,7 @@ function printRoundWithMatches(round) {
           var closeTime = new Date(schedule[0].matchDate);
           var timeoffset;
 
-          if (userTimezone.timezone == "UK") timeoffset = 2;
+          if (userTimezone.timezone == "UK") timeoffset = 1;
           else timeoffset = 1;
 
           //console.log(closeTime.getHours());

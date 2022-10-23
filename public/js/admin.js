@@ -320,6 +320,23 @@ function restoreDatabase(fileName){
   })
 }
 
+function restoreDatabaseToBackup(fileName){
+  $.post(`/api/admin/backups/restoreToBackup?fileName=${fileName}`).done(() => {
+    $(".toast").html(`
+                <div class="toast-header">
+                <strong class="mr-auto">Panel administratora</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="toast-body">
+                    Stworzono nową bazę z kopią: ${fileName}
+                </div>
+            `);
+  $(".toast").toast("show");
+  })
+}
+
 function adminPrintBackups(){
   $(`#admin-backups-table`).html("")
   getBackups().then(async (result) =>{
@@ -329,7 +346,10 @@ function adminPrintBackups(){
       <tr>
         <th scope="row">${counter}</th>
         <td>${backup}</td>
-        <td><button type="button" class="btn btn-primary" onClick="restoreDatabase('${backup}')">Przywróć</button></td>
+        <td>
+          <button type="button" class="btn btn-primary" onClick="restoreDatabase('${backup}')">Przywróć</button>
+          <button type="button" class="btn btn-primary" onClick="restoreDatabaseToBackup('${backup}')">Przywróć</button>
+        </td>
       </tr>
       `)
       counter ++

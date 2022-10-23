@@ -364,6 +364,20 @@ router.post('/admin/backups/restore', function (req, res) {
     
 })
 
+router.post('/admin/backups/restoreToBackup', function (req, res) {
+    //console.log(req.query.fileName)
+    Backup.restoreToBackupDatabase(req.query.fileName)
+        .then(data => {
+	    //console.log(data);
+            res.json(data)
+        })
+        .catch(err => {
+	    //console.log(err);
+            res.json(err)
+        });
+    
+})
+
 router.get('/user/table', function (req, res) {
     UserStats.getAll(req.body)
         .then(data => {

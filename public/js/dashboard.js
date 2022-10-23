@@ -120,6 +120,7 @@ function printRoundWithMatches(round) {
                           </div>
                       </div>
                       ${statsDiv}
+                      <p>Oddano ${stats.counter} typów</p>
                       <p class="card-text"><small>Grupa ${match.group}</small></p>
                   </div>
               </div> 

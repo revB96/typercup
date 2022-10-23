@@ -56,10 +56,12 @@ async function restoreLocalfile2Mongo(fileName) {
 async function restoreToBackupDatabase(fileName) {
     var def = Q.defer();
 
+    console.log(fileName)
+
     const mongo_connector = new MongoDBDuplexConnector({
         connection: {
             uri: `mongodb://localhost`,
-            dbname: fileName,
+            dbname: "Backup2",
         },
     });
 

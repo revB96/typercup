@@ -93,7 +93,10 @@ function printRoundWithMatches(round) {
               <div class="col" style="margin-right: 0;">
               <div class="card ${ticketColor}">
                   <div class="card-body">
-                      <p class="card-text"><small>${hrs}:${mins}</small></p>
+                      <p class="card-text">
+                        <small>Grupa ${match.group}</small>
+                        <small>${hrs}:${mins}</small>
+                      </p>
                       <h5 class="card-title" style="text-align: center;">
                           <div class="row">
                           <div class="col">
@@ -119,8 +122,7 @@ function printRoundWithMatches(round) {
                               <input type="text" value="${t2g}" class="form-control" style="text-align: center;" name="${match.t2._id}" ${roundState}>
                           </div>
                       </div>
-                      ${statsDiv}
-                      <p class="card-text"><small>Grupa ${match.group}</small></p>
+                      <p class="card-text">${statsDiv}</p>
                   </div>
               </div> 
           </div>

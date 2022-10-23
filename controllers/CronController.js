@@ -8,11 +8,10 @@ var CronJobManager = require('cron-job-manager')
 cronManager = new CronJobManager()
 cronManager.add('backupDatabase8','30 * * * *', ()=>{
     console.log("Backup Database...")
-    const timestamp = Date.now();
     Backup.dumpMongo2Localfile("");
 }, {start: true, timeZone: "Europe/Warsaw"}) //Database backup every day at 8:00
 
-cronManager.add('reminder','0 * * * *', ()=>{
+cronManager.add('reminder','* * * * *', ()=>{
     //console.log("Trig reminder")
     User.checkReminder()
 }, {start: true, timeZone: "Europe/Warsaw"})

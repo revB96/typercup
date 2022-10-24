@@ -243,13 +243,148 @@ function print14schedule() {
         }
       }
     });
-  }
+}
+
+function print12schedule() {
+    get12Schedule().then(async (schedule) => {
+      var counter = 0;
+      for await (const [index, match] of Object.entries(schedule)) {
+          counter++;
+        const dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
+        var date = new Date(match.matchDate);
+        var formatDate = date.toLocaleDateString("en-GB", dateOptions);
+        var hrs = date.getHours();
+        var mins = date.getMinutes();
+        
+        if (hrs <= 9) hrs = "0" + hrs;
+        if (mins < 10) mins = "0" + mins;
+  
+        $("#12-stage-table").append(`
+                  
+                      <div class="card text-white bg-success mb-3">
+                          <div class="card-header">${formatDate}</div>
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col" style="text-align:center">
+                                      <b>${match.t1.teamName}</b>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col" style="text-align:center">
+                                      <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span><small>${hrs}:${mins}</small><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col" style="text-align:center">
+                                      <b>${match.t2.teamName}</b>
+                                  </div>
+                              </div>
+                          </div>
+                          </div>
+                      </div>
+             
+              `);
+      }
+  
+      if (counter < 2) {
+        for (let i = counter; i < 2; i++) {
+          $("#12-stage-table").append(`
+                 
+                      <div class="card text-white bg-success mb-3">
+                          <div class="card-header">??:??</div>
+                          <div class="card-body">
+                          <div class="row">
+                              <div class="col" style="text-align:center">
+                              <b>??</b>
+                              </div>
+                              <div class="col" style="text-align:center">
+                              </div>
+                              <div class="col" style="text-align:center">
+                              <b>??</b>
+                              </div>
+                          </div>
+                          </div>
+                      </div>
+                
+              `);
+        }
+      }
+    });
+}
+
+function printFinal() {
+    getFinalSchedule().then(async (schedule) => {
+      var counter = 0;
+      for await (const [index, match] of Object.entries(schedule)) {
+          counter++;
+        const dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
+        var date = new Date(match.matchDate);
+        var formatDate = date.toLocaleDateString("en-GB", dateOptions);
+        var hrs = date.getHours();
+        var mins = date.getMinutes();
+        
+        if (hrs <= 9) hrs = "0" + hrs;
+        if (mins < 10) mins = "0" + mins;
+  
+        $("#final-stage-table").append(`
+                  
+                      <div class="card text-white bg-warning mb-3">
+                          <div class="card-header">${formatDate}</div>
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col" style="text-align:center">
+                                      <b>${match.t1.teamName}</b>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col" style="text-align:center">
+                                      <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span><small>${hrs}:${mins}</small><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col" style="text-align:center">
+                                      <b>${match.t2.teamName}</b>
+                                  </div>
+                              </div>
+                          </div>
+                          </div>
+                      </div>
+             
+              `);
+      }
+  
+      if (counter < 1) {
+        for (let i = counter; i < 1; i++) {
+          $("#12-stage-table").append(`
+                 
+                      <div class="card text-white bg-warning mb-3">
+                          <div class="card-header">??:??</div>
+                          <div class="card-body">
+                          <div class="row">
+                              <div class="col" style="text-align:center">
+                              <b>??</b>
+                              </div>
+                              <div class="col" style="text-align:center">
+                              </div>
+                              <div class="col" style="text-align:center">
+                              <b>??</b>
+                              </div>
+                          </div>
+                          </div>
+                      </div>
+                
+              `);
+        }
+      }
+    });
+}
 
 $(document).ready(function () {
     if(document.title == "Typer Cup | Euro 2021"){
         selectGroup()
         print18schedule()
         print14schedule()
+        print12schedule()
     }
 })
 

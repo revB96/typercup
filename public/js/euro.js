@@ -385,6 +385,7 @@ $(document).ready(function () {
         print18schedule()
         print14schedule()
         print12schedule()
+        printFinal()
     }
 })
 

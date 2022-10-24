@@ -213,7 +213,6 @@ function print14schedule() {
       if (mins < 10) mins = "0" + mins;
 
       $("#14-stage-table").append(`
-                  
                       <div class="card text-white bg-secondary mb-3">
                           <div class="card-header">${formatDate}</div>
                           <div class="card-body">
@@ -221,21 +220,16 @@ function print14schedule() {
                                   <div class="col" style="text-align:center">
                                       <b>${match.t1.teamName}</b>
                                   </div>
-                              </div>
-                              <div class="row">
                                   <div class="col" style="text-align:center">
                                       <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span><small>${hrs}:${mins}</small><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span>
                                   </div>
-                              </div>
-                              <div class="row">
                                   <div class="col" style="text-align:center">
                                       <b>${match.t2.teamName}</b>
                                   </div>
                               </div>
                           </div>
                           </div>
-                      </div>
-             
+                      </div>          
               `);
     }
 
@@ -340,28 +334,23 @@ function printFinal() {
       if (mins < 10) mins = "0" + mins;
 
       $("#final-stage-table").append(`
-                  
                       <div class="card text-white bg-warning mb-3">
                           <div class="card-header">${formatDate}</div>
                           <div class="card-body">
-                             
+                             <div class="row">
                                   <div class="col" style="text-align:center">
                                       <b>${match.t1.teamName}</b>
-                                  </div>
-                              
+                                  </div>                             
                                   <div class="col" style="text-align:center">
                                       <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span><small>${hrs}:${mins}</small><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span>
                                   </div>
-                              
-                             
                                   <div class="col" style="text-align:center">
                                       <b>${match.t2.teamName}</b>
                                   </div>
-                              
+                              </div>
                           </div>
                           </div>
-                      </div>
-             
+                      </div>   
               `);
     }
 

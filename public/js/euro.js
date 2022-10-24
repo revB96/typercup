@@ -115,11 +115,11 @@ function print18schedule(){
     var counter = 0;
     get18Schedule().then(async schedule =>{
         for await (const [index, match] of Object.entries(schedule)) {
-            console.log(match)
             couter++;
             const dateOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
             var date = new Date(match.matchDate)
             var formatDate = date.toLocaleDateString('en-GB', dateOptions)
+            console.log(match.t1)
             $("#18-stage-table").append(`
                 <div class="col">
                     <div class="card text-white bg-primary mb-3">
@@ -142,8 +142,8 @@ function print18schedule(){
         }
     })
 
-    if(counter <= 7){
-        for(let i=counter; i<=8; i++){
+    if(counter < 8){
+        for(let i=counter; i<=7; i++){
             $("#18-stage-table").append(`
                 <div class="col">
                     <div class="card text-white bg-primary mb-3">

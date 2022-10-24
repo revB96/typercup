@@ -127,12 +127,12 @@ function print18schedule() {
                         <div class="card-body">
                         <div class="row">
                             <div class="col">
-                            <b>${match.t1}</b>
+                            <b>${match.t1.teamName}</b>
                             </div>
                             <div class="col-2">
                             </div>
                             <div class="col">
-                            <b>${match.t2}</b>
+                            <b>${match.t2.teamName}</b>
                             </div>
                         </div>
                         </div>

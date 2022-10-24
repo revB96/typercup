@@ -227,12 +227,12 @@ function print14schedule() {
                           <div class="card-header">??:??</div>
                           <div class="card-body">
                           <div class="row">
-                              <div class="col">
+                              <div class="col" style="text-align:center">
                               <b>??</b>
                               </div>
-                              <div class="col-2">
+                              <div class="col" style="text-align:center">
                               </div>
-                              <div class="col">
+                              <div class="col" style="text-align:center">
                               <b>??</b>
                               </div>
                           </div>

@@ -132,7 +132,7 @@ function print18schedule() {
                             </div>
                             <div class="row">
                                 <div class="col" style="text-align:center">
-                                    ${date.getHours()}:${date.getMinutes()}
+                                    <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span><small>${date.getHours()}:${date.getMinutes()}</small><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span>
                                 </div>
                             </div>
                             <div class="row">

@@ -171,6 +171,7 @@ function print18schedule(){
 $(document).ready(function () {
     if(document.title == "Typer Cup | Euro 2021"){
         selectGroup()
+        print18schedule()
     }
 })
 

@@ -113,7 +113,6 @@ function printGroupTable(result, reload = 0){
 
 function print18schedule(){
     var counter = 0;
-    $("#18-stage-table").html(`123`)
     get18Schedule().then(async schedule =>{
         for await (const [index, match] of Object.entries(schedule)) {
             couter++;

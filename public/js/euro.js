@@ -125,15 +125,20 @@ function print18schedule() {
                     <div class="card text-white bg-primary mb-3">
                         <div class="card-header">${formatDate}</div>
                         <div class="card-body">
-                        <div class="row">
-                            <div class="col-5">
-                                <b>${match.t1.teamName}</b>
+                            <div class="row">
+                                <div class="col-5">
+                                    <b>${match.t1.teamName}</b>
+                                </div>
                             </div>
-                            <div class="col">
-                                ${date.getHours()}:${date.getMinutes()}
+                            <div class="row">
+                                <div class="col">
+                                    ${date.getHours()}:${date.getMinutes()}
+                                </div>
                             </div>
-                            <div class="col-5">
-                                <b>${match.t2.teamName}</b>
+                            <div class="row">
+                                <div class="col-5">
+                                    <b>${match.t2.teamName}</b>
+                                </div>
                             </div>
                         </div>
                         </div>

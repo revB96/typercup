@@ -220,7 +220,7 @@ function print14schedule() {
       }
   
       if (counter < 4) {
-        for (let i = counter; i <= 4; i++) {
+        for (let i = counter; i < 4; i++) {
           $("#14-stage-table").append(`
                  
                       <div class="card text-white bg-secondary mb-3">

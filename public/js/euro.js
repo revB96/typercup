@@ -111,16 +111,16 @@ function printGroupTable(result, reload = 0){
     
 }
 
-function print18schedule(){
+function print18schedule() {
+  get18Schedule().then(async (schedule) => {
     var counter = 0;
-    get18Schedule().then(async schedule =>{
-        for await (const [index, match] of Object.entries(schedule)) {
-            couter++;
-            const dateOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
-            var date = new Date(match.matchDate)
-            var formatDate = date.toLocaleDateString('en-GB', dateOptions)
-            console.log(match.t1)
-            $("#18-stage-table").append(`
+    for await (const [index, match] of Object.entries(schedule)) {
+      couter++;
+      const dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
+      var date = new Date(match.matchDate);
+      var formatDate = date.toLocaleDateString("en-GB", dateOptions);
+      console.log(match.t1);
+      $("#18-stage-table").append(`
                 <div class="col">
                     <div class="card text-white bg-primary mb-3">
                         <div class="card-header">${formatDate}</div>
@@ -138,13 +138,12 @@ function print18schedule(){
                         </div>
                     </div>
                 </div>
-            `)
-        }
-    })
+            `);
+    }
 
-    if(counter < 8){
-        for(let i=counter; i<=7; i++){
-            $("#18-stage-table").append(`
+    if (counter < 8) {
+      for (let i = counter; i <= 7; i++) {
+        $("#18-stage-table").append(`
                 <div class="col">
                     <div class="card text-white bg-primary mb-3">
                         <div class="card-header">??:??</div>
@@ -162,10 +161,10 @@ function print18schedule(){
                         </div>
                     </div>
                 </div>
-            `)
-        }
+            `);
+      }
     }
-
+  });
 }
 
 $(document).ready(function () {

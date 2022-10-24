@@ -283,14 +283,16 @@ function print12schedule() {
         <div class="card text-white bg-success mb-3">
             <div class="card-header">${formatDate}</div>
             <div class="card-body">
-                <div class="col" style="text-align:center">
-                    <b>${match.t1.teamName}</b>
-                </div>
-                <div class="col" style="text-align:center">
-                    <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span><small>${hrs}:${mins}</small><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span>
-                </div>
-                <div class="col" style="text-align:center">
-                    <b>${match.t2.teamName}</b>
+                <div class="row">
+                    <div class="col-4" style="text-align:center">
+                        <b>${match.t1.teamName}</b>
+                    </div>
+                    <div class="col-4" style="text-align:center">
+                        <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span><small>${hrs}:${mins}</small><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span>
+                    </div>
+                    <div class="col-4" style="text-align:center">
+                        <b>${match.t2.teamName}</b>
+                    </div>
                 </div>
             </div>
             </div>

@@ -113,7 +113,7 @@ function printGroupTable(result, reload = 0){
 
 function print18schedule(){
     var counter = 0;
-    $("#18-stage-table").html(`123`)
+    $(".18-stage-table").html(`123`)
     get18Schedule().then(async schedule =>{
         for await (const [index, match] of Object.entries(schedule)) {
             couter++;
@@ -144,7 +144,7 @@ function print18schedule(){
 
     if(counter <= 8){
         for(let i=counter; i<=8; i++){
-            $("#18-stage-table").append(`
+            $(".18-stage-table").append(`
                 <div class="col">
                     <div class="card text-white bg-primary mb-3">
                         <div class="card-header">??:??</div>

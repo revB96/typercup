@@ -68,6 +68,62 @@ function getSchedule() {
     })
 }
 
+function get18Schedule() {
+    return $.ajax({
+        url: `/api/schedule/get18`,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (result) {
+            return result;
+        },
+        fail: function (){
+            console.log("Nie udało się pobrać");
+        }
+    })
+}
+
+function get14Schedule() {
+    return $.ajax({
+        url: `/api/schedule/get14`,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (result) {
+            return result;
+        },
+        fail: function (){
+            console.log("Nie udało się pobrać");
+        }
+    })
+}
+
+function get12Schedule() {
+    return $.ajax({
+        url: `/api/schedule/get12`,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (result) {
+            return result;
+        },
+        fail: function (){
+            console.log("Nie udało się pobrać");
+        }
+    })
+}
+
+function getFinalSchedule() {
+    return $.ajax({
+        url: `/api/schedule/getFinal`,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (result) {
+            return result;
+        },
+        fail: function (){
+            console.log("Nie udało się pobrać");
+        }
+    })
+}
+
 function getRound(state){
     return $.ajax({
         url: `/api/round/get?state=${state}`,

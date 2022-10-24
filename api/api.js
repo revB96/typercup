@@ -55,6 +55,46 @@ router.get('/schedule/round', function (req, res) {
             }); 
 })
 
+router.get('/schedule/get18', function (req, res) {
+    Schedule.get18()
+            .then(data => {
+                res.json(data)
+            })
+            .catch(err => {
+                res.json(err)
+            }); 
+})
+
+router.get('/schedule/get14', function (req, res) {
+    Schedule.get14()
+            .then(data => {
+                res.json(data)
+            })
+            .catch(err => {
+                res.json(err)
+            }); 
+})
+
+router.get('/schedule/get12', function (req, res) {
+    Schedule.get12()
+            .then(data => {
+                res.json(data)
+            })
+            .catch(err => {
+                res.json(err)
+            }); 
+})
+
+router.get('/schedule/getFinal', function (req, res) {
+    Schedule.getFinal()
+            .then(data => {
+                res.json(data)
+            })
+            .catch(err => {
+                res.json(err)
+            }); 
+})
+
 router.get('/schedule/knockout', function (req, res) {
     Round.getKnockoutSchedule(req.query.stage)
             .then(data => {

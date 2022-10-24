@@ -111,6 +111,63 @@ function printGroupTable(result, reload = 0){
     
 }
 
+function print18schedule(){
+    var counter = 0;
+    $("#group-table-body").html(``)
+    get18Schedule().then(async schedule =>{
+        for await (const [index, match] of Object.entries(schedule)) {
+            couter++;
+            const dateOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
+            var date = new Date(match.matchDate)
+            var formatDate = date.toLocaleDateString('en-GB', dateOptions)
+            $("#group-table-body").append(`
+                <div class="col">
+                    <div class="card text-white bg-primary mb-3">
+                        <div class="card-header">${formatDate}</div>
+                        <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                            <b>${match.t1}</b>
+                            </div>
+                            <div class="col-2">
+                            </div>
+                            <div class="col">
+                            <b>${match.t2}</b>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            `)
+        }
+    })
+
+    if(counter <= 8){
+        for(let i=counter; i<=8; i++){
+            $("#group-table-body").append(`
+                <div class="col">
+                    <div class="card text-white bg-primary mb-3">
+                        <div class="card-header">??:??</div>
+                        <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                            <b>??</b>
+                            </div>
+                            <div class="col-2">
+                            </div>
+                            <div class="col">
+                            <b>??</b>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            `)
+        }
+    }
+
+}
+
 $(document).ready(function () {
     if(document.title == "Typer Cup | Euro 2021"){
         selectGroup()

@@ -133,6 +133,58 @@ function getMatchesBetweenDates(startDate, endDate){
     return def.promise;
 }
 
+function get18(){
+    var def = Q.defer();
+    Schedule
+            .find({stage:"18"})
+            .sort({matchDate: "asc"})
+            .populate("t1", "teamName shortcut stage").populate("t2", "teamName shortcut stage")
+            .exec(function (err, schedule) {
+                //console.log(schedule)
+                err ? def.reject(err) : def.resolve(schedule);
+        });
+    return def.promise;
+}
+
+function get14(){
+    var def = Q.defer();
+    Schedule
+            .find({stage:"14"})
+            .sort({matchDate: "asc"})
+            .populate("t1", "teamName shortcut stage").populate("t2", "teamName shortcut stage")
+            .exec(function (err, schedule) {
+                //console.log(schedule)
+                err ? def.reject(err) : def.resolve(schedule);
+        });
+    return def.promise;
+}
+
+function get12(){
+    var def = Q.defer();
+    Schedule
+            .find({stage:"12"})
+            .sort({matchDate: "asc"})
+            .populate("t1", "teamName shortcut stage").populate("t2", "teamName shortcut stage")
+            .exec(function (err, schedule) {
+                //console.log(schedule)
+                err ? def.reject(err) : def.resolve(schedule);
+        });
+    return def.promise;
+}
+
+function getFinal(){
+    var def = Q.defer();
+    Schedule
+            .find({stage:"final"})
+            .sort({matchDate: "asc"})
+            .populate("t1", "teamName shortcut stage").populate("t2", "teamName shortcut stage")
+            .exec(function (err, schedule) {
+                //console.log(schedule)
+                err ? def.reject(err) : def.resolve(schedule);
+        });
+    return def.promise;
+}
+
 module.exports = {
     add,
     getAll,
@@ -141,6 +193,10 @@ module.exports = {
     getScheduleById,
     getFirstRoundMatch,
     updateScheduleStatus,
-    getMatchesBetweenDates
+    getMatchesBetweenDates,
+    get18,
+    get14,
+    get12,
+    getFinal,
 }
 

@@ -129,7 +129,7 @@ function print18schedule() {
                             <div class="col">
                                 <b>${match.t1.teamName}</b>
                             </div>
-                            <div class="col-2">
+                            <div class="col">
                                 <small>${date.getHours()}:${date.getMinutes()}</small>
                             </div>
                             <div class="col">

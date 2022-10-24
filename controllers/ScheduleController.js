@@ -140,7 +140,7 @@ function get18(){
             .sort({matchDate: "asc"})
             .populate("t1", "teamName shortcut stage").populate("t2", "teamName shortcut stage")
             .exec(function (err, schedule) {
-                console.log(schedule)
+                //console.log(schedule)
                 err ? def.reject(err) : def.resolve(schedule);
         });
     return def.promise;

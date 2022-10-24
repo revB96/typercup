@@ -115,6 +115,7 @@ function print18schedule(){
     var counter = 0;
     get18Schedule().then(async schedule =>{
         for await (const [index, match] of Object.entries(schedule)) {
+            console.log(match)
             couter++;
             const dateOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
             var date = new Date(match.matchDate)
@@ -141,7 +142,7 @@ function print18schedule(){
         }
     })
 
-    if(counter <= 8){
+    if(counter <= 7){
         for(let i=counter; i<=8; i++){
             $("#18-stage-table").append(`
                 <div class="col">

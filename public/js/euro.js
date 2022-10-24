@@ -249,6 +249,7 @@ $(document).ready(function () {
     if(document.title == "Typer Cup | Euro 2021"){
         selectGroup()
         print18schedule()
+        print14schedule()
     }
 })
 

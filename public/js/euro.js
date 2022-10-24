@@ -119,7 +119,12 @@ function print18schedule() {
       const dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
       var date = new Date(match.matchDate);
       var formatDate = date.toLocaleDateString("en-GB", dateOptions);
-      console.log(match.t1);
+      var hrs = date.getHours();
+      var mins = date.getMinutes();
+      
+      if (hrs <= 9) hrs = "0" + hrs;
+      if (mins < 10) mins = "0" + mins;
+
       $("#18-stage-table").append(`
                 <div class="col">
                     <div class="card text-white bg-primary mb-3">
@@ -132,7 +137,7 @@ function print18schedule() {
                             </div>
                             <div class="row">
                                 <div class="col" style="text-align:center">
-                                    <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span><small>${date.getHours()}:${date.getMinutes()}</small><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span>
+                                    <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span><small>${hrs}:${mins}</small><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span>
                                 </div>
                             </div>
                             <div class="row">

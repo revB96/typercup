@@ -115,7 +115,7 @@ function print18schedule() {
   get18Schedule().then(async (schedule) => {
     var counter = 0;
     for await (const [index, match] of Object.entries(schedule)) {
-      couter++;
+        counter++;
       const dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
       var date = new Date(match.matchDate);
       var formatDate = date.toLocaleDateString("en-GB", dateOptions);

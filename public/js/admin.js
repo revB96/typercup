@@ -169,7 +169,7 @@ function adminListUsers() {
                      <input name="email" type="text" class="form-control" value="${user.email}" required /> 
                      <input name="timezone" type="text" class="form-control" value="${timezone}" required /> 
                      <input name="role" type="text" class="form-control" value="${user.role}" required /> 
-                     <input name="friendlyName" type="text" class="form-control" value="${friendlyName}" required /> 
+                     <input name="friendlyName" type="text" class="form-control" value="${user.friendlyName}" required /> 
                      <input name="champion" class="form-check-input" type="checkbox" value="" ${champion} /> 
                      <input name="firstLogon" class="form-check-input" type="checkbox" value="" ${firstLogon} /> 
                      <input name="filledQuiz" class="form-check-input" type="checkbox" value="" ${filledQuiz} /> 

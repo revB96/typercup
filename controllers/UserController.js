@@ -73,6 +73,8 @@ function update(formData){
   console.log(formData)
   var def = Q.defer();
   const timestamp = Date.now();
+  console.log("1" + formData.userId)
+  console.log("1" + formData[0].userId)
   User.findByIdAndUpdate(formData.userId,{
     username: formData.username,
     email: formData.email,

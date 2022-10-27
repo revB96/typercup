@@ -150,9 +150,9 @@ function adminListUsers() {
       var lastLogon = new Date(user.lastLogon);
       var champion = "", firstLogon="", filledQuiz ="";
 
-      if(user.champion == true) champion = "checked"
-      if(user.firstLogon == true) firstLogon = "checked"
-      if(user.filledQuiz == true) filledQuiz = "checked"
+      if(typeof user.champion != undefined && user.champion == true) champion = "checked"
+      if(typeof user.firstLogon != undefined && user.firstLogon == true) firstLogon = "checked"
+      if(typeof user.filledQuiz != undefined && user.filledQuiz == true) filledQuiz = "checked"
 
       console.log(champion + " " + firstLogon + " " + filledQuiz)
 

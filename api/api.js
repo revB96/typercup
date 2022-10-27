@@ -231,7 +231,7 @@ router.post('/admin/user/add', function (req, res) {
 })
 
 router.post('/admin/user/edit', function (req, res) {
-    //console.log(req.body)
+    console.log(req.body)
     User.update(req.body)
         .then(data => {
             res.json(data)

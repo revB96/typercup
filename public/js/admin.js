@@ -160,7 +160,7 @@ function adminListUsers() {
 
       $("#list-user-table").append(`
               <tr>
-                <form class="edit-${user._id}-form"  enctype="application/x-www-form-urlencoded">
+                <form id="edit-${user._id}-form"  enctype="application/x-www-form-urlencoded">
                     <th scope="row">
                       ${user._id.substr(user._id.length - 4)}
                       <input name="userId" type="text" class="form-control" value="${user._id}"/>
@@ -185,8 +185,8 @@ function adminListUsers() {
 
 function updateUser(userID){
     //console.log(userID)
-    //e.preventDefault();
-    const formData = $(`.edit-${userID}-form`).serializeArray();
+    e.preventDefault();
+    const formData = $(`#edit-${userID}-form`).serializeArray();
     console.log(formData)
     $.post("/api/admin/user/edit", formData).done(() => {
       $(".toast").html(`

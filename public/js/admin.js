@@ -164,6 +164,7 @@ function adminListUsers() {
                     <td><input name="username" type="text" class="form-control" value="${user.username}" required /></td>
                     <td><input name="email" type="text" class="form-control" value="${user.email}" required /></td>
                     <td><input name="timezone" type="text" class="form-control" value="${timezone}" required /></td>
+                    <td><input name="role" type="text" class="form-control" value="${user.role}" required /></td>
                     <td><input name="friendlyName" type="text" class="form-control" value="${friendlyName}" required /></td>
                     <td><input name="champion" class="form-check-input" type="checkbox" value="" ${champion}></td>
                     <td><input name="firstLogon" class="form-check-input" type="checkbox" value="" ${firstLogon}></td>

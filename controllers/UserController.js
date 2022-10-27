@@ -74,20 +74,20 @@ function update(formData){
   var def = Q.defer();
   const timestamp = Date.now();
   console.log("1" + formData.userId)
-  console.log("1" + formData[0].userId)
   User.findByIdAndUpdate(formData.userId,{
     username: formData.username,
     email: formData.email,
     timezone: formData.timezone,
     friendlyName: formData.friendlyName,
-    champion: formData.champion,
-    firstLogon: formData.firstLogon,
-    filledQuiz: formData.filledQuiz,
+    //champion: formData.champion,
+    //firstLogon: formData.firstLogon,
+    //filledQuiz: formData.filledQuiz,
     updatedAt: timestamp,
   },{
     new:true,
     autoIndex: true
   }).exec(function (err, user){
+    console.log(err)
     console.log(user)
     err ? def.reject(err) : def.resolve(1);
   })

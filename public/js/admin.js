@@ -156,11 +156,11 @@ function adminListUsers() {
       if(typeof user.timezone !== "undefined") timezone = user.timezone
       if(typeof user.friendlyName != "undefined") filledQuiz = user.timezone
 
-      console.log(champion)
+      //console.log(champion)
 
       $("#list-user-table").append(`
               <tr>
-                <form class="edit-user-form"  enctype="application/x-www-form-urlencoded">
+                <form class="edit-${user._id}-form"  enctype="application/x-www-form-urlencoded">
                     <th scope="row">${user._id.substr(user._id.length - 4)}</th>
                     <td><input name="username" type="text" class="form-control" value="${user.username}" required /></td>
                     <td><input name="email" type="text" class="form-control" value="${user.email}" required /></td>
@@ -171,7 +171,7 @@ function adminListUsers() {
                     <td><input name="firstLogon" class="form-check-input" type="checkbox" value="" ${firstLogon}></td>
                     <td><input name="filledQuiz" class="form-check-input" type="checkbox" value="" ${filledQuiz}></td>
                     <td>
-                      <button type="submit" class="btn btn-primary">Edytuj</button>
+                      <button type="submit" class="btn btn-primary" onClick("updateUser("${user_.id}")>Edytuj</button>
                     </td>
                   </form>
                 </tr>
@@ -180,25 +180,26 @@ function adminListUsers() {
   });
 }
 
-$(".edit-user-form").submit(function (e) {
-  e.preventDefault();
-  const formData = $(".edit-user-form").serializeArray();
-  $.post("/api/admin/user/edit", formData).done(() => {
-    $(".toast").html(`
-              <div class="toast-header">
-              <strong class="mr-auto">Panel administratora</strong>
-              <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-              </div>
-              <div class="toast-body">
-              Dodano nowego użytkownika: ${formData[0].value}
-              </div>
-          `);
-    adminListUsers();
-    $(".toast").toast("show");
-  });
-});
+function updateUser(userID){
+    console.log("Test")
+    //e.preventDefault();
+    const formData = $(`.edit-${userID}-form`).serializeArray();
+    $.post("/api/admin/user/edit", formData).done(() => {
+      $(".toast").html(`
+                <div class="toast-header">
+                <strong class="mr-auto">Panel administratora</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="toast-body">
+                Dodano nowego użytkownika: ${formData[0].value}
+                </div>
+            `);
+      adminListUsers();
+      $(".toast").toast("show");
+    });
+}
 
 function adminChangeStatus(status, roundId) {
   $.post(`/api/admin/round/changestatus?roundId=${roundId}&status=${status}`)

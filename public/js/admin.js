@@ -154,7 +154,7 @@ function adminListUsers() {
       if(typeof user.firstLogon != undefined && user.firstLogon == true) firstLogon = "checked"
       if(typeof user.filledQuiz != undefined && user.filledQuiz == true) filledQuiz = "checked"
 
-      console.log(champion + " " + firstLogon + " " + filledQuiz)
+      console.log(champion)
 
       $("#list-user-table").append(`
       <form id="update-user-form" enctype="application/x-www-form-urlencoded">

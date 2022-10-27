@@ -186,23 +186,26 @@ function adminListUsers() {
 function updateUser(userID){
     //console.log(userID)
     //e.preventDefault();
+  $(`#add-${userId}-form`).submit(function (e) {
+    e.preventDefault();
     const formData = $(`#edit-${userID}-form`).serializeArray();
     console.log(formData)
     $.post("/api/admin/user/edit", formData).done(() => {
       $(".toast").html(`
-                <div class="toast-header">
-                <strong class="mr-auto">Panel administratora</strong>
-                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="toast-body">
-                Zapisano zmiany
-                </div>
-            `);
-      adminListUsers();
-      $(".toast").toast("show");
-    });
+               <div class="toast-header">
+                  <strong class="mr-auto">Panel administratora</strong>
+                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  </div>
+                  <div class="toast-body">
+                  Zapisano zmiany
+                  </div>
+              `);
+        adminListUsers();
+        $(".toast").toast("show");
+      });
+  })
 }
 
 function adminChangeStatus(status, roundId) {

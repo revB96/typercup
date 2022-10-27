@@ -186,8 +186,9 @@ function adminListUsers() {
 function updateUser(userID){
     //console.log(userID)
     //e.preventDefault();
+    console.log($(`#edit-${userID}-form`).serializeArray())
     const formData = $(`#edit-${userID}-form`).serializeArray();
-    console.log(formData)
+    //console.log(formData)
     $.post("/api/admin/user/edit", formData).done(() => {
       $(".toast").html(`
                <div class="toast-header">

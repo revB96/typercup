@@ -148,11 +148,12 @@ function adminListUsers() {
   adminGetUsers().then((result) => {
     for (const [index, user] of Object.entries(result)) {
       var lastLogon = new Date(user.lastLogon);
-      var champion = "", firstLogon="", filledQuiz ="";
+      var champion = "", firstLogon="", filledQuiz ="", timezone="", friendlyName="";
 
       if(typeof user.champion != undefined && user.champion == true) champion = "checked"
       if(typeof user.firstLogon != undefined && user.firstLogon == true) firstLogon = "checked"
-      if(typeof user.filledQuiz != undefined && user.filledQuiz == true) filledQuiz = "checked"
+      if(typeof user.timezone != undefined) timezone = user.timezone
+      if(typeof user.friendlyName != undefined) filledQuiz = user.timezone
 
       console.log(champion)
 
@@ -162,8 +163,8 @@ function adminListUsers() {
                     <th scope="row">${user._id.substr(user._id.length - 4)}</th>
                     <td><input name="username" type="text" class="form-control" value="${user.username}" required /></td>
                     <td><input name="email" type="text" class="form-control" value="${user.email}" required /></td>
-                    <td><input name="timezone" type="text" class="form-control" value="${user.timezone}" required />${user.timezone}</td>
-                    <td><input name="friendlyName" type="text" class="form-control" value="${user.friendlyName}" required />${user.friendlyName}</td>
+                    <td><input name="timezone" type="text" class="form-control" value="${timezone}" required /></td>
+                    <td><input name="friendlyName" type="text" class="form-control" value="${friendlyName}" required /></td>
                     <td><input name="champion" class="form-check-input" type="checkbox" value="" ${champion}></td>
                     <td><input name="firstLogon" class="form-check-input" type="checkbox" value="" ${firstLogon}></td>
                     <td><input name="filledQuiz" class="form-check-input" type="checkbox" value="" ${filledQuiz}></td>

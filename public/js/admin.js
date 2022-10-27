@@ -211,14 +211,11 @@ function adminListUsers() {
 }
 
 function updateUser(userID){
-    //console.log(userID)
-    //e.preventDefault();
+    var form = document.getElementById(formName);
+    function handleForm(event) { event.preventDefault(); } 
+    form.addEventListener('submit', handleForm);
+    
     var formName = `#edit-${userID}-form`
-    const form = document.getElementById(formName);
-    console.log(formName)
-    console.log(form)
-
-    console.log($(formName).serializeArray())
     const formData = $(`#edit-${userID}-form`).serializeArray();
     //console.log(formData)
     $.post("/api/admin/user/edit", formData).done(() => {

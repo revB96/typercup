@@ -227,6 +227,7 @@ function updateUser(userID){
                   Zapisano zmiany
                   </div>
               `);
+        adminListUsers()
         $(".toast").toast("show");
       });
 }

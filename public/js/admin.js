@@ -186,10 +186,12 @@ function adminListUsers() {
 function updateUser(userID){
     //console.log(userID)
     //e.preventDefault();
-    const form = document.getElementById(`#edit-${userID}-form`);
+    var formName = `#edit-${userID}-form`
+    const form = document.getElementById(formName);
+    console.log(formName)
     console.log(form)
 
-    console.log($(`#edit-${userID}-form`).serializeArray())
+    console.log($(formName).serializeArray())
     const formData = $(`#edit-${userID}-form`).serializeArray();
     //console.log(formData)
     $.post("/api/admin/user/edit", formData).done(() => {

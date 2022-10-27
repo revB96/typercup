@@ -167,9 +167,9 @@ function adminListUsers() {
                     <td><input name="timezone" type="text" class="form-control" value="${timezone}" required /></td>
                     <td><input name="role" type="text" class="form-control" value="${user.role}" required /></td>
                     <td><input name="friendlyName" type="text" class="form-control" value="${friendlyName}" required /></td>
-                    <td><input name="champion" class="form-check-input" type="checkbox" value="" ${champion}></td>
-                    <td><input name="firstLogon" class="form-check-input" type="checkbox" value="" ${firstLogon}></td>
-                    <td><input name="filledQuiz" class="form-check-input" type="checkbox" value="" ${filledQuiz}></td>
+                    <td><input name="champion" class="form-control" type="checkbox" value="" ${champion}></td>
+                    <td><input name="firstLogon" class="form-control" type="checkbox" value="" ${firstLogon}></td>
+                    <td><input name="filledQuiz" class="form-control" type="checkbox" value="" ${filledQuiz}></td>
                     <td>
                       <button type="submit" class="btn btn-primary">Edytuj</button>
                     </td>

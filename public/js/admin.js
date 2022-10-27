@@ -154,7 +154,7 @@ function adminListUsers() {
       if((typeof user.firstLogon !== "undefined") && (user.firstLogon == true)) firstLogon = "checked"
       if((typeof user.filledQuiz !== "undefined") && (user.filledQuiz == true)) filledQuiz = "checked"
       if(typeof user.timezone !== "undefined") timezone = user.timezone
-      if(typeof user.friendlyName !== "undefined") filledQuiz = user.timezone
+      if(typeof user.friendlyName !== "undefined") filledQuiz = user.friendlyName
 
       //console.log(champion)
 

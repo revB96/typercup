@@ -174,7 +174,7 @@ function adminListUsers() {
                     <td><input name="firstLogon" class="form-check-input" type="checkbox" value="" ${firstLogon}></td>
                     <td><input name="filledQuiz" class="form-check-input" type="checkbox" value="" ${filledQuiz}></td>
                     <td>
-                      <button type="submit" class="btn btn-primary" onClick="updateUser('${user._id}')">Edytuj</button>
+                      <button class="btn btn-primary" onClick="updateUser('${user._id}')">Edytuj</button>
                     </td>
                   </form>
                 </tr>
@@ -186,8 +186,6 @@ function adminListUsers() {
 function updateUser(userID){
     //console.log(userID)
     //e.preventDefault();
-  $(`#add-${userID}-form`).submit(function (e) {
-    e.preventDefault();
     const formData = $(`#edit-${userID}-form`).serializeArray();
     console.log(formData)
     $.post("/api/admin/user/edit", formData).done(() => {
@@ -205,7 +203,6 @@ function updateUser(userID){
         adminListUsers();
         $(".toast").toast("show");
       });
-  })
 }
 
 function adminChangeStatus(status, roundId) {

@@ -160,7 +160,7 @@ function adminListUsers() {
 
       $("#list-user-table").append(`
               <tr>
-                <form id="edit-${user._id}-form">
+                <form>
                     
                       ${user._id.substr(user._id.length - 4)}
                       <input name="userId" type="text" class="form-control" value="${user._id}"/>

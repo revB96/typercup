@@ -161,10 +161,12 @@ function adminListUsers() {
       $("#list-user-table").append(`
               <tr>
                 <form id="edit-${user._id}-form">
+                    <div class="form-group">
                     <td">
                       ${user._id.substr(user._id.length - 4)}
                       <input name="userId" type="text" class="form-control" value="${user._id}"/>
                     </td>
+                    </div>
                     <td><input name="username" type="text" class="form-control" value="${user.username}" required /></td>
                     <td><input name="email" type="text" class="form-control" value="${user.email}" required /></td>
                     <td><input name="timezone" type="text" class="form-control" value="${timezone}" required /></td>

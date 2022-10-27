@@ -149,15 +149,21 @@ function adminListUsers() {
     for (const [index, user] of Object.entries(result)) {
       var lastLogon = new Date(user.lastLogon);
       $("#list-user-table").append(`
+      <form id="update-user-form" enctype="application/x-www-form-urlencoded">
                 <tr>
                     <th scope="row">${user._id.substr(user._id.length - 4)}</th>
-                    <td>${user.username}</td>
+                    <td><input name="username" type="text" class="form-control" value="${user.username}" required /></td>
                     <td>${user.email}</td>
                     <td>${user.timezone}</td>
                     <td>${user.role}</td>
                     <td>${user.firstLogon}</td>
                     <td>${user.filledQuiz}</td>
                     <td>${lastLogon.toLocaleDateString("pl-PL", options)}</td>
+                    <td>
+                      <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvas-editUser-${user._id}" role="button" aria-controls="offcanvas-editUser-${question._id}">
+                        Zapisz
+                      </a>
+                    </td>
                 </tr>
                 `);
     }

@@ -69,6 +69,27 @@ async function add(formData) {
   return def.promise;
 }
 
+function update(formData){
+  var def = Q.defer();
+  const timestamp = Date.now();
+  Quiz.findByIdAndUpdate(formData.userId,{
+    username: formData.username,
+    email: formData.email,
+    role: formData.role,
+    timezone: formData.timezone,
+    friendlyName: formData.friendlyName,
+    champion: formData.champion,
+    updatedAt: timestamp,
+  },{
+    new:true
+  }).exec(function (err, user){
+    err ? def.reject(err) : def.resolve(1);
+  })
+  
+  return def.promise;
+}
+
+
 async function addAdmin() {
   const timestamp = Date.now();
   var hashedPassword = await bcrypt.hash("0000", 10);
@@ -2579,6 +2600,7 @@ function checkReminder() {
 
 module.exports = {
   add,
+  update,
   getAll,
   getUserByName,
   getUserById,

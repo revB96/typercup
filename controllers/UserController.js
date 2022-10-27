@@ -79,16 +79,14 @@ function update(formData){
     email: formData.email,
     timezone: formData.timezone,
     friendlyName: formData.friendlyName,
-    //champion: formData.champion,
-    //firstLogon: formData.firstLogon,
-    //filledQuiz: formData.filledQuiz,
+    champion: formData.champion,
+    firstLogon: formData.firstLogon,
+    filledQuiz: formData.filledQuiz,
     updatedAt: timestamp,
   },{
     new:true,
     autoIndex: true
   }).exec(function (err, user){
-    console.log(err)
-    console.log(user)
     err ? def.reject(err) : def.resolve(1);
   })
   

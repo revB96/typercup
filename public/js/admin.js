@@ -186,7 +186,7 @@ function adminListUsers() {
 function updateUser(userID){
     //console.log(userID)
     //e.preventDefault();
-  $(`#add-${userId}-form`).submit(function (e) {
+  $(`#add-${userID}-form`).submit(function (e) {
     e.preventDefault();
     const formData = $(`#edit-${userID}-form`).serializeArray();
     console.log(formData)

@@ -171,7 +171,7 @@ function adminListUsers() {
                     <td><input name="firstLogon" class="form-check-input" type="checkbox" value="" ${firstLogon}></td>
                     <td><input name="filledQuiz" class="form-check-input" type="checkbox" value="" ${filledQuiz}></td>
                     <td>
-                      <button type="submit" class="btn btn-primary" onClick("updateUser("${user._id}")>Edytuj</button>
+                      <button type="submit" class="btn btn-primary" onClick="updateUser('${user._id}')">Edytuj</button>
                     </td>
                   </form>
                 </tr>

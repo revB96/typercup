@@ -190,15 +190,15 @@ function adminListUsers() {
               <input name="role" type="text" class="form-control" value="${user.role}" required />
             </div>
             <div class="col-4">
-              <input name="champion" class="form-check-input" type="checkbox" value=true ${champion} />
+              <input name="champion" class="form-check-input" type="checkbox" value="true" ${champion} />
               <label class="form-label">Mistrz</label>
             </div>
             <div class="col-4">
-              <input name="firstLogon" class="form-check-input" type="checkbox" value=true ${firstLogon} />
+              <input name="firstLogon" class="form-check-input" type="checkbox" value="true" ${firstLogon} />
               <label class="form-label">Logowanie</label>
             </div>
             <div class="col-4">
-              <input name="filledQuiz" class="form-check-input" type="checkbox" value=true ${filledQuiz} />
+              <input name="filledQuiz" class="form-check-input" type="checkbox" value="true" ${filledQuiz} />
               <label class="form-label">Quiz</label>
             </div>
             <div class="col-12">

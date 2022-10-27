@@ -157,7 +157,7 @@ function adminListUsers() {
       console.log(champion)
 
       $("#list-user-table").append(`
-      <form id="update-user-form" enctype="application/x-www-form-urlencoded">
+      <form enctype="application/x-www-form-urlencoded">
                 <tr>
                     <th scope="row">${user._id.substr(user._id.length - 4)}</th>
                     <td><input name="username" type="text" class="form-control" value="${user.username}" required /></td>

@@ -171,6 +171,7 @@ function adminListUsers() {
                       <button type="submit" class="btn btn-primary">Edytuj</button>
                     </td>
                 </tr>
+      </form>
                 `);
     }
   });

@@ -149,10 +149,12 @@ function adminListUsers() {
     for (const [index, user] of Object.entries(result)) {
       var lastLogon = new Date(user.lastLogon);
       var champion = "", firstLogon="", filledQuiz ="";
-      console.log(user)
+
       if(user.champion == true) champion = "checked"
       if(user.firstLogon == true) firstLogon = "checked"
       if(user.filledQuiz == true) filledQuiz = "checked"
+
+      console.log(champion + " " + firstLogon + " " + filledQuiz)
 
       $("#list-user-table").append(`
       <form id="update-user-form" enctype="application/x-www-form-urlencoded">

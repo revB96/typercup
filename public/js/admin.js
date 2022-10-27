@@ -163,7 +163,7 @@ function adminListUsers() {
       `)
       $("#list-user-tabContent").append(`
       <div class="tab-pane fade ${showActive}" id="list-${user._id}" role="tabpanel" aria-labelledby="list-${user._id}-list">
-          <form id="edit-${user._id}-form" class="row g-3">
+          <form id="edit-${user._id}-form" class="row g-3" onsubmit="return false">
             <div class="col-12">
               <p>ID: ${user._id.substr(user._id.length - 4)}</p>
               <input name="userId" type="hidden" class="form-control" value="${user._id}" />

@@ -148,37 +148,36 @@ function adminListUsers() {
   adminGetUsers().then((result) => {
     for (const [index, user] of Object.entries(result)) {
       var lastLogon = new Date(user.lastLogon);
-      var champion = "", firstLogon="", filledQuiz ="", timezone="", friendlyName="";
+      var champion = "", firstLogon = "", filledQuiz = "", timezone = "", friendlyName = "";
+      var active = "", showActive = "";
 
-      if((typeof user.champion !== "undefined") && (user.champion == true)) champion = "checked"
-      if((typeof user.firstLogon !== "undefined") && (user.firstLogon == true)) firstLogon = "checked"
-      if((typeof user.filledQuiz !== "undefined") && (user.filledQuiz == true)) filledQuiz = "checked"
-      if(typeof user.timezone !== "undefined") timezone = user.timezone
-      if(typeof user.friendlyName !== "undefined") filledQuiz = user.friendlyName
+      if (index == 0) { active = "active"; showActive = "show active" }
+      if ((typeof user.champion !== "undefined") && (user.champion == true)) champion = "checked"
+      if ((typeof user.firstLogon !== "undefined") && (user.firstLogon == true)) firstLogon = "checked"
+      if ((typeof user.filledQuiz !== "undefined") && (user.filledQuiz == true)) filledQuiz = "checked"
+      if (typeof user.timezone !== "undefined") timezone = user.timezone
 
       //console.log(champion)
-
-      $("#list-user-table").append(`
-              
-                <form id="edit-${user._id}-form">
-                    
-                      ${user._id.substr(user._id.length - 4)}
-                      <input name="userId" type="text" class="form-control" value="${user._id}"/>
-                   
-                     <input name="username" type="text" class="form-control" value="${user.username}" required /> 
-                     <input name="email" type="text" class="form-control" value="${user.email}" required /> 
-                     <input name="timezone" type="text" class="form-control" value="${timezone}" required /> 
-                     <input name="role" type="text" class="form-control" value="${user.role}" required /> 
-                     <input name="friendlyName" type="text" class="form-control" value="${user.friendlyName}" required /> 
-                     <input name="champion" class="form-check-input" type="checkbox" value="" ${champion} /> 
-                     <input name="firstLogon" class="form-check-input" type="checkbox" value="" ${firstLogon} /> 
-                     <input name="filledQuiz" class="form-check-input" type="checkbox" value="" ${filledQuiz} /> 
-                    
-                      <button class="btn btn-primary" onClick="updateUser('${user._id}')">Edytuj</button>
-                    
-                  </form>
-                
-                `);
+      $("#list-user-items").append(`
+        <a class="list-group-item list-group-item-action ${active}" id="list-${user._id}-list" data-bs-toggle="list" href="#list-${user._id}" role="tab" aria-controls="list-${user._id}">${user._username}</a>
+      `)
+      $("#list-user-tabContent").append(`
+      <div class="tab-pane fade ${showActive}" id="list-${user._id}" role="tabpanel" aria-labelledby="list-${user._id}-list">
+          <form id="edit-${user._id}-form">
+              ${user._id.substr(user._id.length - 4)}
+              <input name="userId" type="text" class="form-control" value="${user._id}" />
+              <input name="username" type="text" class="form-control" value="${user.username}" required />
+              <input name="email" type="text" class="form-control" value="${user.email}" required />
+              <input name="timezone" type="text" class="form-control" value="${timezone}" required />
+              <input name="role" type="text" class="form-control" value="${user.role}" required />
+              <input name="friendlyName" type="text" class="form-control" value="${user.friendlyName}" required />
+              <input name="champion" class="form-check-input" type="checkbox" value="" ${champion} />
+              <input name="firstLogon" class="form-check-input" type="checkbox" value="" ${firstLogon} />
+              <input name="filledQuiz" class="form-check-input" type="checkbox" value="" ${filledQuiz} />
+              <button class="btn btn-primary" onClick="updateUser('${user._id}')">Edytuj</button>
+          </form>
+      </div>
+      `);
     }
   });
 }

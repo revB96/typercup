@@ -152,6 +152,7 @@ function adminListUsers() {
 
       if(typeof user.champion != undefined && user.champion == true) champion = "checked"
       if(typeof user.firstLogon != undefined && user.firstLogon == true) firstLogon = "checked"
+      if(typeof user.filledQuiz != undefined && user.filledQuiz == true) filledQuiz = "checked"
       if(user.timezone != "undefined") timezone = user.timezone
       if(typeof user.friendlyName != undefined) filledQuiz = user.timezone
 

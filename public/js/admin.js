@@ -196,7 +196,7 @@ function updateUser(userID){
                 </button>
                 </div>
                 <div class="toast-body">
-                Dodano nowego użytkownika: ${formData[0].value}
+                Zapisano zmiany
                 </div>
             `);
       adminListUsers();

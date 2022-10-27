@@ -72,7 +72,7 @@ async function add(formData) {
 function update(formData){
   var def = Q.defer();
   const timestamp = Date.now();
-  Quiz.findByIdAndUpdate(formData.userId,{
+  User.findByIdAndUpdate(formData.userId,{
     username: formData.username,
     email: formData.email,
     timezone: formData.timezone,

@@ -83,8 +83,10 @@ function update(formData){
     filledQuiz: formData.filledQuiz,
     updatedAt: timestamp,
   },{
-    new:true
+    new:true,
+    autoIndex: true
   }).exec(function (err, user){
+    console.log(user)
     err ? def.reject(err) : def.resolve(1);
   })
   

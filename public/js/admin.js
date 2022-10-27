@@ -159,7 +159,7 @@ function adminListUsers() {
 
       //console.log(champion)
       $("#list-user-items").append(`
-        <a class="list-group-item list-group-item-action ${active}" id="list-${user._id}-list" data-bs-toggle="list" href="#list-${user._id}" role="tab" aria-controls="list-${user._id}">${user._username}</a>
+        <a class="list-group-item list-group-item-action ${active}" id="list-${user._id}-list" data-bs-toggle="list" href="#list-${user._id}" role="tab" aria-controls="list-${user._id}">${user.username}</a>
       `)
       $("#list-user-tabContent").append(`
       <div class="tab-pane fade ${showActive}" id="list-${user._id}" role="tabpanel" aria-labelledby="list-${user._id}-list">

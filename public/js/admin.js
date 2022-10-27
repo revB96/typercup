@@ -146,6 +146,7 @@ function adminListUsers() {
     minute: "2-digit",
   };
   adminGetUsers().then((result) => {
+    $("#list-user-tabContent").html(``)
     for (const [index, user] of Object.entries(result)) {
       var lastLogon = new Date(user.lastLogon);
       var champion = "", firstLogon = "", filledQuiz = "", timezone = "", friendlyName = "";
@@ -228,6 +229,11 @@ function updateUser(userID){
                   </div>
               `);
         adminListUsers()
+        $("#list-user-items").html(``)
+        $("#list-user-tabContent").html(`
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>`)
         $(".toast").toast("show");
       });
 }

@@ -70,6 +70,7 @@ async function add(formData) {
 }
 
 function update(formData){
+  console.log(formData)
   var def = Q.defer();
   const timestamp = Date.now();
   User.findByIdAndUpdate(formData.userId,{

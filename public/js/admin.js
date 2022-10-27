@@ -163,7 +163,7 @@ function adminListUsers() {
                 <form class="edit-${user._id}-form"  enctype="application/x-www-form-urlencoded">
                     <th scope="row">
                       ${user._id.substr(user._id.length - 4)}
-                      <input name="userId" type="hidden" class="form-control" value="${user._id}"/>
+                      <input name="userId" type="text" class="form-control" value="${user._id}"/>
                     </th>
                     <td><input name="username" type="text" class="form-control" value="${user.username}" required /></td>
                     <td><input name="email" type="text" class="form-control" value="${user.email}" required /></td>

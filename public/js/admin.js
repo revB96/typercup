@@ -157,8 +157,8 @@ function adminListUsers() {
       console.log(champion)
 
       $("#list-user-table").append(`
-      <form enctype="application/x-www-form-urlencoded">
-                <tr>
+              <tr>
+                <form enctype="application/x-www-form-urlencoded">
                     <th scope="row">${user._id.substr(user._id.length - 4)}</th>
                     <td><input name="username" type="text" class="form-control" value="${user.username}" required /></td>
                     <td><input name="email" type="text" class="form-control" value="${user.email}" required /></td>
@@ -170,8 +170,8 @@ function adminListUsers() {
                     <td>
                       <button type="submit" class="btn btn-primary">Edytuj</button>
                     </td>
+                  </form>
                 </tr>
-      </form>
                 `);
     }
   });

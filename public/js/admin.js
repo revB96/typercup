@@ -163,18 +163,46 @@ function adminListUsers() {
       `)
       $("#list-user-tabContent").append(`
       <div class="tab-pane fade ${showActive}" id="list-${user._id}" role="tabpanel" aria-labelledby="list-${user._id}-list">
-          <form id="edit-${user._id}-form">
-              ${user._id.substr(user._id.length - 4)}
-              <input name="userId" type="text" class="form-control" value="${user._id}" />
+          <form id="edit-${user._id}-form" class="row g-3">
+            <div class="col-12">
+              <p>ID: ${user._id.substr(user._id.length - 4)}</p>
+              <input name="userId" type="hidden" class="form-control" value="${user._id}" />
+            </div>
+            <div class="col-6">
+              <label class="form-label">Username</label>
               <input name="username" type="text" class="form-control" value="${user.username}" required />
-              <input name="email" type="text" class="form-control" value="${user.email}" required />
-              <input name="timezone" type="text" class="form-control" value="${timezone}" required />
-              <input name="role" type="text" class="form-control" value="${user.role}" required />
+            </div>
+            <div class="col-6">
+              <label class="form-label">Przyjazna nazwa</label>
               <input name="friendlyName" type="text" class="form-control" value="${user.friendlyName}" required />
+            </div>
+            <div class="col-6">
+              <label class="form-label">E-mail</label>
+              <input name="email" type="text" class="form-control" value="${user.email}" required />
+            </div>
+            <div class="col-3">
+              <label class="form-label">Strefa czasowa</label>
+              <input name="timezone" type="text" class="form-control" value="${timezone}" required />
+            </div>
+            <div class="col-3">
+              <label class="form-label">Rola</label>
+              <input name="role" type="text" class="form-control" value="${user.role}" required />
+            </div>
+            <div class="col-4">
+              <label class="form-label">Mistrz</label>
               <input name="champion" class="form-check-input" type="checkbox" value="" ${champion} />
+            </div>
+            <div class="col-4">
+              <label class="form-label">Logowanie</label>
               <input name="firstLogon" class="form-check-input" type="checkbox" value="" ${firstLogon} />
+            </div>
+            <div class="col-4">
+              <label class="form-label">Quiz</label>
               <input name="filledQuiz" class="form-check-input" type="checkbox" value="" ${filledQuiz} />
+            </div>
+            <div class="col-12">
               <button class="btn btn-primary" onClick="updateUser('${user._id}')">Edytuj</button>
+            </div>
           </form>
       </div>
       `);

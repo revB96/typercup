@@ -161,21 +161,21 @@ function adminListUsers() {
       $("#list-user-table").append(`
               <tr>
                 <form id="edit-${user._id}-form">
-                    <td>
+                    
                       ${user._id.substr(user._id.length - 4)}
                       <input name="userId" type="text" class="form-control" value="${user._id}"/>
-                    </td>
-                    <td><input name="username" type="text" class="form-control" value="${user.username}" required /></td>
-                    <td><input name="email" type="text" class="form-control" value="${user.email}" required /></td>
-                    <td><input name="timezone" type="text" class="form-control" value="${timezone}" required /></td>
-                    <td><input name="role" type="text" class="form-control" value="${user.role}" required /></td>
-                    <td><input name="friendlyName" type="text" class="form-control" value="${friendlyName}" required /></td>
-                    <td><input name="champion" class="form-check-input" type="checkbox" value="" ${champion} /></td>
-                    <td><input name="firstLogon" class="form-check-input" type="checkbox" value="" ${firstLogon} /></td>
-                    <td><input name="filledQuiz" class="form-check-input" type="checkbox" value="" ${filledQuiz} /></td>
-                    <td>
+                   
+                     <input name="username" type="text" class="form-control" value="${user.username}" required /> 
+                     <input name="email" type="text" class="form-control" value="${user.email}" required /> 
+                     <input name="timezone" type="text" class="form-control" value="${timezone}" required /> 
+                     <input name="role" type="text" class="form-control" value="${user.role}" required /> 
+                     <input name="friendlyName" type="text" class="form-control" value="${friendlyName}" required /> 
+                     <input name="champion" class="form-check-input" type="checkbox" value="" ${champion} /> 
+                     <input name="firstLogon" class="form-check-input" type="checkbox" value="" ${firstLogon} /> 
+                     <input name="filledQuiz" class="form-check-input" type="checkbox" value="" ${filledQuiz} /> 
+                    
                       <button class="btn btn-primary" onClick="updateUser('${user._id}')">Edytuj</button>
-                    </td>
+                    
                   </form>
                 </tr>
                 `);

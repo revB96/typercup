@@ -159,8 +159,8 @@ function adminListUsers() {
       //console.log(champion)
 
       $("#list-user-table").append(`
-              <tr>
-                <form>
+              
+                <form id="edit-${user._id}-form">
                     
                       ${user._id.substr(user._id.length - 4)}
                       <input name="userId" type="text" class="form-control" value="${user._id}"/>
@@ -177,7 +177,7 @@ function adminListUsers() {
                       <button class="btn btn-primary" onClick="updateUser('${user._id}')">Edytuj</button>
                     
                   </form>
-                </tr>
+                
                 `);
     }
   });

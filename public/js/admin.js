@@ -150,11 +150,11 @@ function adminListUsers() {
       var lastLogon = new Date(user.lastLogon);
       var champion = "", firstLogon="", filledQuiz ="", timezone="", friendlyName="";
 
-      if(typeof user.champion != undefined && user.champion == true) champion = "checked"
-      if(typeof user.firstLogon != undefined && user.firstLogon == true) firstLogon = "checked"
-      if(typeof user.filledQuiz != undefined && user.filledQuiz == true) filledQuiz = "checked"
-      if(user.timezone != "undefined") timezone = user.timezone
-      if(typeof user.friendlyName != undefined) filledQuiz = user.timezone
+      if((typeof user.champion !== "undefined") && (user.champion == true)) champion = "checked"
+      if((typeof user.firstLogon !== "undefined") && (user.firstLogon == true)) firstLogon = "checked"
+      if((typeof user.filledQuiz !== "undefined") && (user.filledQuiz == true)) filledQuiz = "checked"
+      if(typeof user.timezone !== "undefined") timezone = user.timezone
+      if(typeof user.friendlyName != "undefined") filledQuiz = user.timezone
 
       console.log(champion)
 

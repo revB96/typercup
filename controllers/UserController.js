@@ -75,10 +75,11 @@ function update(formData){
   Quiz.findByIdAndUpdate(formData.userId,{
     username: formData.username,
     email: formData.email,
-    role: formData.role,
     timezone: formData.timezone,
     friendlyName: formData.friendlyName,
     champion: formData.champion,
+    firstLogon: formData.firstLogon,
+    filledQuiz: formData.filledQuiz,
     updatedAt: timestamp,
   },{
     new:true

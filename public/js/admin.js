@@ -148,21 +148,25 @@ function adminListUsers() {
   adminGetUsers().then((result) => {
     for (const [index, user] of Object.entries(result)) {
       var lastLogon = new Date(user.lastLogon);
+      var champion = "", firstLogon="", filledQuiz ="";
+
+      if(user.champion == true) champion = "checked"
+      if(user.firstLogon == true) firstLogon = "checked"
+      if(user.filledQuiz == true) filledQuiz = "checked"
+
       $("#list-user-table").append(`
       <form id="update-user-form" enctype="application/x-www-form-urlencoded">
                 <tr>
                     <th scope="row">${user._id.substr(user._id.length - 4)}</th>
                     <td><input name="username" type="text" class="form-control" value="${user.username}" required /></td>
-                    <td>${user.email}</td>
-                    <td>${user.timezone}</td>
-                    <td>${user.role}</td>
-                    <td>${user.firstLogon}</td>
-                    <td>${user.filledQuiz}</td>
-                    <td>${lastLogon.toLocaleDateString("pl-PL", options)}</td>
+                    <td><input name="email" type="text" class="form-control" value="${user.email}" required /></td>
+                    <td><input name="timezone" type="text" class="form-control" value="${user.timezone}" required />${user.timezone}</td>
+                    <td><input name="friendlyName" type="text" class="form-control" value="${user.friendlyName}" required />${user.friendlyName}</td>
+                    <td><input name="champion" class="form-check-input" type="checkbox" value="" ${champion}></td>
+                    <td><input name="firstLogon" class="form-check-input" type="checkbox" value="" ${firstLogon}></td>
+                    <td><input name="filledQuiz" class="form-check-input" type="checkbox" value="" ${filledQuiz}></td>
                     <td>
-                      <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvas-editUser-${user._id}" role="button" aria-controls="offcanvas-editUser-${question._id}">
-                        Zapisz
-                      </a>
+                      <button type="submit" class="btn btn-primary">Edytuj</button>
                     </td>
                 </tr>
                 `);

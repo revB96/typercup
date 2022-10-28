@@ -11,6 +11,7 @@ const UserNotification = require("../models/userNotifications");
 const bcrypt = require("bcrypt");
 const UserStats = require("./UserStatsController");
 const { getFirstRoundMatch } = require("./ScheduleController");
+const UserNotificationController = require("./UserNotificationController");
 const moment = require("moment-timezone");
 const nodemailer = require("nodemailer");
 const dateFormat = require("dateformat");
@@ -97,12 +98,12 @@ function update(formData){
 
     if(user.active == false){
       UserStats.deactivateUser(user._id)
-      UserNotification.deactivateAllNotificationsForUser(user._id)
+      UserNotificationController.deactivateAllNotificationsForUser(user._id)
     }
 
     if(user.active == true){
       UserStats.activateUser(user._id)
-      UserStats.activateAllNotificationsForUser(user._id)
+      UserNotificationController.activateAllNotificationsForUser(user._id)
     }
 
   })

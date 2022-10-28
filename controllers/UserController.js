@@ -200,9 +200,9 @@ function getAll() {
   return def.promise;
 }
 
-function deactivateUser(userId){
+async function deactivateUser(userId){
  
-  UserStats.findOneAndDelete({user: userId })
+  await UserStats.deleteOne({user: userId });
   
 }
 

@@ -27,7 +27,7 @@ function add(userId){
 
 function deactivateUser(userId){
   var def = Q.defer();
-    UserStats.findByIdAndUpdate(userId, {
+    UserStats.findOneAndUpdate({user:userId}, {
     active: false
   },{
     new:true,

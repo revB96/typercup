@@ -9,6 +9,7 @@ var userStatsSchema = new mongoose.Schema({
     defeat: {type: Number, default: 0},
     correctQuestions: {type: Number, default: 0},
     quizPoints: {type: Number, default: 0},
+    active: {type: Boolean, default: true},
     updatedAt: Date
 });
 var UserStats = mongoose.model('UserStats', userStatsSchema);

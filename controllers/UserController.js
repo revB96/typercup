@@ -201,9 +201,16 @@ function getAll() {
 }
 
 async function deactivateUser(userId){
- 
-  await UserStats.findByIdAndDelete(userId);
-  
+  var def = Q.defer();
+  await UserStats.findByIdAndUpdate(formData.userId, {
+    active: false
+  },{
+    new:true,
+    autoIndex: true
+  }).exec(function (err,result){
+    err ? def.reject(err) : def.resolve(1);
+  })
+  return def.promise;
 }
 
 async function changePassword(formData) {

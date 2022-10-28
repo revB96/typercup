@@ -28,6 +28,7 @@ function add(userId){
 function getAll() {
   var def = Q.defer();
   UserStats.find()
+    .select({active:true})
     .populate("user", "username friendlyName champion")
     .sort({ points: "desc" })
     .exec(function (err, stats) {

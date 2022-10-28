@@ -98,6 +98,9 @@ function update(formData){
     if(user.active == false)
       UserStats.deactivateUser(user._id)
 
+    if(user.active == true)
+      UserStats.activateUser(user._id)
+
   })
   
   return def.promise;

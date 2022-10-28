@@ -39,6 +39,27 @@ function deactivateUser(userId){
   return def.promise;
 }
 
+function activateUser(userId){
+  var def = Q.defer();
+    UserStats.findOneAndUpdate({user:userId}, {
+      points: 0,
+      tickets: 0,
+      correctScore: 0,
+      correctTeam: 0,
+      defeat: 0,
+      correctQuestions: 0,
+      quizPoints: 0,
+      active: 1,
+  },{
+    new:true,
+    autoIndex: true
+  }).exec(function (err,result){
+    err ? def.reject(err) : def.resolve(1);
+    console.log("Aktywacja statystyk: "+result)
+  })
+  return def.promise;
+}
+
 function getAll() {
   var def = Q.defer();
   UserStats.find()
@@ -155,5 +176,6 @@ module.exports = {
     addQuizToStats,
     addToCorrectAnswers,
     getUserCorrectAnswers,
-    deactivateUser
+    deactivateUser,
+    activateUser
 }

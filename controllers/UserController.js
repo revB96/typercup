@@ -202,7 +202,7 @@ function getAll() {
 
 function deactivateUser(userId){
   var def = Q.defer();
-  UserStats.deleteOne({user:userId}).then((err, result) =>{
+  UserStats.findOneAndDelete({user:userId}).then((err, result) =>{
     err ? def.reject(err) : def.resolve(result);
   })
   return def.promise;

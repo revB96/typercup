@@ -96,7 +96,7 @@ function update(formData){
     err ? def.reject(err) : def.resolve(1);
 
     if(user.active == false)
-      deactivateUser(user._id)
+      UserStats.deactivateUser(user._id)
 
   })
   
@@ -197,19 +197,6 @@ function getAll() {
       err ? def.reject(err) : def.resolve(users);
     });
 
-  return def.promise;
-}
-
-async function deactivateUser(userId){
-  var def = Q.defer();
-  await UserStats.findByIdAndUpdate(userId, {
-    active: false
-  },{
-    new:true,
-    autoIndex: true
-  }).exec(function (err,result){
-    err ? def.reject(err) : def.resolve(1);
-  })
   return def.promise;
 }
 

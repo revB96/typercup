@@ -25,6 +25,19 @@ function add(userId){
     }));
 }
 
+function deactivateUser(userId){
+  var def = Q.defer();
+    UserStats.findByIdAndUpdate(userId, {
+    active: false
+  },{
+    new:true,
+    autoIndex: true
+  }).exec(function (err,result){
+    err ? def.reject(err) : def.resolve(1);
+  })
+  return def.promise;
+}
+
 function getAll() {
   var def = Q.defer();
   UserStats.find()
@@ -140,5 +153,6 @@ module.exports = {
     updateUserStats,
     addQuizToStats,
     addToCorrectAnswers,
-    getUserCorrectAnswers
+    getUserCorrectAnswers,
+    deactivateUser
 }

@@ -431,7 +431,7 @@ function adminPrintBackups(){
         </td>
       </tr>
       `)
-      counter ++
+      counter++;
     })
   })
 }

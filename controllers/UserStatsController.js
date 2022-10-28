@@ -34,6 +34,7 @@ function deactivateUser(userId){
     autoIndex: true
   }).exec(function (err,result){
     err ? def.reject(err) : def.resolve(1);
+    console.log("Dezaktywacja statystyk: "+result)
   })
   return def.promise;
 }

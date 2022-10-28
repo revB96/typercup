@@ -49,7 +49,7 @@ function activateUser(userId){
       defeat: 0,
       correctQuestions: 0,
       quizPoints: 0,
-      active: 1,
+      active: true,
   },{
     new:true,
     autoIndex: true
@@ -62,8 +62,7 @@ function activateUser(userId){
 
 function getAll() {
   var def = Q.defer();
-  UserStats.find()
-    .select({active:true})
+  UserStats.find({active:true})
     .populate("user", "username friendlyName champion")
     .sort({ points: "desc" })
     .exec(function (err, stats) {

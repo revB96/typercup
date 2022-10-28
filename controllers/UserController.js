@@ -202,7 +202,7 @@ function getAll() {
 
 async function deactivateUser(userId){
   var def = Q.defer();
-  await UserStats.findByIdAndUpdate(formData.userId, {
+  await UserStats.findByIdAndUpdate(userId, {
     active: false
   },{
     new:true,

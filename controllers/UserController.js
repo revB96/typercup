@@ -11,7 +11,6 @@ const UserNotification = require("../models/userNotifications");
 const bcrypt = require("bcrypt");
 const UserStats = require("./UserStatsController");
 const { getFirstRoundMatch } = require("./ScheduleController");
-const UserNotificationController = require("./UserNotificationController");
 const moment = require("moment-timezone");
 const nodemailer = require("nodemailer");
 const dateFormat = require("dateformat");
@@ -70,17 +69,17 @@ async function add(formData) {
   return def.promise;
 }
 
-function update(formData){
+function update(formData) {
   var def = Q.defer();
   const timestamp = Date.now();
   var filledQuiz, firstLogon, active, champion;
-  
-  if(formData.filledQuiz == null) filledQuiz = false; else filledQuiz = true;
-  if(formData.firstLogon == null) firstLogon = false; else firstLogon = true;
-  if(formData.active == null) active = false; else active = true;
-  if(formData.champion == null) champion = false; else champion = true;
 
-  User.findByIdAndUpdate(formData.userId,{
+  if (formData.filledQuiz == null) filledQuiz = false; else filledQuiz = true;
+  if (formData.firstLogon == null) firstLogon = false; else firstLogon = true;
+  if (formData.active == null) active = false; else active = true;
+  if (formData.champion == null) champion = false; else champion = true;
+
+  User.findByIdAndUpdate(formData.userId, {
     username: formData.username,
     email: formData.email,
     timezone: formData.timezone,
@@ -90,24 +89,44 @@ function update(formData){
     filledQuiz: filledQuiz,
     active: active,
     updatedAt: timestamp,
-  },{
-    new:true,
+  }, {
+    new: true,
     autoIndex: true
-  }).exec(function (err, user){
+  }).exec(function (err, user) {
     err ? def.reject(err) : def.resolve(1);
 
-    if(user.active == false){
+    if (user.active == false) {
       UserStats.deactivateUser(user._id)
-      UserNotificationController.deactivateAllNotificationsForUser(user._id)
+      UserNotification.findOneAndUpdate({ user: user._id }, {
+        newRound: false,
+        daySummary: false,
+        closeRound: false,
+        reminder: false,
+      }, {
+        new: true,
+        autoIndex: true
+      }).exec(function (err, result) {
+        console.log("Deaktywacja powiadomień: " + result)
+      })
     }
 
-    if(user.active == true){
+    if (user.active == true) {
       UserStats.activateUser(user._id)
-      UserNotificationController.activateAllNotificationsForUser(user._id)
+      UserNotification.findOneAndUpdate({ user: user._id }, {
+        newRound: true,
+        daySummary: true,
+        closeRound: true,
+        reminder: true,
+      }, {
+        new: true,
+        autoIndex: true
+      }).exec(function (err, result) {
+        console.log("Aktywacja powiadomień: " + result)
+      })
     }
 
   })
-  
+
   return def.promise;
 }
 

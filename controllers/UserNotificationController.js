@@ -1098,39 +1098,6 @@ function add(userId){
 
 }
 
-function deactivateAllNotificationsForUser(userId){
-    var def = Q.defer();
-    userNotification.findOneAndUpdate({user:userId}, {
-        newRound: false,
-        daySummary: false,
-        closeRound: false,
-        reminder: false,
-  },{
-    new:true,
-    autoIndex: true
-  }).exec(function (err,result){
-    err ? def.reject(err) : def.resolve(1);
-    console.log("Deaktywacja powiadomień: "+result)
-  })
-  return def.promise;
-}
-
-function activateAllNotificationsForUser(userId){
-    var def = Q.defer();
-    userNotification.findOneAndUpdate({user:userId}, {
-        newRound: true,
-        daySummary: true,
-        closeRound: true,
-        reminder: true,
-  },{
-    new:true,
-    autoIndex: true
-  }).exec(function (err,result){
-    err ? def.reject(err) : def.resolve(1);
-    console.log("Aktywacja powiadomień: "+result)
-  })
-  return def.promise;
-}
 
 function getUserNotifications(userId){
     var def = Q.defer();
@@ -1148,6 +1115,4 @@ module.exports ={
     getUserNotifications,
     newAcountEmailNotification,
     sendNotificationToUser,
-    deactivateAllNotificationsForUser,
-    activateAllNotificationsForUser
 }

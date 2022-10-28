@@ -201,17 +201,9 @@ function getAll() {
 }
 
 function deactivateUser(userId){
-  var def = Q.defer();
-  UserStats.findOneAndDelete({user: userId }, function (err, resulr) {
-    if (err){
-        console.log(err)
-    }
-    else{
-        console.log("Deleted User : ", resulr);
-    }
-  });
+ 
+  UserStats.findOneAndDelete({user: userId })
   
-  return def.promise;
 }
 
 async function changePassword(formData) {

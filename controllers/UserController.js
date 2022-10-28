@@ -70,24 +70,34 @@ async function add(formData) {
 }
 
 function update(formData){
-  console.log(formData)
   var def = Q.defer();
   const timestamp = Date.now();
-  console.log("1" + formData.userId)
+  var filledQuiz, firstLogon, active, champion;
+  
+  if(formData.filledQuiz == null) filledQuiz = false; else filledQuiz = true;
+  if(formData.firstLogon == null) firstLogon = false; else firstLogon = true;
+  if(formData.active == null) active = false; else active = true;
+  if(formData.champion == null) champion = false; else champion = true;
+
   User.findByIdAndUpdate(formData.userId,{
     username: formData.username,
     email: formData.email,
     timezone: formData.timezone,
     friendlyName: formData.friendlyName,
-    champion: formData.champion,
-    firstLogon: formData.firstLogon,
-    filledQuiz: formData.filledQuiz,
+    champion: champion,
+    firstLogon: firstLogon,
+    filledQuiz: filledQuiz,
+    active: active,
     updatedAt: timestamp,
   },{
     new:true,
     autoIndex: true
   }).exec(function (err, user){
     err ? def.reject(err) : def.resolve(1);
+
+    if(user.active == false)
+      deactivateUser(user._id)
+
   })
   
   return def.promise;
@@ -133,7 +143,7 @@ function getUserDetails(id) {
   var def = Q.defer();
   User.findOne({ _id: id })
     .populate("userNotifications")
-    .select("username email firstLogon filledQuiz userNotifications timezone friendlyName champion")
+    .select("username email firstLogon filledQuiz userNotifications timezone friendlyName champion active")
     .exec(function (err, user) {
       err ? def.reject(err) : def.resolve(user);
     });
@@ -180,13 +190,21 @@ function getAll() {
   var def = Q.defer();
   User.find(
     {},
-    "username email role firstLogon filledQuiz createdAt updatedAt lastLogon timezone friendlyName champion"
+    "username email role firstLogon filledQuiz createdAt updatedAt lastLogon timezone friendlyName champion active"
   )
     .sort({ createdAt: "desc" })
     .exec(function (err, users) {
       err ? def.reject(err) : def.resolve(users);
     });
 
+  return def.promise;
+}
+
+function deactivateUser(userId){
+  var def = Q.defer();
+  UserStats.deleteOne({user:userId}).then((err, result) =>{
+    err ? def.reject(err) : def.resolve(result);
+  })
   return def.promise;
 }
 

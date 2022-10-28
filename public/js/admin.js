@@ -149,13 +149,14 @@ function adminListUsers() {
     $("#list-user-tabContent").html(``)
     for (const [index, user] of Object.entries(result)) {
       var lastLogon = new Date(user.lastLogon);
-      var champion = "", firstLogon = "", filledQuiz = "", timezone = "", friendlyName = "";
+      var champion = "", firstLogon = "", filledQuiz = "", timezone = "", active = "";
       var active = "", showActive = "";
 
       if (index == 0) { active = "active"; showActive = "show active" }
       if ((typeof user.champion !== "undefined") && (user.champion == true)) champion = "checked"
       if ((typeof user.firstLogon !== "undefined") && (user.firstLogon == true)) firstLogon = "checked"
       if ((typeof user.filledQuiz !== "undefined") && (user.filledQuiz == true)) filledQuiz = "checked"
+      if ((typeof user.active !== "undefined") && (user.active == true)) active = "checked"
       if (typeof user.timezone !== "undefined") timezone = user.timezone
 
       //console.log(champion)
@@ -189,17 +190,21 @@ function adminListUsers() {
               <label class="form-label">Rola</label>
               <input name="role" type="text" class="form-control" value="${user.role}" required />
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <input name="champion" class="form-check-input" type="checkbox" value="true" ${champion} />
               <label class="form-label">Mistrz</label>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <input name="firstLogon" class="form-check-input" type="checkbox" value="true" ${firstLogon} />
               <label class="form-label">Logowanie</label>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <input name="filledQuiz" class="form-check-input" type="checkbox" value="true" ${filledQuiz} />
               <label class="form-label">Quiz</label>
+            </div>
+            <div class="col-md-3">
+              <input name="active" class="form-check-input" type="checkbox" value="true" ${active} />
+              <label class="form-label">Aktywny</label>
             </div>
             <div class="col-md-12">
               <button class="btn btn-primary" onClick="updateUser('${user._id}')">Edytuj</button>

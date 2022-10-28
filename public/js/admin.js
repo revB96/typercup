@@ -419,11 +419,10 @@ function restoreDatabaseToBackup(fileName){
 function adminPrintBackups(){
   $(`#admin-backups-table`).html("")
   getBackups().then(async (result) =>{
-    var counter = 1
-    result.forEach(async backup =>{
+    result.forEach(async (backup, index) =>{
       await $(`#admin-backups-table`).append(`
       <tr>
-        <th scope="row">${counter}</th>
+        <th scope="row">${index}</th>
         <td>${backup}</td>
         <td>
           <button type="button" class="btn btn-primary" onClick="restoreDatabase('${backup}')">Przywróć</button>
@@ -431,7 +430,6 @@ function adminPrintBackups(){
         </td>
       </tr>
       `)
-      counter++;
     })
   })
 }

@@ -6,7 +6,7 @@ var CronJobManager = require('cron-job-manager')
 
 
 cronManager = new CronJobManager()
-cronManager.add('backupDatabase8','30 * * * *', ()=>{
+cronManager.add('backupDatabase','0 10 * * *', ()=>{   //30 * * * *
     console.log("Backup Database...")
     Backup.dumpMongo2Localfile("");
 }, {start: true, timeZone: "Europe/Warsaw"}) //Database backup every day at 8:00

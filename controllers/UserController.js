@@ -202,7 +202,7 @@ function getAll() {
 
 async function deactivateUser(userId){
  
-  await UserStats.deleteOne({user: userId });
+  await UserStats.findByIdAndDelete(userId);
   
 }
 

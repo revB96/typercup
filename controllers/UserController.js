@@ -95,11 +95,15 @@ function update(formData){
   }).exec(function (err, user){
     err ? def.reject(err) : def.resolve(1);
 
-    if(user.active == false)
+    if(user.active == false){
       UserStats.deactivateUser(user._id)
+      UserNotification.deactivateAllNotificationsForUser(user._id)
+    }
 
-    if(user.active == true)
+    if(user.active == true){
       UserStats.activateUser(user._id)
+      UserStats.activateAllNotificationsForUser(user._id)
+    }
 
   })
   

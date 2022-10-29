@@ -907,7 +907,7 @@ function roundEmailNotification(firstMatch) {
         userNotifications.forEach((userNotification) => {
           //setTimeout(() => {
           getUserById(userNotification.user).then((user) => {
-            if(!!user){
+            //if(!!user){
             if(user.timezone == "UK") endDate.setHours(endDate.getHours() - 2); else endDate.setHours(endDate.getHours() - 1);
             endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
 
@@ -1433,7 +1433,7 @@ function roundEmailNotification(firstMatch) {
               });
 
             })
-          }
+          //}
           })
         //}, 1000 * index);  
         })

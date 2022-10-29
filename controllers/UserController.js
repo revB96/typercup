@@ -111,7 +111,7 @@ function update(formData) {
     }
 
     if (user.active == true) {
-      UserStats.activateUser(user._id)
+      //UserStats.activateUser(user._id)
       UserNotification.findOneAndUpdate({ user: user._id }, {
         newRound: true,
         daySummary: true,
@@ -896,21 +896,22 @@ function newAccountEmailNotification(reciver, username, password) {
 function roundEmailNotification(firstMatch) {
   var endDate = new Date(firstMatch);
   var index = 5;
-  endDate.setHours(endDate.getHours() - 1);
-  endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
-
+ 
   UserNotification.find({ newRound: true }).exec(function (
     err,
     userNotifications
   ) {
     if (err) console.log(err);
     else {
-      console.log(userNotifications);
+      //console.log(userNotifications);
       setTimeout(() => {
         userNotifications.forEach((userNotification) => {
           getUserById(userNotification.user).then((user) => {
             if(!!user){
-            //console.log("user: " + user._id)
+
+            if(user.timezone == "UK") endDate.setHours(endDate.getHours() - 2); else endDate.setHours(endDate.getHours() - 1);
+            endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
+
             getUserRandomCode(user._id).then((randomCode) => {
             //console.log("Random code: "+ randomCode);
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);
@@ -1511,6 +1512,7 @@ function toogleNotification(notificationName, userId) {
 
   return def.promise;
 }
+
 function sendReminder(roundDate) {
   var startDate = new Date(moment.tz(roundDate, "Europe/Warsaw"));
   var endDate = new Date(moment.tz(roundDate, "Europe/Warsaw"));
@@ -2019,7 +2021,7 @@ function sendReminder(roundDate) {
                                                     <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
                                                     <tr>
                                                         <td class="content-cell" align="center">
-                                                        <p class="f-fallback sub align-center">&copy; 2021 [typer-cup.pl]. All rights reserved.</p>
+                                                        <p class="f-fallback sub align-center">&copy; 2022 [typer-cup.pl]. All rights reserved.</p>
                                                         </td>
                                                     </tr>
                                                     </table>
@@ -2556,7 +2558,7 @@ function sendCloseRoundNotification() {
                                                   <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
                                                   <tr>
                                                       <td class="content-cell" align="center">
-                                                      <p class="f-fallback sub align-center">&copy; 2021 [typer-cup.pl]. All rights reserved.</p>
+                                                      <p class="f-fallback sub align-center">&copy; 2022 [typer-cup.pl]. All rights reserved.</p>
                                                       </td>
                                                   </tr>
                                                   </table>

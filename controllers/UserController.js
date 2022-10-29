@@ -912,7 +912,7 @@ function roundEmailNotification(firstMatch) {
             endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
 
             getUserRandomCode(user._id).then((randomCode) => {
-            //console.log("Random code: "+ randomCode);
+            console.log("Random code: "+ randomCode);
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);
         
               const dateOptions = {
@@ -1427,8 +1427,8 @@ function roundEmailNotification(firstMatch) {
               transporter.sendMail(mailOptions, function (err, data) {
                 if (err) console.log("Error " + err + data);
                 else{ 
-                  console.log(err)
-                  console.log(data)
+                  //console.log(err)
+                  //console.log(data)
                   console.log("Email Sent")}
               });
 

@@ -903,7 +903,7 @@ function roundEmailNotification(firstMatch) {
   ) {
     if (err) console.log(err);
     else {
-      //console.log(userNotifications);
+      console.log(userNotifications);
       setTimeout(() => {
         userNotifications.forEach((userNotification) => {
           getUserById(userNotification.user).then((user) => {

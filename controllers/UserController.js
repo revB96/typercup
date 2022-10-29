@@ -908,8 +908,6 @@ function roundEmailNotification(firstMatch) {
           //setTimeout(() => {
           getUserById(userNotification.user).then((user) => {
             if(!!user){
-              console.log("user: " + user)
-              console.log("notifications: " + userNotification)
             if(user.timezone == "UK") endDate.setHours(endDate.getHours() - 2); else endDate.setHours(endDate.getHours() - 1);
             endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
 
@@ -1420,7 +1418,7 @@ function roundEmailNotification(firstMatch) {
                               </html>
                               `;
               let mailOptions = {
-                from: '"Typer-Cup.pl ⚽ " <admin@typer-cup.pl>', // sender address
+                from: '"Typer-Cup.pl ⚽ " <powiadomienia@typer-cup.pl>', // sender address
                 to: user.email, // list of receivers
                 subject: "Wystartowała nowa kolejka 🔜", // Subject line
                 html: html, // html body
@@ -1428,7 +1426,10 @@ function roundEmailNotification(firstMatch) {
 
               transporter.sendMail(mailOptions, function (err, data) {
                 if (err) console.log("Error " + err + data);
-                else console.log("Email Sent")
+                else{ 
+                  console.log(err)
+                  console.log(data)
+                  console.log("Email Sent")}
               });
 
             })

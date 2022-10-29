@@ -55,7 +55,7 @@ function getScheduleById(id) {
 function getGroupSchedule(group){
     var def = Q.defer();
     Schedule
-        .find({group:group})
+        .find({group:group, stage: "group"})
         .sort({matchDate: "asc"})
         .populate("t1", "teamName shortcut").populate("t2", "teamName shortcut")
         .exec(function (err, schedule) {

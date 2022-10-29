@@ -9,6 +9,7 @@ function printSchedule(group) {
   $("#euro2021-schedule").html("");
   const dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
   getGroupSchedule(group).then((result) => {
+    console.log(result)
     var matchByDate = result.reduce((acc, value) => {
       var date = new Date(value.matchDate);
       var formatDate = date.toLocaleDateString("en-GB", dateOptions);

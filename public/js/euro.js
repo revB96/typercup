@@ -28,7 +28,7 @@ function printSchedule(group) {
       day = `<ul class="list-group list-group-flush" style="text-align: center;"><li class="list-group-item list-group-item-primary" aria-current="true">${day}</li></ul>`;
       await matchInDay.forEach(async (match) => {
         var date = new Date(match.matchDate);
-        var hrs,mins;
+        var hrs = date.getHours(), mins = date.getMinutes() ;
         if (date.getHours() <= 9) hrs = "0" + date.getHours();
         if (date.getMinutes() < 10) mins = "0" + date.getMinutes();
         day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${match.t1.teamName

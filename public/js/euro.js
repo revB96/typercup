@@ -9,7 +9,6 @@ function printSchedule(group) {
   $("#euro2021-schedule").html("");
   const dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
   getGroupSchedule(group).then((result) => {
-    console.log(result)
     var matchByDate = result.reduce((acc, value) => {
       var date = new Date(value.matchDate);
       var formatDate = date.toLocaleDateString("en-GB", dateOptions);
@@ -24,26 +23,18 @@ function printSchedule(group) {
 
     var matchByDateKeys = Object.keys(matchByDate);
 
-    matchByDateKeys.forEach((day) => {
+    matchByDateKeys.forEach(async (day) => {
       var matchInDay = matchByDate[day];
       day = `<ul class="list-group list-group-flush" style="text-align: center;"><li class="list-group-item list-group-item-primary" aria-current="true">${day}</li></ul>`;
-      matchInDay.forEach((match) => {
+      await matchInDay.forEach(async (match) => {
         var date = new Date(match.matchDate);
-        if (date.getHours() == "15")
-          day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${match.t1.teamName
-            }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>15:00</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${match.t2.teamName
+        day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${match.t1.teamName
+            }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>${date.getHours()}:${date.getMinutes}</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${match.t2.teamName
             }</li></ul>`;
-        else if (date.getHours() == "18")
-          day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${match.t1.teamName
-            }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>18:00</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${match.t2.teamName
-            }</li></ul>`;
-        else if (date.getHours() == "21")
-          day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${match.t1.teamName
-            }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>21:00</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${match.t2.teamName
-            }</li></ul>`;
+        
       });
 
-      $("#euro2021-schedule").append(day);
+      await $("#euro2021-schedule").append(day);
     });
   });
 }

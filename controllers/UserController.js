@@ -905,8 +905,9 @@ function roundEmailNotification(firstMatch) {
     else {
       //console.log(userNotifications);
         userNotifications.forEach((userNotification) => {
-          //setTimeout(() => {
+          setTimeout(() => {
           getUserById(userNotification.user).then((user) => {
+            console.log(user)
             //if(!!user){
             //if(user.timezone == "UK") endDate.setHours(endDate.getHours() - 2); else endDate.setHours(endDate.getHours() - 1);
             endDate.setHours(endDate.getHours() - 1)
@@ -1436,7 +1437,7 @@ function roundEmailNotification(firstMatch) {
             })
           //}
           })
-        //}, 1000 * index);  
+        }, 1000 * index);  
         })
     }
   })

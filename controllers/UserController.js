@@ -907,8 +907,8 @@ function roundEmailNotification(firstMatch) {
         userNotifications.forEach(async (userNotification) => {
           setTimeout(async () => {
           console.log("1")
-          getUserById(userNotification.user).then((user) => {
-            console.log("2")
+          await getUserById(userNotification.user).then((user) => {
+            console.log(user.username + " 2")
             //console.log(user)
             //if(!!user){
             //if(user.timezone == "UK") endDate.setHours(endDate.getHours() - 2); else endDate.setHours(endDate.getHours() - 1);

@@ -134,7 +134,7 @@ function print18schedule() {
       if (mins < 10) mins = "0" + mins;
 
       $("#18-stage-table").append(`
-                <div class="col">
+               
                     <div class="card text-white bg-primary mb-3">
                         <div class="card-header">${formatDate}</div>
                         <div class="card-body">
@@ -156,14 +156,14 @@ function print18schedule() {
                         </div>
                         </div>
                     </div>
-                </div>
+              
             `);
     }
 
     if (counter < 8) {
       for (let i = counter; i <= 7; i++) {
         $("#18-stage-table").append(`
-                <div class="col">
+               
                     <div class="card text-white bg-primary mb-3">
                         <div class="card-header">??:??</div>
                         <div class="card-body">
@@ -179,7 +179,7 @@ function print18schedule() {
                         </div>
                         </div>
                     </div>
-                </div>
+               
             `);
       }
     }

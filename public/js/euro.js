@@ -9,35 +9,42 @@ function printSchedule(group) {
   $("#euro2021-schedule").html("");
   const dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
   getGroupSchedule(group).then((result) => {
-    var matchByDate = result.reduce((acc, value) => {
-      var date = new Date(value.matchDate);
-      var formatDate = date.toLocaleDateString("en-GB", dateOptions);
-      if (!acc[formatDate]) {
-        acc[formatDate] = [];
-      }
-      // Grouping
-      acc[formatDate].push(value);
+    getUserTimezone(getUserId()).then(async (userTimezone) => {
+      var matchByDate = result.reduce((acc, value) => {
+        var date = new Date(value.matchDate);
+        var formatDate = date.toLocaleDateString("en-GB", dateOptions);
+        if (!acc[formatDate]) {
+          acc[formatDate] = [];
+        }
+        // Grouping
+        acc[formatDate].push(value);
 
-      return acc;
-    }, {});
+        return acc;
+      }, {});
 
-    var matchByDateKeys = Object.keys(matchByDate);
+      var matchByDateKeys = Object.keys(matchByDate);
 
-    matchByDateKeys.forEach(async (day) => {
-      var matchInDay = matchByDate[day];
-      day = `<ul class="list-group list-group-flush" style="text-align: center;"><li class="list-group-item list-group-item-primary" aria-current="true">${day}</li></ul>`;
-      await matchInDay.forEach(async (match) => {
-        var date = new Date(match.matchDate);
-        var hrs = date.getHours(), mins = date.getMinutes() ;
-        if (date.getHours() <= 9) hrs = "0" + date.getHours();
-        if (date.getMinutes() < 10) mins = "0" + date.getMinutes();
-        day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${match.t1.teamName
-            }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>${hrs}:${mins}</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${match.t2.teamName
-            }</li></ul>`;
-        
+      matchByDateKeys.forEach(async (day) => {
+        var matchInDay = matchByDate[day];
+        day = `<ul class="list-group list-group-flush" style="text-align: center;"><li class="list-group-item list-group-item-primary" aria-current="true">${day}</li></ul>`;
+        await matchInDay.forEach(async (match) => {
+          var date = new Date(match.matchDate);
+          var hrs = date.getHours(),
+            mins = date.getMinutes();
+
+          if (userTimezone.timezone == "UK") hrs--;
+          if (date.getHours() <= 9) hrs = "0" + date.getHours();
+          if (date.getMinutes() < 10) mins = "0" + date.getMinutes();
+
+          day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${
+            match.t1.teamName
+          }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>${hrs}:${mins}</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${
+            match.t2.teamName
+          }</li></ul>`;
+        });
+
+        await $("#euro2021-schedule").append(day);
       });
-
-      await $("#euro2021-schedule").append(day);
     });
   });
 }
@@ -67,19 +74,25 @@ function printGroupTable(result, reload = 0) {
 
 function print18schedule() {
   get18Schedule().then(async (schedule) => {
-    var counter = 0;
-    for await (const [index, match] of Object.entries(schedule)) {
-      counter++;
-      const dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
-      var date = new Date(match.matchDate);
-      var formatDate = date.toLocaleDateString("en-GB", dateOptions);
-      var hrs = date.getHours();
-      var mins = date.getMinutes();
+    getUserTimezone(getUserId()).then(async (userTimezone) => {
+      var counter = 0;
+      for await (const [index, match] of Object.entries(schedule)) {
+        counter++;
+        const dateOptions = {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+        };
+        var date = new Date(match.matchDate);
+        var formatDate = date.toLocaleDateString("en-GB", dateOptions);
+        var hrs = date.getHours();
+        var mins = date.getMinutes();
 
-      if (hrs <= 9) hrs = "0" + hrs;
-      if (mins < 10) mins = "0" + mins;
+        if (userTimezone.timezone == "UK") hrs--;
+        if (hrs <= 9) hrs = "0" + hrs;
+        if (mins < 10) mins = "0" + mins;
 
-      $("#18-stage-table").append(`
+        $("#18-stage-table").append(`
                
                     <div class="card text-white bg-primary mb-3">
                         <div class="card-header">${formatDate}</div>
@@ -104,11 +117,11 @@ function print18schedule() {
                     </div>
               
             `);
-    }
+      }
 
-    if (counter < 8) {
-      for (let i = counter; i <= 7; i++) {
-        $("#18-stage-table").append(`
+      if (counter < 8) {
+        for (let i = counter; i <= 7; i++) {
+          $("#18-stage-table").append(`
                
                     <div class="card text-white bg-primary mb-3">
                         <div class="card-header">??:??</div>
@@ -127,26 +140,33 @@ function print18schedule() {
                     </div>
                
             `);
+        }
       }
-    }
+    });
   });
 }
 
 function print14schedule() {
   get14Schedule().then(async (schedule) => {
-    var counter = 0;
-    for await (const [index, match] of Object.entries(schedule)) {
-      counter++;
-      const dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
-      var date = new Date(match.matchDate);
-      var formatDate = date.toLocaleDateString("en-GB", dateOptions);
-      var hrs = date.getHours();
-      var mins = date.getMinutes();
+    getUserTimezone(getUserId()).then(async (userTimezone) => {
+      var counter = 0;
+      for await (const [index, match] of Object.entries(schedule)) {
+        counter++;
+        const dateOptions = {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+        };
+        var date = new Date(match.matchDate);
+        var formatDate = date.toLocaleDateString("en-GB", dateOptions);
+        var hrs = date.getHours();
+        var mins = date.getMinutes();
 
-      if (hrs <= 9) hrs = "0" + hrs;
-      if (mins < 10) mins = "0" + mins;
+        if (userTimezone.timezone == "UK") hrs--;
+        if (hrs <= 9) hrs = "0" + hrs;
+        if (mins < 10) mins = "0" + mins;
 
-      $("#14-stage-table").append(`
+        $("#14-stage-table").append(`
                       <div class="card text-white bg-secondary mb-3">
                           <div class="card-header">${formatDate}</div>
                           <div class="card-body">
@@ -165,11 +185,11 @@ function print14schedule() {
                           </div>
                       </div>          
               `);
-    }
+      }
 
-    if (counter < 4) {
-      for (let i = counter; i < 4; i++) {
-        $("#14-stage-table").append(`
+      if (counter < 4) {
+        for (let i = counter; i < 4; i++) {
+          $("#14-stage-table").append(`
                  
                       <div class="card text-white bg-secondary mb-3">
                           <div class="card-header">??:??</div>
@@ -188,26 +208,33 @@ function print14schedule() {
                       </div>
                 
               `);
+        }
       }
-    }
+    });
   });
 }
 
 function print12schedule() {
   get12Schedule().then(async (schedule) => {
-    var counter = 0;
-    for await (const [index, match] of Object.entries(schedule)) {
-      counter++;
-      const dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
-      var date = new Date(match.matchDate);
-      var formatDate = date.toLocaleDateString("en-GB", dateOptions);
-      var hrs = date.getHours();
-      var mins = date.getMinutes();
+    getUserTimezone(getUserId()).then(async (userTimezone) => {
+      var counter = 0;
+      for await (const [index, match] of Object.entries(schedule)) {
+        counter++;
+        const dateOptions = {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+        };
+        var date = new Date(match.matchDate);
+        var formatDate = date.toLocaleDateString("en-GB", dateOptions);
+        var hrs = date.getHours();
+        var mins = date.getMinutes();
 
-      if (hrs <= 9) hrs = "0" + hrs;
-      if (mins < 10) mins = "0" + mins;
+        if (userTimezone.timezone == "UK") hrs--;
+        if (hrs <= 9) hrs = "0" + hrs;
+        if (mins < 10) mins = "0" + mins;
 
-      $("#12-stage-table").append(`
+        $("#12-stage-table").append(`
         <div class="card text-white bg-success mb-3">
             <div class="card-header">${formatDate}</div>
             <div class="card-body">
@@ -225,11 +252,11 @@ function print12schedule() {
             </div>
             </div>
         </div>`);
-    }
+      }
 
-    if (counter < 2) {
-      for (let i = counter; i < 2; i++) {
-        $("#12-stage-table").append(`
+      if (counter < 2) {
+        for (let i = counter; i < 2; i++) {
+          $("#12-stage-table").append(`
                  
                       <div class="card text-white bg-success mb-3">
                           <div class="card-header">??:??</div>
@@ -248,26 +275,32 @@ function print12schedule() {
                       </div>
                 
               `);
+        }
       }
-    }
+    });
   });
 }
 
 function printFinal() {
   getFinalSchedule().then(async (schedule) => {
-    var counter = 0;
-    for await (const [index, match] of Object.entries(schedule)) {
-      counter++;
-      const dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
-      var date = new Date(match.matchDate);
-      var formatDate = date.toLocaleDateString("en-GB", dateOptions);
-      var hrs = date.getHours();
-      var mins = date.getMinutes();
+    getUserTimezone(getUserId()).then(async (userTimezone) => {
+      var counter = 0;
+      for await (const [index, match] of Object.entries(schedule)) {
+        counter++;
+        const dateOptions = {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+        };
+        var date = new Date(match.matchDate);
+        var formatDate = date.toLocaleDateString("en-GB", dateOptions);
+        var hrs = date.getHours();
+        var mins = date.getMinutes();
+        if (userTimezone.timezone == "UK") hrs--;
+        if (hrs <= 9) hrs = "0" + hrs;
+        if (mins < 10) mins = "0" + mins;
 
-      if (hrs <= 9) hrs = "0" + hrs;
-      if (mins < 10) mins = "0" + mins;
-
-      $("#final-stage-table").append(`
+        $("#final-stage-table").append(`
                       <div class="card text-white bg-warning mb-3">
                           <div class="card-header">${formatDate}</div>
                           <div class="card-body">
@@ -286,11 +319,11 @@ function printFinal() {
                           </div>
                       </div>   
               `);
-    }
+      }
 
-    if (counter < 1) {
-      for (let i = counter; i < 1; i++) {
-        $("#final-stage-table").append(`
+      if (counter < 1) {
+        for (let i = counter; i < 1; i++) {
+          $("#final-stage-table").append(`
                       <div class="card text-white bg-warning mb-3">
                           <div class="card-header">??:??</div>
                           <div class="card-body">
@@ -308,8 +341,9 @@ function printFinal() {
                       </div>
                 
               `);
+        }
       }
-    }
+    });
   });
 }
 

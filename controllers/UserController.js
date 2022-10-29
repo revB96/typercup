@@ -894,7 +894,6 @@ function newAccountEmailNotification(reciver, username, password) {
 }
 
 function roundEmailNotification(firstMatch) {
-  var endDate = new Date(firstMatch);
   var index = 5;
  
   UserNotification.find({ newRound: true }).exec(function (
@@ -909,6 +908,7 @@ function roundEmailNotification(firstMatch) {
           console.log("1")
           await getUserById(userNotification.user).then((user) => {
             console.log(user.username + " 2")
+            var endDate = new Date(firstMatch);
             //console.log(user)
             //if(!!user){
             //if(user.timezone == "UK") endDate.setHours(endDate.getHours() - 2); else endDate.setHours(endDate.getHours() - 1);

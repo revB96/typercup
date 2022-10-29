@@ -904,8 +904,8 @@ function roundEmailNotification(firstMatch) {
     if (err) console.log(err);
     else {
       //console.log(userNotifications);
-        userNotifications.forEach((userNotification) => {
-          setTimeout(() => {
+        userNotifications.forEach(async (userNotification) => {
+          setTimeout(async () => {
           console.log("1")
           getUserById(userNotification.user).then((user) => {
             console.log("2")
@@ -916,6 +916,8 @@ function roundEmailNotification(firstMatch) {
             endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
 
             getUserRandomCode(user._id).then((randomCode) => {
+            if(typeof randomCode.code == "undefined")
+              randomCode.code="brak";
             console.log("3")
             //console.log("Random code: "+ randomCode);
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);

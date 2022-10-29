@@ -908,7 +908,8 @@ function roundEmailNotification(firstMatch) {
           //setTimeout(() => {
           getUserById(userNotification.user).then((user) => {
             //if(!!user){
-            if(user.timezone == "UK") endDate.setHours(endDate.getHours() - 2); else endDate.setHours(endDate.getHours() - 1);
+            //if(user.timezone == "UK") endDate.setHours(endDate.getHours() - 2); else endDate.setHours(endDate.getHours() - 1);
+            endDate.setHours(endDate.getHours() - 1)
             endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
 
             getUserRandomCode(user._id).then((randomCode) => {

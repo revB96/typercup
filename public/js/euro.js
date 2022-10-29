@@ -28,8 +28,11 @@ function printSchedule(group) {
       day = `<ul class="list-group list-group-flush" style="text-align: center;"><li class="list-group-item list-group-item-primary" aria-current="true">${day}</li></ul>`;
       await matchInDay.forEach(async (match) => {
         var date = new Date(match.matchDate);
+        var hrs,mins;
+        if (date.getHours() <= 9) hrs = "0" + hrs;
+        if (date.getMinutes() < 10) mins = "0" + mins;
         day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${match.t1.teamName
-            }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>${date.getHours()}:${date.getMinutes()}</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${match.t2.teamName
+            }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>${hrs}:${mins}</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${match.t2.teamName
             }</li></ul>`;
         
       });

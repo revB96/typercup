@@ -422,7 +422,7 @@ function adminPrintBackups(){
     result.forEach(async (backup, index) =>{
       await $(`#admin-backups-table`).append(`
       <tr>
-        <th scope="row">${index}</th>
+        <th scope="row">${index+1}</th>
         <td>${backup}</td>
         <td>
           <button type="button" class="btn btn-primary" onClick="restoreDatabase('${backup}')">Przywróć</button>

@@ -29,23 +29,17 @@ function printSchedule(group) {
       matchInDay.forEach((match) => {
         var date = new Date(match.matchDate);
         if (date.getHours() == "15")
-          day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${
-            match.t1.teamName
-          }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>15:00</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${
-            match.t2.teamName
-          }</li></ul>`;
+          day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${match.t1.teamName
+            }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>15:00</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${match.t2.teamName
+            }</li></ul>`;
         else if (date.getHours() == "18")
-          day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${
-            match.t1.teamName
-          }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>18:00</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${
-            match.t2.teamName
-          }</li></ul>`;
+          day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${match.t1.teamName
+            }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>18:00</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${match.t2.teamName
+            }</li></ul>`;
         else if (date.getHours() == "21")
-          day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${
-            match.t1.teamName
-          }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>21:00</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${
-            match.t2.teamName
-          }</li></ul>`;
+          day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${match.t1.teamName
+            }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>21:00</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${match.t2.teamName
+            }</li></ul>`;
       });
 
       $("#euro2021-schedule").append(day);
@@ -85,23 +79,17 @@ function printKnockoutSchedule(knockoutState) {
     matchInDay.forEach((match) => {
       var date = new Date(match.matchDate);
       if (date.getHours() == "15")
-        day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${
-          match.t1.teamName
-        }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>15:00</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${
-          match.t2.teamName
-        }</li></ul>`;
+        day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${match.t1.teamName
+          }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>15:00</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${match.t2.teamName
+          }</li></ul>`;
       else if (date.getHours() == "18")
-        day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${
-          match.t1.teamName
-        }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>18:00</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${
-          match.t2.teamName
-        }</li></ul>`;
+        day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${match.t1.teamName
+          }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>18:00</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${match.t2.teamName
+          }</li></ul>`;
       else if (date.getHours() == "21")
-        day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${
-          match.t1.teamName
-        }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>21:00</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${
-          match.t2.teamName
-        }</li></ul>`;
+        day += `<ul class="list-group list-group-horizontal list-group-flush"><li class="list-group-item list-group-item-action" style="text-align: right;">${match.t1.teamName
+          }</li><li class="list-group-item list-group-item-action" style="text-align: center; max-width: 150px"> <span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></span> <i>21:00</i> <span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></span></li><li class="list-group-item list-group-item-action"> ${match.t2.teamName
+          }</li></ul>`;
     });
 
     $("#euro2021-knockout").append(day);
@@ -356,8 +344,7 @@ function printFinal() {
 
     if (counter < 1) {
       for (let i = counter; i < 1; i++) {
-        $("#12-stage-table").append(`
-                 
+        $("#final-stage-table").append(`
                       <div class="card text-white bg-warning mb-3">
                           <div class="card-header">??:??</div>
                           <div class="card-body">

@@ -903,9 +903,9 @@ function roundEmailNotification(firstMatch) {
   ) {
     if (err) console.log(err);
     else {
-      console.log(userNotifications);
+      //console.log(userNotifications);
         userNotifications.forEach((userNotification) => {
-          setTimeout(() => {
+          //setTimeout(() => {
           getUserById(userNotification.user).then((user) => {
             if(!!user){
 
@@ -1433,7 +1433,7 @@ function roundEmailNotification(firstMatch) {
             })
           }
           })
-        }, 1000 * index);  
+        //}, 1000 * index);  
         })
     }
   })

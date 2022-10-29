@@ -906,15 +906,18 @@ function roundEmailNotification(firstMatch) {
       //console.log(userNotifications);
         userNotifications.forEach((userNotification) => {
           setTimeout(() => {
+          console.log("1")
           getUserById(userNotification.user).then((user) => {
-            console.log(user)
+            console.log("2")
+            //console.log(user)
             //if(!!user){
             //if(user.timezone == "UK") endDate.setHours(endDate.getHours() - 2); else endDate.setHours(endDate.getHours() - 1);
             endDate.setHours(endDate.getHours() - 1)
             endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
 
             getUserRandomCode(user._id).then((randomCode) => {
-            console.log("Random code: "+ randomCode);
+            console.log("3")
+            //console.log("Random code: "+ randomCode);
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);
         
               const dateOptions = {
@@ -1427,8 +1430,10 @@ function roundEmailNotification(firstMatch) {
               };
 
               transporter.sendMail(mailOptions, function (err, data) {
+                console.log("5")
                 if (err) console.log("Error " + err + data);
                 else{ 
+                  console.log("6")
                   //console.log(err)
                   //console.log(data)
                   console.log("Email Sent")}

@@ -69,7 +69,7 @@ router.get("/table", authenticate, async function (req, res) {
 
 router.get("/euro", authenticate, async function (req, res) {
   res.render("euro", {
-    title: "Euro 2021",
+    title: "Mistrzostwa Świata 2022",
     lastRound: 1
 });
 })

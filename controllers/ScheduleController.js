@@ -59,7 +59,7 @@ function getGroupSchedule(group){
         .sort({matchDate: "asc"})
         .populate("t1", "teamName shortcut").populate("t2", "teamName shortcut")
         .exec(function (err, schedule) {
-            console.log(schedule)
+            //console.log(schedule)
             err ? def.reject(err) : def.resolve(schedule);
     });
     return def.promise;

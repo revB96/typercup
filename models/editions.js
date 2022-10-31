@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 var editionSchema = new mongoose.Schema({
     name: String,
-    prize_pool: Number,
-    participants: Number,
+    prize_pool: String,
+    participants: String,
 });
 var EditionSchema = mongoose.model('Edition', editionSchema);
 

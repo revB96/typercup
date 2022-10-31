@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Q = require("q");
 const express = require("express");
 const SiteConfiguration = require("../models/siteConfiguration.js");
-const Edition = require("../models/edition.js");
+const Edition = require("../models/editions.js");
 
 function addEdition(formData){
     var def = Q.defer();

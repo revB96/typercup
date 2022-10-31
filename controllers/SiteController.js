@@ -8,7 +8,7 @@ function addEdition(formData){
     var def = Q.defer();
     var edition = new Edition({
         name: formData.name,
-        prize_pool: formData.pool_price,
+        price_pool: formData.price_pool,
         participants: formData.participants,
       });
     

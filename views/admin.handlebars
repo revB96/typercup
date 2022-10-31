@@ -16,8 +16,8 @@
       role="tab" aria-controls="pills-round" aria-selected="false">Kolejki</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="pills-knockout-tab" data-bs-toggle="pill" data-bs-target="#pills-knockout"
-      type="button" role="tab" aria-controls="pills-knockout" aria-selected="false">Faza pucharowa</button>
+    <button class="nav-link" id="pills-siteConfig-tab" data-bs-toggle="pill" data-bs-target="#pills-siteConfig"
+      type="button" role="tab" aria-controls="pills-siteConfig" aria-selected="false">Konfiguracja strony</button>
   </li>
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="pills-users-tab" data-bs-toggle="pill" data-bs-target="#pills-users" type="button"
@@ -380,8 +380,31 @@
     </table>
   </div>
   <div class="tab-pane fade" id="pills-randomCodes" role="tabpanel" aria-labelledby="pills-randomCodes-tab">
-   
-
-
+  </div>
+  <div class="tab-pane fade" id="pills-siteConfig" role="tabpanel" aria-labelledby="pills-siteConfig-tab">
+    <div class="row">
+			<div class="col-md-6">
+        <p>Dodaj edycje</p>
+        <form id="add-edition-form" enctype="application/x-www-form-urlencoded" class="row g-3">
+           <div class="col-md-3">
+            <label class="form-label">Nazwa</label>
+            <input name="name" type="text" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Nagroda</label>
+            <input name="price_pool" type="text" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Liczba uczestników</label>
+            <input name="participants" type="text" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <button type="submit" class="btn btn-primary">Dodaj</button>
+          </div>
+        </form>
+			</div>
+			<div class="col-md-6">
+			</div>
+		</div>
   </div>
 </div>

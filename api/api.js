@@ -11,6 +11,7 @@ const UserStats = require("../controllers/UserStatsController")
 const Quiz = require("../controllers/QuizController")
 const Backup = require("../controllers/BackupController")
 const RandomCode = require("../controllers/RandomCodeController")
+const Site = require("../controllers/SiteController")
 
 router.post('/admin/schedule/add', function (req, res) {
     //console.log(req.body)
@@ -569,6 +570,17 @@ router.get('/admin/quiz/addpoints', function (req, res) {
 
 router.get('/admin/randomCodes', function (req, res) {
     RandomCode.getAll()
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        });
+    
+})
+
+router.post('/admin/site/edition/add', function (req, res) {
+    Site.addEdition(req.body)
         .then(data => {
             res.json(data)
         })

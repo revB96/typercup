@@ -590,6 +590,17 @@ router.get('/admin/site/edition/get', function (req, res) {
     
 })
 
+router.get('/admin/site/edition/setActive', function (req, res) {
+    Site.setActiveEdition(req.body)
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        });
+    
+})
+
 router.post('/admin/site/edition/add', function (req, res) {
     Site.addEdition(req.body)
         .then(data => {

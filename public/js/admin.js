@@ -661,6 +661,26 @@ $(document).ready(function () {
     });
   });
 
+  $("#set-activeEdition-form").submit(function (e) {
+    e.preventDefault();
+    const formData = $("#set-activeEdition-form").serializeArray();
+    $.post("/api/admin/site/edition/setActive", formData).done(() => {
+      $(".toast").html(`
+                <div class="toast-header">
+                <strong class="mr-auto">Panel administratora</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="toast-body">
+                  Zapisano!
+                </div>
+            `);
+      adminPrintEditions();
+      $(".toast").toast("show");
+    });
+  });
+
   $("#add-quiz-question-form").submit(function (e) {
     e.preventDefault();
     const formData = $("#add-quiz-question-form").serializeArray();

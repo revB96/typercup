@@ -28,21 +28,30 @@ function addEdition(formData){
     return def.promise;
 }
 
-function setActiveEdition(editionId){
+async function setActiveEdition(formData){
     var def = Q.defer();
-    SiteConfiguration.findOneAndUpdate(
-        {setting: "current_edition"},
-        {
-          value: editionId
-        },
-        {
-          new: false,
-        }
-      ).exec(function (err, userStats) {
-        err ? def.reject(err) : def.resolve(edition);
-      });
+
+    await getAllEditions().then(editions =>{
+        editions.forEach(edition =>{
+            Edition.findByIdAndUpdate(formData.id,{
+                active : false,
+            },{
+                new:false
+            }).exec(function (err, quiz){
+                if(err) def.reject(err)
+            })
+        })
+    })
+
+    await Edition.findByIdAndUpdate(formData.id,{
+        active : true,
+    },{
+        new:false
+    }).exec(function (err, quiz){
+        err ? def.reject(err) : def.resolve(quiz);
+    })
     
-      return def.promise;
+    return def.promise;
 }
 
 function getAllEditions(){

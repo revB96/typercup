@@ -623,7 +623,7 @@ function adminPrintEditionsList(){
       await getEditionHistory(edition._id).then(async (history,index) => {
         var tr="";
         await history.forEach((user_history,index)=>{
-          tr =+ `<tr>
+          tr += `<tr>
                   <th scope="col">${user_history.user.username}</th>
                   <th scope="col">${user_history.result}</th>
                   <th scope="col">${user_history.tickets}</th>

@@ -66,9 +66,10 @@ function getTop3OfAllEditions(){
 function getEditionDetails(editionId){
     var def = Q.defer();
     History
-        .find({edition:editionId})
+        .find({edition:editionId, transfered: true})
         .populate("username")
         .exec(function (err, edition) {
+            console.log(edition)
             err ? def.reject(err) : def.resolve(edition);
         });
     return def.promise;

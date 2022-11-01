@@ -507,6 +507,7 @@ function adminTransferToHistory(){
                 `);
     $(".toast").toast("show");
     adminPrintEditions();
+    adminPrintEditionsList();
     });
 }
 

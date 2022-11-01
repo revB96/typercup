@@ -593,7 +593,8 @@ $(document).ready(function () {
     adminGetQuestions();
     adminGetMatches();
     adminPrintBackups();
-    adminPrintEditions()
+    adminPrintEditions();
+    adminGetSelectEditions()
 
   $("#add-quiz-answer-form").submit(function (e) {
     e.preventDefault();

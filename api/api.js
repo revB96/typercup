@@ -12,6 +12,7 @@ const Quiz = require("../controllers/QuizController")
 const Backup = require("../controllers/BackupController")
 const RandomCode = require("../controllers/RandomCodeController")
 const Site = require("../controllers/SiteController")
+const History = require("../controllers/HistoryController")
 
 router.post('/admin/schedule/add', function (req, res) {
     //console.log(req.body)
@@ -592,6 +593,17 @@ router.get('/admin/site/edition/get', function (req, res) {
 
 router.post('/admin/site/edition/setActive', function (req, res) {
     Site.setActiveEdition(req.body)
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        });
+    
+})
+
+router.post('/admin/site/history/transfer-current-edition', function (req, res) {
+    History.transferToHistory()
         .then(data => {
             res.json(data)
         })

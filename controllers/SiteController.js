@@ -83,8 +83,8 @@ function getAllEditions(){
 
 function getCurrentEdition(){
     var def = Q.defer();
-    SiteConfiguration
-        .find({setting:"current_edition"})
+    Edition
+        .findOne({active:true})
         .exec(function (err, edition) {
             err ? def.reject(err) : def.resolve(edition);
     });

@@ -402,29 +402,6 @@
             </table>
           </div>
         </row>
-        <p>Opcje</p>
-        <div class="row">
-          <form id="transferToArchive-form" enctype="application/x-www-form-urlencoded" class="row g-2">
-            <div class="form-floating col-md-6">
-              <input type="text" class="form-control" value="Euro 2020">
-              <label for="floatingInput">Aktualna kolejka:</label>
-            </div>
-            <div class="col-md-6">
-              <button type="submit" class="btn btn-primary">Transfer aktualnej edycji do archiwum</button>
-            </div>
-          </form>
-        </div>
-        <div class="row">
-          <form id="set-activeEdition-form" enctype="application/x-www-form-urlencoded" class="row g-2">
-            <div class="col-md-6">
-              <select name="id" id="admin-select-editions" class="form-select">
-              </select>
-            </div>
-            <div class="col-md-6">
-              <button type="submit" class="btn btn-primary">Ustaw jako aktualną edycje</button>
-            </div>
-          </form>
-        </div>
 			</div>
 			<div class="col-md-6">
         <row>
@@ -447,6 +424,23 @@
             </div>
           </form>
         </row>
+         <p>Opcje</p>
+        <div class="row">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-primary" onClick="adminTransferToHistory()">Transfer aktualnej edycji do archiwum</button>
+          </div>
+        </div>
+        <div class="row">
+          <form id="set-activeEdition-form" enctype="application/x-www-form-urlencoded" class="row g-2">
+            <div class="col-md-6">
+              <select name="id" id="admin-select-editions" class="form-select">
+              </select>
+            </div>
+            <div class="col-md-6">
+              <button type="submit" class="btn btn-primary">Ustaw jako aktualną edycje</button>
+            </div>
+          </form>
+        </div>
 			</div>
 		</div>
   </div>

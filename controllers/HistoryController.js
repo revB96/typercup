@@ -12,7 +12,6 @@ function transferToHistory(){
         UserStats.getAll().then(stats => {
             console.log("***")
             console.log("Rozpoczęto transfer wyników do historii")
-            console.log("***")
             stats.forEach((stat, index) =>{
                 var history = new History({
                     user: stat.user._id,
@@ -32,14 +31,20 @@ function transferToHistory(){
                     else{
                         console.log("***")
                         console.log("Przetransferowano do historii:")
-                        console.log(result)
+                        console.log(result.user)
+                        console.log("Rezultat: "+ result.result + " | " + 
+                                    "Tickets: "+result.tickets + " | " + 
+                                    "Punkty: "+result.points + " | " + 
+                                    "PW: "+result.pw + " | " + 
+                                    "WD: "+result.wd + " | " + 
+                                    "Q: "+result.q + " | " + 
+                                    "P: "+result.p)
                         console.log("***")
                     }
 
                   });
             })
         })
-        console.log("***")
         console.log("Zakończono transfer wyników do historii")
         console.log("***")
     })

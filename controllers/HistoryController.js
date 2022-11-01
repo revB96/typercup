@@ -38,7 +38,7 @@ function transferToHistory(){
                                     "PW: "+result.pw + " | " + 
                                     "WD: "+result.wd + " | " + 
                                     "Q: "+result.q + " | " + 
-                                    "P: "+result.p)
+                                    "P: "+result.d)
                         console.log("***")
                     }
 

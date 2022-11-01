@@ -614,9 +614,10 @@ function adminPrintEditionsList(){
   getEditions().then(async (editions) =>{
     $(`#list-tab-editions`).html(``)
     editions.forEach(async(edition, index) =>{
-      var active = ""
-      if(index == 0) active = "active"
+      var counter = 0;
       if(edition.transfered == true){
+        counter ++;
+        if(counter == 1) active = "active"
         await $(`#list-tab-editions`).append(`
           <a class="list-group-item list-group-item-action ${active}" data-bs-toggle="list" href="#list-${edition._id}-editions" role="tab" aria-controls="list-${edition._id}-editions">${edition.name}</a>
           `)
@@ -625,14 +626,22 @@ function adminPrintEditionsList(){
           var tr="";
           await history.forEach((user_history,index)=>{
             tr += `<tr>
-                    <th scope="col">${user_history.user.username}</th>
-                    <th scope="col">${user_history.result}</th>
-                    <th scope="col">${user_history.tickets}</th>
-                    <th scope="col">${user_history.points}</th>
-                    <th scope="col">${user_history.pw}</th>
-                    <th scope="col">${user_history.wd}</th>
-                    <th scope="col">${user_history.d}</th>
-                    <th scope="col">${user_history.q}</th>
+                    <td>
+                      <button style="border-style: none; background-color: transparent;" id="tableHistoryEdition-Button-${user_history.user._id}">${user_history.user.username}</button>
+                      <script>tippy('#tableHistoryEdition-${user_history.user._id}', {
+                          content: "${user_history.user.friendlyName}",
+                          placement: 'right-start',
+                          theme: 'material',
+                        });
+                      </script>
+                    </td>
+                    <td scope="col">${user_history.result}</th>
+                    <td scope="col">${user_history.tickets}</th>
+                    <td scope="col">${user_history.points}</th>
+                    <td scope="col">${user_history.pw}</th>
+                    <td scope="col">${user_history.wd}</th>
+                    <td scope="col">${user_history.d}</th>
+                    <td scope="col">${user_history.q}</th>
                   </tr>`
           })
           console.log(tr)

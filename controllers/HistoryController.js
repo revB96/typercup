@@ -20,7 +20,7 @@ function transferToHistory(){
                     tickets: stat.tickets,
                     points: stat.points,
                     pw: stat.correctScore,
-                    wd: stats.correctTeam,
+                    wd: stat.correctTeam,
                     q: stat.quizPoints,
                     d: stat.defeat
                   });
@@ -67,7 +67,7 @@ function getEditionDetails(editionId){
     var def = Q.defer();
     History
         .find({edition:editionId})
-        .populate("user", "username")
+        .populate("user", "username friendlyName")
         .sort({ result: "asc" })
         .exec(function (err, edition) {
             console.log(edition)

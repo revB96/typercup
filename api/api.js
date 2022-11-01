@@ -602,8 +602,19 @@ router.post('/admin/site/edition/setActive', function (req, res) {
     
 })
 
-router.post('/admin/site/history/transfer-current-edition', function (req, res) {
+router.post('/admin/site/archive/transfer-current-edition', function (req, res) {
     History.transferToHistory()
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        });
+    
+})
+
+router.get('/archive/history/get', function (req, res) {
+    History.getEditionDetails(req.query.edition)
         .then(data => {
             res.json(data)
         })

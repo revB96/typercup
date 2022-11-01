@@ -498,6 +498,21 @@ function getEditions(){
     })
 }
 
+function getEditionHistory(editionId){
+    return $.ajax({
+        url: `/api/archive/get?edition=${editionId}`,
+        method: 'get',
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (result) {
+            return result;
+        },
+        fail: function (){
+            console.log("Nie udało się pobrać");
+        }
+    })
+}
+
 function getCountFinishedRound(){
     return $.ajax({
         url: `/api/round/finished/count`,

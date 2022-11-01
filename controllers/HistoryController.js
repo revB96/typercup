@@ -22,7 +22,7 @@ function transferToHistory(){
                     pw: stat.correctScore,
                     wd: stats.correctTeam,
                     q: stat.quizPoints,
-                    p: stat.defeat
+                    d: stat.defeat
                   });
                 
                   history.save(function (err, result) {
@@ -63,12 +63,13 @@ function getTop3OfAllEditions(){
     })
 }
 
-function getEditionDetails(edition){
+function getEditionDetails(editionId){
     var def = Q.defer();
     History
-        .find({edition:edition})
-        .exec(function (err, editions) {
-            err ? def.reject(err) : def.resolve(editions);
+        .find({edition:editionId})
+        .populate("username")
+        .exec(function (err, edition) {
+            err ? def.reject(err) : def.resolve(edition);
         });
     return def.promise;
     
@@ -76,4 +77,5 @@ function getEditionDetails(edition){
 
 module.exports = {
     transferToHistory,
+    getEditionDetails
 }

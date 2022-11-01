@@ -653,7 +653,7 @@ $(document).ready(function () {
                     </button>
                     </div>
                     <div class="toast-body">
-                        Dodano nową edycje
+                        Dodano nową edycje!
                     </div>
                 `);
       $(".toast").toast("show");

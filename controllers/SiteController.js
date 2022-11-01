@@ -30,7 +30,6 @@ function addEdition(formData){
 
 async function setActiveEdition(formData){
     var def = Q.defer();
-    console.log(formData)
     await getAllEditions().then(editions =>{
         editions.forEach(edition =>{
             Edition.findByIdAndUpdate(edition._id,{

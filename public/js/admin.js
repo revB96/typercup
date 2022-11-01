@@ -544,7 +544,11 @@ async function adminGetAllRandomCodes() {
 }
 
 function adminPrintEditions(){
-  $(`#admin-editions-table`).html("")
+  $(`#admin-editions-table`).html(`
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>`)
+    
   getEditions().then(async (editions) =>{
     editions.forEach(async (edition, index) =>{
       var active=``

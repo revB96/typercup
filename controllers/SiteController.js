@@ -30,15 +30,21 @@ function addEdition(formData){
 
 async function setActiveEdition(formData){
     var def = Q.defer();
-
+    console.log(formData)
     await getAllEditions().then(editions =>{
         editions.forEach(edition =>{
-            Edition.findByIdAndUpdate(formData.id,{
+            Edition.findByIdAndUpdate(edition._id,{
                 active : false,
             },{
                 new:false
-            }).exec(function (err, quiz){
-                if(err) def.reject(err)
+            }).exec(function (err, result){
+                if(err){
+                    console.log("***")
+                    console.log("Błąd ustawianiu edycji jako nieaktywna")
+                    console.log(err)
+                    console.log("***")
+                    def.reject(err)
+                }
             })
         })
     })
@@ -47,8 +53,20 @@ async function setActiveEdition(formData){
         active : true,
     },{
         new:false
-    }).exec(function (err, quiz){
-        err ? def.reject(err) : def.resolve(quiz);
+    }).exec(function (err, edition){
+        if(err){
+            console.log("***")
+            console.log("Błąd przy ustawianiu aktualnej edycji")
+            console.log(err)
+            console.log("***")
+            def.reject(err)
+        }else{
+            console.log("***")
+            console.log("Ustawiono nową aktualną edycji")
+            console.log(edition)
+            console.log("***")
+            def.reject(edition)
+        }
     })
     
     return def.promise;

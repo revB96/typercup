@@ -572,6 +572,8 @@ function adminPrintEditions(){
       var active=``
       if(edition.active == true)
         active=`class="table-success"`
+      if(edition.transfered == true)
+        active=`class="table-secondary"`
 
       await $(`#admin-editions-table`).append(`
       <tr ${active}>

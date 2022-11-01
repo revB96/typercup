@@ -66,7 +66,7 @@ function getCurrentEdition(){
 }
 
 module.exports = {
-    setEdition,
+    setActiveEdition,
     getAllEditions,
     getCurrentEdition,
     addEdition

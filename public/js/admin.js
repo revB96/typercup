@@ -615,12 +615,11 @@ function adminPrintEditionsList(){
   getEditions().then(async (editions) =>{
     $(`#list-tab-editions`).html(``)
     editions.forEach(async(edition, index) =>{
-      var counter = 0;
+    
       if(edition.transfered == true){
-        counter ++;
-        if(counter == 1) active = "active"
+     
         await $(`#list-tab-editions`).append(`
-          <a class="list-group-item list-group-item-action ${active}" data-bs-toggle="list" href="#list-${edition._id}-editions" role="tab" aria-controls="list-${edition._id}-editions">${edition.name}</a>
+          <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#list-${edition._id}-editions" role="tab" aria-controls="list-${edition._id}-editions">${edition.name}</a>
           `)
 
         await getEditionHistory(edition._id).then(async (history,index) => {

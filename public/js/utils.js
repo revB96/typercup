@@ -483,6 +483,21 @@ function getRandomCodes(){
     })
 }
 
+function getEditions(){
+    return $.ajax({
+        url: `/api/admin/site/edition/get`,
+        method: 'get',
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (result) {
+            return result;
+        },
+        fail: function (){
+            console.log("Nie udało się pobrać");
+        }
+    })
+}
+
 function getCountFinishedRound(){
     return $.ajax({
         url: `/api/round/finished/count`,

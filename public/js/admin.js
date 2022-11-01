@@ -543,6 +543,27 @@ async function adminGetAllRandomCodes() {
   });
 }
 
+function adminPrintEditions(){
+  $(`#admin-editions-table`).html("")
+  getEditions().then(async (editions) =>{
+    editions.forEach(async (edition, index) =>{
+      var active=`class="table-success">`
+      if(edition.active == 1)
+        active=``
+
+      await $(`#admin-editions-table`).append(`
+      <tr ${active}>
+        <th scope="row">${index+1}</th>
+        <td>${edition.name}</td>
+        <td>${edition.price_pool}</td>
+        <td>${edition.participants}</td>
+      </tr>
+      `)
+
+    })
+  })
+}
+
 $(document).ready(function () {
   if(document.title == "Typer Cup | Admin"){
     adminGetAllRandomCodes()
@@ -554,8 +575,9 @@ $(document).ready(function () {
     adminGetRound();
     adminGetAllScores();
     adminGetQuestions();
-    adminGetMatches()
-    adminPrintBackups()
+    adminGetMatches();
+    adminPrintBackups();
+    adminPrintEditions()
 
   $("#add-quiz-answer-form").submit(function (e) {
     e.preventDefault();

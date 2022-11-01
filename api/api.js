@@ -579,6 +579,17 @@ router.get('/admin/randomCodes', function (req, res) {
     
 })
 
+router.get('/admin/site/edition/get', function (req, res) {
+    Site.getAllEditions(req.body)
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        });
+    
+})
+
 router.post('/admin/site/edition/add', function (req, res) {
     Site.addEdition(req.body)
         .then(data => {

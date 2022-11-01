@@ -384,24 +384,43 @@
   <div class="tab-pane fade" id="pills-siteConfig" role="tabpanel" aria-labelledby="pills-siteConfig-tab">
     <div class="row">
 			<div class="col-md-6">
-        <p>Dodaj edycje</p>
-        <form id="add-edition-form" enctype="application/x-www-form-urlencoded" class="row g-3">
-           <div class="col-md-4">
-            <label class="form-label">Nazwa</label>
-            <input name="name" type="text" class="form-control">
-          </div>
-          <div class="col-md-4">
-            <label class="form-label">Nagroda</label>
-            <input name="price_pool" type="text" class="form-control">
-          </div>
-          <div class="col-md-4">
-            <label class="form-label">Uczestnicy</label>
-            <input name="participants" type="text" class="form-control">
-          </div>
+        <row>
+          <p>Dodaj edycje</p>
+          <form id="add-edition-form" enctype="application/x-www-form-urlencoded" class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label">Nazwa</label>
+              <input name="name" type="text" class="form-control">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Nagroda</label>
+              <input name="price_pool" type="text" class="form-control">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Uczestnicy</label>
+              <input name="participants" type="text" class="form-control">
+            </div>
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-primary">Dodaj</button>
+            </div>
+          </form>
+        </row>
+        <row>
           <div class="col-md-12">
-            <button type="submit" class="btn btn-primary">Dodaj</button>
+            <table class="table table-sm table-hover">
+              <thead>
+                 <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nazwa</th>
+                  <th scope="col">Nagroda</th>
+                  <th scope="col">Uczestnocy</th>
+                </tr>
+              </thead>
+              <tbody id="admin-editions-table">
+                <!-- adminPrintEditions() -->
+              </tbody>
+            </table>
           </div>
-        </form>
+        </row>
 			</div>
 			<div class="col-md-6">
         <p>Opcje</p>

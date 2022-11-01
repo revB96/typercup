@@ -28,7 +28,7 @@ function addEdition(formData){
     return def.promise;
 }
 
-function setEdition(editionId){
+function setActiveEdition(editionId){
     var def = Q.defer();
     SiteConfiguration.findOneAndUpdate(
         {setting: "current_edition"},

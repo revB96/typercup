@@ -72,7 +72,4 @@ function getEditionDetails(edition){
 
 module.exports = {
     transferToHistory,
-    getTop3,
-    getFullEdition,
-    
 }

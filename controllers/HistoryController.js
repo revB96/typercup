@@ -3,19 +3,18 @@ const Q = require("q");
 const express = require("express");
 const UserStats = require("./UserStatsController");
 const History = require("../models/history.js");
-const Edition = require("../models/edition.js");
 const SiteConfig = require("./SiteController")
 
 function transferToHistory(){
 
-    SiteConfig.getCurrentEdition().then(edition => {
+    SiteConfig.getCurrentEdition().then(currentEdition => {
         UserStats.getAll().then(stats => {
             console.log("***")
             console.log("Rozpoczęto transfer wyników do historii")
             stats.forEach((stat, index) =>{
                 var history = new History({
                     user: stat.user._id,
-                    edition: edition._id,
+                    edition: currentEdition._id,
                     result: index+1,
                     tickets: stat.tickets,
                     points: stat.points,

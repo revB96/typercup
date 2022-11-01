@@ -506,6 +506,7 @@ function adminTransferToHistory(){
                     </div>
                 `);
     $(".toast").toast("show");
+    adminPrintEditions();
     });
 }
 

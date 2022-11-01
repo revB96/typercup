@@ -5,6 +5,7 @@ var editionSchema = new mongoose.Schema({
     price_pool: String,
     participants: String,
     active: {type: Boolean, default: false},
+    transfered: {type: Boolean, default: false},
 });
 var EditionSchema = mongoose.model('Edition', editionSchema);
 

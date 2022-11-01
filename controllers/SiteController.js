@@ -91,9 +91,35 @@ function getCurrentEdition(){
     return def.promise;
 }
 
+function setTransferedEdition(editionId){
+    var def = Q.defer();
+    Edition.findByIdAndUpdate(editionId,{
+        transfered : true,
+    },{
+        new:false,
+        autoIndex: true
+    }).exec(function (err, edition){
+        if(err){
+            console.log("***")
+            console.log("Błąd przy ustawianiu kolejki jako przetransferewanej")
+            console.log(err)
+            console.log("***")
+            def.reject(err)
+        }else{
+            console.log("***")
+            console.log("Ustawiono kolejkę jako przetransferowaną")
+            console.log(edition)
+            console.log("***")
+            def.reject(edition)
+        }
+    })
+    return def.promise;
+}
+
 module.exports = {
     setActiveEdition,
     getAllEditions,
     getCurrentEdition,
-    addEdition
+    addEdition,
+    setTransferedEdition
 }

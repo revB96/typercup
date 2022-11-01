@@ -6,11 +6,12 @@ const History = require("../models/history.js");
 const SiteConfig = require("./SiteController")
 
 function transferToHistory(){
-
+    var def = Q.defer();
     SiteConfig.getCurrentEdition().then(currentEdition => {
         UserStats.getAll().then(stats => {
             console.log("***")
             console.log("Rozpoczęto transfer wyników do historii")
+            console.log("***")
             stats.forEach((stat, index) =>{
                 var history = new History({
                     user: stat.user._id,
@@ -25,12 +26,12 @@ function transferToHistory(){
                   });
                 
                   history.save(function (err, result) {
-                    if(err)
+                    if(err){
+                        def.reject(err)
                         console.log(err)
-                    else{
-                        console.log("***")
+                    }else{
                         console.log("Przetransferowano do historii:")
-                        console.log(result.user)
+                        console.log("ID" + result.user)
                         console.log("Rezultat: "+ result.result + " | " + 
                                     "Tickets: "+result.tickets + " | " + 
                                     "Punkty: "+result.points + " | " + 
@@ -44,10 +45,14 @@ function transferToHistory(){
                   });
             })
         })
+
+        SiteConfig.setTransferedEdition(currentEdition._id);
+
+        def.resolve("Zakończono transfer wyników do historii");
         console.log("Zakończono transfer wyników do historii")
         console.log("***")
     })
-
+    return def.promise;
 }
 
 function getTop3OfAllEditions(){
@@ -59,7 +64,6 @@ function getTop3OfAllEditions(){
 }
 
 function getEditionDetails(edition){
- 
     var def = Q.defer();
     History
         .find({edition:edition})

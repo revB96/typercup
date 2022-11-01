@@ -628,7 +628,7 @@ function adminPrintEditionsList(){
             tr += `<tr>
                     <td>
                       <button style="border-style: none; background-color: transparent;" id="tableHistoryEdition-Button-${user_history.user._id}">${user_history.user.username}</button>
-                      <script>tippy('#tableHistoryEdition-${user_history.user._id}', {
+                      <script>tippy('#tableHistoryEdition-Button-${user_history.user._id}', {
                           content: "${user_history.user.friendlyName}",
                           placement: 'right-start',
                           theme: 'material',

@@ -646,7 +646,7 @@ function adminPrintEditionsList(){
           })
           console.log(tr)
           await $(`#nav-tabEditions`).append(`
-            <div class="tab-pane fade show ${active}" id="list-${edition._id}-editions" role="tabpanel" aria-labelledby="list-${edition._id}-editions">
+            <div class="tab-pane fade show" id="list-${edition._id}-editions" role="tabpanel" aria-labelledby="list-${edition._id}-editions">
             <table class="table">
               <thead>
                 <tr>

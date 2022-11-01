@@ -677,7 +677,8 @@ $(document).ready(function () {
     adminGetMatches();
     adminPrintBackups();
     adminPrintEditions();
-    adminGetSelectEditions()
+    adminGetSelectEditions();
+    adminPrintEditionsList()
 
   $("#add-quiz-answer-form").submit(function (e) {
     e.preventDefault();

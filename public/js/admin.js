@@ -644,6 +644,7 @@ $(document).ready(function () {
     const formData = $("#add-edition-form").serializeArray();
     $.post("/api/admin/site/edition/add", formData).done(() => {
       adminGetSelectEditions();
+      adminPrintEditions();
       $(".toast").html(`
                     <div class="toast-header">
                     <strong class="mr-auto">Panel administratora</strong>

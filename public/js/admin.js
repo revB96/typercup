@@ -547,9 +547,9 @@ function adminPrintEditions(){
   $(`#admin-editions-table`).html("")
   getEditions().then(async (editions) =>{
     editions.forEach(async (edition, index) =>{
-      var active=`class="table-success"`
-      if(edition.active == 1)
-        active=``
+      var active=``
+      if(edition.active == true)
+        active=`class="table-success"`
 
       await $(`#admin-editions-table`).append(`
       <tr ${active}>
@@ -569,7 +569,7 @@ function adminGetSelectEditions(){
   getEditions().then(async (editions) =>{
     editions.forEach(async (edition, index) =>{
       var selected=``
-      if(index == 1)
+      if(index == 0)
         selected=`selected`
 
       await $(`#admin-select-editions`).append(`

@@ -548,8 +548,9 @@ function adminPrintEditions(){
     <div class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>`)
-    
+
   getEditions().then(async (editions) =>{
+    $(`#admin-editions-table`).html("")
     editions.forEach(async (edition, index) =>{
       var active=``
       if(edition.active == true)

@@ -219,7 +219,7 @@ function getAll() {
     {},
     "username email role firstLogon filledQuiz createdAt updatedAt lastLogon timezone friendlyName champion active"
   )
-    .sort({ active: "asc" })
+    .sort({ active: "desc" })
     .exec(function (err, users) {
       err ? def.reject(err) : def.resolve(users);
     });

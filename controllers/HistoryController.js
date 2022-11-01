@@ -70,7 +70,6 @@ function getEditionDetails(editionId){
         .populate("user", "username friendlyName")
         .sort({ result: "asc" })
         .exec(function (err, edition) {
-            console.log(edition)
             err ? def.reject(err) : def.resolve(edition);
         });
     return def.promise;

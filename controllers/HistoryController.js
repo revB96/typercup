@@ -67,7 +67,7 @@ function getEditionDetails(editionId){
     var def = Q.defer();
     History
         .find({edition:editionId})
-        .populate("username")
+        .populate("user", "username")
         .exec(function (err, edition) {
             console.log(edition)
             err ? def.reject(err) : def.resolve(edition);

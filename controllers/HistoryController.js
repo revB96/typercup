@@ -68,6 +68,7 @@ function getEditionDetails(editionId){
     History
         .find({edition:editionId})
         .populate("user", "username")
+        .sort("asc")
         .exec(function (err, edition) {
             console.log(edition)
             err ? def.reject(err) : def.resolve(edition);

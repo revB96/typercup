@@ -385,6 +385,24 @@
     <div class="row">
 			<div class="col-md-6">
         <row>
+          <div class="col-md-12">
+            <p>Lista edycji</p>
+            <table class="table table-sm table-hover">
+              <thead>
+                 <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nazwa</th>
+                  <th scope="col">Nagroda</th>
+                  <th scope="col">Uczestnocy</th>
+                </tr>
+              </thead>
+              <tbody id="admin-editions-table">
+                <!-- adminPrintEditions() -->
+              </tbody>
+            </table>
+          </div>
+        </row>
+        <row>
           <p>Dodaj edycje</p>
           <form id="add-edition-form" enctype="application/x-www-form-urlencoded" class="row g-3">
             <div class="col-md-4">
@@ -404,23 +422,6 @@
             </div>
           </form>
         </row>
-        <row>
-          <div class="col-md-12">
-            <table class="table table-sm table-hover">
-              <thead>
-                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Nazwa</th>
-                  <th scope="col">Nagroda</th>
-                  <th scope="col">Uczestnocy</th>
-                </tr>
-              </thead>
-              <tbody id="admin-editions-table">
-                <!-- adminPrintEditions() -->
-              </tbody>
-            </table>
-          </div>
-        </row>
 			</div>
 			<div class="col-md-6">
         <p>Opcje</p>
@@ -438,7 +439,7 @@
         <div class="row">
           <form id="setActiveEdition-form" enctype="application/x-www-form-urlencoded" class="row g-2">
             <div class="col-md-6">
-              <select class="form-select" aria-label="Default select example">
+              <select id="admin-select-editions"class="form-select" aria-label="Default select example">
                 <option selected>Open this select menu</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>

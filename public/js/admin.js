@@ -547,7 +547,7 @@ function adminPrintEditions(){
   $(`#admin-editions-table`).html("")
   getEditions().then(async (editions) =>{
     editions.forEach(async (edition, index) =>{
-      var active=`class="table-success">`
+      var active=`class="table-success"`
       if(edition.active == 1)
         active=``
 
@@ -558,6 +558,22 @@ function adminPrintEditions(){
         <td>${edition.price_pool}</td>
         <td>${edition.participants}</td>
       </tr>
+      `)
+
+    })
+  })
+}
+
+function adminGetSelectEditions(){
+  $(`#admin-select-editions`).html("")
+  getEditions().then(async (editions) =>{
+    editions.forEach(async (edition, index) =>{
+      var selected=``
+      if(index == 1)
+        selected=`selected`
+
+      await $(`#admin-select-editions`).append(`
+        <option value="${edition._id}" ${selected}>${edition.name}</option>
       `)
 
     })
@@ -627,6 +643,7 @@ $(document).ready(function () {
     e.preventDefault();
     const formData = $("#add-edition-form").serializeArray();
     $.post("/api/admin/site/edition/add", formData).done(() => {
+      adminGetSelectEditions();
       $(".toast").html(`
                     <div class="toast-header">
                     <strong class="mr-auto">Panel administratora</strong>

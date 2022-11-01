@@ -616,48 +616,49 @@ function adminPrintEditionsList(){
     editions.forEach(async(edition, index) =>{
       var active = ""
       if(index == 0) active = "active"
-      await $(`#list-tab-editions`).append(`
-        <a class="list-group-item list-group-item-action ${active}" data-bs-toggle="list" href="#list-${edition._id}-editions" role="tab" aria-controls="list-${edition._id}-editions">${edition.name}</a>
-        `)
+      if(edition.transfered == true){
+        await $(`#list-tab-editions`).append(`
+          <a class="list-group-item list-group-item-action ${active}" data-bs-toggle="list" href="#list-${edition._id}-editions" role="tab" aria-controls="list-${edition._id}-editions">${edition.name}</a>
+          `)
 
-      await getEditionHistory(edition._id).then(async (history,index) => {
-        var tr="";
-        await history.forEach((user_history,index)=>{
-          tr += `<tr>
-                  <th scope="col">${user_history.user.username}</th>
-                  <th scope="col">${user_history.result}</th>
-                  <th scope="col">${user_history.tickets}</th>
-                  <th scope="col">${user_history.points}</th>
-                  <th scope="col">${user_history.pw}</th>
-                  <th scope="col">${user_history.wd}</th>
-                  <th scope="col">${user_history.d}</th>
-                  <th scope="col">${user_history.q}</th>
-                </tr>`
+        await getEditionHistory(edition._id).then(async (history,index) => {
+          var tr="";
+          await history.forEach((user_history,index)=>{
+            tr += `<tr>
+                    <th scope="col">${user_history.user.username}</th>
+                    <th scope="col">${user_history.result}</th>
+                    <th scope="col">${user_history.tickets}</th>
+                    <th scope="col">${user_history.points}</th>
+                    <th scope="col">${user_history.pw}</th>
+                    <th scope="col">${user_history.wd}</th>
+                    <th scope="col">${user_history.d}</th>
+                    <th scope="col">${user_history.q}</th>
+                  </tr>`
+          })
+          console.log(tr)
+          await $(`#nav-tabEditions`).append(`
+            <div class="tab-pane fade show ${active}" id="list-${edition._id}-editions" role="tabpanel" aria-labelledby="list-${edition._id}-editions">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Nick</th>
+                  <th scope="col">Wynik</th>
+                  <th scope="col">Typy</th>
+                  <th scope="col">Punkty</th>
+                  <th scope="col">PW</th>
+                  <th scope="col">WD</th>
+                  <th scope="col">P</th>
+                  <th scope="col">Q</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${tr}
+              </tbody>
+            </table>
+            </div>
+          `)
         })
-        console.log(tr)
-        await $(`#nav-tabEditions`).append(`
-          <div class="tab-pane fade show ${active}" id="list-${edition._id}-editions" role="tabpanel" aria-labelledby="list-${edition._id}-editions">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Nick</th>
-                <th scope="col">Wynik</th>
-                <th scope="col">Typy</th>
-                <th scope="col">Punkty</th>
-                <th scope="col">PW</th>
-                <th scope="col">WD</th>
-                <th scope="col">P</th>
-                <th scope="col">Q</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${tr}
-            </tbody>
-          </table>
-          </div>
-        `)
-      })
-
+      }
     })
   })
 

@@ -614,7 +614,6 @@ router.post('/admin/site/archive/transfer-current-edition', function (req, res) 
 })
 
 router.get('/archive/get', function (req, res) {
-    console.log(req.query.edition)
     History.getEditionDetails(req.query.edition)
         .then(data => {
             res.json(data)

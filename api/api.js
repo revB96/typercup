@@ -591,6 +591,7 @@ router.get('/admin/site/edition/get', function (req, res) {
     
 })
 
+
 router.post('/admin/site/edition/setActive', function (req, res) {
     Site.setActiveEdition(req.body)
         .then(data => {

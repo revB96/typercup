@@ -528,7 +528,6 @@ function getCountFinishedRound(){
     })
 }
 
-
 $(document).ready(function () {
     if(checkIfTokenExists() == 1){
         var decoded = jwt_decode(getCookie("access_token"));

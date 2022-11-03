@@ -75,7 +75,7 @@ function getAllEditions(){
     var def = Q.defer();
     Edition
         .find()
-        .sort({name: "asc"})
+        .sort({name: "desc"})
         .exec(function (err, editions) {
             err ? def.reject(err) : def.resolve(editions);
     });

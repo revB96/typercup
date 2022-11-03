@@ -59,7 +59,7 @@ function printHallOfFame(){
                             `
                     await editionDetails.forEach(editionDetail=>{
 
-                        var cardText;
+                        var cardText="";
 
                         if(editionDetail.edition == "636249ddec888973bea471ac")
                             cardText = ""

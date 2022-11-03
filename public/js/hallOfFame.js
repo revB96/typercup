@@ -59,10 +59,12 @@ function printHallOfFame(){
                             `
                     await editionDetails.forEach(editionDetail=>{
 
-                        var cardText = ` <p class="card-text">${editionDetail.pw} PW | ${editionDetail.wd} WD | ${editionDetail.q} Q</p>`
+                        var cardText;
 
-                        if(editionDetail.edition == "63622b8c2295b06d6d8e55a0")
+                        if(editionDetail.edition == "636249ddec888973bea471ac")
                             cardText = ""
+                        else
+                            cardText = ` <p class="card-text">${editionDetail.pw} PW | ${editionDetail.wd} WD | ${editionDetail.q} Q</p>`
 
                         if(editionDetail.result == 1)
                         accordion+=`

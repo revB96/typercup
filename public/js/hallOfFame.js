@@ -2,9 +2,9 @@ function printHallOfFame(){
     $("#hallOfFame-accordion").html("")
     $("#hallOfFame-modals").html("")
     getEditions().then(editions =>{
-        editions.forEach(edition => { 
+        editions.forEach( async edition => { 
         if(edition.transfered == true)
-            getEditionHistory(edition._id).then(editionDetails => {
+            getEditionHistory(edition._id).then(async editionDetails => {
                     var modal = `
                     <div class="modal fade" id="modal-${edition._id}" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog">
@@ -49,7 +49,7 @@ function printHallOfFame(){
                             <div class="row">
                             <div class="col-md-12 text-center">
                             `
-                    editionDetails.forEach(editionDetail=>{
+                    await editionDetails.forEach(editionDetail=>{
                         if(editionDetail.result == 1)
                         accordion+=`
                             <div class="row">
@@ -136,8 +136,8 @@ function printHallOfFame(){
                         </div>
                     </div>
                 </div>`
-                $("#hallOfFame-modals").append(modal)
-                $("#hallOfFame-accordion").append(accordion)
+                await $("#hallOfFame-modals").append(modal)
+                await $("#hallOfFame-accordion").append(accordion)
             })
         })
     })

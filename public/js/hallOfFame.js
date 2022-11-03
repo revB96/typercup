@@ -61,8 +61,9 @@ function printHallOfFame(){
 
                         var cardText = ` <p class="card-text">${editionDetail.pw} PW | ${editionDetail.wd} WD | ${editionDetail.q} Q</p>`
 
-                        if(editionDetail.name == "Euro 2018")
-                            cardText = ""   
+                        if(editionDetail.edition == "63622b8c2295b06d6d8e55a0")
+                            cardText = ""
+
                         if(editionDetail.result == 1)
                         accordion+=`
                             <div class="row">

@@ -5,6 +5,28 @@ function printHallOfFame(){
         await editions.forEach( async edition => { 
         if(edition.transfered == true)
             getEditionHistory(edition._id).then(async editionDetails => {
+                var th=`
+                <th scope="col">Z</th>
+                <th scope="col">PW</th>
+                <th scope="col">WD</th>
+                <th scope="col">P</th>
+                <th scope="col">Q</th>
+                `
+                var caption=`
+                <caption>
+                    Z- Ilość zakładów <br />
+                    PW - Prawidłowy wynik (3 pkt) <br />
+                    WD - Wygrana drużyna (1.5 pkt) <br />
+                    P - Przegrana (0 pkt) <br />
+                    Q - Punkty za Quiz <br />
+                </caption>
+                `
+
+                if(edition.name=="Euro 2018"){
+                    th =""
+                    caption = ""
+                }
+
                     var modal = `
                     <div class="modal fade" id="modal-${edition._id}" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog">
@@ -16,23 +38,13 @@ function printHallOfFame(){
                             <div class="modal-body">
                             <div class="table-responsive">
                                 <table class="table">
-                                <caption>
-                                    Z- Ilość zakładów <br />
-                                    PW - Prawidłowy wynik (3 pkt) <br />
-                                    WD - Wygrana drużyna (1.5 pkt) <br />
-                                    P - Przegrana (0 pkt) <br />
-                                    Q - Punkty za Quiz <br />
-                                </caption>
+                                ${caption}
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Nick</th>
                                             <th scope="col">Punkty</th>
-                                            <th scope="col">Z</th>
-                                            <th scope="col">PW</th>
-                                            <th scope="col">WD</th>
-                                            <th scope="col">P</th>
-                                            <th scope="col">Q</th>
+                                            ${th}
                                         </tr>
                                     </thead>
                                     <tbody>`
@@ -59,12 +71,17 @@ function printHallOfFame(){
                             `
                     await editionDetails.forEach(editionDetail=>{
 
-                        var cardText="";
-
-                        if(editionDetail.edition == "636249ddec888973bea471ac")
+                        var cardText = `<p class="card-text">${editionDetail.pw} PW | ${editionDetail.wd} WD | ${editionDetail.q} Q</p>`
+                        var modalTd = `
+                            <td>${editionDetail.pw}</td>
+                            <td>${editionDetail.wd}</td>
+                            <td>${editionDetail.d}</td>
+                            <td>${editionDetail.q}</td>
+                        `
+                        if(edition.name=="Euro 2018"){
                             cardText = ""
-                        else
-                            cardText = ` <p class="card-text">${editionDetail.pw} PW | ${editionDetail.wd} WD | ${editionDetail.q} Q</p>`
+                            modalTd=""
+                        }
 
                         if(editionDetail.result == 1)
                         accordion+=`
@@ -95,7 +112,7 @@ function printHallOfFame(){
                                         </div>
                                         <div class="card-body">
                                             <h5 class="card-title">${editionDetail.points} pkt</h5>
-                                            <p class="card-text">${editionDetail.pw} PW | ${editionDetail.wd} WD | ${editionDetail.q} Q</p>
+                                            ${cardText}
                                         </div>
                                     </div>
                                 </div>
@@ -114,7 +131,7 @@ function printHallOfFame(){
                                             </div>
                                             <div class="card-body">
                                                 <h5 class="card-title">${editionDetail.points} pkt</h5>
-                                                <p class="card-text">${editionDetail.pw} PW | ${editionDetail.wd} WD | ${editionDetail.q} Q</p>
+                                                ${cardText}
                                             </div>
                                         </div>
                                     </div>
@@ -146,10 +163,7 @@ function printHallOfFame(){
                         </td>
                         <td>${editionDetail.points}</td>
                         <td>${editionDetail.tickets}</td>
-                        <td>${editionDetail.pw}</td>
-                        <td>${editionDetail.wd}</td>
-                        <td>${editionDetail.d}</td>
-                        <td>${editionDetail.q}</td>
+                        ${modalTd}
                     </tr>
                     `
                     })

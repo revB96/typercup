@@ -3,7 +3,7 @@ function printHallOfFame(){
     $("#hallOfFame-modals").html("")
     getEditions().then(async editions =>{
         await editions.forEach(async (edition,index) => { 
-        if(await edition.transfered == true)
+        if(edition.transfered == true)
             getEditionHistory(edition._id).then(async editionDetails => {
                 var th=`
                 <th scope="col">Z</th>
@@ -73,7 +73,7 @@ function printHallOfFame(){
                             <div class="row">
                             <div class="col-md-12 text-center">
                             `
-                    await editionDetails.forEach(editionDetail=>{
+                    await editionDetails.forEach(async editionDetail=>{
 
                         var cardText = `<p class="card-text">${editionDetail.pw} PW | ${editionDetail.wd} WD | ${editionDetail.q} Q</p>`
                         var modalTd = `
@@ -88,7 +88,7 @@ function printHallOfFame(){
                             modalTd=""
                         }
 
-                        if(editionDetail.result == 1)
+                        if(await editionDetail.result == 1)
                         accordion+=`
                             <div class="row">
                                 <div class="col-md-12">
@@ -103,7 +103,7 @@ function printHallOfFame(){
                                     </div>
                                 </div>
                             </div>`
-                        if(editionDetail.result == 2)
+                        if(await editionDetail.result == 2)
                         accordion+=`
                             <div class="row">
                                 <div class="col-md-5">
@@ -123,7 +123,7 @@ function printHallOfFame(){
                                 </div>
                             <div class="col-md-2">
                             </div>`
-                        if(editionDetail.result == 3)
+                        if(await editionDetail.result == 3)
                         accordion+=`
                                 <div class="col-md-5">
                                         <div class="card text-dark mb-3" style="max-width: 18rem; float: none; margin: 0 auto; background-color:#CD7F32">

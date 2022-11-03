@@ -1,11 +1,11 @@
 function printHallOfFame(){
     $("#hallOfFame-accordion").html("")
     $("#hallOfFame-modals").html("")
-    var modalEdition, accordion;
     getEditions().then(editions =>{
+        getEditionHistory(edition._id).then(editionDetails => {
+        var modal ="", accordion ="";
         editions.forEach(edition => { 
-            getEditionHistory(edition._id).then(editionDetails => {
-                $("#hallOfFame-modals").append( `
+                modal+= `
                 <div class="modal fade" id="modal-${edition._id}" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
@@ -27,8 +27,8 @@ function printHallOfFame(){
                                     <th scope="col">Q</th>
                                 </tr>
                             </thead>
-                            <tbody>`)
-                $("#hallOfFame-accordion").append(`
+                            <tbody>`
+                accordion+=`
                 <div class="accordion-item">
                 <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                   <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -48,49 +48,30 @@ function printHallOfFame(){
                     <div class="accordion-body">
                         <div class="row">
                           <div class="col-md-12 text-center">
-                          `)
+                          `
                 editionDetails.forEach(editionDetail=>{
-                if(editionDetail.result == 1)
-                $("#hallOfFame-accordion").append(`
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card text-dark bg-warning mb-3" style="max-width: 18rem; float: none; margin: 0 auto;">
-                                <div class="card-header"><img src="img/crown.svg" style="width: 24px; height: 24px" />
-                                    <p><b>Zumiko</b></p><small class="text-muted">${editionDetail.user.username}</small>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">${editionDetail.points} pkt</h5>
-                                    <p class="card-text">${editionDetail.pw} PW | ${editionDetail.wd} WD | ${editionDetail.q} Q</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`)
-                if(editionDetail.result == 2)
-                $("#hallOfFame-accordion").append(`
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="card text-dark mb-3" style="max-width: 18rem; float: none; margin: 0 auto; background-color:#C0C0C0">
-                                <div class="card-header">
-                                    <p style="padding: 0; margin:0;">2</p>
-                                    <p style="padding: 0; margin:0;">
-                                        <b>${editionDetail.user.username}</b>
-                                    </p>
-                                    <small class="text-muted p-0 m-0" style="padding: 0; margin:0;">${editionDetail.user.friendlyName}</small>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">${editionDetail.points} pkt</h5>
-                                    <p class="card-text">${editionDetail.pw} PW | ${editionDetail.wd} WD | ${editionDetail.q} Q</p>
+                    if(editionDetail.result == 1)
+                    accordion+=`
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card text-dark bg-warning mb-3" style="max-width: 18rem; float: none; margin: 0 auto;">
+                                    <div class="card-header"><img src="img/crown.svg" style="width: 24px; height: 24px" />
+                                        <p><b>Zumiko</b></p><small class="text-muted">${editionDetail.user.username}</small>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">${editionDetail.points} pkt</h5>
+                                        <p class="card-text">${editionDetail.pw} PW | ${editionDetail.wd} WD | ${editionDetail.q} Q</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <div class="col-md-2">
-                    </div>`)
-                if(editionDetail.result == 3)
-                $("#hallOfFame-accordion").append(`
-                        <div class="col-md-5">
-                                <div class="card text-dark mb-3" style="max-width: 18rem; float: none; margin: 0 auto; background-color:#CD7F32">
+                        </div>`
+                    if(editionDetail.result == 2)
+                    accordion+=`
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="card text-dark mb-3" style="max-width: 18rem; float: none; margin: 0 auto; background-color:#C0C0C0">
                                     <div class="card-header">
-                                        <p style="padding: 0; margin:0;">3</p>
+                                        <p style="padding: 0; margin:0;">2</p>
                                         <p style="padding: 0; margin:0;">
                                             <b>${editionDetail.user.username}</b>
                                         </p>
@@ -102,21 +83,40 @@ function printHallOfFame(){
                                     </div>
                                 </div>
                             </div>
+                        <div class="col-md-2">
+                        </div>`
+                    if(editionDetail.result == 3)
+                    accordion+=`
+                            <div class="col-md-5">
+                                    <div class="card text-dark mb-3" style="max-width: 18rem; float: none; margin: 0 auto; background-color:#CD7F32">
+                                        <div class="card-header">
+                                            <p style="padding: 0; margin:0;">3</p>
+                                            <p style="padding: 0; margin:0;">
+                                                <b>${editionDetail.user.username}</b>
+                                            </p>
+                                            <small class="text-muted p-0 m-0" style="padding: 0; margin:0;">${editionDetail.user.friendlyName}</small>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">${editionDetail.points} pkt</h5>
+                                            <p class="card-text">${editionDetail.pw} PW | ${editionDetail.wd} WD | ${editionDetail.q} Q</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        
+                        </div>  
+                        </div>
+                    <div class="row">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-${edition._id}">
+                            Pełna lista uczesników
+                        </button>
                     </div>
                     
-                    </div>  
                     </div>
-                <div class="row">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-${edition._id}">
-                        Pełna lista uczesników
-                    </button>
-                </div>
+                    </div>`
                 
-                </div>
-                </div>`)
-                
-                $("#hallOfFame-modals").append( `
+                modal +=`
                 <tr>
                     <th scope="row">${editionDetail.result}</th>
                     <td>${editionDetail.user.username}</td>
@@ -127,18 +127,19 @@ function printHallOfFame(){
                     <td>${editionDetail.d}</td>
                     <td>${editionDetail.q}</td>
                 </tr>
-                `)
+                `
                 })
-            })
-            $("#hallOfFame-modals").append(`
+            modal += `
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-            </div>`)
+            </div>`
         })
-        
+        $("#hallOfFame-accordion").append(accordion)
+        $("#hallOfFame-modals").append(modal)
+    })
     })
 }
 

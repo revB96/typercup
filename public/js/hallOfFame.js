@@ -10,7 +10,7 @@ function printHallOfFame(){
                         <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Lista uczesnikó∑</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Lista uczesników</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -32,7 +32,7 @@ function printHallOfFame(){
                     <div class="accordion-item">
                     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        data-bs-target="#panelsStayOpen-${edition._id}" aria-expanded="true" aria-controls="panelsStayOpen-${edition._id}">
                         <div class="col">
                         <div class="row">
                             <h1 class="display-2" style="float: none; margin: 0 auto; text-align: center">${edition.name}</h1>
@@ -43,8 +43,8 @@ function printHallOfFame(){
                         </div>
                     </button>
                     </h2>
-                    <div id="panelsStayOpen-collapseOne" style="text-align: center;" class="accordion-collapse collapse show"
-                        aria-labelledby="panelsStayOpen-headingOne">
+                    <div id="panelsStayOpen-${edition._id}" style="text-align: center;" class="accordion-collapse collapse show"
+                        aria-labelledby="panelsStayOpen-${edition._id}">
                         <div class="accordion-body">
                             <div class="row">
                             <div class="col-md-12 text-center">

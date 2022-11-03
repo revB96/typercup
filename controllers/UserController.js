@@ -111,7 +111,7 @@ function update(formData) {
     }
 
     if (user.active == true) {
-      //UserStats.activateUser(user._id)
+      UserStats.activateUser(user._id)
       UserNotification.findOneAndUpdate({ user: user._id }, {
         newRound: true,
         daySummary: true,

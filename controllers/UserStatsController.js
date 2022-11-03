@@ -28,7 +28,7 @@ function add(userId){
 function deactivateUser(userId){
   var def = Q.defer();
     UserStats.findOneAndUpdate({user:userId}, {
-    active: false
+    $set: { active: false }
   },{
     new:true,
     autoIndex: true
@@ -42,6 +42,7 @@ function deactivateUser(userId){
 function activateUser(userId){
   var def = Q.defer();
     UserStats.findOneAndUpdate({user:userId}, {
+      $set: { active: true },
       points: 0,
       tickets: 0,
       correctScore: 0,
@@ -49,7 +50,6 @@ function activateUser(userId){
       defeat: 0,
       correctQuestions: 0,
       quizPoints: 0,
-      active: true,
   },{
     new:true,
     autoIndex: true

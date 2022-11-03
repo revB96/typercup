@@ -17,11 +17,11 @@ function printHallOfFame(){
                             <div class="table-responsive">
                                 <table class="table">
                                 <caption>
-                                    Z- Ilość zakładów
-                                    PW - Prawidłowy wynik (3 pkt)
-                                    WD - Wygrana drużyna (1.5 pkt)
-                                    P - Przegrana (0 pkt)
-                                    Q - Punkty za Quiz
+                                    Z- Ilość zakładów <br />
+                                    PW - Prawidłowy wynik (3 pkt) <br />
+                                    WD - Wygrana drużyna (1.5 pkt) <br />
+                                    P - Przegrana (0 pkt) <br />
+                                    Q - Punkty za Quiz <br />
                                 </caption>
                                     <thead>
                                         <tr>
@@ -58,6 +58,11 @@ function printHallOfFame(){
                             <div class="col-md-12 text-center">
                             `
                     await editionDetails.forEach(editionDetail=>{
+
+                        var cardText = ` <p class="card-text">${editionDetail.pw} PW | ${editionDetail.wd} WD | ${editionDetail.q} Q</p>`
+
+                        if(editionDetail.name == "Euro 2018")
+                            cardText = ""   
                         if(editionDetail.result == 1)
                         accordion+=`
                             <div class="row">
@@ -68,7 +73,7 @@ function printHallOfFame(){
                                         </div>
                                         <div class="card-body">
                                             <h5 class="card-title">${editionDetail.points} pkt</h5>
-                                            <p class="card-text">${editionDetail.pw} PW | ${editionDetail.wd} WD | ${editionDetail.q} Q</p>
+                                            ${cardText}
                                         </div>
                                     </div>
                                 </div>

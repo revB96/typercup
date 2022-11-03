@@ -5,7 +5,7 @@ function printHallOfFame(){
     getEditions().then(editions =>{
         editions.forEach(edition => { 
             getEditionHistory(edition._id).then(editionDetails => {
-                var modalEdition = `
+                $("#hallOfFame-modals").append( `
                 <div class="modal fade" id="modal-${edition._id}" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
@@ -27,8 +27,8 @@ function printHallOfFame(){
                                     <th scope="col">Q</th>
                                 </tr>
                             </thead>
-                            <tbody>`
-                 var accordion =`
+                            <tbody>`)
+                $("#hallOfFame-accordion").append(`
                 <div class="accordion-item">
                 <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                   <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -48,10 +48,10 @@ function printHallOfFame(){
                     <div class="accordion-body">
                         <div class="row">
                           <div class="col-md-12 text-center">
-                          `
+                          `)
                 editionDetails.forEach(editionDetail=>{
                 if(editionDetail.result == 1)
-                    accordion =+ `
+                $("#hallOfFame-accordion").append(`
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card text-dark bg-warning mb-3" style="max-width: 18rem; float: none; margin: 0 auto;">
@@ -64,9 +64,9 @@ function printHallOfFame(){
                                 </div>
                             </div>
                         </div>
-                    </div>`
+                    </div>`)
                 if(editionDetail.result == 2)
-                    accordion =+`
+                $("#hallOfFame-accordion").append(`
                     <div class="row">
                         <div class="col-md-5">
                             <div class="card text-dark mb-3" style="max-width: 18rem; float: none; margin: 0 auto; background-color:#C0C0C0">
@@ -84,9 +84,9 @@ function printHallOfFame(){
                             </div>
                         </div>
                     <div class="col-md-2">
-                    </div>`
+                    </div>`)
                 if(editionDetail.result == 3)
-                   accordion =+`
+                $("#hallOfFame-accordion").append(`
                         <div class="col-md-5">
                                 <div class="card text-dark mb-3" style="max-width: 18rem; float: none; margin: 0 auto; background-color:#CD7F32">
                                     <div class="card-header">
@@ -114,9 +114,9 @@ function printHallOfFame(){
                 </div>
                 
                 </div>
-                </div>`
+                </div>`)
                 
-                modalEdition = `
+                $("#hallOfFame-modals").append( `
                 <tr>
                     <th scope="row">${editionDetail.result}</th>
                     <td>${editionDetail.user.username}</td>
@@ -127,19 +127,18 @@ function printHallOfFame(){
                     <td>${editionDetail.d}</td>
                     <td>${editionDetail.q}</td>
                 </tr>
-                `
+                `)
                 })
             })
-            modalEdition =+ `
+            $("#hallOfFame-modals").append(`
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-            </div>`
+            </div>`)
         })
-        $("#hallOfFame-accordion").append(accordion)
-        $("#hallOfFame-modals").append(modalEdition)
+        
     })
 }
 

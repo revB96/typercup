@@ -27,9 +27,8 @@ function printHallOfFame(){
                     th ="";
                     caption = "";
                 }
-                console.log(index)
-                if(index == 0) showAccordion = "show";
-
+                
+                if(index == 1) showAccordion = "show";
 
                     var modal = `
                     <div class="modal fade" id="modal-${edition._id}" tabindex="-1" aria-hidden="true">

@@ -1,8 +1,8 @@
 function printHallOfFame(){
     $("#hallOfFame-accordion").html("")
     $("#hallOfFame-modals").html("")
-    getEditions().then(editions =>{
-        editions.forEach( async edition => { 
+    getEditions().then(async editions =>{
+        await editions.forEach( async edition => { 
         if(edition.transfered == true)
             getEditionHistory(edition._id).then(async editionDetails => {
                     var modal = `
@@ -16,6 +16,13 @@ function printHallOfFame(){
                             <div class="modal-body">
                             <div class="table-responsive">
                                 <table class="table">
+                                <caption>
+                                    Z- Ilość zakładów
+                                    PW - Prawidłowy wynik (3 pkt)
+                                    WD - Wygrana drużyna (1.5 pkt)
+                                    P - Przegrana (0 pkt)
+                                    Q - Punkty za Quiz
+                                </caption>
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -121,7 +128,7 @@ function printHallOfFame(){
                     <tr>
                         <th scope="row">${editionDetail.result}</th>
                         <td>
-                            <button style="border-style: none; background-color: transparent;" id="tableButton-${editionDetail.user._id}">${editionDetail.user.username}$</button>
+                            <button style="border-style: none; background-color: transparent;" id="tableButton-${editionDetail.user._id}">${editionDetail.user.username}</button>
                             <script>tippy('#tableButton-${editionDetail.user._id}', {
                                 content: "${editionDetail.user.friendlyName}",
                                 placement: 'right-start',

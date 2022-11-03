@@ -1,9 +1,11 @@
 function printHallOfFame(){
     $("#hallOfFame-accordion").html("")
     $("#hallOfFame-modals").html("")
+    var modalEdition, accordion;
     getEditions().then(editions =>{
         editions.forEach(edition => { 
-            modalEdition = `
+            getEditionHistory(edition._id).then(editionDetails => {
+                var modalEdition = `
                 <div class="modal fade" id="modal-${edition._id}" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
@@ -26,8 +28,7 @@ function printHallOfFame(){
                                 </tr>
                             </thead>
                             <tbody>`
-            getEditionHistory(edition._id).then(editionDetails => {
-                accordion =`
+                 var accordion =`
                 <div class="accordion-item">
                 <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                   <button class="accordion-button" type="button" data-bs-toggle="collapse"

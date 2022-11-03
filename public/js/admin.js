@@ -647,23 +647,25 @@ function adminPrintEditionsList(){
           console.log(tr)
           await $(`#nav-tabEditions`).append(`
             <div class="tab-pane fade show" id="list-${edition._id}-editions" role="tabpanel" aria-labelledby="list-${edition._id}-editions">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Nick</th>
-                  <th scope="col">Wynik</th>
-                  <th scope="col">Typy</th>
-                  <th scope="col">Punkty</th>
-                  <th scope="col">PW</th>
-                  <th scope="col">WD</th>
-                  <th scope="col">P</th>
-                  <th scope="col">Q</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${tr}
-              </tbody>
-            </table>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Nick</th>
+                      <th scope="col">Wynik</th>
+                      <th scope="col">Typy</th>
+                      <th scope="col">Punkty</th>
+                      <th scope="col">PW</th>
+                      <th scope="col">WD</th>
+                      <th scope="col">P</th>
+                      <th scope="col">Q</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${tr}
+                  </tbody>
+                </table>
+              </div>
             </div>
           `)
         })

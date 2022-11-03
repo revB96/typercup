@@ -88,7 +88,7 @@ function printHallOfFame(){
                             modalTd=""
                         }
 
-                        if(await editionDetail.result == 1)
+                        if(editionDetail.result == 1)
                         accordion+=`
                             <div class="row">
                                 <div class="col-md-12">
@@ -103,7 +103,7 @@ function printHallOfFame(){
                                     </div>
                                 </div>
                             </div>`
-                        if(await editionDetail.result == 2)
+                        if(editionDetail.result == 2)
                         accordion+=`
                             <div class="row">
                                 <div class="col-md-5">
@@ -123,7 +123,7 @@ function printHallOfFame(){
                                 </div>
                             <div class="col-md-2">
                             </div>`
-                        if(await editionDetail.result == 3)
+                        if(editionDetail.result == 3)
                         accordion+=`
                                 <div class="col-md-5">
                                         <div class="card text-dark mb-3" style="max-width: 18rem; float: none; margin: 0 auto; background-color:#CD7F32">

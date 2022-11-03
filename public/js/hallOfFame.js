@@ -27,7 +27,7 @@ function printHallOfFame(){
                     th ="";
                     caption = "";
                 }
-
+                console.log(index)
                 if(index == 0) showAccordion = "show";
 
 

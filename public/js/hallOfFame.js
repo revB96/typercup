@@ -23,7 +23,7 @@ function printHallOfFame(){
                 `
                 var showAccordion="";
 
-                if(edition.name=="Euro 2018"){
+                 if(edition.name=="Euro 2018"){
                     th ="";
                     caption = "";
                 }
@@ -178,10 +178,11 @@ function printHallOfFame(){
                             </div>
                         </div>
                     </div>
-                </div>`
-                await $("#hallOfFame-modals").append(modal)
-                await $("#hallOfFame-accordion").append(accordion)
+                </div>
+                `
             })
+            await $("#hallOfFame-modals").append(modal)
+            await $("#hallOfFame-accordion").append(accordion)
         })
     })
 }

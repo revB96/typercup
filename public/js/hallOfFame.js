@@ -3,9 +3,9 @@ function printHallOfFame(){
     $("#hallOfFame-modals").html("")
     getEditions().then(editions =>{
         getEditionHistory(edition._id).then(editionDetails => {
-        var modal ="", accordion ="";
+        var modal1 ="", accordion ="";
         editions.forEach(edition => { 
-                modal+= `
+                var modal = `
                 <div class="modal fade" id="modal-${edition._id}" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
@@ -28,7 +28,7 @@ function printHallOfFame(){
                                 </tr>
                             </thead>
                             <tbody>`
-                accordion+=`
+                var accordion =`
                 <div class="accordion-item">
                 <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                   <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -136,9 +136,9 @@ function printHallOfFame(){
                     </div>
                 </div>
             </div>`
+            $("#hallOfFame-modals").append(modal)
+            $("#hallOfFame-accordion").append(accordion)
         })
-        $("#hallOfFame-accordion").append(accordion)
-        $("#hallOfFame-modals").append(modal)
     })
     })
 }

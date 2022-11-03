@@ -2,7 +2,7 @@ function printHallOfFame(){
     $("#hallOfFame-accordion").html("")
     $("#hallOfFame-modals").html("")
     getEditions().then(async editions =>{
-        await editions.forEach( async edition => { 
+        await editions.forEach(async (edition,index) => { 
         if(edition.transfered == true)
             getEditionHistory(edition._id).then(async editionDetails => {
                 var th=`
@@ -21,11 +21,15 @@ function printHallOfFame(){
                     Q - Punkty za Quiz <br />
                 </caption>
                 `
+                var showAccordion="";
 
                 if(edition.name=="Euro 2018"){
-                    th =""
-                    caption = ""
+                    th ="";
+                    caption = "";
                 }
+
+                if(index == 0) showAccordion = "show";
+
 
                     var modal = `
                     <div class="modal fade" id="modal-${edition._id}" tabindex="-1" aria-hidden="true">
@@ -47,10 +51,11 @@ function printHallOfFame(){
                                             ${th}
                                         </tr>
                                     </thead>
-                                    <tbody>`
+                                    <tbody>
+                                    `
                     var accordion =`
                     <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                    <h2 class="accordion-header" id="panelsH2Open-${edition._id}">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
                         data-bs-target="#panelsStayOpen-${edition._id}" aria-expanded="true" aria-controls="panelsStayOpen-${edition._id}">
                         <div class="col">
@@ -63,7 +68,7 @@ function printHallOfFame(){
                         </div>
                     </button>
                     </h2>
-                    <div id="panelsStayOpen-${edition._id}" style="text-align: center;" class="accordion-collapse collapse show"
+                    <div id="panelsStayOpen-${edition._id}" style="text-align: center;" class="accordion-collapse collapse ${showAccordion}"
                         aria-labelledby="panelsStayOpen-${edition._id}">
                         <div class="accordion-body">
                             <div class="row">
@@ -73,6 +78,7 @@ function printHallOfFame(){
 
                         var cardText = `<p class="card-text">${editionDetail.pw} PW | ${editionDetail.wd} WD | ${editionDetail.q} Q</p>`
                         var modalTd = `
+                            <td>${editionDetail.tickets}</td>
                             <td>${editionDetail.pw}</td>
                             <td>${editionDetail.wd}</td>
                             <td>${editionDetail.d}</td>
@@ -162,7 +168,6 @@ function printHallOfFame(){
                             </script>
                         </td>
                         <td>${editionDetail.points}</td>
-                        <td>${editionDetail.tickets}</td>
                         ${modalTd}
                     </tr>
                     `

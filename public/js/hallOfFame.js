@@ -14,20 +14,21 @@ function printHallOfFame(){
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nick</th>
-                                        <th scope="col">Punkty</th>
-                                        <th scope="col">Z</th>
-                                        <th scope="col">PW</th>
-                                        <th scope="col">WD</th>
-                                        <th scope="col">P</th>
-                                        <th scope="col">Q</th>
-                                    </tr>
-                                </thead>
-                                <tbody>`
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nick</th>
+                                            <th scope="col">Punkty</th>
+                                            <th scope="col">Z</th>
+                                            <th scope="col">PW</th>
+                                            <th scope="col">WD</th>
+                                            <th scope="col">P</th>
+                                            <th scope="col">Q</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>`
                     var accordion =`
                     <div class="accordion-item">
                     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
@@ -119,7 +120,15 @@ function printHallOfFame(){
                     modal +=`
                     <tr>
                         <th scope="row">${editionDetail.result}</th>
-                        <td>${editionDetail.user.username}</td>
+                        <td>
+                            <button style="border-style: none; background-color: transparent;" id="tableButton-${editionDetail.user._id}">${editionDetail.user.username}$</button>
+                            <script>tippy('#tableButton-${editionDetail.user._id}', {
+                                content: "${editionDetail.user.friendlyName}",
+                                placement: 'right-start',
+                                theme: 'material',
+                            });
+                            </script>
+                        </td>
                         <td>${editionDetail.points}</td>
                         <td>${editionDetail.tickets}</td>
                         <td>${editionDetail.pw}</td>
@@ -130,8 +139,9 @@ function printHallOfFame(){
                     `
                     })
                 modal += `
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                 </div>
                             </div>
                         </div>
                     </div>

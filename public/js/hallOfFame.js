@@ -2,9 +2,8 @@ function printHallOfFame(){
     $("#hallOfFame-accordion").html("")
     $("#hallOfFame-modals").html("")
     getEditions().then(editions =>{
-        getEditionHistory(edition._id).then(editionDetails => {
-        var modal1 ="", accordion ="";
         editions.forEach(edition => { 
+        getEditionHistory(edition._id).then(editionDetails => {
                 var modal = `
                 <div class="modal fade" id="modal-${edition._id}" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog">

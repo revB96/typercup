@@ -170,7 +170,7 @@ function printUserNotifications(){
 $(document).ready(function () {
   if(document.title == "Typer Cup | Profil"){
   console.log(getUserEmail(getUserId()))
-  var email = getUserEmail(getUserId())
+  var email = getUserEmail(getUserId()).responseText; 
   $("#change-password-form-userId").val(getUserId());
   $("#change-email-form-userId").val(getUserId());
   $("#change-email-form-email").val(email);

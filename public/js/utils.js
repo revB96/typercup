@@ -239,9 +239,10 @@ function getUserNotifications(id){
 function getUserEmail(id){
     return $.ajax({
         url: `/api/user/email?id=${id}`,
-        dataType: 'text',
+        contentType: "application/json",
+        dataType: 'json',
         success: function (result) {
-            return result.responseText;
+            return result;
         },
         fail: function (){
             console.log("Nie udało się pobrać");

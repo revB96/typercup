@@ -244,7 +244,7 @@ router.post('/admin/user/edit', function (req, res) {
     
 })
 
-router.get('/admin/user/reset-password', function (req, res) {
+router.post('/admin/user/reset-password', function (req, res) {
     console.log(req.query)
     User.resetPassword(req.query.id)
         .then(data => {

@@ -159,10 +159,10 @@ function printUserNotifications(){
 
       if (notifications.reminder == true)
         $("#user-notifications-settings").append(`
-            <button class="btn btn-success" type="button" onClick="changeNotificationSettings('reminder')">Przypomnienie o nie wysłaniu typów na aktualną kolejkę</button>`);
+            <button class="btn btn-success" type="button" onClick="changeNotificationSettings('reminder')">Przypominajka o niewysłanych typach na aktualną kolejkę</button>`);
       else
         $("#user-notifications-settings").append(`
-            <button class="btn btn-secondary" type="button" onClick="changeNotificationSettings('reminder')">Przypomnienie o nie wysłaniu typów na aktualną kolejkę</button>`);
+            <button class="btn btn-secondary" type="button" onClick="changeNotificationSettings('reminder')">Przypominajka o niewysłanych typach na aktualną kolejkę</button>`);
     }
   });
 }

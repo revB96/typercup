@@ -150,13 +150,6 @@ function printUserNotifications(){
         $("#user-notifications-settings").append(`
             <button class="btn btn-secondary" type="button" onClick="changeNotificationSettings('newRound')" >Nowa kolejka</button>`);
 
-      if (notifications.daySummary == true)
-        $("#user-notifications-settings").append(`
-          <button class="btn btn-success" type="button" onClick="changeNotificationSettings('daySummary')" >Podsumowanie dnia</button>`);
-      else
-        $("#user-notifications-settings").append(`
-        <button class="btn btn-secondary" type="button" onClick="changeNotificationSettings('daySummary')">Podsumowanie dnia</button>`);
-
       if (notifications.closeRound == true)
         $("#user-notifications-settings").append(`
             <button class="btn btn-success" type="button" onClick="changeNotificationSettings('closeRound')" >Zamknięcie kolejki</button>`);
@@ -172,6 +165,10 @@ function printUserNotifications(){
             <button class="btn btn-secondary" type="button" onClick="changeNotificationSettings('reminder')">Przypomnienie o nie wysłaniu typów na aktualną kolejkę</button>`);
     }
   });
+}
+
+function getUserEmail(){
+  
 }
 
 $(document).ready(function () {
@@ -198,5 +195,25 @@ $(document).ready(function () {
       $(".toast").toast("show");
     });
   });
+
+  $("#change-email-form").submit(function (e) {
+    e.preventDefault();
+    const formData = $("#change-email-form").serializeArray();
+    $.post("/api/user/change-email", formData).done(() => {
+      $(".toast").html(`
+                    <div class="toast-header">
+                    <strong class="mr-auto">Panel administratora</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="toast-body">
+                        Zmieniono twój adres email
+                    </div>
+                `);
+      $(".toast").toast("show");
+    });
+  });
+
   }
 });

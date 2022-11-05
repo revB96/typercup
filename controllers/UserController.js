@@ -130,6 +130,21 @@ function update(formData) {
   return def.promise;
 }
 
+function updateEmail(formData){
+  var def = Q.defer();
+  const timestamp = Date.now();
+
+  User.findByIdAndUpdate(formData.userId, {
+    email: formData.email,
+    updatedAt: timestamp
+  }, {
+    new: false,
+    autoIndex: true
+  }).exec(function (err, user) {
+    err ? def.reject(err) : def.resolve(1);
+  })
+  return def.promise;
+}
 
 async function addAdmin() {
   const timestamp = Date.now();
@@ -2670,5 +2685,6 @@ module.exports = {
   checkReminder,
   addAdmin,
   getUserTimezone,
-  testRoundEmailNotification
+  testRoundEmailNotification,
+  updateEmail
 };

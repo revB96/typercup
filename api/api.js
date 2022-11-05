@@ -260,6 +260,17 @@ router.post('/user/changepassword', function (req, res) {
     
 })
 
+router.post('/user/change-email', function (req, res) {
+    User.updateEmail(req.body)
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        });
+    
+})
+
 router.get('/user', function (req, res) {
     User.getUserDetails(req.query.id)
         .then(data => {

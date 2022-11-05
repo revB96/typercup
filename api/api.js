@@ -244,6 +244,17 @@ router.post('/admin/user/edit', function (req, res) {
     
 })
 
+router.get('/admin/user/reset-password', function (req, res) {
+    User.resetPassword(req.query.id)
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        });
+    
+})
+
 router.post('/admin/test/sendRoundNotification', function (req, res) {
     //console.log(req.body)
     User.testRoundEmailNotification()

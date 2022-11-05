@@ -210,10 +210,30 @@ function adminListUsers() {
               <button class="btn btn-primary" onClick="updateUser('${user._id}')">Edytuj</button>
             </div>
           </form>
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary" type="button" onClick="resetUserPassword('${user._id}')">Reset hasła</button>
+          </div>
       </div>
       `);
     }
   });
+}
+
+function resetUserPassword(userId){
+  $.post(`/api/admin/user/reset-password?id=${userId}`).done(() => {
+    $(".toast").html(`
+             <div class="toast-header">
+                <strong class="mr-auto">Panel administratora</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="toast-body">
+                Zapisano zmiany
+                </div>
+            `);
+      $(".toast").toast("show");
+    });
 }
 
 function updateUser(userID){

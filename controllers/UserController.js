@@ -610,7 +610,6 @@ async function resetPassword(userId){
                     <![endif]-->
                     </head>
                     <body>
-                        <span class="preheader">Wystartowała nowa kolejka</span>
                         <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                         <tr>
                             <td align="center">
@@ -633,7 +632,7 @@ async function resetPassword(userId){
                                             <h1>Witaj ${nameCapitalized}!</h1>
                                             <p>Chyba zapomniałeś swoje hasło do Type-Cyp.pl ?</p>
                                             <p>Nie bój nic, mamy nowe</p>
-                                            <p>Twoje nowe hasło to: bardzo_tajne_hasło</p>
+                                            <p>Twoje nowe hasło to: bardzo_tajne_haslo</p>
                                             <!-- Action -->
                                             <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                                                 <tr>

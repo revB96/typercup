@@ -1,9 +1,9 @@
 const Messenger = require('messenger-node');
 
 let client_config = {
-    'page_token': 'EAAMJvuJSZCIsBAIaUKbofl7pnxzAglzasKzoYv946ULiXEurJRkl2H0ZAaU7n9gRElhPrkYtTZB9xqlAessjx358NIUKGUcoYzXqMtPSJnhkoiTxvUYEoZBO1rv8PZCc3qi9aQyYjXIzb5a7M7HLZBqZCECjHLU3VStgvYEpEciWu8AHTMPumZAm',
-    'app_token': '855140375657611',
-    'api_version': 'v15.0'
+    'page_token': process.env.PAGE_TOKEN,
+    'app_token': process.env.APP_TOKEN,
+    'api_version': process.env.API_VERSION
   }
   
 const Client = new Messenger.Client(client_config);

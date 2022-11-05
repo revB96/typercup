@@ -239,8 +239,7 @@ function getUserNotifications(id){
 function getUserEmail(id){
     return $.ajax({
         url: `/api/user/email?id=${id}`,
-        contentType: "application/json",
-        dataType: 'json',
+        dataType: 'text',
         success: function (result) {
             return result;
         },

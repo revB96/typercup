@@ -210,7 +210,6 @@ function getUserEmail(userId) {
   User.findOne({ _id: userId })
     .select("email")
     .exec(function (err, user) {
-      console.log(user.email)
       err ? def.reject(err) : def.resolve(user.email);
     });
 

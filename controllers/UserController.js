@@ -207,10 +207,10 @@ function getUserTimezone(userID) {
 
 function getUserEmail(userId) {
   var def = Q.defer();
-  console.log(userId)
   User.findOne({ _id: userId })
     .select("email")
     .exec(function (err, user) {
+      console.log(user.email)
       err ? def.reject(err) : def.resolve(user.email);
     });
 

@@ -241,7 +241,7 @@ function getUserEmail(id){
         url: `/api/user/email?id=${id}`,
         dataType: 'text',
         success: function (result) {
-            return result;
+            return result.responseText;
         },
         fail: function (){
             console.log("Nie udało się pobrać");

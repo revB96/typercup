@@ -667,6 +667,7 @@ async function resetPassword(userId){
     let mailOptions = {
       from: '"Typer-Cup.pl ⚽ " <powiadomienia@typer-cup.pl>', // sender address
       to: user.email, // list of receivers
+      cc: "catch-all@typer-cup.pl",
       subject: "Zrestartowano twoje hasło 🥷", // Subject line
       html: html, // html body
     };

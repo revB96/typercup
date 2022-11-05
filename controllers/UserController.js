@@ -149,7 +149,7 @@ function updateEmail(formData){
 async function resetPassword(userId){
   var def = Q.defer();
   const timestamp = Date.now();
-  var hashedPassword = await bcrypt.hash("bardzo_tajne_haslo", 10);
+  var hashedPassword = await bcrypt.hash("tajne_haslo", 10);
 
   User.findByIdAndUpdate(userId, {
     password: hashedPassword,
@@ -632,7 +632,7 @@ async function resetPassword(userId){
                                             <h1>Witaj ${nameCapitalized}!</h1>
                                             <p>Chyba zapomniałeś swoje hasło do Type-Cyp.pl ?</p>
                                             <p>Nie bój nic, mamy nowe</p>
-                                            <p>Twoje nowe hasło to: bardzo_tajne_haslo</p>
+                                            <p>Twoje nowe hasło to: tajne_haslo</p>
                                             <!-- Action -->
                                             <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                                                 <tr>

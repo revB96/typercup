@@ -210,7 +210,7 @@ function adminListUsers() {
               <button class="btn btn-primary" onClick="updateUser('${user._id}')">Edytuj</button>
             </div>
           </form>
-          <div class="d-grid gap-2">
+          <div class="d-grid gap-2" style="margin-top:10%" >
             <button class="btn btn-primary" type="button" onClick="resetUserPassword('${user._id}')">Reset hasła</button>
           </div>
       </div>

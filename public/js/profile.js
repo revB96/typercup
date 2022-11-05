@@ -175,6 +175,8 @@ $(document).ready(function () {
   if(document.title == "Typer Cup | Profil"){
   $("#change-password-form-userId").val(getUserId());
   $("#change-email-form-userId").val(getUserId());
+  $("#change-email-form-email").val(getEmail());
+  
   printUserTicketsTable(getUserId());
   printUserNotifications()
 

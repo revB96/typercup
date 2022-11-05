@@ -271,6 +271,17 @@ router.post('/user/change-email', function (req, res) {
     
 })
 
+router.get('/user/email', function (req, res) {
+    User.getUserEmal(req.query.id)
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        });
+    
+})
+
 router.get('/user', function (req, res) {
     User.getUserDetails(req.query.id)
         .then(data => {

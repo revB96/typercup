@@ -236,6 +236,20 @@ function getUserNotifications(id){
     })
 }
 
+function getUserEmail(id){
+    return $.ajax({
+        url: `/api/user/email?id=${id}`,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (result) {
+            return result;
+        },
+        fail: function (){
+            console.log("Nie udało się pobrać");
+        }
+    })
+}
+
 function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);

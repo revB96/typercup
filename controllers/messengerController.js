@@ -10,7 +10,7 @@ const Client = new Messenger.Client(client_config);
 
 function testMessage(){
     let recipient = {
-        'id': 'p_ambroziak@outlook.com'
+        'id': '784572586'
       };
       
       // set the message to send

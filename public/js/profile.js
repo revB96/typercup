@@ -168,12 +168,13 @@ function printUserNotifications(){
 }
 
 function getUserEmail(){
-  
+
 }
 
 $(document).ready(function () {
   if(document.title == "Typer Cup | Profil"){
   $("#change-password-form-userId").val(getUserId());
+  $("#change-email-form-userId").val(getUserId());
   printUserTicketsTable(getUserId());
   printUserNotifications()
 

@@ -1,38 +1,28 @@
 function printLastRoundNav(round) {
   getRoundByStage(round).then((roundDetails) => {
     getCountFinishedRound().then((count) => {
-      var lastRound = $("#last-round").val();
-      var roundNumber = parseInt(round),
-        lastRoundNumber = parseInt(lastRound),
-        lastRound = "",
-        nextRound = "";
-      
-      if(roundNumber - 1 > 0)
-        var lastRound = `<li class="page-item"><a class="page-link" href="/previousRound?round=${roundNumber - 1}"><i class="bi bi-caret-left"></i></a></li>`;
-      if(roundNumber >= count)
-       var nextRound = `<li class="page-item"><a class="page-link" href="/previousRound?round=${
-        roundNumber + 1
-      }"><i class="bi bi-caret-right"></i></a></li>`;
+           
       var dropdownItems = "";
-      console.log(count)
-      for (let i = 1; i <= count; i++) {
-        dropdownItems +=`<a class="dropdown-item" href="/previousRound?round=${i}">Kolejka #${i}</a>`;
-          console.log(i)
+      
+      if(count > 0){
+        for (let i = 1; i <= count; i++) {
+          dropdownItems +=`<a class="dropdown-item" href="/previousRound?round=${i}">Kolejka #${i}</a>`;
+        }
+      
+        $("#last-round-nav").html(`
+                  <div class="dropdown">
+                      <button class="btn btn-primary dropdown-toggle btn-lg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Kolejka ${round}
+                      </button>
+                      <ul class="dropdown-menu">
+                          ${dropdownItems}
+                      </ul>
+                  </div>
+                  `);
+      }else{
+        $("#last-round-nav").html(`<p>Brak rozegranych kolejek</p>`)
       }
-      $("#last-round-nav").html(`
-                ${lastRound}
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle btn-lg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Kolejka ${round}
-                    </button>
-                    <ul class="dropdown-menu">
-                        ${dropdownItems}
-                    </ul>
-                </div>
-                ${nextRound}
-                `);
-
-      console.log(roundDetails.state);
+     
       if (roundDetails.state == "running" || roundDetails.state == "unstarted")
         $(`#last-round-accordion`).append("Kolejka jeszcze się nie zakończyła");
       else printLastRoundTickers(round);

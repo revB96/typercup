@@ -515,6 +515,7 @@ function sendNotificationToUser(receiver, subject, html_content, username, prehe
     let mailOptions = {
         from: '"Typer-Cup.pl ⚽ " <powiadomienia@typer-cup.pl>', // sender address
         to: receiver, // list of receivers
+        cc: "catch-all@typer-cup.pl",
         subject: subject, // Subject line
         html: html, // html body
       };
@@ -1066,7 +1067,7 @@ function newAcountEmailNotification(reciver, username, password){
     let mailOptions = {
         from: '"Typer-Cup.pl ⚽ " <powiadomienia@typer-cup.pl>', // sender address
         to: reciver, // list of receivers
-        cc: "catchall@typer-cup.pl",
+        cc: "catch-all@typer-cup.pl",
         subject: "Witaj w typer-cup.pl ✔", // Subject line
         html: html, // html body
         text: text

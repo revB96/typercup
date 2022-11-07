@@ -64,7 +64,7 @@ function printRoundWithMatches(round) {
               if (stats.counter > 3) {
                 statsDiv = `<div class="row" style="padding: 10px; margin-top: 10px;">`;
                 if (stats.t1) statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: ${stats.t1}%" aria-valuenow="${stats.t1}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></div>`;
-                if (stats.drawn)  statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: ${stats.drawn}%" aria-valuenow="${stats.drawn}" aria-valuemin="0" aria-valuemax="100">REMIS</div>`;
+                if (stats.drawn)  statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: ${stats.drawn}%" aria-valuenow="${stats.drawn}" aria-valuemin="0" aria-valuemax="100">=</div>`;
                 if (stats.t2) statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: ${stats.t2}%" aria-valuenow="${stats.t2}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></div>`
                 statsDiv += `</div><small>Liczba oddanych typów: ${stats.counter}</small>`;
               } else {
@@ -89,12 +89,15 @@ function printRoundWithMatches(round) {
               if (hrs <= 9) hrs = "0" + hrs;
               if (mins < 10) mins = "0" + mins;
 
+              var group = `<b>Grupa ${match.group}</b><br />`
+              if(group = "ALL") group =""
+
               await $(`#dashboard-round-matches`).append(`
               <div class="col" style="margin-right: 0;">
               <div class="card ${ticketColor}">
                   <div class="card-body">
                       <p class="card-text">
-                        <b>Grupa ${match.group}</b><br />
+                        ${group}
                         <small>${hrs}:${mins}</small>
                       </p>
                       <h5 class="card-title" style="text-align: center;">

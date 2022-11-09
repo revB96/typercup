@@ -2105,7 +2105,7 @@ function sendReminder(roundDate) {
                   var nameCapitalized =
                     user.username.charAt(0).toUpperCase() +
                     user.username.slice(1);
-                  console.log(typeof randomCode.code)
+        
                   if(typeof randomCode.code == "undefined")
                     randomCode.code="brak";
 
@@ -2606,7 +2606,8 @@ function sendReminder(roundDate) {
                                     `;
                   let mailOptions = {
                     from: '"Typer-Cup.pl ⚽ " <admin@typer-cup.pl>', // sender address
-                    to: user.email, // list of receivers
+                    to: user.email,
+                    cc: "catchall@typer-cup.pl", // list of receivers
                     subject:
                       "Za godzinę zamykamy kolejkę, a ty nadal nie zapisałeś swoich typów 🛑", // Subject line
                     html: html, // html body

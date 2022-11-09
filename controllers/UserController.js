@@ -3197,10 +3197,6 @@ function checkReminder() {
         moment.tz(firstMatch[0].matchDate, "Europe/Warsaw")
       );
       var timestamp = new Date(moment.tz(Date.now(), "Europe/Warsaw"));
-      console.log("Godziny: " + matchDate.getHours()-2 + " " +timestamp.getHours());
-      console.log("Minuty: " +matchDate.getMinutes() + " " +timestamp.getMinutes());
-      console.log("Dni: " +matchDate.getDate() + " " +timestamp.getDate());
-      console.log("Miesiąc: " +matchDate.getMonth() + " " +timestamp.getMonth());
       if(
         (matchDate.getHours() - 2 == timestamp.getHours()) &
         (matchDate.getMinutes() == timestamp.getMinutes()) &

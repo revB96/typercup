@@ -11,13 +11,11 @@ function configureCronManager(){
     }, {start: true, timeZone: "Europe/Warsaw"}) 
 
     cm.add('reminder','* * * * *', ()=>{
-        console.log("Trig reminder")
         User.checkReminder()
     }, {start: true, timeZone: "Europe/Warsaw"})
 
     cm.add('closeRound','0 * * * *', function(){
         User.checkCloseRoundNotification();
-        console.log("Close Round")
     }, {start: true, timeZone: "Europe/Warsaw"})
 
 

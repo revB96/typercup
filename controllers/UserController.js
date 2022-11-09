@@ -3202,10 +3202,10 @@ function checkReminder() {
       console.log(matchDate.getDay() + " " +timestamp.getDay());
       console.log(matchDate.getMonth() + " " +timestamp.getMonth());
       if(
-        (matchDate.getHours() - 2 == timestamp.getHours()) &
-        (matchDate.getMinutes() == timestamp.getMinutes()) &
-        (matchDate.getDay() == timestamp.getDay()) &
-        (matchDate.getMonth() == timestamp.getMonth())
+        ("Godziny: " + matchDate.getHours() - 2 == timestamp.getHours()) &
+        ("Minuty: " + matchDate.getMinutes() == timestamp.getMinutes()) &
+        ("Dni: " + matchDate.getDay() == timestamp.getDay()) &
+        ("Miesiąc: " + matchDate.getMonth() == timestamp.getMonth())
       ) {
         sendReminder(moment.tz(firstMatch[0].matchDate, "Europe/Warsaw"));
       }

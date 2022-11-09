@@ -169,7 +169,7 @@ function adminListUsers() {
             <div class="col-md-12">
               <p>
                 ID: ${user._id.substr(user._id.length - 4)} | 
-                Ostatnie logowanie: ${lastLogon.getHours()}:${lastLogon.getMinutes()}/${lastLogon.getDay()}.${lastLogon.getMonth()}.${lastLogon.getFullYear()}
+                Ostatnie logowanie: ${lastLogon.getHours()}:${lastLogon.getMinutes()} ${lastLogon.getDay()}.${lastLogon.getMonth()}.${lastLogon.getFullYear()}
               </p>
               <input name="userId" type="hidden" class="form-control" value="${user._id}" />
             </div>

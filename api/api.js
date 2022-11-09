@@ -388,7 +388,7 @@ router.get('/tickets', function (req, res) {
             res.json(data)
         })
         .catch(err => {
-            res.json(err)
+            //res.json(err)
         });
     
 })

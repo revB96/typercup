@@ -167,7 +167,10 @@ function adminListUsers() {
       <div class="tab-pane fade ${showActive}" id="list-${user._id}" role="tabpanel" aria-labelledby="list-${user._id}-list">
           <form id="edit-${user._id}-form" class="row g-3" onsubmit="return false">
             <div class="col-md-12">
-              <p>ID: ${user._id.substr(user._id.length - 4)}</p>
+              <p>
+                ID: ${user._id.substr(user._id.length - 4)} | 
+                Ostatnie logowanie: ${user.lastLogon}
+              </p>
               <input name="userId" type="hidden" class="form-control" value="${user._id}" />
             </div>
             <div class="col-md-6">

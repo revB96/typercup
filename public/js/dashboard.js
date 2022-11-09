@@ -7,10 +7,13 @@ function printRoundWithMatches(round) {
   }
 
   getRound("running").then((round) => {
-    $(`#dashboard-round-matches`).html("");
+    $(`#dashboard-round-matches`).html(`<div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>`);
     getRoundSchedule(round[0].roundDate).then(async (schedule) => {
       await getUserTickets(getUserId(), round[0].round).then(async (userTickets) => {
         await getUserTimezone(getUserId()).then(async (userTimezone) => {
+          $(`#dashboard-round-matches`).html("")
           var roundDate = new Date(round[0].roundDate);
           var closeTime = new Date(schedule[0].matchDate);
           var timeoffset;

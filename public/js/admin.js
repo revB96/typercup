@@ -668,7 +668,7 @@ function adminPrintEditionsList(){
                     <td scope="col">${user_history.q}</th>
                   </tr>`
           })
-          console.log(tr)
+          
           await $(`#nav-tabEditions`).append(`
             <div class="tab-pane fade show" id="list-${edition._id}-editions" role="tabpanel" aria-labelledby="list-${edition._id}-editions">
               <div class="table-responsive">

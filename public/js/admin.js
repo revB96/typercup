@@ -713,7 +713,8 @@ $(document).ready(function () {
     adminPrintBackups();
     adminPrintEditions();
     adminGetSelectEditions();
-    adminPrintEditionsList()
+    adminPrintEditionsList();
+    adminGetMatches();
 
   $("#add-quiz-answer-form").submit(function (e) {
     e.preventDefault();

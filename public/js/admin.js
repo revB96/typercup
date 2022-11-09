@@ -305,6 +305,7 @@ function adminGetRound() {
       await $(`#admin-score-round-select`).append(
         `<option value="${round.roundDate}">${round.round}. ${round.displayName}</option>`
       );
+      adminGetMatches();
     }
   });
 }
@@ -714,7 +715,6 @@ $(document).ready(function () {
     adminPrintEditions();
     adminGetSelectEditions();
     adminPrintEditionsList();
-    adminGetMatches();
 
   $("#add-quiz-answer-form").submit(function (e) {
     e.preventDefault();

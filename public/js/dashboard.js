@@ -49,6 +49,7 @@ function printRoundWithMatches(round) {
                 closeTime.getHours() - timeoffset
               }:${minutes}`
             );
+
             $(`#dashboard-message`).html(
               `<a href="/roundSummary"><button type="button" class="btn btn-primary">Sprawdź jak postawili inni</button></a>`
             );
@@ -82,10 +83,11 @@ function printRoundWithMatches(round) {
               }
 
               var timeMatch = new Date(match.matchDate);
+              
               var hrs = timeMatch.getHours();
-              //if (userTimezone.timezone == "UK") hrs = hrs - 1;
-
               var mins = timeMatch.getMinutes();
+         
+
               if (hrs <= 9) hrs = "0" + hrs;
               if (mins < 10) mins = "0" + mins;
 

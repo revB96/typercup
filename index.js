@@ -16,7 +16,7 @@ const flash = require('express-flash');
 const methodOverride = require('method-override')
 const moment = require('moment-timezone');
 const api = require("./api/api");
-//const Backup = require("./controllers/BackupController");
+const Backup = require("./controllers/BackupController");
 const routes = require('./routes/routes');
 const DB = config.database;
 

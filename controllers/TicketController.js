@@ -127,13 +127,33 @@ function deactivateRandomCode(randomCode) {
   var def = Q.defer();
   const timestamp = moment.tz(Date.now(), "Europe/Warsaw");
 
-  if(randomCode != "Q5fx5M95OCWN5c295TnnaEHMlI0dJR0ZDxOoHWzCgd3pnJ1VatqwCwRx7Hs9uVcT")
     RandomCode.findOneAndUpdate(
       { code: randomCode },
       {
         $set: {
           active: false,
           updatedAt: timestamp,
+        },
+      },
+      {
+        new: false,
+      }
+    ).exec(function (err, code) {
+      err ? def.reject(err) : def.resolve(code);
+    });
+
+  return def.promise;
+}
+
+function deactivateUserRandomCodeByRound(userId, round) {
+  var def = Q.defer();
+  const timestamp = moment.tz(Date.now(), "Europe/Warsaw");
+
+    RandomCode.findOneAndUpdate(
+      { user: userId, round: round },
+      {
+        $set: {
+          active: false,
         },
       },
       {
@@ -164,6 +184,9 @@ function addRandomTickets(randomCode){
               Schedule.getRoundSchedule(runningRound.roundDate).then(schedule =>{
                 //console.log("Schedule: " + schedule)
                 schedule.forEach(match =>{
+
+                  checkUserTicket(userRandomCode.user, match._id)
+
                   var chance1 = new Chance();
                   var chance2 = new Chance();
                   var ticket = new Ticket({
@@ -256,6 +279,7 @@ function add(formData) {
                 console.log(err);
                 console.log("***");
               } else {
+                deactivateUserRandomCodeByRound(match.userId, match.round)
                 def.resolve(result);
                 console.log("***");
                 console.log("Dodano nowy typ ");
@@ -275,6 +299,7 @@ function add(formData) {
           } else {
             ticketUpdate(result._id, match.t1g, match.t2g).then(
               (ticketUpdateResult) => {
+                deactivateUserRandomCodeByRound(match.userId, match.round)
                 def.resolve(ticketUpdateResult);
                 console.log("***");
                 console.log("Aktualizacja typu");

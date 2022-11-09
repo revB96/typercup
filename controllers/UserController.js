@@ -3197,9 +3197,11 @@ function checkReminder() {
         moment.tz(firstMatch[0].matchDate, "Europe/Warsaw")
       );
       var timestamp = new Date(moment.tz(Date.now(), "Europe/Warsaw"));
-      //console.log(matchDate);
-      //console.log(timestamp);
-      if (
+      console.log(matchDate.getHours()-2 + " " +timestamp.getHours());
+      console.log(matchDate.getMinutes() + " " +timestamp.getMinutes());
+      console.log(matchDate.getDay() + " " +timestamp.getDay());
+      console.log(matchDate.getMonth() + " " +timestamp.getMonth());
+      if(
         (matchDate.getHours() - 2 == timestamp.getHours()) &
         (matchDate.getMinutes() == timestamp.getMinutes()) &
         (matchDate.getDay() == timestamp.getDay()) &

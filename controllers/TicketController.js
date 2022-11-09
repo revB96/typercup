@@ -154,6 +154,7 @@ function deactivateUserRandomCodeByRound(userId, round) {
       {
         $set: {
           active: false,
+          updatedAt: timestamp,
         },
       },
       {

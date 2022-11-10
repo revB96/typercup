@@ -1,7 +1,12 @@
 function printLastRoundNav(round) {
+  $("#last-round-nav").html(`<div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>`)
   getRoundByStage(round).then((roundDetails) => {
     getCountFinishedRound().then((count) => {
-           
+      $("#last-round-nav").html("")
       var dropdownItems = "";
       
       if(count > 0){
@@ -31,7 +36,11 @@ function printLastRoundNav(round) {
 }
 
 function printLastRoundTickers(round) {
-  $(`#last-round-accordion`).html("");
+  $(`#last-round-accordion`).html(`<div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>`);
   getRoundTickets(round).then((tickets) => {
     var ticketsByMatch = tickets.reduce((acc, value) => {
       if (!acc[value.schedule._id]) {
@@ -44,7 +53,7 @@ function printLastRoundTickers(round) {
     }, {});
 
     var ticketsByDateKeys = Object.keys(ticketsByMatch);
-
+    $(`#last-round-accordion`).html("")
     ticketsByDateKeys.forEach((match) => {
       var matchCounter = 0;
       getScheduleScore(ticketsByMatch[match][0].schedule._id).then((score) => {

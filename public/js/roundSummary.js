@@ -1,7 +1,11 @@
 function printRoundSummaryAccordion(){
-    $(`#round-summary-accordion`).html("")
+    $(`#round-summary-accordion`).html(`<div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>`)
     checkIfRoundIsOpen(getUserId()).then((roundState) => {
-        console.log(roundState)
+        $(`#round-summary-accordion`).html("")
         if(roundState == false)
         {
             getRound("running").then((runningRound) => {

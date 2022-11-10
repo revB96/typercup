@@ -6,8 +6,10 @@ function selectGroup() {
 }
 
 function printSchedule(group) {
-  $("#euro2021-schedule").html(`<div class="spinner-border" role="status">
-    <span class="visually-hidden">Loading...</span>
+  $("#euro2021-schedule").html(`<div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
   </div>`);
   const dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
   getGroupSchedule(group).then((result) => {

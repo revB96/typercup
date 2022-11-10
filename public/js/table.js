@@ -1,5 +1,11 @@
 function listUserTable(){
+    $("#users-stat-table").html(`<div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>`)
     getUserTable().then(result=>{
+        $("#users-stat-table").html("")
         for (const [index,userStat] of Object.entries(result)) {
             var counter = parseInt(index, 10) + 1;
             var yellowClass=""

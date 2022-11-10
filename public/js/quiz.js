@@ -1,8 +1,11 @@
 function printQuiz() {
-  $("#quiz-cards").html("");
+  $("#quiz-cards").html(`<div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>`);
   getQuestions().then(async (questions) => {
     await getUserAnswers(getUserId()).then(async (userQuestions) => {
       getUserCorrectAnswers(getUserId()).then(async (userCorrectAnswer) => {
+        $("#quiz-cards").html("")
         for await (const [index, question] of Object.entries(questions)) {
           var points = 0,
         background = "",

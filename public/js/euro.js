@@ -6,10 +6,13 @@ function selectGroup() {
 }
 
 function printSchedule(group) {
-  $("#euro2021-schedule").html("");
+  $("#euro2021-schedule").html(`<div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>`);
   const dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
   getGroupSchedule(group).then((result) => {
     getUserTimezone(getUserId()).then(async (userTimezone) => {
+      $("#euro2021-schedule").html("")
       var matchByDate = result.reduce((acc, value) => {
         var date = new Date(value.matchDate);
         var formatDate = date.toLocaleDateString("en-GB", dateOptions);

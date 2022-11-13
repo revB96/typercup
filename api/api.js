@@ -245,7 +245,6 @@ router.post('/admin/user/edit', function (req, res) {
 })
 
 router.post('/admin/user/reset-password', function (req, res) {
-    console.log(req.query)
     User.resetPassword(req.query.id)
         .then(data => {
             res.json(data)
@@ -477,7 +476,7 @@ router.get('/user/table', function (req, res) {
     
 })
 
-router.get('/admin/user/reset-stats', function (req, res) {
+router.post('/admin/user/reset-stats', function (req, res) {
     UserStats.resetUserStats(req.query.id)
         .then(data => {
             res.json(data)

@@ -45,8 +45,8 @@ function listUserTable(){
                 <td>${userStat.defeat}</td>
                 <td>${quizPoints}</td>
                 <td>
-                    <span style="padding:0;margin:0" class="badge rounded-pill bg-primary">${Math.round(effectiveness)}%</span>
-                    <span style="padding:0;margin:0" class="badge rounded-pill bg-success">${Math.round(effectiveness2)}%</span>
+                    <span style="padding:5px;margin:0" class="badge rounded-pill bg-primary">${Math.round(effectiveness)}%</span>
+                    <span style="padding:5px;margin:0" class="badge rounded-pill bg-success">${Math.round(effectiveness2)}%</span>
                 </td>
                 
              </tr>

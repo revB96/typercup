@@ -111,7 +111,8 @@ function update(formData) {
     }
 
     if (user.active == true) {
-      UserStats.activateUser(user._id)
+      UserStats.activateUser(user._id);
+      RandomCode.updateEmail(user._id, formData.email);
       UserNotification.findOneAndUpdate({ user: user._id }, {
         newRound: true,
         daySummary: true,
@@ -141,7 +142,12 @@ function updateEmail(formData){
     new: false,
     autoIndex: true
   }).exec(function (err, user) {
-    err ? def.reject(err) : def.resolve(1);
+    if(err)
+      def.reject(err)
+    else{
+      RandomCode.updateEmail(formData.userId, formData.email)
+      def.resolve(1)
+    }
   })
   return def.promise;
 }

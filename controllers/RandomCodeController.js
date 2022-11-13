@@ -36,7 +36,25 @@ function getAll(){
         
 }
 
+function updateEmail(userId, email) {
+    var def = Q.defer();
+  
+    RandomCode.updateMany({ 
+        user: userId
+    },{
+        $set: {
+            mailToNotifications: email,
+        },
+    },{
+        new: false,
+    }).exec(function (err, code) {
+        err ? def.reject(err) : def.resolve(1);
+    });
+  
+    return def.promise;
+  }
 
 module.exports = {
     getAll,
+    updateEmail
 }

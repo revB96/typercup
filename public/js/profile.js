@@ -70,11 +70,12 @@ function printUserTicketsTable(userId) {
             else if(userTicket.round == "semifinal") round = "Półfinał"
             else if(userTicket.round == "roundof16") round = "1/16 finału"
             else round = userTicket.round 
-
+            var lp = parseInt(index) + 1
             if ((userTicket.schedule) != null) {
               var updatedAt = new Date(userTicket.updatedAt);
               await $(`#profile-user-ticket-table`).append(`
                                     <tr class="${trClass}">
+                                        <td>${lp}</td>
                                         <td>${round}</td>
                                         <td>${
                                           userTicket.schedule.t1.teamName} vs ${userTicket.schedule.t2.teamName}</td>
@@ -140,7 +141,7 @@ function changeNotificationSettings(notification){
 }
 
 function printUserNotifications(){
-  $("#user-notifications-settings").html("")
+  $("#user-notifications-settings").html("<small>Kliknij aby włączyć/wyłączyć</small>")
   getUserNotifications(getUserId()).then((notifications) => {
     if (!!notifications) {
       if (notifications.newRound == true)

@@ -64,8 +64,8 @@ function printRoundWithMatches(round) {
                   t2g = "",
                   statsDiv = "",
                   ticketColor = "text-white bg-danger",
-                  styleT1=`style="text-align: center;`,
-                  styleT2=`style="text-align: center;`;
+                  styleT1=`style="text-align: center;"`,
+                  styleT2=`style="text-align: center;"`;
 
               if(stats.t1 < 10)
                 styleT1 = `style="height: 14px; width: 14px; text-align: center;"`

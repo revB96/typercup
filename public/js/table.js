@@ -27,8 +27,11 @@ function listUserTable(){
                 effectiveness2 = (userStat.points / (result[0].tickets * 3)) * 100
 
             var textSize = ""
-            if(userStat.user.username.lenght > 12)
+            var nickname = userStat.user.username
+            if(nickname.lenght > 12)
                 textSize="font-size:10px;"
+
+            console.log(nickname.lenght)
 
             $("#users-stat-table").append(`
             <tr ${yellowClass}>

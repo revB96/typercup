@@ -416,10 +416,12 @@ function adminGetQuestions() {
         }   
         else
             correctAnswer = question.correctAnswer
-            
+       
+        var lp = index + 1
+
         $(`#list-questions-table`).append(`
             <tr>
-                <th scope="row">${index+1}</th>
+                <th scope="row">${lp}</th>
                 <td>${question.question}</td>
                 <td>${question.type}</td>
                 <td>${correctAnswer}</td>

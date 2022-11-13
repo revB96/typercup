@@ -72,6 +72,7 @@ function printUserTicketsTable(userId) {
             else round = userTicket.round 
             if ((userTicket.schedule) != null) {
               var lp = parseInt(index) + 1
+              console.log(lp)
               var updatedAt = new Date(userTicket.updatedAt);
               await $(`#profile-user-ticket-table`).append(`
                                     <tr class="${trClass}">

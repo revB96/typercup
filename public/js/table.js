@@ -13,7 +13,7 @@ function listUserTable(){
             var crown="";
             var effectiveness=0;
             var effectiveness2 = 0;
-            var textSize;
+            var textSize="";
 
             if(counter === 1)
                 yellowClass = `class="bg-warning"`

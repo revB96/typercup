@@ -477,6 +477,17 @@ router.get('/user/table', function (req, res) {
     
 })
 
+router.get('/admin/user/reset-stats', function (req, res) {
+    UserStats.resetUserStats(req.query.id)
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        });
+    
+})
+
 router.get('/round/last', function (req, res) {
     Round.countFinishedRounds()
         .then(data => {

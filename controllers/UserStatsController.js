@@ -43,6 +43,19 @@ function activateUser(userId){
   var def = Q.defer();
     UserStats.findOneAndUpdate({user:userId}, {
       $set: { active: true },
+  },{
+    new:true,
+    autoIndex: true
+  }).exec(function (err,result){
+    err ? def.reject(err) : def.resolve(1);
+    console.log("Aktywacja statystyk: "+result)
+  })
+  return def.promise;
+}
+
+function resetUserStats(userId){
+  var def = Q.defer();
+    UserStats.findOneAndUpdate({user:userId}, {
       points: 0,
       tickets: 0,
       correctScore: 0,
@@ -55,7 +68,7 @@ function activateUser(userId){
     autoIndex: true
   }).exec(function (err,result){
     err ? def.reject(err) : def.resolve(1);
-    console.log("Aktywacja statystyk: "+result)
+    console.log("Reset statystyk: "+result)
   })
   return def.promise;
 }
@@ -176,5 +189,6 @@ module.exports = {
     addToCorrectAnswers,
     getUserCorrectAnswers,
     deactivateUser,
-    activateUser
+    activateUser,
+    resetUserStats
 }

@@ -215,6 +215,7 @@ function adminListUsers() {
           </form>
           <div class="d-grid gap-2" style="margin-top:10%" >
             <button class="btn btn-primary" type="button" onClick="resetUserPassword('${user._id}')">Reset hasła</button>
+            <button class="btn btn-primary" type="button" onClick="resetUserStats('${user._id}')">Reset statystyk</button>
           </div>
       </div>
       `);
@@ -232,7 +233,24 @@ function resetUserPassword(userId){
                 </button>
                 </div>
                 <div class="toast-body">
-                Zapisano zmiany
+                  Zrestartowano hasło
+                </div>
+            `);
+      $(".toast").toast("show");
+    });
+}
+
+function resetUserStats(userId){
+  $.post(`/api/admin/user/reset-stats?id=${userId}`).done(() => {
+    $(".toast").html(`
+             <div class="toast-header">
+                <strong class="mr-auto">Panel administratora</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="toast-body">
+                  Zrestartowano statystyki
                 </div>
             `);
       $(".toast").toast("show");
@@ -257,6 +275,7 @@ function updateUser(userID){
                   </div>
               `);
         adminListUsers()
+        adminGetAllRandomCodes();
         $("#list-user-items").html(``)
         $("#list-user-tabContent").html(`
           <div class="spinner-border" role="status">

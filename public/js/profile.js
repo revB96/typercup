@@ -101,10 +101,10 @@ function printUserTicketsTable(userId) {
             else if(userTicket.round == "semifinal") round = "Półfinał"
             else if(userTicket.round == "roundof16") round = "1/16 finału"
             else round = userTicket.round 
-            
+            var lp = parseInt(index) + 1
             await $(`#profile-user-ticket-table`).append(`
                         <tr>
-                
+                            <td>${lp}</td>
                             <td>${round}</td>
                             <td>${userTicket.schedule.t1.teamName} vs ${userTicket.schedule.t2.teamName}</td>
                             <td>${userTicket.t1g}:${userTicket.t2g}</td>

@@ -26,11 +26,15 @@ function listUserTable(){
             if(isNaN((userStat.points / (result[0].tickets * 3)) * 100) == false)
                 effectiveness2 = (userStat.points / (result[0].tickets * 3)) * 100
 
+            var textSize = ""
+            if(userStat.user.username.lenght > 12)
+                textSize="font-size:10px;"
+
             $("#users-stat-table").append(`
             <tr ${yellowClass}>
                 <th scope="row">${counter}</th>
                 <td>
-                    <button style="border-style: none; background-color: transparent; font-size:10px;" id="tableButton-${userStat._id}">${userStat.user.username}${crown}</button>
+                    <button style="border-style: none; background-color: transparent; ${textSize}" id="tableButton-${userStat._id}">${userStat.user.username}${crown}</button>
                     <script>tippy('#tableButton-${userStat._id}', {
                         content: "${userStat.user.friendlyName}",
                         placement: 'right-start',

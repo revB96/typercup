@@ -24,7 +24,7 @@ function printHallOfFame(){
                 `
                 var showAccordion="";
 
-                 if(edition.name=="Mistrostwa Świata 2018"){
+                 if(edition.name=="Mistrzostwa Świata 2018"){
                     th ="";
                     caption = "";
                 }

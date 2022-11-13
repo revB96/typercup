@@ -112,7 +112,10 @@ function update(formData) {
 
     if (user.active == true) {
       UserStats.activateUser(user._id);
-      RandomCode.updateEmail(user._id, formData.email);
+      RandomCode.updateEmail(user._id, formData.email).then((err,result)=>{
+        if(err) console.log(err)
+        else console.log("Status aktualizacji maila w RandomCodes: " + result)
+      });
       UserNotification.findOneAndUpdate({ user: user._id }, {
         newRound: true,
         daySummary: true,

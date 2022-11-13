@@ -70,8 +70,8 @@ function printUserTicketsTable(userId) {
             else if(userTicket.round == "semifinal") round = "Półfinał"
             else if(userTicket.round == "roundof16") round = "1/16 finału"
             else round = userTicket.round 
-            var lp = parseInt(index) + 1
             if ((userTicket.schedule) != null) {
+              var lp = parseInt(index) + 1
               var updatedAt = new Date(userTicket.updatedAt);
               await $(`#profile-user-ticket-table`).append(`
                                     <tr class="${trClass}">

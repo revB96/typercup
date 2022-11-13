@@ -419,7 +419,7 @@ function adminGetQuestions() {
             
         $(`#list-questions-table`).append(`
             <tr>
-                <th scope="row">${question._id.substr(question._id.length - 4)}</th>
+                <th scope="row">${index+1}</th>
                 <td>${question.question}</td>
                 <td>${question.type}</td>
                 <td>${correctAnswer}</td>

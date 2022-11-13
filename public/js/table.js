@@ -29,7 +29,7 @@ function listUserTable(){
 
             var nickname = userStat.user.username
             if(nickname.length > 12)
-                textSize="font-size:13px;"
+                textSize="font-size:12px;"
             console.log(textSize)
 
             $("#users-stat-table").append(`

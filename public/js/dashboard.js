@@ -68,9 +68,9 @@ function printRoundWithMatches(round) {
                   styleT2="";
 
               if(stats.t1 < 10)
-                styleT1 = `style="height: 12px; width: 12px;"`
+                styleT1 = `style="height: 14px; width: 14px;"`
               if(stats.t2 <10)
-                styleT2 = `style="height: 12px; width: 12px;"`    
+                styleT2 = `style="height: 14px; width: 14px;"`    
             
               if (stats.counter > 3) {
                 statsDiv = `<div class="row" style="padding: 10px; margin-top: 10px;">`;

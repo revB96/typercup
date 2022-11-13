@@ -17,30 +17,31 @@ function generateUserCodes(roundNumber){
     User.getAll().then(Users =>{
         
         Users.forEach(user =>{
-            var cryptoRandomCode = cryptoRandomString({length: 64, type: 'alphanumeric'});
+            if(user.active == true){
+                var cryptoRandomCode = cryptoRandomString({length: 64, type: 'alphanumeric'});
 
-            var randomCode = new RandomCode({
-                user: user._id,
-                mailToNotifications: user.email,
-                code:cryptoRandomCode,
-                active: true,
-                round:roundNumber,
-                createdAt:timestamp,
-                updatedAt:timestamp
-            })
+                var randomCode = new RandomCode({
+                    user: user._id,
+                    mailToNotifications: user.email,
+                    code:cryptoRandomCode,
+                    active: true,
+                    round:roundNumber,
+                    createdAt:timestamp,
+                    updatedAt:timestamp
+                })
 
-            randomCode.save((function(err, result){
-                if(err){
-                    console.log("Błąd przy generowaniu kodu losowego! Treść błędu: ")
-                    console.log(err)
-                }
-                else{
-                    def.resolve(result);
-                    console.log("Dodano nowy kod losowy: ")
-                    console.log(`User: ${user.username}, Data: ${timestamp}`)
-                }
-            }));
-
+                randomCode.save((function(err, result){
+                    if(err){
+                        console.log("Błąd przy generowaniu kodu losowego! Treść błędu: ")
+                        console.log(err)
+                    }
+                    else{
+                        def.resolve(result);
+                        console.log("Dodano nowy kod losowy: ")
+                        console.log(`User: ${user.username}`)
+                    }
+                }));
+            }
         })
     })
 

@@ -873,6 +873,7 @@ $(document).ready(function () {
                 `);
         $(".toast").toast("show");
         adminListRound();
+        adminGetAllRandomCodes()
       })
       .fail((xhr, status, error) => {
         $(".toast").html(`

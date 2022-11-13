@@ -24,7 +24,7 @@ function printHallOfFame(){
                 `
                 var showAccordion="";
 
-                 if(edition.name=="Euro 2018"){
+                 if(edition.name=="Mistrostwa Świata 2018"){
                     th ="";
                     caption = "";
                 }
@@ -84,7 +84,7 @@ function printHallOfFame(){
                             <td>${editionDetail.d}</td>
                             <td>${editionDetail.q}</td>
                         `
-                        if(edition.name=="Euro 2018"){
+                        if(edition.name=="Mistrzostwa Świata 2018"){
                             cardText = ""
                             modalTd=""
                         }

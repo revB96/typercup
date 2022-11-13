@@ -417,7 +417,7 @@ function adminGetQuestions() {
         else
             correctAnswer = question.correctAnswer
        
-        var lp = index + 1
+        var lp = parseInt(index) + 1
 
         $(`#list-questions-table`).append(`
             <tr>

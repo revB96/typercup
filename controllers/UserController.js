@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const Q = require("q");
 const express = require("express");
 const User = require("../models/users");
-const RandomCode = require("../models/randomCodes");
+const RandomCode = require("./RandomCodeController");
 const UserNotification = require("../models/userNotifications");
 const bcrypt = require("bcrypt");
 const UserStats = require("./UserStatsController");
@@ -898,15 +898,10 @@ function getRunningRound() {
 function getUserRandomCode(userId) {
   var def = Q.defer();
   getRunningRound().then(round => {
-    //console.log(round)
-    RandomCode.findOne({ user: userId, round: round.round}).exec(function (
-      err,
-      randomCode
-    ) {
-      //console.log("Random code" + randomCode.code);
-      err ? def.reject(err) : def.resolve(randomCode);
-    });
-  });
+    RandomCode.userRandomCode(userId, round.round).then((err,code) =>{
+      err ? def.reject(err) : def.resolve(code);
+    })
+  })
   return def.promise;
 }
 

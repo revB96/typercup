@@ -52,9 +52,25 @@ function updateEmail(userId, email) {
     });
   
     return def.promise;
-  }
+}
+
+function userRandomCode(userId, round){
+    var def = Q.defer();
+  
+    RandomCode.findOne({ user: userId, round: round}).exec(function (
+        err,
+        randomCode
+      ) {
+        //console.log("Random code" + randomCode.code);
+        err ? def.reject(err) : def.resolve(randomCode);
+      });
+
+    return def.promise;
+
+}
 
 module.exports = {
     getAll,
-    updateEmail
+    updateEmail,
+    userRandomCode
 }

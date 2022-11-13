@@ -13,6 +13,7 @@ function listUserTable(){
             var crown="";
             var effectiveness=0;
             var effectiveness2 = 0;
+            var textSize;
 
             if(counter === 1)
                 yellowClass = `class="bg-warning"`
@@ -26,18 +27,16 @@ function listUserTable(){
             if(isNaN((userStat.points / (result[0].tickets * 3)) * 100) == false)
                 effectiveness2 = (userStat.points / (result[0].tickets * 3)) * 100
 
-            var textSize = ""
             var nickname = userStat.user.username
-            if(nickname.lenght > 12)
-                textSize="font-size:10px;"
-
-            console.log(nickname.lenght)
+           
+            textSize="213"
+            console.log(textSize)
 
             $("#users-stat-table").append(`
             <tr ${yellowClass}>
                 <th scope="row">${counter}</th>
                 <td>
-                    <button style="border-style: none; background-color: transparent; ${textSize}" id="tableButton-${userStat._id}">${userStat.user.username}${crown}</button>
+                    <button style="border-style: none; background-color: transparent; " id="tableButton-${userStat._id}">${userStat.user.username}${crown}</button>
                     <script>tippy('#tableButton-${userStat._id}', {
                         content: "${userStat.user.friendlyName}",
                         placement: 'right-start',

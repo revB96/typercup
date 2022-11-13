@@ -151,6 +151,8 @@ function adminListUsers() {
       var lastLogon = new Date(user.lastLogon);
       var champion = "", firstLogon = "", filledQuiz = "", timezone = "", active = "";
       var active = "", showActive = "", notActive="";
+      var lastLogonMinutes = lastLogon.getMinutes();
+      var lastLogonHours = lastLogon.getHours();
 
       if (index == 0) { active = "active"; showActive = "show active" }
       if ((typeof user.champion !== "undefined") && (user.champion == true)) champion = "checked"
@@ -158,6 +160,8 @@ function adminListUsers() {
       if ((typeof user.filledQuiz !== "undefined") && (user.filledQuiz == true)) filledQuiz = "checked"
       if ((typeof user.active !== "undefined") && (user.active == true)) active = "checked"; else notActive ="list-group-item-dark"
       if (typeof user.timezone !== "undefined") timezone = user.timezone
+      if(lastLogonMinutes < 10) lastLogonMinutes = "0" + lastLogonMinutes;
+      if(lastLogonHours < 10) lastLogonHours = "0" + lastLogonHours;
 
       //console.log(champion)
       $("#list-user-items").append(`
@@ -169,7 +173,7 @@ function adminListUsers() {
             <div class="col-md-12">
               <p>
                 ID: ${user._id.substr(user._id.length - 4)} | 
-                Ostatnie logowanie: ${lastLogon.getHours()}:${lastLogon.getMinutes()} ${lastLogon.getDate()}.${lastLogon.getMonth()}.${lastLogon.getFullYear()}
+                Ostatnie logowanie: ${lastLogonHours}:${lastLogonMinutes} ${lastLogon.getDate()}.${lastLogon.getMonth()+1}.${lastLogon.getFullYear()}
               </p>
               <input name="userId" type="hidden" class="form-control" value="${user._id}" />
             </div>

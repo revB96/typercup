@@ -401,16 +401,16 @@ function getTicketStats(scheduleID){
         if(ticket.t1g < ticket.t2g) t2w++;
         counter++;
       })
-      var t1stats=((t1w/counter)*100).toFixed(2),
-          t2stats=((t2w/counter)*100).toFixed(2),
-          drawnStats=((drawn/counter)*100).toFixed(2);
-      var offset = 0.01;
+      var t1stats=((t1w/counter)*100).toFixed(1),
+          t2stats=((t2w/counter)*100).toFixed(1),
+          drawnStats=((drawn/counter)*100).toFixed(1);
+      var offset = 0.1;
       console.log(t1stats)
       console.log(t2stats)
       console.log(drawnStats)
-      if((t1stats + t2stats + drawnStats) > 100.00){
+      if((t1stats + t2stats + drawnStats) > 100.0){
         console.log("1")
-        while(t1stats + t2stats + drawnStats > 100.00){
+        while(t1stats + t2stats + drawnStats > 100.0){
           console.log("2")
           t1stats = t1stats - offset;
           t2stats = t2stats - offset;

@@ -407,12 +407,15 @@ function getTicketStats(scheduleID){
       var offset = 0.01;
   
       if(t1stats + t2stats + drawnStats > 100.0){
+        console.log("1")
         while(t1stats + t2stats + drawnStats > 100){
+          console.log("2")
           t1stats = t1stats - offset;
           t2stats = t2stats - offset;
           drawnStats = drawnStats - offset;
         }
       }
+      console.log(t1stats)
 
       def.resolve({
         t1: t1stats,

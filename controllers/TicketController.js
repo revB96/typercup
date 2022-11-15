@@ -401,11 +401,22 @@ function getTicketStats(scheduleID){
         if(ticket.t1g < ticket.t2g) t2w++;
         counter++;
       })
-      
+      var t1stats=((t1w/counter)*100).toFixed(2),
+          t2stats=((t2w/counter)*100).toFixed(2),
+          drawnStats=((drawn/counter)*100).toFixed(2);
+      var offset = 0.1;
+  
+      if(t1stats + t2stats + drawnStats > 100.0){
+        while(t1stats + t2stats + drawnStats > 100.0){
+          t1stats = t1stats - offset;
+          t2stats = t2stats - offset;
+          drawnStats = drawnStats - offset;
+        }
+      }
       def.resolve({
-        t1: ((t1w/counter)*100).toFixed(2),
-        t2: ((t2w/counter)*100).toFixed(2),
-        drawn: ((drawn/counter)*100).toFixed(2),
+        t1: t1stats,
+        t2: t2stats,
+        drawn: drawn,
         counter: counter
       })
     }

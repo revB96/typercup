@@ -67,16 +67,16 @@ function printRoundWithMatches(round) {
                   styleT1=`style="margin: 0 auto"`,
                   styleT2=`style="margin: 0 auto"`;
 
-              if(stats.t1 < 10)
-                styleT1 = `style="height: 14px; width: 14px; margin: 0 auto;"`
-              if(stats.t2 <10)
-                styleT2 = `style="height: 14px; width: 14px; margin: 0 auto;"`    
+              //if(stats.t1 < 10)
+               // styleT1 = `style="height: 14px; width: 14px; margin: 0 auto;"`
+              //if(stats.t2 <10)
+               // styleT2 = `style="height: 14px; width: 14px; margin: 0 auto;"`    
             
               if (stats.counter > 3) {
-                statsDiv = `<div class="row" style="padding: 10px; margin-top: 10px;"><div class="progress">`;
-                if (stats.t1) statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: ${stats.t1}%" aria-valuenow="${stats.t1}" aria-valuemin="0" aria-valuemax="100"><span ${styleT1} class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></div>`;
+                statsDiv = `<div class="row" style="padding: 10px; margin-top: 10px;"><div class="progress" style="background: none;">`;
+                if (stats.t1) statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: ${stats.t1}%" aria-valuenow="${stats.t1}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t1.shortcut.toLowerCase()}"></div>`;
                 if (stats.drawn)  statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: ${stats.drawn}%" aria-valuenow="${stats.drawn}" aria-valuemin="0" aria-valuemax="100">=</div>`;
-                if (stats.t2) statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: ${stats.t2}%" aria-valuenow="${stats.t2}" aria-valuemin="0" aria-valuemax="100"><span ${styleT2} class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></div>`
+                if (stats.t2) statsDiv += `<div class="progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: ${stats.t2}%" aria-valuenow="${stats.t2}" aria-valuemin="0" aria-valuemax="100"><span class="flag-icon flag-icon-${match.t2.shortcut.toLowerCase()}"></div>`
                 statsDiv += `</div><small>Liczba oddanych typów: ${stats.counter}</small>`;
               } else {
                 statsDiv = `</div><p class="fw-lighter" style="color: white; margin: 0; padding: 0;">(Zbyt mało głosów)</div>`;

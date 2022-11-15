@@ -408,9 +408,9 @@ function getTicketStats(scheduleID){
       console.log(t1stats)
       console.log(t2stats)
       console.log(drawnStats)
-      if((t1stats + t2stats + drawnStats) > 100){
+      if((t1stats + t2stats + drawnStats) > 100.00){
         console.log("1")
-        while(t1stats + t2stats + drawnStats > 100){
+        while(t1stats + t2stats + drawnStats > 100.00){
           console.log("2")
           t1stats = t1stats - offset;
           t2stats = t2stats - offset;

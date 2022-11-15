@@ -408,7 +408,7 @@ function getTicketStats(scheduleID){
       console.log(t1stats)
       console.log(t2stats)
       console.log(drawnStats)
-      var sum = t1stats.parseFloat() + t2stats.parseFloat() + drawnStats.parseFloat();
+      var sum = Number(t1stats) + Number(t2stats) + Number(drawnStats);
       console.log(sum)
       if(sum > 100.0){
         console.log("1")

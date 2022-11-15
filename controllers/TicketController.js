@@ -417,9 +417,9 @@ function getTicketStats(scheduleID){
         }
       }
       def.resolve({
-        t1: t1stats,
-        t2: t2stats,
-        drawn: drawnStats,
+        t1: t1stats.toFixed(1),
+        t2: t2stats.toFixed(1),
+        drawn: drawnStats.toFixed(1),
         counter: counter
       })
     }

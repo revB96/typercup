@@ -403,9 +403,9 @@ function getTicketStats(scheduleID){
       })
       
       def.resolve({
-        t1: Math.floor((t1w/counter)*100),
-        t2: Math.floor((t2w/counter)*100),
-        drawn: Math.floor((drawn/counter)*100),
+        t1: Math.trunc((t1w/counter)*100),
+        t2: Math.trunc((t2w/counter)*100),
+        drawn: Math.trunc((drawn/counter)*100),
         counter: counter
       })
     }

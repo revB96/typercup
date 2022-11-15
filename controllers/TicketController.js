@@ -405,7 +405,9 @@ function getTicketStats(scheduleID){
           t2stats=((t2w/counter)*100).toFixed(2),
           drawnStats=((drawn/counter)*100).toFixed(2);
       var offset = 0.01;
-  
+      console.log(t1stats)
+      console.log(t2stats)
+      console.log(drawnStats)
       if((t1stats + t2stats + drawnStats) > 100){
         console.log("1")
         while(t1stats + t2stats + drawnStats > 100){
@@ -415,7 +417,7 @@ function getTicketStats(scheduleID){
           drawnStats = drawnStats - offset;
         }
       }
-      console.log(t1stats)
+      
 
       def.resolve({
         t1: t1stats,

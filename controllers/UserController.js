@@ -2095,6 +2095,7 @@ function sendReminder(roundDate) {
   startDate.setHours(2, 0, 0, 0);
   endDate.setHours(25, 59, 59, 99);
   UserNotification.find().exec(function (err, userNotifications) {
+    console.log(userNotifications)
     if (err) console.log(err);
     else {
       userNotifications.forEach((userNotification, index) => {

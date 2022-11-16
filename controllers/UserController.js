@@ -901,6 +901,7 @@ function getRunningRound() {
 function getUserRandomCode(userId) {
   var def = Q.defer();
   getRunningRound().then(round => {
+    console.log("Runda: " + round)
     RandomCode.userRandomCode(userId, round.round).then((err,code) =>{
       err ? def.reject(err) : def.resolve(code);
     })
@@ -1477,7 +1478,6 @@ function roundEmailNotification(firstMatch) {
             var endDate = new Date(firstMatch);
             console.log("1")
             if(!!user){
-            console.log(user)
             if(user.timezone == "UK") endDate.setHours(endDate.getHours() - 2); else endDate.setHours(endDate.getHours() - 1);
            
             endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");

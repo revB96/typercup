@@ -1469,8 +1469,9 @@ function roundEmailNotification(firstMatch) {
   ) {
     if (err) console.log(err);
     else {
-      //console.log(userNotifications);
+      console.log(userNotifications);
         userNotifications.forEach(async (userNotification) => {
+          console.log("0")
           setTimeout(async () => {
           await getUserById(userNotification.user).then((user) => {
             var endDate = new Date(firstMatch);

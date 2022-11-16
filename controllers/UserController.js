@@ -3210,10 +3210,7 @@ function checkReminder() {
       console.log("TS " + timestamp.getHours())
       console.log("MD " + matchDate.getHours())
       if(
-        ((matchDate.getHours() - 2) == timestamp.getHours()) &
-        (matchDate.getMinutes() == timestamp.getMinutes()) &
-        (matchDate.getDate() == timestamp.getDate()) &
-        (matchDate.getMonth() == timestamp.getMonth())
+        ((matchDate.getHours() - 2) == timestamp.getHours())
       ) {
         console.log("3")
         sendReminder(moment.tz(firstMatch[0].matchDate, "Europe/Warsaw"));

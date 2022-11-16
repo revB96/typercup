@@ -49,7 +49,7 @@ function printRoundSummaryAccordion(){
                         `
                         var counter = 1
                         ticketsByMatch[match].forEach(userTicket => {
-                            var nickname = userStat.user.username;
+                            var nickname = userTicket.user.username;
                             var textSize="";
                             
                             if(nickname.length > 12)

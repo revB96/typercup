@@ -1485,7 +1485,7 @@ function roundEmailNotification(firstMatch) {
             }
 
             if(user.timezone == "UK"){ 
-              endDate.setHours(endDate.getHours() - 2); 
+              endDate.setHours(endDate.getHours() - 1); 
             }
 
             if(typeof randomCode.code == "undefined") randomCode ="brak";

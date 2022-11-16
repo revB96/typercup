@@ -902,10 +902,7 @@ function getUserRandomCode(userId) {
   var def = Q.defer();
   //console.log("getUserRandomCode #1")
   getRunningRound().then(round => {
-    console.log("runda: " + round.round)
-
     RandomCode.userRandomCode(userId, round.round).then(user_code =>{
-      console.log("getUserRandomCode #3")
       console.log("kod: " + user_code.code)
       err ? def.reject(err) : def.resolve(user_code);
     })
@@ -1486,9 +1483,8 @@ function roundEmailNotification(firstMatch) {
             endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
             console.log(user._id)
             getUserRandomCode(user._id).then((randomCode) => {
-            console.log("2")
             console.log(randomCode)
-            if(typeof randomCode.code == "undefined")
+            if(typeof randomCode == "undefined")
               randomCode.code="brak";
             
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);

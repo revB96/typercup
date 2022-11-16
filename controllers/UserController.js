@@ -1480,6 +1480,7 @@ function roundEmailNotification(firstMatch) {
            
             endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
             getUserRandomCode(user._id).then((randomCode) => {
+            console.log(randomCode)
             if(typeof randomCode == "undefined")
               randomCode.code="brak";
             

@@ -49,11 +49,24 @@ function printRoundSummaryAccordion(){
                         `
                         var counter = 1
                         ticketsByMatch[match].forEach(userTicket => {
-                            console.log(userTicket)
+                            var nickname = userStat.user.username;
+                            var textSize="";
+                            
+                            if(nickname.length > 12)
+                                textSize="font-size:11px;"
+                            
                             matchAccordion += `
                             <tr>
                                 <th scope="row">${counter}</th>
-                                <th>${userTicket.user.username}</th>
+                                <td>
+                                    <button style="border-style: none; background-color: transparent; ${textSize}" id="roundSummaryButton-${userTicket._id}">${userTicket.user.username}</button>
+                                    <script>tippy('#roundSummaryButton-${userTicket._id}', {
+                                        content: "${userTicket.user.friendlyName}",
+                                        placement: 'right-start',
+                                        theme: 'material',
+                                    });
+                                    </script>
+                                </td>
                                 <td>${userTicket.t1g}</td>
                                 <td>${userTicket.t2g}</td>
                             </tr>

@@ -902,7 +902,7 @@ function getUserRandomCode(userId) {
   var def = Q.defer();
   getRunningRound().then(round => {
     RandomCode.userRandomCode(userId, round.round).then((err,user_code) =>{
-      console.log(user_code)
+      console.log("123" + user_code)
       err ? def.reject(err) : def.resolve(user_code);
     })
   })

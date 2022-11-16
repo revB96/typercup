@@ -1479,7 +1479,6 @@ function roundEmailNotification(firstMatch) {
             getUserRandomCode(user._id).then(randomCode => {
               
               var endDate = new Date(firstMatch);
-              endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
               endDate.setHours(endDate.getHours() - 1); 
             if(user.timezone == "UK"){ 
               endDate.setHours(endDate.getHours() - 1); 
@@ -1488,7 +1487,7 @@ function roundEmailNotification(firstMatch) {
             if(typeof randomCode.code == "undefined") randomCode ="brak";
             
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);
-            
+              endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
               const dateOptions = {
                 year: "numeric",
                 month: "numeric",

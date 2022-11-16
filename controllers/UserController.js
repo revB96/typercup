@@ -3181,11 +3181,8 @@ function getRunningRound() {
 function checkCloseRoundNotification() {
   var def = Q.defer();
   getRunningRound().then((runningRound) => {
-    console.log("1")
     if (!!runningRound) {
-      console.log("2")
       getFirstRoundMatch(runningRound.roundDate).then((firstMatch) => {
-        console.log("3")
         var timezoneTemplate = Date.now();
         var timestamp = new Date(timezoneTemplate, "Europe/Warsaw".format());
         var matchDate = new Date(moment.tz(firstMatch[0].matchDate, "Europe/Warsaw").format());
@@ -3205,17 +3202,20 @@ function checkCloseRoundNotification() {
 
 function checkReminder() {
   getRunningRound().then((runningRound) => {
+    console.log("1")
     getFirstRoundMatch(runningRound.roundDate).then((firstMatch) => {
+      console.log("2")
       var matchDate = new Date(
         moment.tz(firstMatch[0].matchDate, "Europe/Warsaw")
       );
       var timestamp = new Date(moment.tz(Date.now(), "Europe/Warsaw"));
       if(
-        (matchDate.getHours() - 2 == timestamp.getHours()) &
+        ((matchDate.getHours() - 2) == timestamp.getHours()) &
         (matchDate.getMinutes() == timestamp.getMinutes()) &
         (matchDate.getDate() == timestamp.getDate()) &
         (matchDate.getMonth() == timestamp.getMonth())
       ) {
+        console.log("")
         sendReminder(moment.tz(firstMatch[0].matchDate, "Europe/Warsaw"));
       }
     });

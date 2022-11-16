@@ -58,10 +58,10 @@ function userRandomCode(userId, round){
     var def = Q.defer();
     RandomCode.findOne({ user: userId, round: round}).exec(function (
         err,
-        randomCode
+        user_code
       ) {
-        //console.log("userRandomCode: " + randomCode.code)
-        err ? def.reject(err) : def.resolve(randomCode);
+        console.log("userRandomCode: " + user_code)
+        err ? def.reject(err) : def.resolve(user_code);
       });
 
     return def.promise;

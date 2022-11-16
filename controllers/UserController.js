@@ -900,9 +900,9 @@ function getRunningRound() {
 
 function getUserRandomCode(userId) {
   var def = Q.defer();
-  console.log("getUserRandomCode #1")
   getRunningRound().then(round => {
     RandomCode.userRandomCode(userId, round.round).then(user_code =>{
+      console.log(user_code)
       err ? def.reject(err) : def.resolve(user_code);
     })
   })

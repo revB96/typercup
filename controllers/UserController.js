@@ -1475,12 +1475,11 @@ function roundEmailNotification(firstMatch) {
           setTimeout(async () => {
           await getUserById(userNotification.user).then(user => {
             var endDate = new Date(firstMatch);
-            console.log("1")
             if(!!user){
             if(user.timezone == "UK") endDate.setHours(endDate.getHours() - 2); else endDate.setHours(endDate.getHours() - 1);
            
             endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
-
+            console.log("1")
             getUserRandomCode(user._id).then((randomCode) => {
             console.log("2")
             console.log(randomCode)

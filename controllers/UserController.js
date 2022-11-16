@@ -1483,11 +1483,13 @@ function roundEmailNotification(firstMatch) {
             endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
 
             getUserRandomCode(user._id).then((randomCode) => {
+            console.log("2")
+            console.log(randomCode)
             if(typeof randomCode.code == "undefined")
               randomCode.code="brak";
             
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);
-              console.log("2")
+            
               const dateOptions = {
                 year: "numeric",
                 month: "numeric",

@@ -1480,13 +1480,13 @@ function roundEmailNotification(firstMatch) {
               
               var endDate = new Date(firstMatch);
               endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
-            if(user.timezone == "UK"){ 
-              endDate.setHours(endDate.getHours() - 2); 
+            if(user.timezone == "PL"){ 
+              endDate.setHours(endDate.getHours() - 1); 
             }else{
-              endDate.setHours(endDate.getHours() - 1);
+              endDate.setHours(endDate.getHours() - 2);
             }
 
-            
+            if(typeof randomCode.code == "undefined") randomCode ="brak";
             
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);
             

@@ -56,12 +56,12 @@ function updateEmail(userId, email) {
 
 function userRandomCode(userId, round){
     var def = Q.defer();
-  
+    console.log("userRandomCode #1")
     RandomCode.findOne({ user: userId, round: round}).exec(function (
         err,
         randomCode
       ) {
-        //console.log("Random code" + randomCode.code);
+        console.log("Random code: " + randomCode.code);
         err ? def.reject(err) : def.resolve(randomCode);
       });
 

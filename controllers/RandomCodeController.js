@@ -61,10 +61,9 @@ function userRandomCode(userId, round){
         randomCode
       ) {
         //console.log("userRandomCode: " + randomCode.code)
-        err ? def.reject(err) : def.resolve(randomCode.code);
+        err ? def.reject(err) : def.resolve(randomCode);
       });
 
-    console.log(def.promise)
     return def.promise;
 
 }

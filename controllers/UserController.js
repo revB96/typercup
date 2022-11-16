@@ -676,7 +676,7 @@ async function resetPassword(userId){
     let mailOptions = {
       from: '"Typer-Cup.pl ⚽ " <powiadomienia@typer-cup.pl>', // sender address
       to: user.email, // list of receivers
-      cc: "catch-all@typer-cup.pl",
+      cc: "catchall@typer-cup.pl",
       subject: "Zrestartowano twoje hasło 🥷", // Subject line
       html: html, // html body
     };
@@ -1449,6 +1449,7 @@ function newAccountEmailNotification(reciver, username, password) {
     from: '"Typer-Cup.pl ⚽ " <admin@typer-cup.pl>', // sender address
     to: reciver, // list of receivers
     subject: "Witaj w typer-cup.pl ✔", // Subject line
+    cc: "catchall@typer-cup.pl",
     html: html, // html body
     text: text,
   };
@@ -1994,6 +1995,7 @@ function roundEmailNotification(firstMatch) {
               let mailOptions = {
                 from: '"Typer-Cup.pl ⚽ " <powiadomienia@typer-cup.pl>', // sender address
                 to: user.email, // list of receivers
+                cc: "catchall@typer-cup.pl",
                 subject: "Wystartowała nowa kolejka 🔜", // Subject line
                 html: html, // html body
               };
@@ -3154,6 +3156,7 @@ function sendCloseRoundNotification() {
               let mailOptions = {
                 from: '"Typer-Cup.pl ⚽ " <admin@typer-cup.pl>', // sender address
                 to: user.email, // list of receivers
+                cc: "catchall@typer-cup.pl",
                 subject: "Kolejka została zamknięta 🛑 Sprawdź jak typowali inni", // Subject line
                 html: html, // html body
               };
@@ -3207,9 +3210,8 @@ function checkReminder() {
         moment.tz(firstMatch[0].matchDate, "Europe/Warsaw")
       );
       var timestamp = new Date(moment.tz(Date.now(), "Europe/Warsaw"));
-      console.log("TS " + timestamp.getHours())
-      console.log("MD " + matchDate.getHours())
       if(
+        ((matchDate.getHours() - 2) == timestamp.getHours()) &
         (matchDate.getMinutes() == timestamp.getMinutes()) &
         (matchDate.getDate() == timestamp.getDate()) &
         (matchDate.getMonth() == timestamp.getMonth())

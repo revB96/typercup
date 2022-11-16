@@ -57,7 +57,6 @@ function updateEmail(userId, email) {
 function userRandomCode(userId, round){
     var def = Q.defer();
     RandomCode.findOne({ user: userId, round: round}).exec((err, user_code) => {
-        console.log(user_code)
         err ? def.reject(err) : def.resolve(user_code);
       });
     return def.promise;

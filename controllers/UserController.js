@@ -1480,10 +1480,7 @@ function roundEmailNotification(firstMatch) {
               
               var endDate = new Date(firstMatch);
               endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
-            if(user.timezone == "PL"){ 
               endDate.setHours(endDate.getHours() - 1); 
-            }
-
             if(user.timezone == "UK"){ 
               endDate.setHours(endDate.getHours() - 1); 
             }

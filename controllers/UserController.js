@@ -907,8 +907,8 @@ function getUserRandomCode(userId) {
       console.log("getUserRandomCode #3")
       err ? def.reject(err) : def.resolve(code);
     })
+    return def.promise;
   })
-  return def.promise;
 }
 
 //USER NOTIFICATIONS

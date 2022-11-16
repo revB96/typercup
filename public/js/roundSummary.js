@@ -6,12 +6,9 @@ function printRoundSummaryAccordion(){
     </div>`)
     checkIfRoundIsOpen(getUserId()).then((roundState) => {
         $(`#round-summary-accordion`).html("")
-        if(roundState == false)
-        {
+        if(roundState == false){
             getRound("running").then((runningRound) => {
-                console.log(runningRound)
                 getRoundTickets(runningRound[0].round).then(tickets =>{
-                    console.log(tickets)
                     var ticketsByMatch = tickets.reduce((acc, value) => {
                         if (!acc[value.schedule._id]) {
                           acc[value.schedule._id] = [];

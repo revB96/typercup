@@ -1488,9 +1488,7 @@ function roundEmailNotification(firstMatch) {
               endDate.setHours(endDate.getHours() - 1);
             }
 
-            if(typeof randomCode.code == "undefined")
-            console.log("2")
-              randomCode ="brak";
+            if(typeof randomCode.code == "undefined") randomCode ="brak";
             
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);
             

@@ -341,7 +341,7 @@ function getTicketsByRound(round){
       path: "schedule",
       populate: { path: "t2" },
     })
-    .populate("user", "username")
+    .populate("user", "username friendlyName")
     .exec(function (err, tickets) {
       err ? def.reject(err) : def.resolve(tickets);
     });

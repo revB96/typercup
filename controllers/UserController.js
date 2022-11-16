@@ -3202,13 +3202,13 @@ function checkCloseRoundNotification() {
 
 function checkReminder() {
   getRunningRound().then((runningRound) => {
-    console.log("1")
     getFirstRoundMatch(runningRound.roundDate).then((firstMatch) => {
-      console.log("2")
       var matchDate = new Date(
         moment.tz(firstMatch[0].matchDate, "Europe/Warsaw")
       );
       var timestamp = new Date(moment.tz(Date.now(), "Europe/Warsaw"));
+      console.log("TS " + timestamp)
+      console.log("MD " + matchDate)
       if(
         ((matchDate.getHours() - 2) == timestamp.getHours()) &
         (matchDate.getMinutes() == timestamp.getMinutes()) &

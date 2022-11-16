@@ -904,9 +904,9 @@ function getUserRandomCode(userId) {
   getRunningRound().then(round => {
     console.log("runda: " + round.round)
 
-    RandomCode.userRandomCode(userId, round.round).then((err,user_code) =>{
+    RandomCode.userRandomCode(userId, round.round).then(user_code =>{
       console.log("getUserRandomCode #3")
-      console.log("kod: " + user_code)
+      console.log("kod: " + user_code.code)
       err ? def.reject(err) : def.resolve(user_code);
     })
   })

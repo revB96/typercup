@@ -1487,7 +1487,9 @@ function roundEmailNotification(firstMatch) {
               console.log("2: " + user.timezone) 
               endDate.setHours(endDate.getHours() - 1);
             }
-            if(typeof randomCode == "undefined")
+
+            if(typeof randomCode.code == "undefined")
+            console.log("2")
               randomCode ="brak";
             
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);
@@ -1977,7 +1979,7 @@ function roundEmailNotification(firstMatch) {
                                                           </td>
                                                           </tr>
                                                       </table>
-                                                      <p>Jeżeli nie możesz wysłać swoich typów, kliknij w ten link aby dodać losowe typy: <a href="https://typer-cup.pl/randomCode?code=${randomCode}" class="f-fallback button" target="_blank">KLIK</a></p> 
+                                                      <p>Jeżeli nie możesz wysłać swoich typów, kliknij w ten link aby dodać losowe typy: <a href="https://typer-cup.pl/randomCode?code=${randomCode.code}" class="f-fallback button" target="_blank">KLIK</a></p> 
                                               <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
                                               <tr>
                                                   <td class="content-cell" align="center">

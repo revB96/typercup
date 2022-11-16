@@ -903,7 +903,7 @@ function getUserRandomCode(userId) {
   getRunningRound().then(round => {
     RandomCode.userRandomCode(userId, round.round).then((err,user_code) =>{
       if(err) console.log(err)
-      console.log("123" + user_code)
+      console.log("123" + err)
       err ? def.reject(err) : def.resolve(user_code);
     })
   })

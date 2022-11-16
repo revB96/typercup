@@ -1476,14 +1476,15 @@ function roundEmailNotification(firstMatch) {
           await getUserById(userNotification.user).then(user => {
             var endDate = new Date(firstMatch);
             if(!!user){
+            
             if(user.timezone == "UK") endDate.setHours(endDate.getHours() - 2); else endDate.setHours(endDate.getHours() - 1);
-           
+            
             endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
             getUserRandomCode(user._id).then((err, randomCode) => {
             console.log(err)
             console.log(randomCode)
             if(typeof randomCode == "undefined")
-              randomCode.code="brak";
+              randomCode ="brak";
             
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);
             

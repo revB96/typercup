@@ -1482,8 +1482,6 @@ function roundEmailNotification(firstMatch) {
               endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
             if(user.timezone == "PL"){ 
               endDate.setHours(endDate.getHours() - 1); 
-            }else{
-              endDate.setHours(endDate.getHours() - 2);
             }
 
             if(typeof randomCode.code == "undefined") randomCode ="brak";

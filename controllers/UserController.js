@@ -1475,7 +1475,7 @@ function roundEmailNotification(firstMatch) {
           setTimeout(async () => {
           await getUserById(userNotification.user).then(user => {
             //if(!!user){
-            getUserRandomCode(user._id).then((randomCode, err) => {
+            getUserRandomCode(user._id).then(randomCode => {
               var endDate = new Date(firstMatch);
               endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
             

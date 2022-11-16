@@ -1480,7 +1480,7 @@ function roundEmailNotification(firstMatch) {
               
               var endDate = new Date(firstMatch);
               endDate.setHours(endDate.getHours() - 1); 
-              
+
             if(user.timezone == "UK"){ 
               endDate.setHours(endDate.getHours() - 1); 
             }
@@ -2100,7 +2100,9 @@ function sendReminder(roundDate) {
       userNotifications.forEach((userNotification, index) => {
         setTimeout(() => {
           getUserById(userNotification.user).then((user) => {
+            console.log(user)
             getUserRandomCode(user._id).then(randomCode => {
+              console.log(randomCode)
             Ticket.find({
               user: user._id,
               matchDate: { $gte: startDate, $lte: endDate },

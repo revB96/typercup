@@ -1480,13 +1480,13 @@ function roundEmailNotification(firstMatch) {
               
               var endDate = new Date(firstMatch);
               endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
-            if(user.timezone == "UK"){ 
-              console.log("1: " + user.timezone)
-              endDate.setHours(endDate.getHours() - 2); 
-            }else{
-              console.log("2: " + user.timezone) 
-              endDate.setHours(endDate.getHours() - 1);
-            }
+            // if(user.timezone == "UK"){ 
+            //   console.log("1: " + user.timezone)
+            //   endDate.setHours(endDate.getHours() - 2); 
+            // }else{
+            //   console.log("2: " + user.timezone) 
+            //   endDate.setHours(endDate.getHours() - 1);
+            // }
 
             if(typeof randomCode.code == "undefined") randomCode ="brak";
             

@@ -904,9 +904,9 @@ function getUserRandomCode(userId) {
     RandomCode.userRandomCode(userId, round.round).then(user_code =>{
       console.log(user_code)
       err ? def.reject(err) : def.resolve(user_code);
-      return def.promise;
     })
   })
+  return def.promise;
 }
 
 //USER NOTIFICATIONS
@@ -1481,7 +1481,7 @@ function roundEmailNotification(firstMatch) {
             
             endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
             getUserRandomCode(user._id).then((err, randomCode) => {
-            console.log(err)
+            console.log("12312312321")
             console.log(randomCode)
             if(typeof randomCode == "undefined")
               randomCode ="brak";

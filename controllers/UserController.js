@@ -3215,7 +3215,7 @@ function checkReminder() {
         (matchDate.getDate() == timestamp.getDate()) &
         (matchDate.getMonth() == timestamp.getMonth())
       ) {
-        console.log("")
+        console.log("3")
         sendReminder(moment.tz(firstMatch[0].matchDate, "Europe/Warsaw"));
       }
     });

@@ -49,6 +49,7 @@ function printRoundSummaryAccordion(){
                         `
                         var counter = 1
                         ticketsByMatch[match].forEach(userTicket => {
+                            console.log(userTicket)
                             matchAccordion += `
                             <tr>
                                 <th scope="row">${counter}</th>

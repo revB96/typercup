@@ -1469,13 +1469,14 @@ function roundEmailNotification(firstMatch) {
   ) {
     if (err) console.log(err);
     else {
-      console.log(userNotifications);
+      
         userNotifications.forEach(async (userNotification) => {
           console.log("0")
           setTimeout(async () => {
-          await getUserById(userNotification.user).then((user) => {
+          await getUserById(userNotification.user).then(user => {
             var endDate = new Date(firstMatch);
             console.log("1")
+            console.log(user)
             if(!!user){
             
             if(user.timezone == "UK") endDate.setHours(endDate.getHours() - 2); else endDate.setHours(endDate.getHours() - 1);

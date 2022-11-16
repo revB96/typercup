@@ -1479,7 +1479,8 @@ function roundEmailNotification(firstMatch) {
             if(user.timezone == "UK") endDate.setHours(endDate.getHours() - 2); else endDate.setHours(endDate.getHours() - 1);
            
             endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
-            getUserRandomCode(user._id).then((randomCode) => {
+            getUserRandomCode(user._id).then((err, randomCode) => {
+            console.log(err)
             console.log(randomCode)
             if(typeof randomCode == "undefined")
               randomCode.code="brak";

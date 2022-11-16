@@ -1475,11 +1475,12 @@ function roundEmailNotification(firstMatch) {
         userNotifications.forEach(async (userNotification) => {
           setTimeout(async () => {
           await getUserById(userNotification.user).then(user => {
-            //if(!!user){
+            if(!!user){
             getUserRandomCode(user._id).then(randomCode => {
               
               var endDate = new Date(firstMatch);
               endDate.setHours(endDate.getHours() - 1); 
+              
             if(user.timezone == "UK"){ 
               endDate.setHours(endDate.getHours() - 1); 
             }
@@ -2006,7 +2007,7 @@ function roundEmailNotification(firstMatch) {
               });
 
             })
-          //}
+          }
           })
         }, 1000 * index);  
         })

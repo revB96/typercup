@@ -1481,11 +1481,12 @@ function roundEmailNotification(firstMatch) {
               var endDate = new Date(firstMatch);
               endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
             if(user.timezone == "UK"){ 
-              console.log("1: " + user.timezone)
               endDate.setHours(endDate.getHours() - 2); 
+            }else{
+              endDate.setHours(endDate.getHours() - 1);
             }
 
-            if(typeof randomCode.code == "undefined") randomCode ="brak";
+            
             
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);
             

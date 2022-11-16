@@ -903,7 +903,6 @@ function getUserRandomCode(userId) {
   //console.log("getUserRandomCode #1")
   getRunningRound().then(round => {
     RandomCode.userRandomCode(userId, round.round).then(user_code =>{
-      console.log("kod: " + user_code.code)
       err ? def.reject(err) : def.resolve(user_code);
     })
   })
@@ -1473,7 +1472,6 @@ function roundEmailNotification(firstMatch) {
     else {
       
         userNotifications.forEach(async (userNotification) => {
-          console.log("0")
           setTimeout(async () => {
           await getUserById(userNotification.user).then(user => {
             var endDate = new Date(firstMatch);
@@ -1481,9 +1479,7 @@ function roundEmailNotification(firstMatch) {
             if(user.timezone == "UK") endDate.setHours(endDate.getHours() - 2); else endDate.setHours(endDate.getHours() - 1);
            
             endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
-            console.log(user._id)
             getUserRandomCode(user._id).then((randomCode) => {
-            console.log(randomCode)
             if(typeof randomCode == "undefined")
               randomCode.code="brak";
             
@@ -1974,7 +1970,7 @@ function roundEmailNotification(firstMatch) {
                                                           </td>
                                                           </tr>
                                                       </table>
-                                                      <p>Jeżeli nie możesz wysłać swoich typów, kliknij w ten link aby dodać losowe typy: <a href="https://typer-cup.pl/randomCode?code=${randomCode.code}" class="f-fallback button" target="_blank">KLIK</a></p> 
+                                                      <p>Jeżeli nie możesz wysłać swoich typów, kliknij w ten link aby dodać losowe typy: <a href="https://typer-cup.pl/randomCode?code=${randomCode}" class="f-fallback button" target="_blank">KLIK</a></p> 
                                               <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
                                               <tr>
                                                   <td class="content-cell" align="center">

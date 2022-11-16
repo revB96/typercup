@@ -905,10 +905,12 @@ function getUserRandomCode(userId) {
     console.log("getUserRandomCode #2")
     RandomCode.userRandomCode(userId, round.round).then((err,code) =>{
       console.log("getUserRandomCode #3")
+      console.log("kod: " + code)
       err ? def.reject(err) : def.resolve(code);
-      return def.promise;
+      
     })
   })
+  return def.promise;
 }
 
 //USER NOTIFICATIONS

@@ -904,9 +904,9 @@ function getUserRandomCode(userId) {
     RandomCode.userRandomCode(userId, round.round).then(user_code =>{
       console.log(user_code)
       err ? def.reject(err) : def.resolve(user_code);
+      return def.promise;
     })
   })
-  return def.promise;
 }
 
 //USER NOTIFICATIONS

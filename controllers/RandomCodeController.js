@@ -24,9 +24,10 @@ function getAll(){
                         updatedAt:"$updatedAt",
                         code:"$code"
                     }
-                }
-            }
-        }
+                },                
+            },
+            $sort : {round : -1,}
+        },
     ])
     .then(randomCodes =>{
         //console.log(randomCodes);

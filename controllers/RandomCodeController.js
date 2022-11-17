@@ -27,7 +27,7 @@ function getAll(){
                 },                
             },
         },{
-            $sort : {round : -1,}
+            $sort : {round : "asc",}
         }
     ])
     .then(randomCodes =>{

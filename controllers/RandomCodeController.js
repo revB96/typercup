@@ -26,8 +26,6 @@ function getAll(){
                     }
                 },                
             },
-        },{
-            $sort : {round : 1}
         }
     ])
     .then(randomCodes =>{

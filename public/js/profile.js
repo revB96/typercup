@@ -73,10 +73,9 @@ function printUserTicketsTable(userId) {
             else round = userTicket.round 
             if ((userTicket.schedule) != null) {
               var lp = parseInt(index) + 1
-              console.log(lp)
+        
               var updatedAt = new Date(userTicket.updatedAt);
               if (userTimezone.timezone == "UK") updatedAt.setHours(updatedAt.getHours() - 1)
-             
               await $(`#profile-user-ticket-table`).append(`
                                     <tr class="${trClass}">
                                         <td>${lp}</td>
@@ -98,7 +97,7 @@ function printUserTicketsTable(userId) {
           if ((userTicket.schedule) != null) {
             var round;
             var updatedAt = await new Date(userTicket.updatedAt);
-            
+            if (userTimezone.timezone == "UK") updatedAt.setHours(updatedAt.getHours() - 1)
             if(userTicket.round == "quarterfinal") round = "Ćwierćfinał"
             else if(userTicket.round == "final") round = "Finał"
             else if(userTicket.round == "semifinal") round = "Półfinał"

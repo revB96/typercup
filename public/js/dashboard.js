@@ -17,7 +17,7 @@ function printRoundWithMatches(round) {
           var roundDate = new Date(round[0].roundDate);
           var closeTime = new Date(schedule[0].matchDate);
           var timeoffset;
-          var spinner = `<div class="spinner-grow spinner-grow-sm float-end text-success" role="status">
+          var spinner = `<div class="spinner-grow spinner-grow-sm float-end text-info" role="status">
                           <span class="visually-hidden">Loading...</span>
                         </div>`
 

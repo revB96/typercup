@@ -568,6 +568,7 @@ async function adminGetAllRandomCodes() {
       var content = `
       <div>
       <span class="badge badge-dark">${randomCode._id}</span>
+      <div class="table-responsive">
       <table class="table table-sm table-hover caption-top">
         <thead class="table-light">
           <tr>
@@ -602,6 +603,7 @@ async function adminGetAllRandomCodes() {
       content += `
       </tbody>
       </table>
+      </div>
       </div>
       `
       $("#pills-randomCodes").append(content)

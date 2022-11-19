@@ -43,7 +43,10 @@ function printQuiz() {
             if (question.closed == true) {
               closed = "disabled";
               $("#save-user-quiz-button").addClass(closed);
+              $("#save-user-quiz-button").addClass("btn-danger");
               $("#save-user-quiz-button").html("Quiz zamknięty")
+            }else{
+              $("#save-user-quiz-button").addClass("btn-primary");
             }
 
             if (userQuestions != null) {

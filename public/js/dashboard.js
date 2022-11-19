@@ -39,9 +39,14 @@ function printRoundWithMatches(round) {
                           <span class="visually-hidden">Loading...</span>
                         </button>`
           }
-
+        
           var minutes = closeTime.getMinutes();
-          
+          if(today.getHours() - closeTime.getHours() == 4)
+            spinner = `<button class="btn btn-sm btn-light" type="button" disabled>
+                        <span class="spinner-grow spinner-grow-sm text-warning" role="status" aria-hidden="true"></span>
+                        <span class="visually-hidden">Loading...</span>
+                       </button>`
+
           if (minutes < 10) minutes = "00";
           if (roundState != "Disabled")
             $(`#dashboard-round-date`).html(
@@ -55,9 +60,7 @@ function printRoundWithMatches(round) {
               `${roundDate.toLocaleDateString(
                 "pl-PL",
                 dateOptions
-              )}<br /> Kolejka została zamknięta o: ${
-                closeTime.getHours() - timeoffset - 1
-              }:${minutes}`
+              )}<br /> Kolejka została zamknięta o: ${closeTime.getHours() - timeoffset - 1}:${minutes} ${spinner}`
             );
 
             $(`#dashboard-message`).html(

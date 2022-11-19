@@ -23,7 +23,7 @@ function printRoundWithMatches(round) {
                         </button>`
   
           if (userTimezone.timezone == "UK") timeoffset = 1;
-          else timeoffset = 1;
+          else timeoffset = 0;
 
           //console.log(closeTime.getHours());
           //console.log(userTimezone);
@@ -41,7 +41,7 @@ function printRoundWithMatches(round) {
           }
 
           var minutes = closeTime.getMinutes();
-
+          
           if (minutes < 10) minutes = "00";
           if (roundState != "Disabled")
             $(`#dashboard-round-date`).html(
@@ -49,7 +49,7 @@ function printRoundWithMatches(round) {
                 "pl-PL",
                 dateOptions
               )}<br /> Godzina zamknięcia kolejki: ${
-                closeTime.getHours() - timeoffset
+                closeTime.getHours() - timeoffset 
               }:${minutes}`
             );
           else {

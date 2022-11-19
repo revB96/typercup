@@ -133,6 +133,7 @@ $(document).ready(function () {
                             </div>
                         `);
           $(".toast").toast("show");
+          printQuiz();
         },
       });
     });

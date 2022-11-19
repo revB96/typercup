@@ -44,7 +44,7 @@ function printRoundWithMatches(round) {
           var today = new Date();
           console.log(today.getHours())
           console.log(today.getHours() - closeTime.getHours())
-          if(today.getHours() - closeTime.getHours() == 4)
+          if(closeTime.getHours() - today.getHours() == 4)
             spinner = `<button class="btn btn-sm btn-light" type="button" disabled>
                         <span class="spinner-grow spinner-grow-sm text-warning" role="status" aria-hidden="true"></span>
                         <span class="visually-hidden">Loading...</span>

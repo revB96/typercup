@@ -24,8 +24,8 @@ function getAll(){
                         updatedAt:"$updatedAt",
                         code:"$code"
                     }
-                }
-            }
+                },                
+            },
         }
     ])
     .then(randomCodes =>{

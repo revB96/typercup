@@ -49,7 +49,7 @@ function printRoundWithMatches(round) {
                 "pl-PL",
                 dateOptions
               )}<br /> Godzina zamknięcia kolejki: ${
-                closeTime.getHours() - timeoffset 
+                closeTime.getHours() - timeoffset - 1
               }:${minutes}`
             );
           else {
@@ -58,7 +58,7 @@ function printRoundWithMatches(round) {
                 "pl-PL",
                 dateOptions
               )}<br /> Kolejka została zamknięta o: ${
-                closeTime.getHours() - timeoffset
+                closeTime.getHours() - timeoffset - 1
               }:${minutes}`
             );
 

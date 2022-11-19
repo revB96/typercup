@@ -37,6 +37,7 @@ function printUserTicketsTable(userId) {
     hour: "2-digit",
     minute: "2-digit",
   };
+  getUserTimezone(userId).then(userTimezone => {
   getAllUserTickets(userId).then(async (userTickets) => {
     for await (const [index, userTicket] of Object.entries(userTickets)) {
       if ((await userTickets) != null) {
@@ -74,6 +75,8 @@ function printUserTicketsTable(userId) {
               var lp = parseInt(index) + 1
               console.log(lp)
               var updatedAt = new Date(userTicket.updatedAt);
+              if (userTimezone.timezone == "UK") updatedAt.setHours(updatedAt.getHours() - 1)
+             
               await $(`#profile-user-ticket-table`).append(`
                                     <tr class="${trClass}">
                                         <td>${lp}</td>
@@ -95,7 +98,7 @@ function printUserTicketsTable(userId) {
           if ((userTicket.schedule) != null) {
             var round;
             var updatedAt = await new Date(userTicket.updatedAt);
-
+            
             if(userTicket.round == "quarterfinal") round = "Ćwierćfinał"
             else if(userTicket.round == "final") round = "Finał"
             else if(userTicket.round == "semifinal") round = "Półfinał"
@@ -121,6 +124,7 @@ function printUserTicketsTable(userId) {
       }
     }
   });
+})
 }
 
 function changeNotificationSettings(notification){

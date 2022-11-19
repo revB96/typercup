@@ -80,8 +80,7 @@ function printUserTicketsTable(userId) {
                                     <tr class="${trClass}">
                                         <td>${lp}</td>
                                         <td>${round}</td>
-                                        <td>${
-                                          userTicket.schedule.t1.teamName} vs ${userTicket.schedule.t2.teamName}</td>
+                                        <td>${userTicket.schedule.t1.teamName}<br/> vs <br/>${userTicket.schedule.t2.teamName}</td>
                                         <td>${userTicket.t1g}:${userTicket.t2g}</td>
                                         <td>${t1g}:${t2g}</td>
                                         <td>${result}</td>

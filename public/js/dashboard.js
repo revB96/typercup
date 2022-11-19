@@ -17,6 +17,9 @@ function printRoundWithMatches(round) {
           var roundDate = new Date(round[0].roundDate);
           var closeTime = new Date(schedule[0].matchDate);
           var timeoffset;
+          var spinner = `<div class="spinner-grow spinner-grow-sm float-end text-success" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>`
 
           if (userTimezone.timezone == "UK") timeoffset = 1;
           else timeoffset = 1;
@@ -24,9 +27,12 @@ function printRoundWithMatches(round) {
           //console.log(closeTime.getHours());
           //console.log(userTimezone);
 
-          if (roundState != "disabled")
+          if (roundState != "disabled"){
             $(`#dashboard-round-display-name`).html(`${round[0].displayName}`);
-          else
+            spinner = `<div class="spinner-grow spinner-grow-sm float-end text-danger" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>`
+          }else
             $(`#dashboard-round-display-name`).html(
               `<div class="row" style="text-align: center;"><h3>Kolejka zamknięta</h3></div>`
             );
@@ -103,7 +109,7 @@ function printRoundWithMatches(round) {
                   <div class="card-body">
                       <p class="card-text">
                         ${group}
-                        <small>${hrs}:${mins}</small>
+                        <small>${hrs}:${mins} ${spinner}</small>
                       </p>
                       <h5 class="card-title" style="text-align: center;">
                           <div class="row">

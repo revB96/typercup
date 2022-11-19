@@ -48,7 +48,6 @@ function printQuiz() {
                 if (userQuestions.answers[i] != undefined)
                   if (userQuestions.answers[i].questionId == question._id) {
                     checked="✅"
-                    backgroud = "text-white bg-orange"
                     answer = userQuestions.answers[i].answer;
                   }
               }

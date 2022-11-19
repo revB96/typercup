@@ -595,7 +595,7 @@ async function adminGetAllRandomCodes() {
         content += `
         <tr class="table-${tableColor}">
           <th scope="row">${code.round}</th>
-          <td>${code.code}</td>
+          <td>${code.code.substr(code.code.length - 4)}...</td>
           <td>${active}</td>
         </tr>`
       }

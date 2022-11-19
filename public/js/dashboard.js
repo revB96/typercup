@@ -17,7 +17,7 @@ function printRoundWithMatches(round) {
           var roundDate = new Date(round[0].roundDate);
           var closeTime = new Date(schedule[0].matchDate);
           var timeoffset;
-          var spinner = `<button class="btn btn-light" type="button" disabled>
+          var spinner = `<button class="btn btn-light float-end" type="button" disabled>
                           <span class="spinner-grow spinner-grow-sm text-success" role="status" aria-hidden="true"></span>
                           <span class="visually-hidden">Loading...</span>
                         </button>`
@@ -110,10 +110,10 @@ function printRoundWithMatches(round) {
               <div class="card ${ticketColor}">
                   <div class="card-body">
                       <p class="card-text">
+                        ${spinner}
                         ${group}
                         <small>${hrs}:${mins}</small>
                       </p>
-                      ${spinner}
                       <h5 class="card-title" style="text-align: center;">
                           <div class="row">
                           <div class="col">

@@ -29,13 +29,14 @@ function printRoundWithMatches(round) {
 
           if (roundState != "disabled"){
             $(`#dashboard-round-display-name`).html(`${round[0].displayName}`);
-            spinner = `<div class="spinner-grow spinner-grow-sm float-end text-danger" role="status">
-                          <span class="visually-hidden">Loading...</span>
-                        </div>`
-          }else
+          }else{
             $(`#dashboard-round-display-name`).html(
               `<div class="row" style="text-align: center;"><h3>Kolejka zamknięta</h3></div>`
             );
+            spinner = `<div class="spinner-grow spinner-grow-sm float-end text-danger" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>`
+          }
 
           var minutes = closeTime.getMinutes();
 
@@ -101,15 +102,14 @@ function printRoundWithMatches(round) {
               if (mins < 10) mins = "0" + mins;
 
               var group = `<b>Grupa ${match.group}</b><br />`
-              if(group = "ALL") group =""
 
               await $(`#dashboard-round-matches`).append(`
               <div class="col" style="margin-right: 0;">
               <div class="card ${ticketColor}">
                   <div class="card-body">
                       <p class="card-text">
-                        ${group}
-                        <small>${hrs}:${mins} ${spinner}</small>
+                        ${group} ${spinner}
+                        <small>${hrs}:${mins}</small>
                       </p>
                       <h5 class="card-title" style="text-align: center;">
                           <div class="row">

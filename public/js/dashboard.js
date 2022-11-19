@@ -112,7 +112,7 @@ function printRoundWithMatches(round) {
                       <p class="card-text">
                         ${spinner}
                         ${group}
-                        <small>${hrs}:${mins}</small>
+                        <small>${hrs - timeoffset}:${mins}</small>
                       </p>
                       <h5 class="card-title" style="text-align: center;">
                           <div class="row">

@@ -40,8 +40,11 @@ function printQuiz() {
                                   <option value="yes">TAK</option>
                                   <option value="no">NIE</option>`;
 
-            if (question.closed == true) closed = "disabled";
-                $("#save-user-quiz-button").addClass(closed);
+            if (question.closed == true) {
+              closed = "disabled";
+              $("#save-user-quiz-button").addClass(closed);
+              $("#save-user-quiz-button").html("Quiz zamknięty")
+            }
 
             if (userQuestions != null) {
               for (var i = 1; i <= Object.keys(questions).length; i++) {

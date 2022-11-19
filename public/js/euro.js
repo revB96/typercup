@@ -59,14 +59,12 @@ function printGroupTable(result, reload = 0) {
 
   for (const [index, team] of Object.entries(result)) {
     var counter = parseInt(index, 10);
-    var promotion = ``
+    var promotion = `class="table-secondary"`
 
     if(index == 0 )
       promotion = `class="table-success"`
-    else if (index == 1)
+    if(index == 1)
       promotion = `class="table-info"`
-    else 
-      secondary = `class="table-secondary"`
 
     $("#group-table-body").append(`
         <tr ${promotion}>

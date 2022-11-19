@@ -10,13 +10,13 @@ function printQuiz() {
         $("#quiz-cards").html("")
         for await (const [index, question] of Object.entries(questions)) {
           var points = 0,
-        background = "",
-        footer = "";
+              background = "",
+              footer = "";
+              checked =  "";
           if(!!userCorrectAnswer){
               for await (const [index2, correctAnswer] of Object.entries(userCorrectAnswer)){
-                console.log(question._id, correctAnswer.question)
+                //console.log(question._id, correctAnswer.question)
                   if (question._id == correctAnswer.question) {
-                    console.log("1")
                     points += 0.5;
                     background = "text-white bg-success";
                     footer = `<div class="card-footer text-white">
@@ -47,6 +47,8 @@ function printQuiz() {
               for (var i = 1; i <= Object.keys(questions).length; i++) {
                 if (userQuestions.answers[i] != undefined)
                   if (userQuestions.answers[i].questionId == question._id) {
+                    checked="✅"
+                    backgroud = "text-white bg-orange"
                     answer = userQuestions.answers[i].answer;
                   }
               }
@@ -70,7 +72,7 @@ function printQuiz() {
             await $("#quiz-cards").append(`
                         <div class="card text-center mt-3 ${background}">
                         <div class="card-header">
-                            Pytanie #${counter}
+                            Pytanie #${counter} ${checked}
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">${question.question}</h5>

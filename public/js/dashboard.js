@@ -17,7 +17,7 @@ function printRoundWithMatches(round) {
           var roundDate = new Date(round[0].roundDate);
           var closeTime = new Date(schedule[0].matchDate);
           var timeoffset;
-          var spinner = `<button class="btn btn-sm btn-light position-absolute top-0 start-0" type="button" disabled>
+          var spinner = `<button class="btn btn-sm btn-light position-absolute top-0 end-0" type="button" disabled>
                           <span class="spinner-grow spinner-grow-sm text-success" role="status" aria-hidden="true"></span>
                           <span class="visually-hidden">Loading...</span>
                         </button>`
@@ -34,7 +34,7 @@ function printRoundWithMatches(round) {
             $(`#dashboard-round-display-name`).html(
               `<div class="row" style="text-align: center;"><h3>Kolejka zamknięta</h3></div>`
             );
-            spinner = `<button class="btn btn-sm btn-light" type="button" disabled>
+            spinner = `<button class="btn btn-sm btn-light position-absolute top-0 end-0" type="button" disabled>
                           <span class="spinner-grow spinner-grow-sm text-danger" role="status" aria-hidden="true"></span>
                           <span class="visually-hidden">Loading...</span>
                         </button>`

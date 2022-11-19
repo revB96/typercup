@@ -108,9 +108,10 @@ function printRoundWithMatches(round) {
               <div class="card ${ticketColor}">
                   <div class="card-body">
                       <p class="card-text">
-                        ${group} ${spinner}
+                        ${group}
                         <small>${hrs}:${mins}</small>
                       </p>
+                      ${spinner}
                       <h5 class="card-title" style="text-align: center;">
                           <div class="row">
                           <div class="col">

@@ -12,7 +12,7 @@ function printQuiz() {
           var points = 0,
               background = "",
               footer = "";
-              checked =  "";
+              checked =  "❌";
           if(!!userCorrectAnswer){
               for await (const [index2, correctAnswer] of Object.entries(userCorrectAnswer)){
                 //console.log(question._id, correctAnswer.question)

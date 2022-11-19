@@ -59,7 +59,7 @@ function printGroupTable(result, reload = 0) {
 
   for (const [index, team] of Object.entries(result)) {
     var counter = parseInt(index, 10);
-    var promotion = `class="table-secondary"`
+    var promotion = `class="table-light"`
 
     if(index == 0 )
       promotion = `class="table-success"`

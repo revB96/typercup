@@ -34,10 +34,6 @@ function printRoundWithMatches(round) {
             $(`#dashboard-round-display-name`).html(
               `<div class="row" style="text-align: center;"><h3>Kolejka zamknięta</h3></div>`
             );
-            spinner = `<button class="btn btn-sm btn-light" type="button" disabled>
-                          <span class="spinner-grow spinner-grow-sm text-danger" role="status" aria-hidden="true"></span>
-                          <span class="visually-hidden">Loading...</span>
-                        </button>`
           }
         
           var minutes = closeTime.getMinutes();
@@ -59,6 +55,10 @@ function printRoundWithMatches(round) {
               )}<br /> Godzina zamknięcia kolejki: ${closeTime.getHours() - timeoffset - 1}:${minutes} ${spinner}`
             );
           else {
+            spinner = `<button class="btn btn-sm btn-light" type="button" disabled>
+                          <span class="spinner-grow spinner-grow-sm text-danger" role="status" aria-hidden="true"></span>
+                          <span class="visually-hidden">Loading...</span>
+                        </button>`
             $(`#dashboard-round-date`).html(
               `${roundDate.toLocaleDateString(
                 "pl-PL",

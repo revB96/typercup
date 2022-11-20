@@ -2091,7 +2091,7 @@ function toogleNotification(notificationName, userId) {
   return def.promise;
 }
 
-function sendReminder(roundDate) {
+function sendReminder(round) {
   var startDate = new Date(moment.tz(roundDate, "Europe/Warsaw"));
   var endDate = new Date(moment.tz(roundDate, "Europe/Warsaw"));
   startDate.setHours(2, 0,);
@@ -2106,7 +2106,7 @@ function sendReminder(roundDate) {
             console.log(user)
             getUserRandomCode(user._id).then(randomCode => {
               console.log(randomCode)
-              Ticket.getUserTicketBetweenDates(user._id, startDate, endDate).then(tickets =>{       
+              Ticket.countUserTicketByRound(user._id, round.round).then(tickets =>{       
                 if (tickets == 0) {
                   var nameCapitalized =
                     user.username.charAt(0).toUpperCase() +
@@ -3212,7 +3212,7 @@ function checkReminder() {
         (matchDate.getMonth() == timestamp.getMonth())
       ) {
         console.log("3")
-        sendReminder(moment.tz(firstMatch[0].matchDate, "Europe/Warsaw"));
+        sendReminder(runningRound);
       }
     });
   });

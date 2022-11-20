@@ -448,11 +448,12 @@ function getUserTicketBetweenDates(userId, startDate, endDate){
   var def = Q.defer();
   console.log("2.1" + userId)
   Ticket.find({
-      user: userId,
-      //matchDate: { $gte: startDate, $lte: endDate },
+      //user: userId,
+      matchDate: { $gte: startDate, $lte: endDate },
     })
     .count()
     .exec(tickets => {
+      console.log("2.2 " + tickets)
       def.resolve(tickets);
     })
     return def.promise;

@@ -2109,9 +2109,10 @@ function sendReminder(roundDate) {
             Ticket.find({
               user: user._id,
               matchDate: { $gte: startDate, $lte: endDate },
-            })
+              })
               .count()
               .exec(function (err, tickets) {
+                console.log(tickets)
                 if (tickets == 0) {
                   var nameCapitalized =
                     user.username.charAt(0).toUpperCase() +

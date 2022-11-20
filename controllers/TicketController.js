@@ -435,7 +435,7 @@ function testGetUserTicketBetweenDates(){
   startDate.setHours(2, 0,);
   endDate.setHours(23, 59);
 
-  getUserTicketBetweenDates(" ", startDate, endDate).then(result => { 
+  getUserTicketBetweenDates("60bfe193e4a45b138a196179", startDate, endDate).then(result => { 
     def.resolve(result);
   })
 

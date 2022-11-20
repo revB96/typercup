@@ -435,7 +435,7 @@ function testGetUserTicketBetweenDates(){
   startDate.setHours(2, 0,);
   endDate.setHours(23, 59);
 
-  getUserTicketBetweenDates("60bfe193e4a45b138a196179", startDate, endDate).then(result => { 
+  getUserTicketBetweenDates(" ", startDate, endDate).then(result => { 
     def.resolve(result);
   })
 
@@ -447,7 +447,7 @@ function getUserTicketBetweenDates(userId, startDate, endDate){
   var def = Q.defer();
   Ticket.find({
       user: userId,
-      matchDate: { $gte: startDate, $lte: endDate },
+      //matchDate: { $gte: startDate, $lte: endDate },
     })
     .count()
     .exec(tickets => {

@@ -2092,20 +2092,13 @@ function toogleNotification(notificationName, userId) {
 }
 
 function sendReminder(round) {
-  var startDate = new Date(moment.tz(roundDate, "Europe/Warsaw"));
-  var endDate = new Date(moment.tz(roundDate, "Europe/Warsaw"));
-  startDate.setHours(2, 0,);
-  endDate.setHours(23, 59);
   UserNotification.find().exec(function (err, userNotifications) {
-    console.log(userNotifications)
     if (err) console.log(err);
     else {
       userNotifications.forEach((userNotification, index) => {
         setTimeout(() => {
           getUserById(userNotification.user).then((user) => {
-            console.log(user)
             getUserRandomCode(user._id).then(randomCode => {
-              console.log(randomCode)
               Ticket.countUserTicketByRound(user._id, round.round).then(tickets =>{       
                 if (tickets == 0) {
                   var nameCapitalized =

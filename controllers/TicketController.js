@@ -446,16 +446,19 @@ function testGetUserTicketBetweenDates(){
 
 function getUserTicketBetweenDates(userId, startDate, endDate){
   var def = Q.defer();
-  console.log("2.1" + userId)
-  Ticket.find({
-      round: "2",
-      //matchDate: { $gte: startDate, $lte: endDate },
+  Ticket.find({ user: userId })
+    .populate({
+      path: "schedule",
+      populate: { path: "t1", select: "teamName" },
     })
-    .count()
-    .exec(tickets => {
-      console.log("2.2 " + tickets)
-      def.resolve(tickets);
+    .populate({
+      path: "schedule",
+      populate: { path: "t2", select: "teamName" },
     })
+    .sort({ round: "asc" })
+    .exec(function (err, tickets) {
+      err ? def.reject(err) : def.resolve(tickets);
+    });
     return def.promise;
 }
 

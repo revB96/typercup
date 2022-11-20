@@ -427,6 +427,35 @@ function getTicketStats(scheduleID){
   return def.promise;
 }
 
+function testGetUserTicketBetweenDates(){
+  var def = Q.defer();
+  var timestamp = Date.now();
+  var startDate = new Date(moment.tz(timestamp, "Europe/Warsaw"));
+  var endDate = new Date(moment.tz(timestamp, "Europe/Warsaw"));
+  startDate.setHours(2, 0,);
+  endDate.setHours(23, 59);
+
+  getUserTicketBetweenDates("60bfe193e4a45b138a196179", startDate, endDate).then(result => { 
+    def.resolve(result);
+  })
+
+  return def.promise;
+}
+
+
+function getUserTicketBetweenDates(userId, startDate, endDate){
+  var def = Q.defer();
+  Ticket.find({
+      user: userId,
+      matchDate: { $gte: startDate, $lte: endDate },
+    })
+    .count()
+    .exec(tickets => {
+      def.resolve(tickets);
+    })
+    return def.promise;
+}
+
 module.exports = {
   add,
   getUserTicketsByRound,
@@ -435,5 +464,7 @@ module.exports = {
   getTicketsByRound,
   checkIfRoundIsOpen,
   addRandomTickets,
-  getTicketStats
+  getTicketStats,
+  getUserTicketBetweenDates,
+  testGetUserTicketBetweenDates
 };

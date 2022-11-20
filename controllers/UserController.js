@@ -14,7 +14,7 @@ const { getFirstRoundMatch } = require("./ScheduleController");
 const moment = require("moment-timezone");
 const nodemailer = require("nodemailer");
 const dateFormat = require("dateformat");
-const Ticket = require("../models/tickets.js");
+const Ticket = require("./ScheduleController");
 const Round = require("../models/rounds.js");
 
 let transporter = nodemailer.createTransport({
@@ -2094,8 +2094,8 @@ function toogleNotification(notificationName, userId) {
 function sendReminder(roundDate) {
   var startDate = new Date(moment.tz(roundDate, "Europe/Warsaw"));
   var endDate = new Date(moment.tz(roundDate, "Europe/Warsaw"));
-  startDate.setHours(2, 0, 0, 0);
-  endDate.setHours(25, 59, 59, 99);
+  startDate.setHours(2, 0,);
+  endDate.setHours(23, 59);
   UserNotification.find().exec(function (err, userNotifications) {
     console.log(userNotifications)
     if (err) console.log(err);
@@ -2106,13 +2106,7 @@ function sendReminder(roundDate) {
             console.log(user)
             getUserRandomCode(user._id).then(randomCode => {
               console.log(randomCode)
-            Ticket.find({
-              user: user._id,
-              matchDate: { $gte: startDate, $lte: endDate },
-              })
-              .count()
-              .exec(function (err, tickets) {
-                console.log(tickets)
+              Ticket.getUserTicketBetweenDates(user._id, startDate, endDate).then(tickets =>{       
                 if (tickets == 0) {
                   var nameCapitalized =
                     user.username.charAt(0).toUpperCase() +
@@ -2630,7 +2624,7 @@ function sendReminder(roundDate) {
                     else console.log("Wysłano Reminder");
                   });
                 }
-              });
+              })
             });
           });
         }, 1000 * index);

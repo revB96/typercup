@@ -680,4 +680,14 @@ router.post('/admin/site/edition/add', function (req, res) {
     
 })
 
+router.get('/admin/test/testGetUserTicketBetweenDates', function (req, res) {
+    Ticket.testGetUserTicketBetweenDates()
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        });
+})
+
 module.exports = router;

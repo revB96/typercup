@@ -446,16 +446,7 @@ function testGetUserTicketBetweenDates(){
 
 function getUserTicketBetweenDates(userId, startDate, endDate){
   var def = Q.defer();
-  Ticket.find({ user: userId })
-    .populate({
-      path: "schedule",
-      populate: { path: "t1", select: "matchDate" },
-    })
-    .populate({
-      path: "schedule",
-      populate: { path: "t2", select: "matchDate" },
-    })
-    .count()
+  Ticket.find({ user: userId, "ticket.schedule.matchDate":{"$gte": startDate, "$lt": endDate} })
     .exec(function (err, tickets) {
       err ? def.reject(err) : def.resolve(tickets);
     });

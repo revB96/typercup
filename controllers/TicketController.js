@@ -449,13 +449,13 @@ function getUserTicketBetweenDates(userId, startDate, endDate){
   Ticket.find({ user: userId })
     .populate({
       path: "schedule",
-      populate: { path: "t1", select: "teamName" },
+      populate: { path: "t1", select: "matchDate" },
     })
     .populate({
       path: "schedule",
-      populate: { path: "t2", select: "teamName" },
+      populate: { path: "t2", select: "matchDate" },
     })
-    .sort({ round: "asc" })
+    .count()
     .exec(function (err, tickets) {
       err ? def.reject(err) : def.resolve(tickets);
     });

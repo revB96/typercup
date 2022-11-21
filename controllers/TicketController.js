@@ -443,7 +443,6 @@ function testGetUserTicketBetweenDates(){
   return def.promise;
 }
 
-
 function countUserTicketByRound(userId, round){
   var def = Q.defer();
   Ticket.find({ user: userId, round: round })

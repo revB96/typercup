@@ -61,8 +61,8 @@ function ticketUpdate(ticketId, t1g, t2g) {
   Ticket.findByIdAndUpdate(
     ticketId,
     {
-      t1g: t1g,
-      t2g: t2g,
+      t1g: t1g.replace(/ /g, ''),
+      t2g: t2g.replace(/ /g, ''),
       updatedAt: timestamp,
     },
     {
@@ -253,8 +253,8 @@ function add(formData) {
   const timestamp = moment.tz(Date.now(), "Europe/Warsaw")
   formData.forEach((match) => {
     var ticket = new Ticket({
-      t1g: match.t1g,
-      t2g: match.t2g,
+      t1g: match.t1g.replace(/ /g, ''),
+      t2g: match.t2g.replace(/ /g, ''),
       round: match.round,
       schedule: match.scheduleId,
       user: match.userId,

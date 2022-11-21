@@ -5,7 +5,7 @@ const Ticket = require("../models/tickets.js");
 const Round = require("../models/rounds.js");
 const RandomCode = require("../models/randomCodes.js");
 const { updateUserStats } = require("./UserStatsController.js");
-const { getUserTimezone } = require("./UserController.js");
+const User = require("./UserController.js");
 const Schedule = require("./ScheduleController.js");
 const moment = require('moment-timezone');
 const nodemailer = require("nodemailer");
@@ -86,7 +86,7 @@ function getRunningRound(){
 
 function checkIfRoundIsOpen(userID){
   var def = Q.defer();
-  getUserTimezone(userID).then(timezone =>{
+  User.getUserTimezone(userID).then(timezone =>{
     
     var userTZ, offsetTZ;
     if(timezone = "UK") {userTZ = "Europe/London"; offsetTZ = 1}

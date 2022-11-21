@@ -33,7 +33,7 @@ function printRoundSummaryAccordion(){
                             <div id="flush-collapse-${ticketsByMatch[match][0]._id}" class="accordion-collapse collapse" aria-labelledby="flush-heading-${ticketsByMatch[match][0]._id}" data-bs-parent="#round-summary-accordion">
                             <div class="accordion-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-sm" style="text-align: center;">
+                                    <table class="table table-sm" style="text-align: center;">
                                     <thead class="table-dark">
                                         <tr>
                                         <th scope="col">#</th>

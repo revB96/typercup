@@ -185,7 +185,7 @@ function addRandomTickets(randomCode){
               Schedule.getRoundSchedule(runningRound.roundDate).then(schedule =>{
                 //console.log("Schedule: " + schedule)
                 schedule.forEach(match =>{
-                  
+
                   var chance1 = new Chance();
                   var chance2 = new Chance();
                   var ticket = new Ticket({
@@ -251,8 +251,8 @@ function add(formData) {
   const timestamp = moment.tz(Date.now(), "Europe/Warsaw")
   formData.forEach((match) => {
     var ticket = new Ticket({
-      t1g: match.t1g.replace(/ /g, ''),
-      t2g: match.t2g.replace(/ /g, ''),
+      t1g: match.t1g,
+      t2g: match.t2g,
       round: match.round,
       schedule: match.scheduleId,
       user: match.userId,

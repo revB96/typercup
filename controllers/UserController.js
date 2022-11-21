@@ -14,7 +14,7 @@ const { getFirstRoundMatch } = require("./ScheduleController");
 const moment = require("moment-timezone");
 const nodemailer = require("nodemailer");
 const dateFormat = require("dateformat");
-const Ticket = require("./ScheduleController");
+const Ticket = require("./TicketController");
 const Round = require("../models/rounds.js");
 
 let transporter = nodemailer.createTransport({

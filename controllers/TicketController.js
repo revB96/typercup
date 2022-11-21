@@ -185,9 +185,7 @@ function addRandomTickets(randomCode){
               Schedule.getRoundSchedule(runningRound.roundDate).then(schedule =>{
                 //console.log("Schedule: " + schedule)
                 schedule.forEach(match =>{
-
-                  checkUserTicket(userRandomCode.user, match._id)
-
+                  
                   var chance1 = new Chance();
                   var chance2 = new Chance();
                   var ticket = new Ticket({

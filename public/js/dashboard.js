@@ -52,7 +52,7 @@ function printRoundWithMatches(round) {
               `${roundDate.toLocaleDateString(
                 "pl-PL",
                 dateOptions
-              )}<br /> Godzina zamknięcia kolejki: ${closeTime.getHours() - timeoffset - 1}:${minutes} ${spinner}`
+              )}<br /> Godzina zamknięcia kolejki: ${closeTime.getHours() - 1}:${minutes} ${spinner}`
             );
           else {
             spinner = `<button class="btn btn-sm btn-light" type="button" disabled>
@@ -63,7 +63,7 @@ function printRoundWithMatches(round) {
               `${roundDate.toLocaleDateString(
                 "pl-PL",
                 dateOptions
-              )}<br /> Kolejka została zamknięta o: ${closeTime.getHours() - timeoffset - 1}:${minutes} ${spinner}`
+              )}<br /> Kolejka została zamknięta o: ${closeTime.getHours() - 1}:${minutes} ${spinner}`
             );
 
             $(`#dashboard-message`).html(

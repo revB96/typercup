@@ -96,7 +96,7 @@ function printUserTicketsTable(userId) {
           if ((userTicket.schedule) != null) {
             var round;
             var updatedAt = await new Date(userTicket.updatedAt);
-            if (userTimezone.timezone == "UK") updatedAt.setHours(updatedAt.getHours() - 1)
+            if (userTimezone.timezone == "UK") updatedAt.setHours(updatedAt.getHours())
             if(userTicket.round == "quarterfinal") round = "Ćwierćfinał"
             else if(userTicket.round == "final") round = "Finał"
             else if(userTicket.round == "semifinal") round = "Półfinał"

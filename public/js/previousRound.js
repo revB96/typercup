@@ -57,6 +57,7 @@ function printLastRoundTickers(round) {
     ticketsByDateKeys.forEach((match) => {
       var matchCounter = 0;
       getScheduleScore(ticketsByMatch[match][0].schedule._id).then((score) => {
+        if(!!score){
         matchCounter++;
         var scoreResult = "vs";
         if (score.schedule._id == match)
@@ -141,6 +142,7 @@ function printLastRoundTickers(round) {
             </div>
             `;
         $(`#last-round-accordion`).append(matchAccordion);
+      }
       });
     });
   });

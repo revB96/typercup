@@ -139,7 +139,7 @@ function printRoundWithMatches(round) {
                               <div class="col-1">:
                               </div>
                               <div class="col">
-                                  <input id="${match.t2._id}" onchange="verifyValue('${match.t2._id}',${roundState})" type="number" value="${t2g}" class="form-control" min="0" max="9" style="text-align: center;" name="${match.t2._id}" ${roundState}>
+                                  <input id="${match.t2._id}" onchange="verifyValue('${match.t2._id}','${roundState}')" type="number" value="${t2g}" class="form-control" min="0" max="9" style="text-align: center;" name="${match.t2._id}" ${roundState}>
                               </div>
                           </div>
                           ${statsDiv}

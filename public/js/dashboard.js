@@ -161,9 +161,10 @@ function printRoundWithMatches(round) {
 }
 
 function verifyValue(inputId){
-  console.log($(`#${inputId}`).val)
-  if($(`#${inputId}`).val > 9){
-    console.log($(`#${inputId}`).val)
+  //var input = `#${inputId}`
+  //console.log($(`#${inputId}`).val())
+  if($(`#${inputId}`).val() > 9){
+    console.log($(`#${inputId}`).val())
     $(`#${inputId}`).addClass("is-invalid")
   }
 }

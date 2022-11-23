@@ -166,7 +166,7 @@ function verifyValue(inputId, roundState){
   if($(`#${inputId}`).val() > 9){
     $(`#${inputId}`).removeClass("is-valid")
     $(`#${inputId}`).addClass("is-invalid")
-    $(`#dashboard-warnings`).html("Jeden z wyników, jest większy niż 9")
+    $(`#dashboard-warnings`).html("<p><em>Jeden z wyników w toich typach, jest większy od 9</em></p>")
     if(roundState=""){
       $(`#${inputId}`).addClass("disabled")
     }

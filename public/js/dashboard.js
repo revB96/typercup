@@ -134,12 +134,12 @@ function printRoundWithMatches(round) {
                               <input type="text" class="form-control d-none" value="${match._id}" disabled/>
                               <input type="text" class="form-control d-none" value="${round[0].round}" disabled/>
                               <div class="col">
-                                  <input id="${match.t1._id}" onClick="verifyValue(${match.t1._id})" type="number" value="${t1g}" class="form-control" min="0" max="9" style="text-align: center;" name="${match.t1._id}" ${roundState}>
+                                  <input id="${match.t1._id}" onClick="verifyValue('${match.t1._id}')" type="number" value="${t1g}" class="form-control" min="0" max="9" style="text-align: center;" name="${match.t1._id}" ${roundState}>
                               </div>
                               <div class="col-1">:
                               </div>
                               <div class="col">
-                                  <input id="${match.t2._id}" onClick="verifyValue(${match.t2._id})" type="number" value="${t2g}" class="form-control" min="0" max="9" style="text-align: center;" name="${match.t2._id}" ${roundState}>
+                                  <input id="${match.t2._id}" onClick="verifyValue('${match.t2._id}')" type="number" value="${t2g}" class="form-control" min="0" max="9" style="text-align: center;" name="${match.t2._id}" ${roundState}>
                               </div>
                           </div>
                           ${statsDiv}

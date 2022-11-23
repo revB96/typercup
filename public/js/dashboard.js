@@ -110,43 +110,43 @@ function printRoundWithMatches(round) {
               var group = `<b>Grupa ${match.group}</b><br />`
 
               await $(`#dashboard-round-matches`).append(`
-              <div class="col" style="margin-right: 0;">
-              <div class="card ${ticketColor}">
-                  <div class="card-body">
-                      <p class="card-text">
-                        ${group}
-                        <small>${hrs - timeoffset}:${mins}</small>
-                      </p>
-                      <h5 class="card-title" style="text-align: center;">
+                  <div class="col" style="margin-right: 0;">
+                  <div class="card ${ticketColor}">
+                      <div class="card-body">
+                          <p class="card-text">
+                            ${group}
+                            <small>${hrs - timeoffset}:${mins}</small>
+                          </p>
+                          <h5 class="card-title" style="text-align: center;">
+                              <div class="row">
+                              <div class="col">
+                              <b>${match.t1.teamName}</b>
+                              </div>
+                              <div class="col-2">
+                              </div>
+                              <div class="col">
+                              <b>${match.t2.teamName}</b>
+                              </div>
+                              </div>
+                          </h5>
+                          <p class="card-text">
                           <div class="row">
-                          <div class="col">
-                          <b>${match.t1.teamName}</b>
+                              <input type="text" class="form-control d-none" value="${match._id}" disabled/>
+                              <input type="text" class="form-control d-none" value="${round[0].round}" disabled/>
+                              <div class="col">
+                                  <input id="${match.t1._id}" onClick="verifyValue(${match.t1._id})" type="number" value="${t1g}" class="form-control" min="0" max="9" style="text-align: center;" name="${match.t1._id}" ${roundState}>
+                              </div>
+                              <div class="col-1">:
+                              </div>
+                              <div class="col">
+                                  <input id="${match.t2._id}" onClick="verifyValue(${match.t2._id})" type="number" value="${t2g}" class="form-control" min="0" max="9" style="text-align: center;" name="${match.t2._id}" ${roundState}>
+                              </div>
                           </div>
-                          <div class="col-2">
-                          </div>
-                          <div class="col">
-                          <b>${match.t2.teamName}</b>
-                          </div>
-                          </div>
-                      </h5>
-                      <p class="card-text">
-                      <div class="row">
-                          <input type="text" class="form-control d-none" value="${match._id}" disabled/>
-                          <input type="text" class="form-control d-none" value="${round[0].round}" disabled/>
-                          <div class="col">
-                              <input type="number" value="${t1g}" class="form-control" min="0" max="9" style="text-align: center;" name="${match.t1._id}" ${roundState}>
-                          </div>
-                          <div class="col-1">:
-                          </div>
-                          <div class="col">
-                              <input type="number" value="${t2g}" class="form-control" min="0" max="9" style="text-align: center;" name="${match.t2._id}" ${roundState}>
-                          </div>
+                          ${statsDiv}
                       </div>
-                      ${statsDiv}
-                  </div>
-              </div> 
-          </div>
-                        `);
+                  </div> 
+              </div>
+            `);
             });
           }
         });
@@ -158,6 +158,12 @@ function printRoundWithMatches(round) {
       .html(`<div class="d-grid gap-2" style="padding: 1.5em;">
                 <button type="submit" class="btn btn-primary">Dodaj</button>
                </div>`);
+}
+
+function verifyValue(inputId){
+  if($(`#${inputId}`).value > 9){
+    $(`#${inputId}`).addClass("is-invalid")
+  }
 }
 
 $(document).ready(function () {

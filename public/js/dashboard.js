@@ -167,14 +167,14 @@ function verifyValue(inputId, roundState){
     $(`#${inputId}`).removeClass("is-valid")
     $(`#${inputId}`).addClass("is-invalid")
     $(`#dashboard-warnings`).html("<p><em><small>Jeden z wyników w twoich typach, jest większy niż 9!</small></em></p>")
-    if(roundState=""){
+    if(roundState==""){
       $(`#${inputId}`).addClass("disabled")
     }
   }else{
     $(`#${inputId}`).addClass("is-valid")
     $(`#${inputId}`).removeClass("is-invalid")
     $(`#dashboard-warnings`).html("")
-    if(roundState=""){
+    if(roundState==""){
       $(`#${inputId}`).removeClass("disabled")
     }
   }

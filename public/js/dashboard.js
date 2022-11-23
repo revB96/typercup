@@ -164,8 +164,11 @@ function verifyValue(inputId){
   //var input = `#${inputId}`
   //console.log($(`#${inputId}`).val())
   if($(`#${inputId}`).val() > 9){
-    console.log($(`#${inputId}`).val())
+    $(`#${inputId}`).removeClass("is-valid")
     $(`#${inputId}`).addClass("is-invalid")
+  }else{
+    $(`#${inputId}`).addClass("is-valid")
+    $(`#${inputId}`).removeClass("is-invalid")
   }
 }
 

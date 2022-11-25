@@ -164,7 +164,7 @@ function verifyValue(inputId, roundState){
   var buttonState1 = 0;
   var buttonState2 = 0;
 
-  if($(`#${inputId}`).val() == null){
+  if(($(`#${inputId}`).val() == null)&($(`#${inputId}`).val() == "")){
     $(`#dashboard-warnings-nullType`).html("<em><small>Nie wypełniłeś wszystkich typów</small></em>")
     buttonState1 = 0;
   }else{

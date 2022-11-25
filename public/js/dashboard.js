@@ -163,7 +163,7 @@ function printRoundWithMatches(round) {
 function verifyValue(inputId, roundState){
   var buttonState1 = 0;
   var buttonState2 = 0;
-  $("#add-ticket-form input").each(function(){
+  $("#add-ticket-form input[type=Number]").each(function(){
     var input = $(this);
     console.log(input.val())
    });

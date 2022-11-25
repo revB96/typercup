@@ -164,12 +164,14 @@ function verifyValue(inputId, roundState){
   var buttonState1 = 0;
   var buttonState2 = 0;
 
-  if(($(`#${inputId}`).val() == null)&($(`#${inputId}`).val() == "")){
-    $(`#dashboard-warnings-nullType`).html("<em><small>Nie wypełniłeś wszystkich typów</small></em>")
-    buttonState1 = 0;
-  }else{
+  console.log($(`#${inputId}`).val())
+
+  if(!!($(`#${inputId}`).val())){
     $(`#dashboard-warnings-nullType`).html("")
     buttonState1 = 1;
+  }else{
+    $(`#dashboard-warnings-nullType`).html("<em><small>Nie wypełniłeś wszystkich typów</small></em>")
+    buttonState1 = 0;
   }
 
   if($(`#${inputId}`).val() > 9){

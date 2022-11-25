@@ -194,11 +194,11 @@ function verifyValue(roundState){
 
     });
  
-    if((isInvalid == false) || (isNull == false)){
-      if(isInvalid == false)
-        $(`#dashboard-warnings`).append("<p><em><small>Jeden z wyników w twoich typach, jest większy niż 9!</small></em></p>")
-      if(isNull == false)
-        $(`#dashboard-warnings`).append("<p><em><small>Nie wypełniłeś wszystkich typów</small></em></p>")
+    if((isInvalid == true) || (isNull == true)){
+      if(isInvalid == true)
+        $(`#dashboard-warnings`).html("<p><em><small>Jeden z wyników w twoich typach, jest większy niż 9!</small></em></p>")
+      if(isNull == true)
+        $(`#dashboard-warnings`).html("<p><em><small>Nie wypełniłeś wszystkich typów</small></em></p>")
 
       if(roundState == "") $(`#sendTicketsButton`).addClass("disabled")
 

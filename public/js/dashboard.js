@@ -161,23 +161,39 @@ function printRoundWithMatches(round) {
 }
 
 function verifyValue(inputId, roundState){
-  //var input = `#${inputId}`
-  //console.log($(`#${inputId}`).val())
-  if($(`#${inputId}`).val() > 9){
-    $(`#${inputId}`).removeClass("is-valid")
-    $(`#${inputId}`).addClass("is-invalid")
-    $(`#dashboard-warnings`).html("<p><em><small>Jeden z wyników w twoich typach, jest większy niż 9!</small></em></p>")
-    if(roundState==""){
-      $(`#sendTicketsButton`).addClass("disabled")
-    }
+  var buttonState1 = 0;
+  var buttonState2 = 0;
+
+  if($(`#${inputId}`).val() == null){
+    $(`#dashboard-warnings-nullType`).html("<em><small>Nie wypełniłeś wszystkich typów</small></em>")
+    buttonState1 = 0;
   }else{
+    $(`#dashboard-warnings-nullType`).html("")
+    buttonState1 = 1;
+  }
+
+  if($(`#${inputId}`).val() > 9){
+    $(`#dashboard-warnings-invalidType`).html("<em><small>Jeden z wyników w twoich typach, jest większy niż 9!</small></em>")
+    buttonState2 = 0
+  }else{
+    $(`#dashboard-warnings-invalidType`).html("")
+    buttonState2 = 1;
+  }
+
+  if((buttonState1 == 1) & (buttonState2 == 1)){
     $(`#${inputId}`).addClass("is-valid")
     $(`#${inputId}`).removeClass("is-invalid")
-    $(`#dashboard-warnings`).html("")
     if(roundState==""){
       $(`#sendTicketsButton`).removeClass("disabled")
     }
+  }else{
+    $(`#${inputId}`).removeClass("is-valid")
+    $(`#${inputId}`).addClass("is-invalid")
+    if(roundState==""){
+      $(`#sendTicketsButton`).addClass("disabled")
+    }
   }
+
 }
 
 $(document).ready(function () {

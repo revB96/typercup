@@ -170,12 +170,12 @@ function verifyValue(inputId, roundState){
     $(`#dashboard-warnings-nullType`).html("")
     buttonState1 = 1;
   }else{
-    $(`#dashboard-warnings-nullType`).append("<em><small>Nie wypełniłeś wszystkich typów</small></em>")
+    $(`#dashboard-warnings-nullType`).append("<p><em><small>Nie wypełniłeś wszystkich typów</small></em></p>")
     buttonState1 = 0;
   }
 
   if($(`#${inputId}`).val() > 9){
-    $(`#dashboard-warnings-invalidType`).append("<em><small>Jeden z wyników w twoich typach, jest większy niż 9!</small></em>")
+    $(`#dashboard-warnings-invalidType`).append("<p><em><small>Jeden z wyników w twoich typach, jest większy niż 9!</small></em></p>")
     buttonState2 = 0
   }else{
     $(`#dashboard-warnings-invalidType`).html("")

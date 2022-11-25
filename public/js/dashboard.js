@@ -163,38 +163,40 @@ function printRoundWithMatches(round) {
 function verifyValue(inputId, roundState){
   var buttonState1 = 0;
   var buttonState2 = 0;
+  $("form#add-ticket-form :input").each(function(){
+    console.log($(this).val())
+   });
+ 
 
-  console.log($(`#${inputId}`).val())
+  // if(!!($(`#${inputId}`).val())){
+  //   $(`#dashboard-warnings-nullType`).html("")
+  //   buttonState1 = 1;
+  // }else{
+  //   $(`#dashboard-warnings-nullType`).append("<p><em><small>Nie wypełniłeś wszystkich typów</small></em></p>")
+  //   buttonState1 = 0;
+  // }
 
-  if(!!($(`#${inputId}`).val())){
-    $(`#dashboard-warnings-nullType`).html("")
-    buttonState1 = 1;
-  }else{
-    $(`#dashboard-warnings-nullType`).append("<p><em><small>Nie wypełniłeś wszystkich typów</small></em></p>")
-    buttonState1 = 0;
-  }
+  // if($(`#${inputId}`).val() > 9){
+  //   $(`#dashboard-warnings-invalidType`).append("<p><em><small>Jeden z wyników w twoich typach, jest większy niż 9!</small></em></p>")
+  //   buttonState2 = 0
+  // }else{
+  //   $(`#dashboard-warnings-invalidType`).html("")
+  //   buttonState2 = 1;
+  // }
 
-  if($(`#${inputId}`).val() > 9){
-    $(`#dashboard-warnings-invalidType`).append("<p><em><small>Jeden z wyników w twoich typach, jest większy niż 9!</small></em></p>")
-    buttonState2 = 0
-  }else{
-    $(`#dashboard-warnings-invalidType`).html("")
-    buttonState2 = 1;
-  }
-
-  if((buttonState1 == 1) & (buttonState2 == 1)){
-    $(`#${inputId}`).addClass("is-valid")
-    $(`#${inputId}`).removeClass("is-invalid")
-    if(roundState==""){
-      $(`#sendTicketsButton`).removeClass("disabled")
-    }
-  }else{
-    $(`#${inputId}`).removeClass("is-valid")
-    $(`#${inputId}`).addClass("is-invalid")
-    if(roundState==""){
-      $(`#sendTicketsButton`).addClass("disabled")
-    }
-  }
+  // if((buttonState1 == 1) & (buttonState2 == 1)){
+  //   $(`#${inputId}`).addClass("is-valid")
+  //   $(`#${inputId}`).removeClass("is-invalid")
+  //   if(roundState==""){
+  //     $(`#sendTicketsButton`).removeClass("disabled")
+  //   }
+  // }else{
+  //   $(`#${inputId}`).removeClass("is-valid")
+  //   $(`#${inputId}`).addClass("is-invalid")
+  //   if(roundState==""){
+  //     $(`#sendTicketsButton`).addClass("disabled")
+  //   }
+  // }
 
 }
 

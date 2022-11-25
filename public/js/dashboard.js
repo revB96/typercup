@@ -161,12 +161,43 @@ function printRoundWithMatches(round) {
 }
 
 function verifyValue(inputId, roundState){
-  var buttonState1 = 0;
-  var buttonState2 = 0;
+  var isNull;
+  var isInvalid;
+
   $("#add-ticket-form input[type=Number]").each(function(){
     var input = $(this);
-    console.log(input.val())
-   });
+    if(input.val() == ""){
+      isNull = true;
+    }else{
+      if(isNull == true)
+        isNull = true;
+      else
+        isNull = false
+    }
+
+    if(input.val() > 9){
+      isInvalid = true;
+    }else{
+      if(isInvalid == true)
+        isInvalid = true;
+      else
+        isInvalid = false
+    }
+
+    if((isInvalid == false) || (isNull == false)){
+      if(isInvalid == false)
+        $(`#dashboard-warnings`).append("<p><em><small>Jeden z wyników w twoich typach, jest większy niż 9!</small></em></p>")
+      if(isNull == false)
+        $(`#dashboard-warnings`).append("<p><em><small>Nie wypełniłeś wszystkich typów</small></em></p>")
+
+      if(roundState == "") $(`#sendTicketsButton`).addClass("disabled")
+
+    }else{
+      if(roundState == "") $(`#sendTicketsButton`).removeClass("disabled")
+      $(`#dashboard-warnings`).html("")
+    }
+
+  });
  
 
   // if(!!($(`#${inputId}`).val())){

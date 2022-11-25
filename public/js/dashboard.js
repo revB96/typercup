@@ -134,12 +134,12 @@ function printRoundWithMatches(round) {
                               <input type="text" class="form-control d-none" value="${match._id}" disabled/>
                               <input type="text" class="form-control d-none" value="${round[0].round}" disabled/>
                               <div class="col">
-                                  <input id="${match.t1._id}" onchange="verifyValue('${match.t1._id}','${roundState}')" type="number" value="${t1g}" class="form-control" min="0" max="9" style="text-align: center;" name="${match.t1._id}" ${roundState} required>
+                                  <input id="${match.t1._id}" onchange="verifyValue('${roundState}')" type="number" value="${t1g}" class="form-control" min="0" max="9" style="text-align: center;" name="${match.t1._id}" ${roundState} required>
                               </div>
                               <div class="col-1">:
                               </div>
                               <div class="col">
-                                  <input id="${match.t2._id}" onchange="verifyValue('${match.t2._id}','${roundState}')" type="number" value="${t2g}" class="form-control" min="0" max="9" style="text-align: center;" name="${match.t2._id}" ${roundState} required>
+                                  <input id="${match.t2._id}" onchange="verifyValue('${roundState}')" type="number" value="${t2g}" class="form-control" min="0" max="9" style="text-align: center;" name="${match.t2._id}" ${roundState} required>
                               </div>
                           </div>
                           ${statsDiv}
@@ -160,15 +160,19 @@ function printRoundWithMatches(round) {
                </div>`);
 }
 
-function verifyValue(inputId, roundState){
+function verifyValue(roundState){
   var isNull;
   var isInvalid;
 
   $("#add-ticket-form input[type=Number]").each(function(){
     var input = $(this);
     if(input.val() == ""){
+      input.addClass("is-invalid")
+      input.removeClass("is-valid")
       isNull = true;
     }else{
+      input.removeClass("is-invalid")
+      input.addClass("is-valid")
       if(isNull == true)
         isNull = true;
       else
@@ -176,14 +180,20 @@ function verifyValue(inputId, roundState){
     }
 
     if(input.val() > 9){
+      input.addClass("is-invalid")
+      input.removeClass("is-valid")
       isInvalid = true;
     }else{
+      input.removeClass("is-invalid")
+      input.addClass("is-valid")
       if(isInvalid == true)
         isInvalid = true;
       else
         isInvalid = false
     }
 
+    });
+ 
     if((isInvalid == false) || (isNull == false)){
       if(isInvalid == false)
         $(`#dashboard-warnings`).append("<p><em><small>Jeden z wyników w twoich typach, jest większy niż 9!</small></em></p>")
@@ -196,10 +206,6 @@ function verifyValue(inputId, roundState){
       if(roundState == "") $(`#sendTicketsButton`).removeClass("disabled")
       $(`#dashboard-warnings`).html("")
     }
-
-  });
- 
-
   // if(!!($(`#${inputId}`).val())){
   //   $(`#dashboard-warnings-nullType`).html("")
   //   buttonState1 = 1;

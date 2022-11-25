@@ -195,10 +195,12 @@ function verifyValue(roundState){
     });
  
     if((isInvalid == true) || (isNull == true)){
-      if(isInvalid == true)
-        $(`#dashboard-warnings`).html("<p><em><small>Jeden z wyników w twoich typach, jest większy niż 9!</small></em></p>")
-      if(isNull == true)
+      if((isInvalid == true) & (isNull == true))
+        $(`#dashboard-warnings`).html("<p><em><small>Jeden z wyników w twoich typach, jest większy niż 9!</small></em></p><p><em><small>Nie wypełniłeś wszystkich typów</small></em></p>")
+      if((isNull == true) & (isInvalid == false))
         $(`#dashboard-warnings`).html("<p><em><small>Nie wypełniłeś wszystkich typów</small></em></p>")
+      if((isNull == false) & (isInvalid == true))
+        $(`#dashboard-warnings`).html("<p><em><small>Jeden z wyników w twoich typach, jest większy niż 9!</small></em></p>")
 
       if(roundState == "") $(`#sendTicketsButton`).addClass("disabled")
 

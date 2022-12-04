@@ -1,5 +1,12 @@
 function printQuizSummary(){
-    getAllUsernames().then(users =>{ 
+    getAllUsernames().then(users =>{
+        getQuestions()(questions => {
+            var quiz_questions = `<th scope="col">User</th>`
+            questions.forEach((question,index) =>{
+                quiz_questions += `<th scope="col">${index+1}<br />${question.correctAnswer}</th>`
+            })
+            $("#quiz-summary-questions").append(quiz_questions)
+        })
         users.forEach(user => {
             getUserAnswers(user._id).then(async answers => {
                 var nickname = user.username;
@@ -10,7 +17,6 @@ function printQuizSummary(){
                     textSize="font-size:11px;"
 
                 answers.answers.forEach(async (ans,index) =>{
-                    console.log(ans)
                     if(index != 0){
                         if(ans.answer == "yes"){
                             answers_content += `<td>Tak</td>`

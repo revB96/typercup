@@ -50,12 +50,11 @@ function printQuizSummary(){
                         }
                     }
                 })
-                $("#quiz-summary-questions").append(quiz_questions)
                 $("#quiz-summary-answers").append(`
-                <tr>
-                    <th style="${textSize}" scope="row">${user.username}</th>
-                    ${answers_content}
-                </tr>
+                                                    <tr>
+                                                        <th style="${textSize}" scope="row">${user.username}</th>
+                                                        ${answers_content}
+                                                    </tr>
             `);
             })
         })

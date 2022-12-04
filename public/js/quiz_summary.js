@@ -43,7 +43,7 @@ function printQuizSummary(){
 
                 $("#quiz-summary-answers").append(`
             <tr>
-                <th style"${textSize}" scope="row">${user.username}</th>
+                <th style="${textSize}" scope="row">${user.username}</th>
                 ${answers_content}
             </tr>
             `);

@@ -19,7 +19,7 @@ function printQuizQuestions(){
                 correct_answer = question.correctAnswer
 
             if(question.correctAnswer == "")
-                quiz_questions += `<th scope="col"><button style="border-style: none; background-color: transparent; id="quiz-summary-question-${question._id}">${index+1}<br /><br /><br /><small class="text-muted">${correct_answer}</small></button></th>
+                quiz_questions += `<th scope="col"><button style="border-style: none; background-color: transparent;" id="quiz-summary-question-${question._id}">${index+1}<br /><br /><br /><small class="text-muted">${correct_answer}</small></button></th>
                                     <script>tippy('#quiz-summary-question-${question._id}', {
                                         content: "${question.question}",
                                         placement: 'right-start',
@@ -27,7 +27,7 @@ function printQuizQuestions(){
                                     });
                                     </script>`
             else if(question.correctAnswer.length > 10)
-                quiz_questions += `<th scope="col"><button style="border-style: none; background-color: transparent; id="quiz-summary-question-${question._id}">${index+1}<br /><small class="text-muted">${correct_answer}</small></button></th>
+                quiz_questions += `<th scope="col"><button style="border-style: none; background-color: transparent;" id="quiz-summary-question-${question._id}">${index+1}<br /><small class="text-muted">${correct_answer}</small></button></th>
                                     <script>tippy('#quiz-summary-question-${question._id}', {
                                         content: "${question.question}",
                                         placement: 'right-start',
@@ -35,7 +35,7 @@ function printQuizQuestions(){
                                     });
                                     </script>`
             else
-                quiz_questions += `<th scope="col"><button style="border-style: none; background-color: transparent; id="quiz-summary-question-${question._id}">${index+1}<br /><br /><small class="text-muted">${correct_answer}</small></button></th>
+                quiz_questions += `<th scope="col"><button style="border-style: none; background-color: transparent;" id="quiz-summary-question-${question._id}">${index+1}<br /><br /><small class="text-muted">${correct_answer}</small></button></th>
                                     <script>tippy('#quiz-summary-question-${question._id}', {
                                         content: "${question.question}",
                                         placement: 'right-start',

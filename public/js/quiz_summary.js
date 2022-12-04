@@ -86,9 +86,21 @@ function printQuizSummary(){
                                                 });
                                                 </script>`
                         }else if(ans.answer == "no"){
-                            answers_content += `<td class="${td_variant}"><button style="border-style: none; background-color: transparent;" class="quiz-question-${ans.questionId}">Nie</button></td>`
+                            answers_content += `<td class="${td_variant}"><button style="border-style: none; background-color: transparent;" class="quiz-answers-${ans.questionId}">Nie</button></td>
+                                                <script>tippy('.quiz-answers-${ans.questionId}', {
+                                                    content: "${correct_answer.question}",
+                                                    placement: 'right-start',
+                                                    theme: 'material',
+                                                });
+                                                </script>`
                         }else{
-                            answers_content += `<td class="${td_variant}"><button style="border-style: none; background-color: transparent;" class="quiz-question-${ans.questionId}">${ans.answer}</button></td>`
+                            answers_content += `<td class="${td_variant}"><button style="border-style: none; background-color: transparent;" class="quiz-answers-${ans.questionId}">${ans.answer}</button></td>
+                                                <script>tippy('.quiz-answers-${ans.questionId}', {
+                                                    content: "${correct_answer.question}",
+                                                    placement: 'right-start',
+                                                    theme: 'material',
+                                                });
+                                                </script>`
                         }
                     }
                 })

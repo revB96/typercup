@@ -8,25 +8,25 @@ function printQuizSummary(){
             <tr>
                 <th scope="row">${user.username}</th>
                 <td>${answers.answers[1].answer}</td>
-                <td>${answers.answers[2]}</td>
-                <td>${answers.answers[3]}</td>
-                <td>${answers.answers[4]}</td>
-                <td>${answers.answers[5]}</td>
-                <td>${answers.answers[6]}</td>
-                <td>${answers.answers[7]}</td>
-                <td>${answers.answers[8]}</td>
-                <td>${answers.answers[9]}</td>
-                <td>${answers.answers[10]}</td>
-                <td>${answers.answers[11]}</td>
-                <td>${answers.answers[12]}</td>
-                <td>${answers.answers[13]}</td>
-                <td>${answers.answers[14]}</td>
-                <td>${answers.answers[15]}</td>
-                <td>${answers.answers[16]}</td>
-                <td>${answers.answers[17]}</td>
-                <td>${answers.answers[18]}</td>
-                <td>${answers.answers[19]}</td>
-                <td>${answers.answers[20]}</td>
+                <td>${answers.answers[2].answer}</td>
+                <td>${answers.answers[3].answer}</td>
+                <td>${answers.answers[4].answer}</td>
+                <td>${answers.answers[5].answer}</td>
+                <td>${answers.answers[6].answer}</td>
+                <td>${answers.answers[7].answer}</td>
+                <td>${answers.answers[8].answer}</td>
+                <td>${answers.answers[9].answer}</td>
+                <td>${answers.answers[10].answer}</td>
+                <td>${answers.answers[11].answer}</td>
+                <td>${answers.answers[12].answer}</td>
+                <td>${answers.answers[13].answer}</td>
+                <td>${answers.answers[14].answer}</td>
+                <td>${answers.answers[15].answer}</td>
+                <td>${answers.answers[16].answer}</td>
+                <td>${answers.answers[17].answer}</td>
+                <td>${answers.answers[18].answer}</td>
+                <td>${answers.answers[19].answer}</td>
+                <td>${answers.answers[20].answer}</td>
             </tr>
             `);
             })

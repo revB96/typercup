@@ -34,11 +34,12 @@ function printQuizSummary(){
                     textSize="font-size:11px;"
 
                 answers.answers.forEach(async (ans,index) =>{
-                    console.log(ans)
+                    //console.log(ans)
                     var correct_answer = questions.find(result => {
-                        return result._id == ans._id
+                        console.log(result)
+                        return result._id == ans.questionId
                     })
-                    console.log(correct_answer)
+                    //console.log(correct_answer)
                     if(index != 0){
                         if(ans.answer == "yes"){
                             answers_content += `<td>Tak</td>`

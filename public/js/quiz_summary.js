@@ -1,3 +1,11 @@
+{/* <button style="border-style: none; background-color: transparent; ${textSize}" id="tableButton-${userStat._id}">${userStat.user.username}${crown}</button>
+                    <script>tippy('#tableButton-${userStat._id}', {
+                        content: "${userStat.user.friendlyName}",
+                        placement: 'right-start',
+                        theme: 'material',
+                      });
+                    </script> */}
+                    
 function printQuizQuestions(){
     getQuestions().then(questions => {
         var quiz_questions = `<th scope="col">User</th>`
@@ -11,14 +19,32 @@ function printQuizQuestions(){
                 correct_answer = question.correctAnswer
 
             if(question.correctAnswer == "")
-                quiz_questions += `<th scope="col">${index+1}<br /><br /><br /><small class="text-muted">${correct_answer}</small></th>`
+                quiz_questions += `<th scope="col"><button style="border-style: none; background-color: transparent; id="quiz-summary-question-${question._id}">${index+1}<br /><br /><br /><small class="text-muted">${correct_answer}</small></button></th>
+                                    <script>tippy('#quiz-summary-question-${question._id}', {
+                                        content: "${question.question}",
+                                        placement: 'right-start',
+                                        theme: 'material',
+                                    });
+                                    </script>`
             else if(question.correctAnswer.length > 10)
-                quiz_questions += `<th scope="col">${index+1}<br /><small class="text-muted">${correct_answer}</small></th>`
+                quiz_questions += `<th scope="col"><button style="border-style: none; background-color: transparent; id="quiz-summary-question-${question._id}">${index+1}<br /><small class="text-muted">${correct_answer}</small></button></th>
+                                    <script>tippy('#quiz-summary-question-${question._id}', {
+                                        content: "${question.question}",
+                                        placement: 'right-start',
+                                        theme: 'material',
+                                    });
+                                    </script>`
             else
-                quiz_questions += `<th scope="col">${index+1}<br /><br /><small class="text-muted">${correct_answer}</small></th>`
+                quiz_questions += `<th scope="col"><button style="border-style: none; background-color: transparent; id="quiz-summary-question-${question._id}">${index+1}<br /><br /><small class="text-muted">${correct_answer}</small></button></th>
+                                    <script>tippy('#quiz-summary-question-${question._id}', {
+                                        content: "${question.question}",
+                                        placement: 'right-start',
+                                        theme: 'material',
+                                    });
+                                    </script>`
         })
         $("#quiz-summary-questions").append(quiz_questions)
-        $("#quiz-summary-questions").append(`<th scope="col">Pkt</th>`)
+        $("#quiz-summary-questions").append(`<th scope="col"><br /><br />Pkt</th>`)
     })
 }
 function printQuizSummary(){

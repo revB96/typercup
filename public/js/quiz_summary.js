@@ -17,7 +17,9 @@ function printQuizSummary(){
                     quiz_questions += `<th scope="col">${index+1}<br /><small class="text-muted">${correct_answer}</small></th>`
                 else
                     quiz_questions += `<th scope="col">${index+1}<br /><br /><small class="text-muted">${correct_answer}</small></th>`
-        
+                    
+            $("#quiz-summary-questions").append(quiz_questions)
+
         users.forEach(user => {
             getUserAnswers(user._id).then(async answers => {
                 var nickname = user.username;
@@ -38,7 +40,6 @@ function printQuizSummary(){
                         }
                     }
                 })
-                $("#quiz-summary-questions").append(quiz_questions)
                 $("#quiz-summary-answers").append(`
                 <tr>
                     <th style="${textSize}" scope="row">${user.username}</th>

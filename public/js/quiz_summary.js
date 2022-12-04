@@ -18,6 +18,7 @@ function printQuizQuestions(){
                 quiz_questions += `<th scope="col">${index+1}<br /><br /><small class="text-muted">${correct_answer}</small></th>`
         })
         $("#quiz-summary-questions").append(quiz_questions)
+        $("#quiz-summary-questions").append(`<th scope="col">Pkt</th>`)
     })
 }
 function printQuizSummary(){
@@ -25,7 +26,7 @@ function printQuizSummary(){
         users.forEach(user => {
             getUserAnswers(user._id).then(async answers => {
                 getQuestions().then(questions => {
-                
+                var points = 0;
                 var nickname = user.username;
                 var textSize="";
                 var answers_content=""
@@ -40,11 +41,15 @@ function printQuizSummary(){
                         return result._id == ans.questionId
                     })
                     if(!!correct_answer){
-                        if (correct_answer.correctAnswer == ans.answer)
+                        if (correct_answer.correctAnswer == ans.answer){
                             td_variant = "table-success"
+                            points += 0.5;
+                        }else if(correct_answer.correctAnswer == "")
+                            td_variant = ""
                         else  
                             td_variant = "table-danger"  
                     }
+
                     if(index != 0){
                         if(ans.answer == "yes"){
                             answers_content += `<td class="${td_variant}">Tak</td>`
@@ -58,6 +63,7 @@ function printQuizSummary(){
                 $("#quiz-summary-answers").append(`<tr>
                                                         <th style="${textSize}" scope="row">${user.username}</th>
                                                         ${answers_content}
+                                                        <td>${points}</td>
                                                     </tr>`);
             })
         })

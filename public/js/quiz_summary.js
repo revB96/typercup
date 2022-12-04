@@ -3,12 +3,20 @@ function printQuizSummary(){
         getQuestions().then(questions => {
             var quiz_questions = `<th scope="col">User</th>`
             questions.forEach((question,index) =>{
-                if(question.correctAnswer == "")
-                    quiz_questions += `<th scope="col">${index+1}<br /><br /><br /><small>${question.correctAnswer}</small></th>`
-                else if(question.correctAnswer.length > 10)
-                    quiz_questions += `<th scope="col">${index+1}<br /><small>${question.correctAnswer}</small></th>`
+                var correct_answer;
+                if(question.correctAnswer == "yes")
+                    correct_answer = `Tak`
+                else if(question.correctAnswer == "no")
+                    correct_answer = "Nie"
                 else
-                    quiz_questions += `<th scope="col">${index+1}<br /><br /><small>${question.correctAnswer}</small></th>`
+                    correct_answer = question.correctAnswer
+
+                if(question.correctAnswer == "")
+                    quiz_questions += `<th scope="col">${index+1}<br /><br /><br /><small class="text-muted">${correct_answer}</small></th>`
+                else if(question.correctAnswer.length > 10)
+                    quiz_questions += `<th scope="col">${index+1}<br /><small class="text-muted">${correct_answer}</small></th>`
+                else
+                    quiz_questions += `<th scope="col">${index+1}<br /><br /><small class="text-muted">${correct_answer}</small></th>`
             })
             $("#quiz-summary-questions").append(quiz_questions)
         })

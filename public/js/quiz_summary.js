@@ -39,12 +39,12 @@ function printQuizSummary(){
                     var correct_answer = questions.find(result => {
                         return result._id == ans.questionId
                     })
-                    if(!!correct_answer)
+                    if(!!correct_answer){
                         if (correct_answer.correctAnswer == ans.answer)
                             td_variant = "table-success"
                         else  
                             td_variant = "table-danger"  
-
+                    }
                     if(index != 0){
                         if(ans.answer == "yes"){
                             answers_content += `<td class="${td_variant}">Tak</td>`

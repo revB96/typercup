@@ -37,7 +37,6 @@ function printQuizSummary(){
                 answers.answers.forEach(async (ans,index) =>{
                     //console.log(ans)
                     var correct_answer = questions.find(result => {
-                        console.log(result)
                         return result._id == ans.questionId
                     })
                     if (correct_answer.correctAnswer == ans.answer)

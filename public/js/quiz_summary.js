@@ -9,7 +9,7 @@ function printQuizSummary(){
                 if(nickname.length > 12)
                     textSize="font-size:11px;"
 
-                answers.forEach(async (ans,index) =>{
+                answers.answers.forEach(async (ans,index) =>{
                     if(ans[index+1].answer == "yes"){
                         answers_content =+ `<td>Tak</td>`
                     }else if(ans[index+1].answer == "no"){

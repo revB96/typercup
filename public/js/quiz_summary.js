@@ -3,7 +3,12 @@ function printQuizSummary(){
         getQuestions().then(questions => {
             var quiz_questions = `<th scope="col">User</th>`
             questions.forEach((question,index) =>{
-                quiz_questions += `<th scope="col">${index+1}<br /><small>${question.correctAnswer}</small></th>`
+                if(question.correctAnswer == "")
+                    quiz_questions += `<th scope="col">${index+1}<br /><br /><br /><small>${question.correctAnswer}</small></th>`
+                else if(question.correctAnswer.length > 10)
+                    quiz_questions += `<th scope="col">${index+1}<br /><small>${question.correctAnswer}</small></th>`
+                else
+                    quiz_questions += `<th scope="col">${index+1}<br /><br /><small>${question.correctAnswer}</small></th>`
             })
             $("#quiz-summary-questions").append(quiz_questions)
         })

@@ -29,7 +29,7 @@ function printQuizSummary(){
                 var nickname = user.username;
                 var textSize="";
                 var answers_content=""
-                var td_variant;
+                var td_variant ="";
 
                 if(nickname.length > 12)
                     textSize="font-size:11px;"
@@ -39,7 +39,7 @@ function printQuizSummary(){
                     var correct_answer = questions.find(result => {
                         return result._id == ans.questionId
                     })
-                    if(!!correct_answer.correctAnswer)
+                    if(!!correct_answer)
                         if (correct_answer.correctAnswer == ans.answer)
                             td_variant = "table-success"
                         else  

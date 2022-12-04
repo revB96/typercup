@@ -3,7 +3,7 @@ function printQuizSummary(){
         getQuestions().then(questions => {
             var quiz_questions = `<th scope="col">User</th>`
             questions.forEach((question,index) =>{
-                quiz_questions += `<th scope="col">${index+1}<br />${question.correctAnswer}</th>`
+                quiz_questions += `<th scope="col">${index+1}<br /><small>${question.correctAnswer}</small></th>`
             })
             $("#quiz-summary-questions").append(quiz_questions)
         })

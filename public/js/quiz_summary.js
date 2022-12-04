@@ -1,6 +1,6 @@
 function printQuizSummary(){
     getAllUsernames().then(users =>{
-        getQuestions()(questions => {
+        getQuestions().then(questions => {
             var quiz_questions = `<th scope="col">User</th>`
             questions.forEach((question,index) =>{
                 quiz_questions += `<th scope="col">${index+1}<br />${question.correctAnswer}</th>`

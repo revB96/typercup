@@ -2,31 +2,27 @@ function printQuizSummary(){
     getAllUsernames().then(users =>{ 
         users.forEach(user => {
             getUserAnswers(user._id).then(async answers => {
-                console.log(answers.answers);
+                var nickname = user.username;
+                var textSize="";
+                var answers_content=""
+
+                if(nickname.length > 12)
+                    textSize="font-size:11px;"
+
+                answers.forEach(async (ans,index) =>{
+                    if(ans[index+1].answer == "yes"){
+                        answers_content =+ `<td>Tak</td>`
+                    }else if(ans[index+1].answer == "no"){
+                        answers_content =+ `<td>Nie</td>`
+                    }else{
+                        answers_content =+ `<td>${ans[index+1].answer}</td>`
+                    }
+                })
 
                 $("#quiz-summary-answers").append(`
             <tr>
-                <th scope="row">${user.username}</th>
-                <td>${answers.answers[1].answer}</td>
-                <td>${answers.answers[2].answer}</td>
-                <td>${answers.answers[3].answer}</td>
-                <td>${answers.answers[4].answer}</td>
-                <td>${answers.answers[5].answer}</td>
-                <td>${answers.answers[6].answer}</td>
-                <td>${answers.answers[7].answer}</td>
-                <td>${answers.answers[8].answer}</td>
-                <td>${answers.answers[9].answer}</td>
-                <td>${answers.answers[10].answer}</td>
-                <td>${answers.answers[11].answer}</td>
-                <td>${answers.answers[12].answer}</td>
-                <td>${answers.answers[13].answer}</td>
-                <td>${answers.answers[14].answer}</td>
-                <td>${answers.answers[15].answer}</td>
-                <td>${answers.answers[16].answer}</td>
-                <td>${answers.answers[17].answer}</td>
-                <td>${answers.answers[18].answer}</td>
-                <td>${answers.answers[19].answer}</td>
-                <td>${answers.answers[20].answer}</td>
+                <th style"${textSize}" scope="row">${user.username}</th>
+                ${answers_content}
             </tr>
             `);
             })

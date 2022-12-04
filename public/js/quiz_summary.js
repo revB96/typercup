@@ -35,24 +35,30 @@ function printQuizSummary(){
                     textSize="font-size:11px;"
 
                 answers.answers.forEach(async (ans,index) =>{
-                    //console.log(ans)
-                    
+                    console.log(ans)
+                    var correct_answer = questions.find(result => {
+                        return result._id == ans.questionId
+                    })
+                    if(!!correct_answer){
+                        if (correct_answer.correctAnswer == ans.answer)
+                            td_variant = "table-success"
+                        else  
+                            td_variant = "table-danger"  
+                    }
                     if(index != 0){
                         if(ans.answer == "yes"){
                             answers_content += `<td class="${td_variant}">Tak</td>`
                         }else if(ans.answer == "no"){
-                            answers_content += `<td class="${td_variant}>Nie</td>`
+                            answers_content += `<td class="${td_variant}">Nie</td>`
                         }else{
-                            answers_content += `<td class="${td_variant}>${ans.answer}</td>`
+                            answers_content += `<td class="${td_variant}">${ans.answer}</td>`
                         }
                     }
                 })
-                $("#quiz-summary-answers").append(`
-                                                    <tr>
+                $("#quiz-summary-answers").append(`<tr>
                                                         <th style="${textSize}" scope="row">${user.username}</th>
                                                         ${answers_content}
-                                                    </tr>
-            `);
+                                                    </tr>`);
             })
         })
         });

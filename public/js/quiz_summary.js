@@ -12,11 +12,11 @@ function printQuizSummary(){
                 answers.answers.forEach(async (ans,index) =>{
                     console.log(ans)
                     if(ans.answer == "yes"){
-                        answers_content =+ `<td>Tak</td>`
+                        answers_content += `<td>Tak</td>`
                     }else if(ans.answer == "no"){
-                        answers_content =+ `<td>Nie</td>`
+                        answers_content += `<td>Nie</td>`
                     }else{
-                        answers_content =+ `<td>${ans.answer}</td>`
+                        answers_content += `<td>${ans.answer}</td>`
                     }
                 })
 

@@ -181,6 +181,12 @@ router.get("/quiz", authenticate, async function (req, res, next) {
   });
 });
 
+router.get("/quiz/summary", authenticate, async function (req, res, next) {
+  res.render("quiz_summary", {
+    title: "Podsumowanie Quizu",
+  });
+});
+
 router.get("/hallOfFame", authenticate, async function (req, res, next) {
   res.render("hallOfFame", {
     title: "⭐ HALL OF FAME ⭐",

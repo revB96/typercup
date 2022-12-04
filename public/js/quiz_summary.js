@@ -39,7 +39,7 @@ function printQuizSummary(){
                         console.log(result)
                         return result._id == ans.questionId
                     })
-                    //console.log(correct_answer)
+                    console.log(correct_answer)
                     if(index != 0){
                         if(ans.answer == "yes"){
                             answers_content += `<td>Tak</td>`

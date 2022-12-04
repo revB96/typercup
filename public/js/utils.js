@@ -529,7 +529,7 @@ function getEditionHistory(editionId){
 
 function getAllUsernames(){
     return $.ajax({
-        url: `/user/get-all-usernames`,
+        url: `/api/user/get-all-usernames`,
         method: 'get',
         contentType: "application/json",
         dataType: 'json',

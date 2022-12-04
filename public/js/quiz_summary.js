@@ -29,6 +29,7 @@ function printQuizSummary(){
                 var nickname = user.username;
                 var textSize="";
                 var answers_content=""
+                var td_variant;
 
                 if(nickname.length > 12)
                     textSize="font-size:11px;"
@@ -39,14 +40,18 @@ function printQuizSummary(){
                         console.log(result)
                         return result._id == ans.questionId
                     })
-                    console.log(correct_answer)
+                    if (correct_answer.correctAnswer == ans.answer)
+                        td_variant = "table-success"
+                    else  
+                        td_variant = "table-danger"  
+
                     if(index != 0){
                         if(ans.answer == "yes"){
-                            answers_content += `<td>Tak</td>`
+                            answers_content += `<td class="${td_variant}">Tak</td>`
                         }else if(ans.answer == "no"){
-                            answers_content += `<td>Nie</td>`
+                            answers_content += `<td class="${td_variant}>Nie</td>`
                         }else{
-                            answers_content += `<td>${ans.answer}</td>`
+                            answers_content += `<td class="${td_variant}>${ans.answer}</td>`
                         }
                     }
                 })

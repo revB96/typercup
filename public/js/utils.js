@@ -527,6 +527,21 @@ function getEditionHistory(editionId){
     })
 }
 
+function getAllUsernames(){
+    return $.ajax({
+        url: `/user/get-all-usernames`,
+        method: 'get',
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (result) {
+            return result;
+        },
+        fail: function (){
+            console.log("Nie udało się pobrać");
+        }
+    })
+}
+
 function getCountFinishedRound(){
     return $.ajax({
         url: `/api/round/finished/count`,

@@ -799,6 +799,20 @@ function getAll() {
   return def.promise;
 }
 
+function getAllUsernames() {
+  var def = Q.defer();
+  User.find(
+    {active: true},
+    "username friendlyName"
+  )
+    .sort({ username: "desc" })
+    .exec(function (err, users) {
+      err ? def.reject(err) : def.resolve(users);
+    });
+
+  return def.promise;
+}
+
 async function changePassword(formData) {
   var def = Q.defer();
   const timestamp = moment.tz(Date.now(), "Europe/Warsaw");
@@ -3236,5 +3250,6 @@ module.exports = {
   testRoundEmailNotification,
   updateEmail,
   getUserEmail,
-  resetPassword
+  resetPassword,
+  getAllUsernames
 };

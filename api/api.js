@@ -476,6 +476,17 @@ router.get('/user/table', function (req, res) {
     
 })
 
+router.get('/user/get-all-usernames', function (req, res) {
+    User.getAllUsernames(req.body)
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        });
+    
+})
+
 router.post('/admin/user/reset-stats', function (req, res) {
     UserStats.resetUserStats(req.query.id)
         .then(data => {

@@ -2,7 +2,6 @@ function printQuizSummary(){
     getAllUsernames().then(users =>{
         getQuestions().then(questions => {
             var quiz_questions = `<th scope="col">User</th>`
-            var quiz_answers = "";
             questions.forEach((question,index) =>{
                 var correct_answer;
                 if(question.correctAnswer == "yes")
@@ -40,13 +39,13 @@ function printQuizSummary(){
                     }
                 })
 
-                quiz_answers+=`<tr>
-                                    <th style="${textSize}" scope="row">${user.username}</th>
-                                    ${answers_content}
-                                </tr>`
+                $("#quiz-summary-answers").append(`
+                <tr>
+                    <th style="${textSize}" scope="row">${user.username}</th>
+                    ${answers_content}
+                </tr>`);
             })
         });
-        $("#quiz-summary-answers").html(quiz_answers)
         $("#quiz-summary-questions").html(quiz_questions)
     })
 })

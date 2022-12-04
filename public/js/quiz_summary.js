@@ -2,7 +2,7 @@ function printQuizSummary(){
     getAllUsernames().then(users =>{ 
         users.forEach(user => {
             getUserAnswers(user._id).then(async answers => {
-                console.log(answers);
+                console.log(answers.answers[0]);
 
                 $("#quiz-summary-answers").append(`
             <tr>

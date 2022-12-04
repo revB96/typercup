@@ -1,7 +1,10 @@
 function printQuizSummary(){
     getAllUsernames().then(users =>{ 
         users.forEach(user => {
-            $("#quiz-summary-answers").append(`
+            getUserAnswers(user._id).then(async answers => {
+                console.log(answers);
+
+                $("#quiz-summary-answers").append(`
             <tr>
                 <th scope="row">${user.username}</th>
                 <td></td>
@@ -26,6 +29,7 @@ function printQuizSummary(){
                 <td></td>
             </tr>
             `);
+            })
         });
     })
 }

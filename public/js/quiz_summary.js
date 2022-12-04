@@ -19,24 +19,24 @@ function printQuizQuestions(){
                 correct_answer = question.correctAnswer
 
             if(question.correctAnswer == "")
-                quiz_questions += `<th scope="col"><button style="border-style: none; background-color: transparent;" id="quiz-summary-question-${question._id}">${index+1}<br /><br /><br /><small class="text-muted">${correct_answer}</small></button></th>
-                                    <script>tippy('#quiz-summary-question-${question._id}', {
+                quiz_questions += `<th scope="col"><button style="border-style: none; background-color: transparent;" class="quiz-question-${question._id}">${index+1}<br /><br /><br /><small class="text-muted">${correct_answer}</small></button></th>
+                                    <script>tippy('.quiz-summary-question-${question._id}', {
                                         content: "${question.question}",
                                         placement: 'right-start',
                                         theme: 'material',
                                     });
                                     </script>`
             else if(question.correctAnswer.length > 10)
-                quiz_questions += `<th scope="col"><button style="border-style: none; background-color: transparent;" id="quiz-summary-question-${question._id}">${index+1}<br /><small class="text-muted">${correct_answer}</small></button></th>
-                                    <script>tippy('#quiz-summary-question-${question._id}', {
+                quiz_questions += `<th scope="col"><button style="border-style: none; background-color: transparent;" class="quiz-question-${question._id}">${index+1}<br /><small class="text-muted">${correct_answer}</small></button></th>
+                                    <script>tippy('.quiz-summary-question-${question._id}', {
                                         content: "${question.question}",
                                         placement: 'right-start',
                                         theme: 'material',
                                     });
                                     </script>`
             else
-                quiz_questions += `<th scope="col"><button style="border-style: none; background-color: transparent;" id="quiz-summary-question-${question._id}">${index+1}<br /><br /><small class="text-muted">${correct_answer}</small></button></th>
-                                    <script>tippy('#quiz-summary-question-${question._id}', {
+                quiz_questions += `<th scope="col"><button style="border-style: none; background-color: transparent;" class="quiz-question-${question._id}">${index+1}<br /><br /><small class="text-muted">${correct_answer}</small></button></th>
+                                    <script>tippy('.quiz-summary-question-${question._id}', {
                                         content: "${question.question}",
                                         placement: 'right-start',
                                         theme: 'material',
@@ -44,7 +44,7 @@ function printQuizQuestions(){
                                     </script>`
         })
         $("#quiz-summary-questions").append(quiz_questions)
-        $("#quiz-summary-questions").append(`<th scope="col"><br /><br />Pkt</th>`)
+        $("#quiz-summary-questions").append(`<th scope="col">Pkt<br /><br /></th>`)
     })
 }
 function printQuizSummary(){
@@ -78,11 +78,11 @@ function printQuizSummary(){
 
                     if(index != 0){
                         if(ans.answer == "yes"){
-                            answers_content += `<td class="${td_variant}">Tak</td>`
+                            answers_content += `<td class="${td_variant}"><button style="border-style: none; background-color: transparent;" class="quiz-question-${ans.questionId}">Tak</button></td>`
                         }else if(ans.answer == "no"){
-                            answers_content += `<td class="${td_variant}">Nie</td>`
+                            answers_content += `<td class="${td_variant}"><button style="border-style: none; background-color: transparent;" class="quiz-question-${ans.questionId}">Nie</button></td>`
                         }else{
-                            answers_content += `<td class="${td_variant}">${ans.answer}</td>`
+                            answers_content += `<td class="${td_variant}"><button style="border-style: none; background-color: transparent;" class="quiz-question-${ans.questionId}">${ans.answer}</button></td>`
                         }
                     }
                 })

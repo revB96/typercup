@@ -181,7 +181,7 @@ router.get("/quiz", authenticate, async function (req, res, next) {
   });
 });
 
-router.get("/quiz/summary", authenticate, async function (req, res, next) {
+router.get("/quiz-summary", authenticate, async function (req, res, next) {
   res.render("quiz_summary", {
     title: "Podsumowanie Quizu",
   });

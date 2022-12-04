@@ -2,12 +2,12 @@ function printQuizSummary(){
     getAllUsernames().then(users =>{ 
         users.forEach(user => {
             getUserAnswers(user._id).then(async answers => {
-                console.log(answers.answers[0]);
+                console.log(answers.answers);
 
                 $("#quiz-summary-answers").append(`
             <tr>
                 <th scope="row">${user.username}</th>
-                <td>${answers.answers[1]}</td>
+                <td>${answers.answers[1].answer}</td>
                 <td>${answers.answers[2]}</td>
                 <td>${answers.answers[3]}</td>
                 <td>${answers.answers[4]}</td>

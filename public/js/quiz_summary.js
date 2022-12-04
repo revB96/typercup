@@ -23,9 +23,9 @@ function printQuizQuestions(){
 }
 function printQuizSummary(){
     getAllUsernames().then(users =>{
-        users.forEach(user => {
+        users.forEach(async user => {
             getUserAnswers(user._id).then(async answers => {
-                getQuestions().then(questions => {
+                getQuestions().then(async questions => {
                 var points = 0;
                 var nickname = user.username;
                 var textSize="";
@@ -35,7 +35,7 @@ function printQuizSummary(){
                 if(nickname.length > 12)
                     textSize="font-size:11px;"
 
-                answers.answers.forEach(async (ans,index) =>{
+                await answers.answers.forEach(async (ans,index) =>{
                     console.log(ans)
                     var correct_answer = questions.find(result => {
                         return result._id == ans.questionId
@@ -60,7 +60,7 @@ function printQuizSummary(){
                         }
                     }
                 })
-                $("#quiz-summary-answers").append(`<tr>
+                await $("#quiz-summary-answers").append(`<tr>
                                                         <th style="${textSize}" scope="row">${user.username}</th>
                                                         ${answers_content}
                                                         <td>${points}</td>

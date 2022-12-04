@@ -20,7 +20,7 @@ function printQuizQuestions(){
 
             if(question.correctAnswer == "")
                 quiz_questions += `<th scope="col"><button style="border-style: none; background-color: transparent;" class="quiz-question-${question._id}">${index+1}<br /><br /><br /><small class="text-muted">${correct_answer}</small></button></th>
-                                    <script>tippy('quiz-summary-question-${question._id}', {
+                                    <script>tippy('.quiz-question-${question._id}', {
                                         content: "${question.question}",
                                         placement: 'right-start',
                                         theme: 'material',
@@ -28,7 +28,7 @@ function printQuizQuestions(){
                                     </script>`
             else if(question.correctAnswer.length > 10)
                 quiz_questions += `<th scope="col"><button style="border-style: none; background-color: transparent;" class="quiz-question-${question._id}">${index+1}<br /><small class="text-muted">${correct_answer}</small></button></th>
-                                    <script>tippy('quiz-summary-question-${question._id}', {
+                                    <script>tippy('.quiz-question-${question._id}', {
                                         content: "${question.question}",
                                         placement: 'right-start',
                                         theme: 'material',
@@ -36,7 +36,7 @@ function printQuizQuestions(){
                                     </script>`
             else
                 quiz_questions += `<th scope="col"><button style="border-style: none; background-color: transparent;" class="quiz-question-${question._id}">${index+1}<br /><br /><small class="text-muted">${correct_answer}</small></button></th>
-                                    <script>tippy('quiz-summary-question-${question._id}', {
+                                    <script>tippy('.quiz-question-${question._id}', {
                                         content: "${question.question}",
                                         placement: 'right-start',
                                         theme: 'material',

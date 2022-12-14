@@ -82,6 +82,9 @@ function adminGetSchedule() {
          case 'final':
           stage = "Finał"
           break;
+         case '3rd_place':
+          stage = "3rd_place"
+          break;
         default:
           stage = "Nieokreślony"
           break;

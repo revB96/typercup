@@ -41,6 +41,7 @@ function printQuiz() {
                                   <option value="no">NIE</option>`;
 
             if (question.closed == true) {
+              $("#quiz-summary-button").html(`<a href="https://typer-cup.pl/quiz-summary" class="btn btn-primary btn-sm" role="button">Sprawdź jak odpowiadali inni</a>`)
               closed = "disabled";
               $("#save-user-quiz-button").addClass(closed);
               $("#save-user-quiz-button").addClass("btn-danger");

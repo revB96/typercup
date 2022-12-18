@@ -13,6 +13,7 @@ function listUserTable(){
             var crown="";
             var effectiveness=0;
             var effectiveness2 = 0;
+            var effectiveness3 = 0;
             var textSize="";
 
             if(counter === 1)
@@ -26,6 +27,9 @@ function listUserTable(){
                 effectiveness = ( (userStat.correctScore + userStat.correctTeam) / result[0].tickets) * 100
             if(isNaN((userStat.points / (result[0].tickets * 3)) * 100) == false)
                 effectiveness2 = (userStat.points / (result[0].tickets * 3)) * 100
+
+            if(isNaN((quizPoints/userStat.points) * 100) == false)
+                effectiveness3 = (quizPoints/userStat.points) * 100
 
             var nickname = userStat.user.username
             if(nickname.length > 12)
@@ -53,6 +57,7 @@ function listUserTable(){
                 <td>
                     <span style="padding:2px;margin:0" class="badge rounded-pill bg-primary">${Math.round(effectiveness)}%</span>
                     <span style="padding:2px;margin:0" class="badge rounded-pill bg-success">${Math.round(effectiveness2)}%</span>
+                    <span style="padding:2px;margin:0" class="badge rounded-pill bg-warning">${Math.round(effectiveness3)}%</span>
                 </td>
                 
              </tr>

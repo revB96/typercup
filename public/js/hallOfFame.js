@@ -75,6 +75,11 @@ function printHallOfFame(){
                             <div class="col-md-12 text-center">
                             `
                     await editionDetails.forEach(async editionDetail=>{
+                        var effectiveness, effectiveness2;
+                        if(isNaN(((editionDetail.correctScore + editionDetail.correctTeam) / editionDetail.tickets * 100) == false))
+                            effectiveness = ( (userStat.correctScore + editionDetail.correctTeam) / editionDetail.tickets) * 100
+                        if(isNaN((editionDetail.points / (editionDetail.tickets * 3)) * 100) == false)
+                            effectiveness2 = (editionDetail.points / (editionDetail.tickets * 3)) * 100
 
                         var cardText = `<p class="card-text">${editionDetail.pw} PW | ${editionDetail.wd} WD | ${editionDetail.q} Q</p>`
                         var modalTd = `
@@ -83,6 +88,10 @@ function printHallOfFame(){
                             <td>${editionDetail.wd}</td>
                             <td>${editionDetail.d}</td>
                             <td>${editionDetail.q}</td>
+                            <td>
+                                <span style="padding:2px;margin:0" class="badge rounded-pill bg-primary">${Math.round(effectiveness)}%</span>
+                                <span style="padding:2px;margin:0" class="badge rounded-pill bg-success">${Math.round(effectiveness2)}%</span>
+                            </td>
                         `
                         if(edition.name=="Mistrzostwa Świata 2018"){
                             cardText = ""

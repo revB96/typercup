@@ -77,7 +77,7 @@ function printHallOfFame(){
                     await editionDetails.forEach(async editionDetail=>{
                         var effectiveness, effectiveness2;
                         if(isNaN(((editionDetail.correctScore + editionDetail.correctTeam) / editionDetail.tickets * 100) == false))
-                            effectiveness = ( (userStat.correctScore + editionDetail.correctTeam) / editionDetail.tickets) * 100
+                            effectiveness = ( (editionDetail.correctScore + editionDetail.correctTeam) / editionDetail.tickets) * 100
                         if(isNaN((editionDetail.points / (editionDetail.tickets * 3)) * 100) == false)
                             effectiveness2 = (editionDetail.points / (editionDetail.tickets * 3)) * 100
 

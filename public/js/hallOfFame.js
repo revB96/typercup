@@ -5,7 +5,7 @@ function printHallOfFame(){
         await editions.forEach(async (edition,index) => { 
         await edition;
         if(edition.transfered == true)
-            getEditionHistory(edition._id).then(async editionDetails => {
+            await getEditionHistory(edition._id).then(async editionDetails => {
                 var th=`
                 <th scope="col">Z</th>
                 <th scope="col">PW</th>
@@ -189,7 +189,7 @@ function printHallOfFame(){
                     </div>
                 </div>
                 `
-                $("#hallOfFame-modals").append(modal)
+                await $("#hallOfFame-modals").append(modal)
                 await $("#hallOfFame-accordion").append(accordion)
             })
         })

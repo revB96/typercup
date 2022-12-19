@@ -73,6 +73,6 @@ app.use(express.static('public'))
 
 /*Run Server*/
 app.listen(8081, function () {
-    CronManager.configureCronManager();
+    //CronManager.configureCronManager();
     console.log("Server is running at 1996 port...");
 })

@@ -9,12 +9,13 @@ function printQuiz() {
       getUserCorrectAnswers(getUserId()).then(async (userCorrectAnswer) => {
         $("#quiz-cards").html("")
         for await (const [index, question] of Object.entries(questions)) {
+          getDictionaryByType(question.dictionary).then((questionDictionary) => {
           var points = 0,
               background = "",
               footer = "";
               checked =  "❌";
           if(!!userCorrectAnswer){
-              for await (const [index2, correctAnswer] of Object.entries(userCorrectAnswer)){
+              for (const [index2, correctAnswer] of Object.entries(userCorrectAnswer)){
                 //console.log(question._id, correctAnswer.question)
                   if (question._id == correctAnswer.question) {
                     points += 0.5;
@@ -65,15 +66,22 @@ function printQuiz() {
               select = `<option value="yes">TAK</option>
                             <option value="no" selected>NIE</option>`;
 
-            if (question.type == "yes-no")
+            if (question.type == "yes-no"){
               questionType = `
                                 <select class="form-select" style="text-align-last: center;" name="${question._id}" ${closed}>
                                     ${select}
                                 </select>`;
-            else
-              questionType = `<input value="${answer}" type="text" class="form-control" style="text-align-last: center;" name="${question._id}" ${closed}>`;
+            }else{
+              questionType = `<input value="${answer}" list="${question._id}-answers" type="text" class="form-control" style="text-align-last: center;" name="${question._id}" ${closed}>
+                              <datalist id="${question._id}-answers">`;
+              for (const [index, dictionary] of Object.entries(questionDictionary)) {
+                  questionType += `<option value="${dictionary.param1}">`;
+              }
 
-            await $("#quiz-cards").append(`
+              questionType += `</datalist>`;
+              
+            }
+            $("#quiz-cards").append(`
                         <div class="card text-center mt-3 ${background}">
                         <div class="card-header">
                             Pytanie #${counter} ${checked}
@@ -86,6 +94,7 @@ function printQuiz() {
                         </div>
                     `);
           }
+        })
         }
       });
     });
@@ -93,7 +102,7 @@ function printQuiz() {
 }
 
 $(document).ready(function () {
-  if (document.title == "Typer Cup | Quiz") {
+  if (window.location.pathname === '/quiz') {
     printQuiz();
 
     $("#save-user-quiz-form").submit(function (e) {

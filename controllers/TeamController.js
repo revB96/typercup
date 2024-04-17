@@ -3,26 +3,30 @@ const Q = require("q");
 const express = require("express");
 const Team = require("../models/nationalTeams");
 const moment = require('moment-timezone');
+const { getDictionaryByParam1 } = require("./DictionaryController.js");
 
 function add(formData) {
   const timestamp = moment.tz(Date.now(), "Europe/Warsaw")
   var def = Q.defer();
-
-  var data = new Team({
-    teamName: formData.teamName,
-    group: formData.group,
-    shortcut: formData.shortcut,
-    createdAt: timestamp,
-    updatedAt: timestamp,
-  });
-
-  data.save(function (err, result) {
-    err ? def.reject(err) : def.resolve(result);
-  });
-
-  console.log("Dodano reprezentacje");
-
+  
+  getDictionaryByParam1(formData.teamName).then(dictionary =>{
+    var data = new Team({
+      teamName: formData.teamName,
+      group: formData.group,
+      shortcut: dictionary.param2,
+      createdAt: timestamp,
+      updatedAt: timestamp,
+    });
+  
+    data.save(function (err, result) {
+      err ? def.reject(err) : def.resolve(result);
+    });
+  
+    console.log("Dodano reprezentacje");
+  })
+  
   return def.promise;
+
 }
 
 function getAll() {

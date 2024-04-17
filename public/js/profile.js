@@ -172,7 +172,7 @@ function printUserNotifications(){
 }
 
 $(document).ready(function () {
-  if(document.title == "Typer Cup | Profil"){
+  if(window.location.pathname === '/profile'){
   
   getUserEmail(getUserId()).then(email => {
     $("#change-email-form-email").val(email);

@@ -197,7 +197,7 @@ function printHallOfFame(){
 }
 
 $(document).ready(function () {
-    if (document.title == "Typer Cup | ⭐ HALL OF FAME ⭐") {
+    if (window.location.pathname=== '/hallOfFame') {
         printHallOfFame();
     }
 

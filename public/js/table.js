@@ -68,7 +68,7 @@ function listUserTable(){
 
 $(document).ready(function () {
     $('[data-toggle="popover"]').popover()
-    if(document.title == "Typer Cup | Tabela"){
+    if(window.location.pathname === '/table'){
         listUserTable()
     }
 })

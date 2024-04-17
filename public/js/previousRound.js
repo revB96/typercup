@@ -163,7 +163,7 @@ function getQueryParams(qs) {
 }
 
 $(document).ready(function () {
-  if (document.title == "Typer Cup | Poprzednie kolejki") {
+  if (window.location.pathname === '/previousRound') {
     var query = getQueryParams(document.location.search);
     console.log(query);
     printLastRoundNav(query.round);

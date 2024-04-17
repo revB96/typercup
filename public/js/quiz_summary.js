@@ -116,7 +116,7 @@ function printQuizSummary(){
 }
 
 $(document).ready(function () {
-    if (document.title == "Typer Cup | Podsumowanie Quizu") {
+    if (window.location.pathname === '/quiz-summary') {
       printQuizQuestions();
       printQuizSummary();
     }

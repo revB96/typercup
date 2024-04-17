@@ -11,6 +11,7 @@ const moment = require('moment-timezone');
 const nodemailer = require("nodemailer");
 const {sendNotificationToUser} = require("./UserNotificationController");
 const Chance = require('chance');
+const { getScheduleById } = require("./ScheduleController.js");
 
 let transporter = nodemailer.createTransport({
   host: "smtp.x999.mikr.dev",
@@ -258,7 +259,7 @@ function addRandomTickets(randomCode){
   return def.promise;
 }
 
-function add(formData) {
+function addOld(formData) {
   var def = Q.defer();
   const timestamp = moment.tz(Date.now(), "Europe/Warsaw")
   formData.forEach((match) => {
@@ -277,6 +278,94 @@ function add(formData) {
          def.reject(new Error("Kolejka jest już zamknięta"));
 
      } else {
+        getUserTicketById(match.scheduleId, match.userId).then((result) => {
+          if (result == null) {
+            ticket.save(function (err, result) {
+              if (err) {
+                def.reject(err);
+                console.log("***");
+                console.log("Błąd przy zapisywaniu typów!");
+                console.log(`User: ${match.userId.substr(match.userId.length - 4)}`
+                );
+                console.log("Treść błędu: ");
+                console.log(err);
+                console.log("***");
+              } else {
+                deactivateUserRandomCodeByRound(match.userId, match.round)
+                def.resolve(result);
+                console.log("***");
+                console.log("Dodano nowy typ ");
+                console.log(
+                  `User: ${match.scheduleId.substr(
+                    match.scheduleId.length - 4
+                  )}`
+                );
+                console.log(
+                  `Mecz: ${match.scheduleId.substr(
+                    match.scheduleId.length - 4
+                  )}`
+                );
+                console.log("***");
+              }
+            });
+          } else {
+            ticketUpdate(result._id, match.t1g, match.t2g).then(
+              (ticketUpdateResult) => {
+                deactivateUserRandomCodeByRound(match.userId, match.round)
+                def.resolve(ticketUpdateResult);
+                console.log("***");
+                console.log("Aktualizacja typu");
+                console.log(
+                  `User: ${match.userId.substr(match.userId.length - 4)}`
+                );
+                console.log("***");
+              }
+            );
+          }
+        });
+      }
+    });
+  });
+  return def.promise;
+}
+
+function valideTicket(matchId){
+  var def = Q.defer();
+  console.log("validate")
+  getScheduleById(matchId).then(match =>{
+    console.log(match)
+    if(new Date() < new Date(match.matchDate)) {
+      var diff = Math.abs(new Date() - new Date(match.matchDate))
+      if(diff < 300000 ){ 
+        def.resolve(0);
+      }else{
+        def.resolve(1);
+      }
+    }else if(new Date() > new Date(match.matchDate)){
+      def.resolve(0);
+    }
+  })
+  console.log(def)
+  return def.promise;
+}
+
+function add(formData) {
+  var def = Q.defer();
+  const timestamp = moment.tz(Date.now(), "Europe/Warsaw")
+  formData.forEach((match) => {
+    var ticket = new Ticket({
+      t1g: match.t1g,
+      t2g: match.t2g,
+      round: match.round,
+      schedule: match.scheduleId,
+      user: match.userId,
+      createdAt: timestamp,
+      updatedAt: timestamp,
+    });
+
+    valideTicket(ticket.schedule).then(result => {
+      console.log(result)
+      if (result != 0) {
         getUserTicketById(match.scheduleId, match.userId).then((result) => {
           if (result == null) {
             ticket.save(function (err, result) {

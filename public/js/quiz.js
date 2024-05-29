@@ -6,10 +6,10 @@ function printQuiz() {
   </div>`);
   getQuestions().then(async (questions) => {
     await getUserAnswers(getUserId()).then(async (userQuestions) => {
-      getUserCorrectAnswers(getUserId()).then(async (userCorrectAnswer) => {
+      await getUserCorrectAnswers(getUserId()).then(async (userCorrectAnswer) => {
         $("#quiz-cards").html("")
         for await (const [index, question] of Object.entries(questions)) {
-          getDictionaryByType(question.dictionary).then((questionDictionary) => {
+          getDictionaryByType(question.dictionary).then(async (questionDictionary) => {
           var points = 0,
               background = "",
               footer = "";
@@ -81,7 +81,7 @@ function printQuiz() {
               questionType += `</datalist>`;
               
             }
-            $("#quiz-cards").append(`
+            await $("#quiz-cards").append(`
                         <div class="card text-center mt-3 ${background}">
                         <div class="card-header">
                             Pytanie #${counter} ${checked}

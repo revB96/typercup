@@ -1503,14 +1503,6 @@ function roundEmailNotification(firstMatch) {
             if(typeof randomCode.code == "undefined") randomCode ="brak";
             
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);
-              endDate = dateFormat(endDate, "yyyy-mm-dd HH:MM");
-              const dateOptions = {
-                year: "numeric",
-                month: "numeric",
-                day: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-              };
               var html = `
                               <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
                               <html xmlns="http://www.w3.org/1999/xhtml">
@@ -1974,7 +1966,6 @@ function roundEmailNotification(firstMatch) {
                                                   <div class="f-fallback">
                                                       <h1>Witaj ${nameCapitalized}!</h1>
                                                       <p><b>Wystartowała nowa kolejka!</b></p>
-                                                      <p>Nie zapomnij zapisać swoich typów. Masz czas do: ${endDate}</p>
                                                       <!-- Action -->
                                                       <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                                                           <tr>

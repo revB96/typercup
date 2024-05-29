@@ -3,6 +3,46 @@ const Q = require("q");
 const express = require("express");
 const SiteConfiguration = require("../models/siteConfiguration.js");
 const Edition = require("../models/editions.js");
+const NationalTeam = require("../models/nationalTeams");
+const Quiz = require("../models/quiz");
+const QuizQuestion = require("../models/quizQuestions");
+const QuizCorrectAnswer = require("../models/quizCorrectAnswers");
+const randomCode = require("../models/randomCodes");
+const Round = require("../models/rounds");
+const Schedule = require("../models/schedule");
+const Score = require("../models/scores");
+const Ticket = require("../models/tickets");
+const UserStat = require("../models/userStats");
+const {resetAllUserStats} = require("./UserStatsController.js")
+
+// NationalTeam.collection.drop()
+// Quiz.collection.drop();
+// QuizQuestion.collection.drop();
+// QuizCorrectAnswer.collection.drop();
+// randomCode.collection.drop();
+// Round.collection.drop();
+// Schedule.collection.drop();
+// Score.collection.drop();
+// Ticket.collection.drop();
+// UserStat.collection.drop();
+
+function prepareEdition(){
+    mongoose.connection.db.listCollections().toArray(function (err, names) {
+        for (i = 0; i < names.length; i++) {
+            if(names[i].name == "nationalteams") NationalTeam.collection.drop()
+            if(names[i].name == "quizzes") Quiz.collection.drop()
+            if(names[i].name == "quizquestions") QuizQuestion.collection.drop()
+            if(names[i].name == "quizcorrectanswers") QuizCorrectAnswer.collection.drop()
+            if(names[i].name == "randomcodes") randomCode.collection.drop()
+            if(names[i].name == "rounds") Round.collection.drop()
+            if(names[i].name == "schedules") Schedule.collection.drop()
+            if(names[i].name == "scores") Score.collection.drop()
+            if(names[i].name == "tickets") Ticket.collection.drop()
+            if(names[i].name == "userstats") resetAllUserStats();
+        }
+    })
+}
+
 
 function addEdition(formData){
     var def = Q.defer();
@@ -64,7 +104,8 @@ async function setActiveEdition(formData){
             console.log("Ustawiono nową aktualną edycji")
             console.log(edition)
             console.log("***")
-            def.reject(edition)
+            prepareEdition();
+            def.resolve(edition)
         }
     })
     

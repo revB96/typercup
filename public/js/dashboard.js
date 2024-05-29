@@ -95,7 +95,7 @@ function printRoundWithMatches() {
                       <div class="card-body">
                           <p class="card-text">
                             ${group}
-                            <small>${hrs - timeoffset}:${mins}</small>
+                            <small>${hrs - timeoffset}:${mins}</small><br/>
                           </p>
                           <h5 class="card-title" style="text-align: center;">
                               <div class="row">
@@ -153,6 +153,7 @@ function printRoundWithMatches() {
                </div>`);
 }
 
+
 function verifyValue() {
   var isNull;
   var isInvalid;
@@ -209,7 +210,7 @@ $(document).ready(function () {
   $(`#dashboard-round-matches`).html("Brak aktywnych kolejek");
   if (window.location.pathname === '/') {
     printRoundWithMatches();
-
+    
     $("#add-ticket-form").submit(function (e) {
       e.preventDefault();
       var inputs = document.getElementsByTagName("input");

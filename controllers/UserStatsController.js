@@ -73,6 +73,26 @@ function resetUserStats(userId){
   return def.promise;
 }
 
+function resetAllUserStats(){
+  var def = Q.defer();
+    UserStats.updateMany({}, {
+      points: 0,
+      tickets: 0,
+      correctScore: 0,
+      correctTeam: 0,
+      defeat: 0,
+      correctQuestions: 0,
+      quizPoints: 0,
+  },{
+    new:true,
+    autoIndex: true
+  }).exec(function (err,result){
+    err ? def.reject(err) : def.resolve(1);
+    console.log("Reset statystyk: "+result)
+  })
+  return def.promise;
+}
+
 function getAll() {
   var def = Q.defer();
   UserStats.find({active:true})
@@ -190,5 +210,6 @@ module.exports = {
     getUserCorrectAnswers,
     deactivateUser,
     activateUser,
-    resetUserStats
+    resetUserStats,
+    resetAllUserStats
 }

@@ -6,7 +6,7 @@ function printRoundWithMatches() {
       .html(`<div class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>`);
-    if (round.length == 0){
+    if (round.length > 0){
     $(`#dashboard-round-display-name`).html(`${round[0].displayName}`);
     $(`#dashboard-message`).html(
       `<a href="/roundSummary"><button type="button" class="btn btn-primary">Sprawdź jak postawili inni</button></a>`

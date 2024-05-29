@@ -1,10 +1,10 @@
-function printQuiz() {
+async function printQuiz() {
   $("#quiz-cards").html(`<div class="d-flex justify-content-center">
     <div class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
   </div>`);
-  getQuestions().then(async (questions) => {
+  await getQuestions().then(async (questions) => {
     await getUserAnswers(getUserId()).then(async (userQuestions) => {
       await getUserCorrectAnswers(getUserId()).then(async (userCorrectAnswer) => {
         $("#quiz-cards").html("")

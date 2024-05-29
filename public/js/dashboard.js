@@ -2,11 +2,11 @@ function printRoundWithMatches() {
   const dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
 
   getRound("running").then((round) => {
-    console.log(round.length)
     $(`#dashboard-round-matches`)
       .html(`<div class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>`);
+    if (round.length == 0){
     $(`#dashboard-round-display-name`).html(`${round[0].displayName}`);
     $(`#dashboard-message`).html(
       `<a href="/roundSummary"><button type="button" class="btn btn-primary">Sprawdź jak postawili inni</button></a>`
@@ -146,6 +146,9 @@ function printRoundWithMatches() {
         }
       );
     });
+  }else{
+    $(`#dashboard-round-matches`).html("Brak aktywnych kolejek");
+  }
   });
 
   $("#dashboard-submit-button")

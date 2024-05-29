@@ -1,12 +1,12 @@
-async function printQuiz() {
+function printQuiz() {
   $("#quiz-cards").html(`<div class="d-flex justify-content-center">
     <div class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
   </div>`);
-  await getQuestions().then(async (questions) => {
-    await getUserAnswers(getUserId()).then(async (userQuestions) => {
-      await getUserCorrectAnswers(getUserId()).then(async (userCorrectAnswer) => {
+   getQuestions().then(async (questions) => {
+     await getUserAnswers(getUserId()).then(async (userQuestions) => {
+       getUserCorrectAnswers(getUserId()).then(async (userCorrectAnswer) => {
         $("#quiz-cards").html("")
         for await (const [index, question] of Object.entries(questions)) {
           getDictionaryByType(question.dictionary).then(async (questionDictionary) => {
@@ -15,7 +15,7 @@ async function printQuiz() {
               footer = "";
               checked =  "❌";
           if(!!userCorrectAnswer){
-              for (const [index2, correctAnswer] of Object.entries(userCorrectAnswer)){
+              for await (const [index2, correctAnswer] of Object.entries(userCorrectAnswer)){
                 //console.log(question._id, correctAnswer.question)
                   if (question._id == correctAnswer.question) {
                     points += 0.5;

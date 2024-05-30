@@ -168,7 +168,7 @@ async function resetPassword(userId){
     numbers: true,
     excludeSimilarCharacters: true,
   });
-  var hashedPassword = await bcrypt.hash('tajne_haslo', 10);
+  var hashedPassword = await bcrypt.hash(password, 10);
 
   User.findByIdAndUpdate(userId, {
     password: hashedPassword,

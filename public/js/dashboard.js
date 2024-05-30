@@ -29,7 +29,7 @@ function printRoundWithMatches() {
                   t2g = "",
                   statsDiv = "",
                   ticketColor = "text-white bg-danger";
-                  tipInfo = "<b style='color:red'>CZERWONY</b> - Mecz otwarty, nie zapisałeś jeszcze typów na to spotkanie."
+                  tipInfo = '<b style="color:red">CZERWONY</b> - Mecz otwarty, nie zapisałeś jeszcze typów na to spotkanie.'
 
                 if (stats.counter > 2) {
                   statsDiv = `<div class="row" style="margin-top: 20px;"><div class="progress" style="background: none; height: 20px;">`;
@@ -60,7 +60,7 @@ function printRoundWithMatches() {
                       t1g = userTicket.t1g;
                       t2g = userTicket.t2g;
                       ticketColor = "text-white bg-success";
-                      tipInfo = "<b style='color:green'>ZIELONY</b> - Mecz otwarty, wysłałeś na niego typy, ale możesz nadal je modyfikować <br />"
+                      tipInfo = '<b style="color:green">ZIELONY</b> - Mecz otwarty, wysłałeś na niego typy, ale możesz nadal je modyfikować <br />'
                     }
                   }
                 }
@@ -73,13 +73,13 @@ function printRoundWithMatches() {
                   if(diff < 300000 ){ 
                     matchState = "disabled"
                     ticketColor = "text-white bg-secondary"
-                    tipInfo = "<b style='color:gray'>SZARY</b> - Mecz zamknięty, nie możesz wysyłać/aktualizować typów na to spotkanie"
+                    tipInfo = '<b style="color:gray">SZARY</b> - Mecz zamknięty, nie możesz wysyłać/aktualizować typów na to spotkanie'
                   }
                 }
                 if(new Date() > new Date(match.matchDate)){
                   matchState = "disabled"
                   ticketColor = "text-white bg-secondary"
-                  tipInfo = "<b style='color:gray'>SZARY</b> - Mecz zamknięty, nie możesz wysyłać/aktualizować typów na to spotkanie"
+                  tipInfo = '<b style="color:gray">SZARY</b> - Mecz zamknięty, nie możesz wysyłać/aktualizować typów na to spotkanie'
                 }
           
                 var hrs = timeMatch.getHours();

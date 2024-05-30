@@ -48,7 +48,7 @@ function getDictionaryByType(type) {
 
 function getDictionaryByParam1(param1) {
   var def = Q.defer();
-  Dictionary.findOne({ param1: param1 })
+  Dictionary.findOne({ param1: param1 }).sort({type:"desc"})
     .exec(function (err, data) {
         err ? def.reject(err) : def.resolve(data);
     });

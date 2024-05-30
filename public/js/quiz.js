@@ -9,7 +9,7 @@ function printQuiz() {
        getUserCorrectAnswers(getUserId()).then(async (userCorrectAnswer) => {
         $("#quiz-cards").html("")
         for await (const [index, question] of Object.entries(questions)) {
-          getDictionaryByType(question.dictionary).then(async (questionDictionary) => {
+          await getDictionaryByType(question.dictionary).then(async (questionDictionary) => {
           var points = 0,
               background = "",
               footer = "";
@@ -74,7 +74,7 @@ function printQuiz() {
             }else{
               questionType = `<input value="${answer}" list="${question._id}-answers" type="text" class="form-control" style="text-align-last: center;" name="${question._id}" ${closed}>
                               <datalist id="${question._id}-answers">`;
-              for (const [index, dictionary] of Object.entries(questionDictionary)) {
+              for await (const [index, dictionary] of Object.entries(questionDictionary)) {
                   questionType += `<option value="${dictionary.param1}">`;
               }
 

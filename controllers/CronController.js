@@ -10,13 +10,13 @@ function configureCronManager(){
         Backup.dumpMongo2Localfile("");
     }, {start: true, timeZone: "Europe/Warsaw"}) 
 
-    cm.add('reminder','* * * * *', ()=>{
-        User.checkReminder()
-    }, {start: true, timeZone: "Europe/Warsaw"})
+    // cm.add('reminder','* * * * *', ()=>{
+    //     User.checkReminder()
+    // }, {start: true, timeZone: "Europe/Warsaw"})
 
-    cm.add('closeRound','0 * * * *', function(){
-        User.checkCloseRoundNotification();
-    }, {start: true, timeZone: "Europe/Warsaw"})
+    // cm.add('closeRound','0 * * * *', function(){
+    //     User.checkCloseRoundNotification();
+    // }, {start: true, timeZone: "Europe/Warsaw"})
 
 
     console.log(`I got the current jobs: ${cm}`)

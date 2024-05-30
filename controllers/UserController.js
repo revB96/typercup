@@ -16,6 +16,7 @@ const nodemailer = require("nodemailer");
 const dateFormat = require("dateformat");
 const Ticket = require("./TicketController");
 const Round = require("../models/rounds.js");
+const generator = require('generate-password');
 
 let transporter = nodemailer.createTransport({
   host: "smtp.x999.mikr.dev",
@@ -33,8 +34,12 @@ let transporter = nodemailer.createTransport({
 async function add(formData) {
   const timestamp = Date.now();
   var def = Q.defer();
-
-  var hashedPassword = await bcrypt.hash(formData.password, 10);
+  var password = generator.generate({
+    length: 6,
+    numbers: true,
+    excludeSimilarCharacters: true,
+  });
+  var hashedPassword = await bcrypt.hash(password, 10);
 
   var user = new User({
     username: formData.username,
@@ -61,7 +66,7 @@ async function add(formData) {
       newAccountEmailNotification(
         formData.email,
         formData.username,
-        formData.password
+        password
       );
     }
   });
@@ -158,7 +163,12 @@ function updateEmail(formData){
 async function resetPassword(userId){
   var def = Q.defer();
   const timestamp = Date.now();
-  var hashedPassword = await bcrypt.hash("tajne_haslo", 10);
+  var password = generator.generate({
+    length: 6,
+    numbers: true,
+    excludeSimilarCharacters: true,
+  });
+  var hashedPassword = await bcrypt.hash(password, 10);
 
   User.findByIdAndUpdate(userId, {
     password: hashedPassword,
@@ -639,9 +649,7 @@ async function resetPassword(userId){
                                         <td class="content-cell">
                                         <div class="f-fallback">
                                             <h1>Witaj ${nameCapitalized}!</h1>
-                                            <p>Chyba zapomniałeś swoje hasło do Type-Cyp.pl ?</p>
-                                            <p>Nie bój nic, mamy nowe</p>
-                                            <p>Twoje nowe hasło to: tajne_haslo</p>
+                                            <p>Twoje nowe hasło to: ${password}</p>
                                             <!-- Action -->
                                             <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                                                 <tr>
@@ -1405,7 +1413,7 @@ function newAccountEmailNotification(reciver, username, password) {
                                       <tr>
                                       <td class="attributes_item">
                                           <span class="f-fallback">
-                  <strong>Hasło startowe:</strong> ${password} <small>(Zmień na jakieś lepsze po zalogowaniu się 👽)</small>
+                  <strong>Hasło startowe:</strong> ${password} <small>(Możesz je zmienić po zalogowaniu w Profilu👽)</small>
                   </span>
                                       </td>
                                       </tr>
@@ -1413,6 +1421,7 @@ function newAccountEmailNotification(reciver, username, password) {
                                   </td>
                               </tr>
                               </table>
+                              <p>Podczas pierwszego logowania, zostaniesz poproszony o wypełnienie Quizu początkowego. Składa się on z 20 pytań, które dotycza nadchodzącego Euro</p>
                               <!-- Action -->
                               <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                                   <tr>
@@ -1431,7 +1440,7 @@ function newAccountEmailNotification(reciver, username, password) {
                       <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
                       <tr>
                           <td class="content-cell" align="center">
-                          <p class="f-fallback sub align-center">&copy; 2021 [typer-cup.pl]. All rights reserved.</p>
+                          <p class="f-fallback sub align-center">&copy; 2024 [typer-cup.pl]. All rights reserved.</p>
                           </td>
                       </tr>
                       </table>
@@ -1454,10 +1463,10 @@ function newAccountEmailNotification(reciver, username, password) {
       Login: ${username}
       Hasło startowe: ${username}
   
-      Zmień hasło na jakieś lepsze, po zalogowaniu się 👽
-      Podczas pierwszego logowania, zostaniesz poproszony o wypełnienie Quizu początkowego. Składa się on z 20 pytań, które dotycza nadchodzącego Euro 2020
+      Możesz je zmienić po zalogowaniu w Profilu 👽
+      Podczas pierwszego logowania, zostaniesz poproszony o wypełnienie Quizu początkowego. Składa się on z 20 pytań, które dotycza nadchodzącego Euro
       
-      © 2022 [typer-cup.pl]. All rights reserved.
+      © 2024 [typer-cup.pl]. All rights reserved.
       `;
   let mailOptions = {
     from: '"Typer-Cup.pl ⚽ " <admin@typer-cup.pl>', // sender address
@@ -1491,7 +1500,6 @@ function roundEmailNotification(firstMatch) {
           setTimeout(async () => {
           await getUserById(userNotification.user).then(user => {
             if(!!user){
-            getUserRandomCode(user._id).then(randomCode => {
               
               var endDate = new Date(firstMatch);
               endDate.setHours(endDate.getHours() - 1); 
@@ -1500,8 +1508,6 @@ function roundEmailNotification(firstMatch) {
               endDate.setHours(endDate.getHours() - 1); 
             }
 
-            if(typeof randomCode.code == "undefined") randomCode ="brak";
-            
               var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);
               var html = `
                               <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -1966,6 +1972,7 @@ function roundEmailNotification(firstMatch) {
                                                   <div class="f-fallback">
                                                       <h1>Witaj ${nameCapitalized}!</h1>
                                                       <p><b>Wystartowała nowa kolejka!</b></p>
+                                                      <p>Swoje typy możesz aktualizować do 5 minut przed rozpoczęciem spotkania</p>
                                                       <!-- Action -->
                                                       <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                                                           <tr>
@@ -1979,12 +1986,11 @@ function roundEmailNotification(firstMatch) {
                                                               </table>
                                                           </td>
                                                           </tr>
-                                                      </table>
-                                                      <p>Jeżeli nie możesz wysłać swoich typów, kliknij w ten link aby dodać losowe typy: <a href="https://typer-cup.pl/randomCode?code=${randomCode.code}" class="f-fallback button" target="_blank">KLIK</a></p> 
+                                                      </table>                                                 
                                               <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
                                               <tr>
                                                   <td class="content-cell" align="center">
-                                                  <p class="f-fallback sub align-center">&copy; 2021 [typer-cup.pl]. All rights reserved.</p>
+                                                  <p class="f-fallback sub align-center">&copy; 2024 [typer-cup.pl]. All rights reserved.</p>
                                                   </td>
                                               </tr>
                                               </table>
@@ -2013,7 +2019,7 @@ function roundEmailNotification(firstMatch) {
                   console.log("Email Sent")}
               });
 
-            })
+       
           }
           })
         }, 1000 * index);  
@@ -2096,6 +2102,7 @@ function toogleNotification(notificationName, userId) {
   return def.promise;
 }
 
+//OLD
 function sendReminder(round) {
   UserNotification.find().exec(function (err, userNotifications) {
     if (err) console.log(err);
@@ -2103,15 +2110,11 @@ function sendReminder(round) {
       userNotifications.forEach((userNotification, index) => {
         setTimeout(() => {
           getUserById(userNotification.user).then((user) => {
-            getUserRandomCode(user._id).then(randomCode => {
               Ticket.countUserTicketByRound(user._id, round.round).then(tickets =>{       
                 if (tickets == 0) {
                   var nameCapitalized =
                     user.username.charAt(0).toUpperCase() +
                     user.username.slice(1);
-        
-                  if(typeof randomCode.code == "undefined")
-                    randomCode.code="brak";
 
                   var html = `
                                     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -2623,7 +2626,7 @@ function sendReminder(round) {
                   });
                 }
               })
-            });
+           
           });
         }, 1000 * index);
       });
@@ -2631,6 +2634,7 @@ function sendReminder(round) {
   });
 }
 
+//OLD
 function sendCloseRoundNotification() {
   UserNotification.find({ closeRound: true }).exec(function (
     err,
@@ -3174,6 +3178,7 @@ function getRunningRound() {
   return def.promise;
 }
 
+//OLD
 function checkCloseRoundNotification() {
   var def = Q.defer();
   getRunningRound().then((runningRound) => {
@@ -3196,6 +3201,7 @@ function checkCloseRoundNotification() {
   });
 }
 
+//OLD
 function checkReminder() {
   getRunningRound().then((runningRound) => {
     getFirstRoundMatch(runningRound.roundDate).then((firstMatch) => {

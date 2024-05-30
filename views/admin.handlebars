@@ -245,12 +245,11 @@
         <input name="username" type="text" class="form-control" required />
       </div>
       <div class="mb-3">
-        <label for="password">Hasło startowe</label>
-        <input name="password" type="password" class="form-control" required />
-      </div>
-      <div class="mb-3">
         <label for="timezone">Strefa czasowa</label>
-        <input name="timezone" type="text" class="form-control" required />
+        <select name="timezone" class="form-select">
+          <option value="user" selected> PL</option>
+          <option value="admin">UK</option>
+        </select>
       </div>
       <div class="mb-3">
         <label for="email">Email</label>

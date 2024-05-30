@@ -30,7 +30,7 @@ function getAll() {
 
 function getDictionaryTypes() {
   var def = Q.defer();
-  Dictionary.find().sort({type:"desc"}).distinct("type").exec(function (err, data) {
+  Dictionary.find().sort({type:"asc"}).distinct("type").exec(function (err, data) {
     err ? def.reject(err) : def.resolve(data);
   });
   return def.promise;
@@ -39,7 +39,7 @@ function getDictionaryTypes() {
 function getDictionaryByType(type) {
   var def = Q.defer();
   Dictionary.find({ type: type })
-    .sort({ param1: "desc" })
+    .sort({ param1: "asc" })
     .exec(function (err, data) {
         err ? def.reject(err) : def.resolve(data);
     });
@@ -48,7 +48,7 @@ function getDictionaryByType(type) {
 
 function getDictionaryByParam1(param1) {
   var def = Q.defer();
-  Dictionary.findOne({ param1: param1 }).sort({type:"desc"})
+  Dictionary.findOne({ param1: param1 }).sort({type:"asc"})
     .exec(function (err, data) {
         err ? def.reject(err) : def.resolve(data);
     });

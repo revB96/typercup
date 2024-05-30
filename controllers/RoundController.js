@@ -6,47 +6,47 @@ const RandomCode = require("../models/randomCodes.js");
 const moment = require('moment-timezone');
 const Schedule = require("./ScheduleController");
 const User = require("./UserController")
-const cryptoRandomString = require("crypto-random-string")
+//const cryptoRandomString = require("crypto-random-string")
 
 
-function generateUserCodes(roundNumber){
+// function generateUserCodes(roundNumber){
     
-    var def = Q.defer();
-    let timestamp = Date.now();
+//     var def = Q.defer();
+//     let timestamp = Date.now();
 
-    User.getAll().then(Users =>{
+//     User.getAll().then(Users =>{
         
-        Users.forEach(user =>{
-            if(user.active == true){
-                var cryptoRandomCode = cryptoRandomString({length: 64, type: 'alphanumeric'});
+//         Users.forEach(user =>{
+//             if(user.active == true){
+//                 var cryptoRandomCode = cryptoRandomString({length: 64, type: 'alphanumeric'});
 
-                var randomCode = new RandomCode({
-                    user: user._id,
-                    mailToNotifications: user.email,
-                    code:cryptoRandomCode,
-                    active: true,
-                    round:roundNumber,
-                    createdAt:timestamp,
-                    updatedAt:timestamp
-                })
+//                 var randomCode = new RandomCode({
+//                     user: user._id,
+//                     mailToNotifications: user.email,
+//                     code:cryptoRandomCode,
+//                     active: true,
+//                     round:roundNumber,
+//                     createdAt:timestamp,
+//                     updatedAt:timestamp
+//                 })
 
-                randomCode.save((function(err, result){
-                    if(err){
-                        console.log("Błąd przy generowaniu kodu losowego! Treść błędu: ")
-                        console.log(err)
-                    }
-                    else{
-                        def.resolve(result);
-                        console.log("Dodano nowy kod losowy: ")
-                        console.log(`User: ${user.username}`)
-                    }
-                }));
-            }
-        })
-    })
+//                 randomCode.save((function(err, result){
+//                     if(err){
+//                         console.log("Błąd przy generowaniu kodu losowego! Treść błędu: ")
+//                         console.log(err)
+//                     }
+//                     else{
+//                         def.resolve(result);
+//                         console.log("Dodano nowy kod losowy: ")
+//                         console.log(`User: ${user.username}`)
+//                     }
+//                 }));
+//             }
+//         })
+//     })
 
-    return def.promise;
-}
+//     return def.promise;
+// }
 
 function add(formData){
     var def = Q.defer();
@@ -67,7 +67,7 @@ function add(formData){
             def.resolve(result);
             console.log("Dodano nową kolejkę: ")
             console.log(`Nazwa wyświetlania: ${formData.displayName}, Data: ${formData.roundDate}`)
-            generateUserCodes(formData.round);
+            //generateUserCodes(formData.round);
         }
     }));
 

@@ -29,7 +29,7 @@ function printRoundWithMatches() {
                   t2g = "",
                   statsDiv = "",
                   ticketColor = "text-white bg-danger";
-                  tipInfo = "<b style='color:red'>CZERWONY</b> - Mecz otwarty, nie zapisałeś jeszcze typów na to spotkanie. "
+                  tipInfo = "<b style='color:red'>CZERWONY</b> - Mecz otwarty, nie zapisałeś jeszcze typów na to spotkanie."
 
                 if (stats.counter > 2) {
                   statsDiv = `<div class="row" style="margin-top: 20px;"><div class="progress" style="background: none; height: 20px;">`;
@@ -94,9 +94,9 @@ function printRoundWithMatches() {
                   <div class="col" style="margin-right: 0;">
                   <div class="card ${ticketColor}">
                       <div class="card-body">
-                      <i style='float: right' id="help" class="bi bi-info-circle"></i>
+                      <i style='float: right' id="help-${match._id}" class="bi bi-info-circle"></i>
                             <script>
-                              tippy('#help', {
+                              tippy('#help-${match._id}', {
                                 content: '${tipInfo}',
                                 allowHTML: true
                               });

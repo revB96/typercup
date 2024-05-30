@@ -3,13 +3,7 @@ function printRoundWithMatches() {
 
   getRound("running").then((round) => {
   
-    $(`#dashboard-round-display-name`).html(`${round[0].displayName} <i style="text-align: right;"id="help" class="bi bi-info-circle"></i>
-    <script>
-      tippy('#help', {
-        content: "<b style='color:green'>ZIELONY</b> - Mecz otwarty, wysłałeś na niego typy, ale możesz nadal je modyfikować <br /><b style='color:red'>CZERWONY</b> - Mecz otwarty, nie zapisałeś jeszcze typów na to spotkanie. <br/><b style='color:gray'>SZARY</b> - Mecz zamknięty, nie możesz wysyłać/aktualizować typów na to spotkanie",
-        allowHTML: true
-      });
-    </script>`);
+    $(`#dashboard-round-display-name`).html(`${round[0].displayName}`);
     $(`#dashboard-message`).html(
       `<a href="/roundSummary"><button type="button" class="btn btn-primary">Sprawdź jak postawili inni</button></a>`
     );

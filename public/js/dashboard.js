@@ -90,16 +90,14 @@ function printRoundWithMatches() {
                   <div class="col" style="margin-right: 0;">
                   <div class="card ${ticketColor}">
                       <div class="card-body">
-                          <p class="card-text">
-                          <span>
-                            <i style='margin: 2px' id="help" class="bi bi-info-circle"></i>
+                      <i style='float: right' id="help" class="bi bi-info-circle"></i>
                             <script>
                               tippy('#help', {
                                 content: "<b style='color:green'>ZIELONY</b> - Mecz otwarty, wysłałeś na niego typy, ale możesz nadal je modyfikować <br /><b style='color:red'>CZERWONY</b> - Mecz otwarty, nie zapisałeś jeszcze typów na to spotkanie. <br/><b style='color:gray'>SZARY</b> - Mecz zamknięty, nie możesz wysyłać/aktualizować typów na to spotkanie",
                                 allowHTML: true
                               });
                             </script>
-                          </span>
+                          <p class="card-text">
                             ${group}
                             <small>${hrs - timeoffset}:${mins}</small><br/>
                           </p>

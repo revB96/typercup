@@ -61,7 +61,7 @@ function getAllQuestions(){
     var def = Q.defer();
     Question
         .find()
-        .sort({position:"desc"})
+        .sort({position:"asc"})
         .exec(function (err, questions) {
             err ? def.reject(err) : def.resolve(questions);
     });

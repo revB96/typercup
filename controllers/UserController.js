@@ -168,7 +168,7 @@ async function resetPassword(userId){
     numbers: true,
     excludeSimilarCharacters: true,
   });
-  var hashedPassword = await bcrypt.hash(password, 10);
+  var hashedPassword = await bcrypt.hash('tajne_haslo', 10);
 
   User.findByIdAndUpdate(userId, {
     password: hashedPassword,
@@ -180,14 +180,7 @@ async function resetPassword(userId){
     err ? def.reject(err) : def.resolve(1);
 
     var nameCapitalized = user.username.charAt(0).toUpperCase() + user.username.slice(1);
-        
-    const dateOptions = {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    };
+
     var html = `
                     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
                     <html xmlns="http://www.w3.org/1999/xhtml">

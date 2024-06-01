@@ -75,7 +75,10 @@ function printQuiz() {
               questionType = `<input value="${answer}" list="${question._id}-answers" type="text" class="form-control" style="text-align-last: center;" name="${question._id}" ${closed}>
                               <datalist id="${question._id}-answers">`;
               for await (const [index, dictionary] of Object.entries(questionDictionary)) {
+                if(dictionary.param2 != "")
                   questionType += `<option value="${dictionary.param1} | ${dictionary.param2}">`;
+                else
+                  questionType += `<option value="${dictionary.param1}">`;
               }
 
               questionType += `</datalist>`;

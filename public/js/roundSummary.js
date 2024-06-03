@@ -85,7 +85,7 @@ function printRoundSummaryAccordion(){
                     }
                     console.log(ticketsLenght)
                     if (ticketsLenght == 0){
-                        $(`#round-summary-accordion`).append('Wszystkie mecze są otwarte i trwa obstawianie. Wróć tutaj jak zakończy się typowanie na któreś ze spotkań.')
+                        $(`#round-summary-accordion`).append('<div class="alert alert-warning d-flex align-items-center" role="alert"><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg><div>Wszystkie mecze są otwarte i trwa obstawianie. Wróć tutaj jak zakończy się typowanie na któreś ze spotkań.</div></div>')
                     }
                     })
               })

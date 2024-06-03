@@ -103,7 +103,7 @@ function printRoundWithMatches() {
                             </script>
                           <p class="card-text">
                             ${group}
-                            <small>${hrs - timeoffset}:${mins}</small><br/>
+                            <small>${hrs}:${mins}</small><br/>
                           </p>
                           <h5 class="card-title" style="text-align: center;">
                               <div class="row">

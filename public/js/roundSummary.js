@@ -4,9 +4,12 @@ function printRoundSummaryAccordion(){
       <span class="visually-hidden">Loading...</span>
       </div>
   </div>`)
-
           getRound("running").then((runningRound) => {
               getRoundTickets(runningRound[0].round).then(tickets =>{
+                var matchAccordion = ""
+                if (tickets.lenght == 0){
+                    matchAccordion += 'Wszystkie mecze są otwarte i trwa obstawianie. Wróć tutaj jak zakończy się typowanie na któreś ze spotkań.'
+                }
                   var ticketsByMatch = tickets.reduce((acc, value) => {
                       if (!acc[value.schedule._id]) {
                         acc[value.schedule._id] = [];
@@ -21,7 +24,6 @@ function printRoundSummaryAccordion(){
                     $(`#round-summary-accordion`).html("")
                     
                     ticketsByDateKeys.forEach(match => {
-                      console.log(match)
                       var diff = Math.abs(new Date() - new Date(ticketsByMatch[match][0].schedule.matchDate));
                       if (new Date() >new Date(ticketsByMatch[match][0].schedule.matchDate) || diff < 300000) {
                       var matchAccordion =`

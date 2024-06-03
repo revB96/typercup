@@ -7,8 +7,8 @@ function printRoundSummaryAccordion(){
           getRound("running").then((runningRound) => {
               getRoundTickets(runningRound[0].round).then(tickets =>{
                 var matchAccordion = ""
-                console.log(tickets.lenght)
-                if (tickets.lenght == 0){
+                console.log(Object.keys(tickets).length)
+                if (Object.keys(tickets).length == 0){
                     matchAccordion += 'Wszystkie mecze są otwarte i trwa obstawianie. Wróć tutaj jak zakończy się typowanie na któreś ze spotkań.'
                 }
                   var ticketsByMatch = tickets.reduce((acc, value) => {

@@ -1,3 +1,5 @@
+const { getSiteConfig } = require("../../controllers/SiteController");
+
 function printQuiz() {
   $("#quiz-cards").html(`<div class="d-flex justify-content-center">
     <div class="spinner-border" role="status">
@@ -42,7 +44,6 @@ function printQuiz() {
                                   <option value="no">NIE</option>`;
 
             if (question.closed == true) {
-              $("#quiz-summary-button").html(`<a href="https://typer-cup.pl/quiz-summary" class="btn btn-primary btn-sm" role="button">Sprawdź jak odpowiadali inni</a>`)
               closed = "disabled";
               $("#save-user-quiz-button").addClass(closed);
               $("#save-user-quiz-button").addClass("btn-danger");
@@ -104,10 +105,18 @@ function printQuiz() {
   });
 }
 
+function printQuizSummaryButton(){
+  getSiteConfig("quizSummaryButton").then(async (buttonConfig) => {
+    if(buttonConfig.state == true){
+      $("#quiz-summary-button").html(`<a href="https://typer-cup.pl/quiz-summary" class="btn btn-primary btn-sm" role="button">Sprawdź jak odpowiadali inni</a>`)
+    }
+  })
+}
+
 $(document).ready(function () {
   if (window.location.pathname === '/quiz') {
     printQuiz();
-
+    printQuizSummaryButton();
     $("#save-user-quiz-form").submit(function (e) {
       e.preventDefault();
       const formData = $("#save-user-quiz-form").serializeArray();

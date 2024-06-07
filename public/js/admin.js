@@ -813,6 +813,21 @@ function adminPrintEditionsList() {
   });
 }
 
+function adminPrintSiteConfigTable() {
+  $(`#admin-config-table`).html("")
+  getSiteConfigs().then(configs => {
+    configs.forEach(async (config, index) => {
+      $(`#admin-config-table`).append(`
+      <tr>
+        <td scope="col">${config.configName}</th>
+        <td scope="col">${config.state}</th>
+        <td scope="col">${config.value}</th>
+      </tr>
+      `)
+    })
+  })
+}
+
 $(document).ready(function () {
   if (window.location.pathname === '/admin') {
     adminGetAllRandomCodes();
@@ -832,6 +847,7 @@ $(document).ready(function () {
     adminListDictionary();
     adminGetNationalTeamsDictionary();
     adminGetQuizQuestionDictionaryTypes();
+    adminPrintSiteConfigTable();
 
     $("#add-quiz-answer-form").submit(function (e) {
       e.preventDefault();
@@ -918,6 +934,26 @@ $(document).ready(function () {
                 </div>
             `);
         adminPrintEditions();
+        $(".toast").toast("show");
+      });
+    });
+
+    $("#add-siteConfig-form").submit(function (e) {
+      e.preventDefault();
+      const formData = $("#add-siteConfig-form").serializeArray();
+      $.post("/api/admin/site/config", formData).done(() => {
+        $(".toast").html(`
+                <div class="toast-header">
+                <strong class="mr-auto">Panel administratora</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="toast-body">
+                  Zapisano!
+                </div>
+            `);
+        adminPrintSiteConfigTable();
         $(".toast").toast("show");
       });
     });

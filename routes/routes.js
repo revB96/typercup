@@ -129,7 +129,9 @@ router.post("/login", async (req, res, next) => {
         //httpOnly: true
       });
 
-      res.cookie('edition', edition.name);
+      res.cookie('edition', edition.name, {
+        maxAge: 86400000,
+      });
 
       UserController.lastLogonUpdate(user.id)
 

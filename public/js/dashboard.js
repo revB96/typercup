@@ -130,7 +130,7 @@ function printRoundWithMatches() {
                                     match.t1._id
                                   }" type="number" value="${t1g}" class="form-control" min="0" max="9" style="text-align: center;" name="${
                   match.t1._id
-                }" ${matchState} required>
+                }" ${matchState}>
                               </div>
                               <div class="col-1">:
                               </div>
@@ -139,7 +139,7 @@ function printRoundWithMatches() {
                                     match.t2._id
                                   }" type="number" value="${t2g}" class="form-control" min="0" max="9" style="text-align: center;" name="${
                   match.t2._id
-                }" ${matchState} required>
+                }" ${matchState}>
                               </div>
                           </div>
                           ${statsDiv}

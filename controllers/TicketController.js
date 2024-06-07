@@ -59,19 +59,22 @@ function getAllUserTickets(userId) {
 function ticketUpdate(ticketId, t1g, t2g) {
   var def = Q.defer();
   const timestamp = moment.tz(Date.now(), "Europe/Warsaw")
-  Ticket.findByIdAndUpdate(
-    ticketId,
-    {
-      t1g: t1g.replace(/ /g, ''),
-      t2g: t2g.replace(/ /g, ''),
-      updatedAt: timestamp,
-    },
-    {
-      new: true,
-    }
-  ).exec(function (err, round) {
-    err ? def.reject(err) : def.resolve(round);
-  });
+  
+  if((t1g != "") & (t2g != "")){
+    Ticket.findByIdAndUpdate(
+      ticketId,
+      {
+        t1g: t1g.replace(/ /g, ''),
+        t2g: t2g.replace(/ /g, ''),
+        updatedAt: timestamp,
+      },
+      {
+        new: true,
+      }
+    ).exec(function (err, round) {
+      err ? def.reject(err) : def.resolve(round);
+    });
+  }
   return def.promise;
 }
 

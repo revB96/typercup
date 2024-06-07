@@ -630,6 +630,20 @@ function getActiveEdition(){
     })
 }
 
+function getSiteConfigs(){
+    return $.ajax({
+        url: `/api/admin/site/config/all`,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (result) {
+            return result;
+        },
+        fail: function (){
+            console.log("Nie udało się pobrać");
+        }
+    })
+}
+
 $(document).ready(function () {
     if(checkIfTokenExists() == 1){
         var decoded = jwt_decode(getCookie("access_token"));

@@ -691,6 +691,7 @@ router.post("/admin/site/config", authenticate, function (req, res) {
     .catch((err) => {
       res.json(err);
     });
+    
 });
 
 router.get("/admin/site/config", authenticate, function (req, res) {

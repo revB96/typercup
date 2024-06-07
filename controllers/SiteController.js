@@ -194,7 +194,7 @@ function addSiteConfig(formData) {
             console.log(err);
             def.reject(err);
         }else{
-            def.resolve(edition);
+            def.resolve(config);
             console.log("***")
             console.log("Dodano nowe ustawienie")
             console.log(result)

@@ -684,6 +684,16 @@ router.get("/admin/site/edition/get", authenticate, function (req, res) {
 });
 
 router.post("/admin/site/config", authenticate, function (req, res) {
+  Site.setSiteConfig(req.body)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
+router.get("/admin/site/config", authenticate, function (req, res) {
   Site.getSiteConfig(req.query.name)
     .then((data) => {
       res.json(data);
@@ -693,7 +703,7 @@ router.post("/admin/site/config", authenticate, function (req, res) {
     });
 });
 
-router.post("/admin/site/config/all", authenticate, function (req, res) {
+router.get("/admin/site/config/all", authenticate, function (req, res) {
   Site.getAllSiteConfigs()
     .then((data) => {
       res.json(data);

@@ -180,20 +180,29 @@ function getAllSiteConfigs() {
     return def.promise;
   }
 
-function setSiteConfig(formData) {
+function addSiteConfig(formData) {
     var def = Q.defer();
-    SiteConfig.findByIdAndUpdate(
-        formData.configName,
-      {
+
+    var config = new SiteConfig({
+        configName: formData.configName,
         state: formData.state,
-        value: formData.value,
-      },
-      {
-        new: true,
-      }
-    ).exec(function (err, config) {
-      err ? def.reject(err) : def.resolve(config);
-    });
+        value: formData.participavaluents,
+      });
+
+      config.save(function (err, result) {
+        if(err){
+            console.log(err);
+            def.reject(err);
+        }else{
+            def.resolve(edition);
+            console.log("***")
+            console.log("Dodano nowe ustawienie")
+            console.log(result)
+            console.log("***")
+        }
+
+      });
+
     return def.promise;
 }
 
@@ -204,6 +213,6 @@ module.exports = {
     addEdition,
     setTransferedEdition,
     getSiteConfig,
-    setSiteConfig,
+    addSiteConfig,
     getAllSiteConfigs
 }

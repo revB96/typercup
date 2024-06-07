@@ -684,7 +684,7 @@ router.get("/admin/site/edition/get", authenticate, function (req, res) {
 });
 
 router.post("/admin/site/config", authenticate, function (req, res) {
-  Site.setSiteConfig(req.body)
+  Site.addSiteConfig(req.body)
     .then((data) => {
       res.json(data);
     })

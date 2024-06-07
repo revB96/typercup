@@ -182,13 +182,11 @@ function getAllSiteConfigs() {
 
 function setSiteConfig(formData) {
     var def = Q.defer();
-    const timestamp = moment.tz(Date.now(), "Europe/Warsaw")
     SiteConfig.findByIdAndUpdate(
         formData.configName,
       {
         state: formData.state,
         value: formData.value,
-        updatedAt: timestamp,
       },
       {
         new: true,

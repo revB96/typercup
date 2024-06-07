@@ -1,5 +1,3 @@
-const { getSiteConfig } = require("../../controllers/SiteController");
-
 function printQuiz() {
   $("#quiz-cards").html(`<div class="d-flex justify-content-center">
     <div class="spinner-border" role="status">
@@ -106,7 +104,7 @@ function printQuiz() {
 }
 
 function printQuizSummaryButton(){
-  getSiteConfig("quizSummaryButton").then(async (buttonConfig) => {
+  getSiteConfigs("quizSummaryButton").then(async (buttonConfig) => {
     if(buttonConfig.state == true){
       $("#quiz-summary-button").html(`<a href="https://typer-cup.pl/quiz-summary" class="btn btn-primary btn-sm" role="button">Sprawdź jak odpowiadali inni</a>`)
     }

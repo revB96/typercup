@@ -683,7 +683,7 @@ router.get("/admin/site/edition/get", authenticate, function (req, res) {
     });
 });
 
-router.get("/admin/site/config", authenticate, function (req, res) {
+router.post("/admin/site/config", authenticate, function (req, res) {
   Site.getSiteConfig(req.query.name)
     .then((data) => {
       res.json(data);

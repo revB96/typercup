@@ -126,14 +126,14 @@ function printUserTicketsTable(userId) {
 }
 
 function getProfileUserStats(userId){
-  console.log(userId)
+ 
   getUserStats(userId).then(userStats =>{
-    console.log(userStats)
+    
     $("#user-stats-ticket_counter").html(userStats.tickets);
-    $("#user-stats-correct_score").html(userStats.correctScore);
-    $("#user-stats-correct_team").html(userStats.correctTeam);
+    $("#user-stats-correct_score").html(`${userStats.correctScore} | ${userStats.correctScore * 3} pkt`);
+    $("#user-stats-correct_teams").html(userStats.correctTeam);
     $("#user-stats-defeat").html(userStats.defeat);
-    $("#user-stats-points").html(userStats.points);
+    $("#user-stats-points").html(`${userStats.points} pkt`);
   })
 }
 

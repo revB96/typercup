@@ -204,7 +204,7 @@ function addQuizToStats(userId, point){
 function getUserStats(userId){
   var def = Q.defer();
   UserStats
-      .findOne({_id:userId})
+      .findOne({user:userId})
       .exec(function (err, result) {
           console.log(result)
           err ? def.reject(err) : def.resolve(result);

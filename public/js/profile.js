@@ -127,11 +127,12 @@ function printUserTicketsTable(userId) {
 
 function getUserStats(){
   getUserStats(getUserId()).then(userStats =>{
-    $("#user-stats-ticket_counter").append(userStats.tickets);
-    $("#user-stats-correct_score").append(userStats.correctScore);
-    $("#user-stats-correct_team").append(userStats.correctTeam);
-    $("#user-stats-defeat").append(userStats.defeat);
-    $("#user-stats-points").append(userStats.points);
+    console.log(userStats)
+    $("#user-stats-ticket_counter").html(userStats.tickets);
+    $("#user-stats-correct_score").html(userStats.correctScore);
+    $("#user-stats-correct_team").html(userStats.correctTeam);
+    $("#user-stats-defeat").html(userStats.defeat);
+    $("#user-stats-points").html(userStats.points);
   })
 }
 
@@ -192,7 +193,7 @@ $(document).ready(function () {
   $("#change-email-form-userId").val(getUserId());
   
   printUserTicketsTable(getUserId());
-
+  getUserStats();
   $("#change-password-form").submit(function (e) {
     e.preventDefault();
     const formData = $("#change-password-form").serializeArray();

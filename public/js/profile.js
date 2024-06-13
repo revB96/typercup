@@ -125,7 +125,7 @@ function printUserTicketsTable(userId) {
 })
 }
 
-function getUserStats(userId){
+function getProfileUserStats(userId){
   console.log(userId)
   getUserStats(userId).then(userStats =>{
     console.log(userStats)
@@ -194,7 +194,7 @@ $(document).ready(function () {
   $("#change-email-form-userId").val(userId);
   
   printUserTicketsTable(userId);
-  //getUserStats(userId);
+  getProfileUserStats(userId);
   $("#change-password-form").submit(function (e) {
     e.preventDefault();
     const formData = $("#change-password-form").serializeArray();

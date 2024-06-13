@@ -201,6 +201,16 @@ function addQuizToStats(userId, point){
   });
 }
 
+function getUserStats(userId){
+  var def = Q.defer();
+  UserStats
+      .findOne({_id:userId})
+      .exec(function (err, result) {
+          err ? def.reject(err) : def.resolve(result);
+      });
+  return def.promise;
+}
+
 module.exports = {
     add,
     getAll,
@@ -211,5 +221,6 @@ module.exports = {
     deactivateUser,
     activateUser,
     resetUserStats,
-    resetAllUserStats
+    resetAllUserStats,
+    getUserStats
 }

@@ -125,6 +125,16 @@ function printUserTicketsTable(userId) {
 })
 }
 
+function getUserStats(){
+  getUserStats(getUserId()).then(userStats =>{
+    $("#user-stats-ticket_counter").append(userStats.tickets);
+    $("#user-stats-correct_score").append(userStats.correctScore);
+    $("#user-stats-correct_team").append(userStats.correctTeam);
+    $("#user-stats-defeat").append(userStats.defeat);
+    $("#user-stats-points").append(userStats.points);
+  })
+}
+
 function changeNotificationSettings(notification){
   $.post(`/api/user/notification/toggle?name=${notification}&userId=${getUserId()}`).done(() => {
     $(".toast").html(`

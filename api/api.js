@@ -529,6 +529,16 @@ router.get("/user/table", authenticate, function (req, res) {
     });
 });
 
+router.get("/user/get-stats", authenticate, function (req, res) {
+  UserStats.getUserStats(req.query.userId)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
 router.get("/user/get-all-usernames", authenticate, function (req, res) {
   User.getAllUsernames(req.body)
     .then((data) => {

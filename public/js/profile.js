@@ -194,7 +194,7 @@ $(document).ready(function () {
   $("#change-email-form-userId").val(userId);
   
   printUserTicketsTable(userId);
-  getUserStats(userId);
+  //getUserStats(userId);
   $("#change-password-form").submit(function (e) {
     e.preventDefault();
     const formData = $("#change-password-form").serializeArray();

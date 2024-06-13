@@ -125,8 +125,8 @@ function printUserTicketsTable(userId) {
 })
 }
 
-function getUserStats(){
-  getUserStats(getUserId()).then(userStats =>{
+function getUserStats(userId){
+  getUserStats(userId).then(userStats =>{
     console.log(userStats)
     $("#user-stats-ticket_counter").html(userStats.tickets);
     $("#user-stats-correct_score").html(userStats.correctScore);
@@ -184,16 +184,16 @@ function changeNotificationSettings(notification){
 
 $(document).ready(function () {
   if(window.location.pathname === '/profile'){
-  
-  getUserEmail(getUserId()).then(email => {
+  var userId = getUserId()
+  getUserEmail(userId).then(email => {
     $("#change-email-form-email").val(email);
   })
   
-  $("#change-password-form-userId").val(getUserId());
-  $("#change-email-form-userId").val(getUserId());
+  $("#change-password-form-userId").val(userId);
+  $("#change-email-form-userId").val(userId);
   
-  printUserTicketsTable(getUserId());
-  getUserStats();
+  printUserTicketsTable(userId);
+  getUserStats(userId);
   $("#change-password-form").submit(function (e) {
     e.preventDefault();
     const formData = $("#change-password-form").serializeArray();

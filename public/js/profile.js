@@ -126,6 +126,7 @@ function printUserTicketsTable(userId) {
 }
 
 function getUserStats(userId){
+  console.log(userId)
   getUserStats(userId).then(userStats =>{
     console.log(userStats)
     $("#user-stats-ticket_counter").html(userStats.tickets);

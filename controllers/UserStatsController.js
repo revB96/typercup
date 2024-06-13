@@ -206,6 +206,7 @@ function getUserStats(userId){
   UserStats
       .findOne({_id:userId})
       .exec(function (err, result) {
+          console.log(result)
           err ? def.reject(err) : def.resolve(result);
       });
   return def.promise;

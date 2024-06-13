@@ -17,7 +17,7 @@ const methodOverride = require('method-override')
 const moment = require('moment-timezone');
 const api = require("./api/api");
 const Backup = require("./controllers/BackupController");
-const CronManager = require("./controllers/CronController");
+const {configureCronManager} = require("./controllers/CronController");
 const User = require("./controllers/UserController");
 const routes = require('./routes/routes');
 const DB = config.database;
@@ -74,6 +74,7 @@ app.use(express.static('public'))
 
 /*Run Server*/
 app.listen(8081, function () {
-    User.addAdmin();
+    //User.addAdmin();
+    configureCronManager();
     console.log("Server is running at 9081 port...");
 })

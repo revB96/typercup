@@ -5,12 +5,12 @@ var CronJobManager = require('cron-job-manager')
 function configureCronManager(){
     cm = new CronJobManager()
 
-    cm.add('backupDatabase','30 * * * *', ()=>{   //30 * * * *
+    cm.add('backupDatabase','0 * * * *', ()=>{   //30 * * * *
         console.log("Backup Database...")
         Backup.dumpMongo2Localfile("");
     }, {start: true, timeZone: "Europe/Warsaw"}) 
 
-    // cm.add('reminder','* * * * *', ()=>{
+    //cm.add('reminder','* * * * *', ()=>{
     //     User.checkReminder()
     // }, {start: true, timeZone: "Europe/Warsaw"})
 

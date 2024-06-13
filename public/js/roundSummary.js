@@ -7,7 +7,7 @@ function printRoundSummaryAccordion(){
           getRound("running").then((runningRound) => {
               getRoundTickets(runningRound[0].round).then(tickets =>{
                 var matchAccordion = ""
-                ticketsLenght = 0
+                var ticketsLenght = 0;
                   var ticketsByMatch = tickets.reduce((acc, value) => {
                       if (!acc[value.schedule._id]) {
                         acc[value.schedule._id] = [];
@@ -20,7 +20,6 @@ function printRoundSummaryAccordion(){
 
                     var ticketsByDateKeys = Object.keys(ticketsByMatch);
                     $(`#round-summary-accordion`).html("")
-                    
                     ticketsByDateKeys.forEach(match => {
                       var diff = Math.abs(new Date() - new Date(ticketsByMatch[match][0].schedule.matchDate));
                       if (new Date() >new Date(ticketsByMatch[match][0].schedule.matchDate) || diff < 300000) {
@@ -80,12 +79,11 @@ function printRoundSummaryAccordion(){
                             </div>
                         </div>
                         `
+                        if (ticketsLenght == 0){
+                            $(`#round-summary-accordion`).append('<div class="alert alert-warning d-flex align-items-center" role="alert"><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg><div>Wszystkie mecze są otwarte i trwa obstawianie. Wróć tutaj jak zakończy się obstawienie na pierwszy mecz.</div></div>')
+                        }
                         $(`#round-summary-accordion`).append(matchAccordion)
 
-                    }
-                    console.log(ticketsLenght)
-                    if (ticketsLenght == 0){
-                        $(`#round-summary-accordion`).append('<div class="alert alert-warning d-flex align-items-center" role="alert"><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg><div>Wszystkie mecze są otwarte i trwa obstawianie. Wróć tutaj jak zakończy się obstawienie na pierwszy mecz.</div></div>')
                     }
                     })
               })

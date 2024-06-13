@@ -143,33 +143,33 @@ function changeNotificationSettings(notification){
   })
 }
 
-function printUserNotifications(){
-  $("#user-notifications-settings").html("<small>Kliknij aby włączyć/wyłączyć</small>")
-  getUserNotifications(getUserId()).then((notifications) => {
-    if (!!notifications) {
-      if (notifications.newRound == true)
-        $("#user-notifications-settings").append(`
-            <button class="btn btn-success" type="button" onClick="changeNotificationSettings('newRound')" >Nowa kolejka</button>`);
-      else
-        $("#user-notifications-settings").append(`
-            <button class="btn btn-secondary" type="button" onClick="changeNotificationSettings('newRound')" >Nowa kolejka</button>`);
+// function printUserNotifications(){
+//   $("#user-notifications-settings").html("<small>Kliknij aby włączyć/wyłączyć</small>")
+//   getUserNotifications(getUserId()).then((notifications) => {
+//     if (!!notifications) {
+//       if (notifications.newRound == true)
+//         $("#user-notifications-settings").append(`
+//             <button class="btn btn-success" type="button" onClick="changeNotificationSettings('newRound')" >Nowa kolejka</button>`);
+//       else
+//         $("#user-notifications-settings").append(`
+//             <button class="btn btn-secondary" type="button" onClick="changeNotificationSettings('newRound')" >Nowa kolejka</button>`);
 
-      if (notifications.closeRound == true)
-        $("#user-notifications-settings").append(`
-            <button class="btn btn-success" type="button" onClick="changeNotificationSettings('closeRound')" >Zamknięcie kolejki</button>`);
-      else
-        $("#user-notifications-settings").append(`
-            <button class="btn btn-secondary" type="button" onClick="changeNotificationSettings('closeRound')" >Zamknięcie kolejki</button>`);
+//       if (notifications.closeRound == true)
+//         $("#user-notifications-settings").append(`
+//             <button class="btn btn-success" type="button" onClick="changeNotificationSettings('closeRound')" >Zamknięcie kolejki</button>`);
+//       else
+//         $("#user-notifications-settings").append(`
+//             <button class="btn btn-secondary" type="button" onClick="changeNotificationSettings('closeRound')" >Zamknięcie kolejki</button>`);
 
-      if (notifications.reminder == true)
-        $("#user-notifications-settings").append(`
-            <button class="btn btn-success" type="button" onClick="changeNotificationSettings('reminder')">Przypominajka o niewysłanych typach na aktualną kolejkę</button>`);
-      else
-        $("#user-notifications-settings").append(`
-            <button class="btn btn-secondary" type="button" onClick="changeNotificationSettings('reminder')">Przypominajka o niewysłanych typach na aktualną kolejkę</button>`);
-    }
-  });
-}
+//       if (notifications.reminder == true)
+//         $("#user-notifications-settings").append(`
+//             <button class="btn btn-success" type="button" onClick="changeNotificationSettings('reminder')">Przypominajka o niewysłanych typach na aktualną kolejkę</button>`);
+//       else
+//         $("#user-notifications-settings").append(`
+//             <button class="btn btn-secondary" type="button" onClick="changeNotificationSettings('reminder')">Przypominajka o niewysłanych typach na aktualną kolejkę</button>`);
+//     }
+//   });
+// }
 
 $(document).ready(function () {
   if(window.location.pathname === '/profile'){
@@ -182,7 +182,6 @@ $(document).ready(function () {
   $("#change-email-form-userId").val(getUserId());
   
   printUserTicketsTable(getUserId());
-  printUserNotifications()
 
   $("#change-password-form").submit(function (e) {
     e.preventDefault();

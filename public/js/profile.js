@@ -131,8 +131,8 @@ function getProfileUserStats(userId){
     
     $("#user-stats-ticket_counter").html(userStats.tickets);
     $("#user-stats-correct_score").html(`${userStats.correctScore} | ${userStats.correctScore * 3} pkt`);
-    $("#user-stats-correct_teams").html(userStats.correctTeam);
-    $("#user-stats-defeat").html(userStats.defeat);
+    $("#user-stats-correct_teams").html(`${userStats.correctTeam} | ${userStats.correctTeam * 1.5} pkt`);
+    $("#user-stats-defeat").html(`${userStats.defeat} | -${userStats.defeat * 3} pkt`);
     $("#user-stats-points").html(`${userStats.points} pkt`);
   })
 }

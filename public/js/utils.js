@@ -653,7 +653,7 @@ function getUserStats(userId) {
             return result;
         },
         fail: function (){
-            console.log("Nie udało się pobrać");
+            console.log("Nie udało się pobrać!");
         }
     })
 }
